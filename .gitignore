@@ -11,6 +11,9 @@ local.properties
 .loadpath
 .recommenders
 *.bat
+*.cmd
+mvnw.*
+*.mvnw
 
 # External tool builders
 .externalToolBuilders/
@@ -78,3 +81,4 @@ local.properties
 /dist/
 /nbdist/
 /.nb-gradle/
+
