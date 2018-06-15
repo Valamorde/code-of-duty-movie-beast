@@ -1,4 +1,4 @@
-## This is simply a structural placeholder of the master branch, nothing to do yet.
+## Paulina's Branch
 
 ## How to use Git (Just in case someone forgot)
 
