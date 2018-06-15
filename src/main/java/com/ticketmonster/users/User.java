@@ -2,9 +2,8 @@ package com.ticketmonster.users;
 
 import javax.persistence.*;
 
-//TODO: add corresponding db structure
 @Entity
-@Table(name = "persons")
+@Table(name = "users")
 public class User {
 
     @Id
@@ -12,13 +11,15 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Column
-    private String username;
+    private String email;
     @Column
     private String firstName;
     @Column
     private String lastName;
     @Column
-    private String email;
+    private String password;
+    //@Column
+    //private Date create_time;
 
     public int getId() {
         return id;
@@ -26,6 +27,14 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getFirstName() {
@@ -44,11 +53,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getEmail() {
-        return email;
+    public String getPassword() {
+        return password;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
