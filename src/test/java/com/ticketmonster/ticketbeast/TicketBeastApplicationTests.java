@@ -1,4 +1,4 @@
-package com.ticketmonster.app;
+package com.ticketmonster.ticketbeast;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class AppApplicationTests {
+public class TicketBeastApplicationTests {
 
 	@Test
 	public void contextLoads() {
