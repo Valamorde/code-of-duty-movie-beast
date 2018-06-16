@@ -12,54 +12,73 @@ import java.util.Date;
 @Entity
 @Table(name = "users")
 @EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value = {"createdAt"}, allowGetters = true, allowSetters = true)
+@JsonIgnoreProperties(value = {"created_at"}, allowGetters = true, allowSetters = true)
 public class User implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "user_id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private long user_id;
 
+    @Column(name = "last_name")
     @NotBlank
-    private String lastName;
+    private String last_name;
 
+    @Column(name = "first_name")
     @NotBlank
-    private String firstName;
+    private String first_name;
 
-    @Column(nullable = false, updatable = false)
+    @Column(name = "created_at", nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
-    private Date createdAt;
+    private Date created_at;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Account account;
 
     public User() {
     }
 
-    public User(@NotBlank String lastName, @NotBlank String firstName, Date createdAt) {
-        this.lastName = lastName;
-        this.firstName = firstName;
-        this.createdAt = createdAt;
+    public User(@NotBlank String last_name, @NotBlank String first_name, Date created_at) {
+        this.last_name = last_name;
+        this.first_name = first_name;
+        this.created_at = created_at;
     }
 
-    public Long getId() {
-        return id;
+    public Account getAccount() {
+        return account;
     }
 
-    public String getLastName() {
-        return lastName;
+//    public void setAccount(Account account) {
+//        this.account = account;
+//    }
+
+    public long getUser_id() {
+        return user_id;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public String getLast_name() {
+
+        return last_name;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public void setLast_name(String last_name) {
+
+        this.last_name = last_name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public String getFirst_name() {
+
+        return first_name;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
+    public void setFirst_name(String first_name) {
+
+        this.first_name = first_name;
+    }
+
+    public Date getCreated_at() {
+
+        return created_at;
     }
 }

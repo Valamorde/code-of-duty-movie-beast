@@ -40,8 +40,8 @@ public class UserController {
     @PutMapping("/users/{id}")
     public User updateUser(@PathVariable(value = "id") Long id, @Valid @RequestBody User userDetails) {
         User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "Id", id));
-        user.setFirstName(userDetails.getFirstName());
-        user.setLastName(userDetails.getLastName());
+        user.setFirst_name(userDetails.getFirst_name());
+        user.setLast_name(userDetails.getLast_name());
 
         User updatedUser = userRepository.save(user);
         return updatedUser;

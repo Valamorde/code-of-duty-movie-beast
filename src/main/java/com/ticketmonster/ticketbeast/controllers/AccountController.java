@@ -42,7 +42,7 @@ public class AccountController {
         Account account = accountRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Account", "Id", id));
         account.setEmail(accountDetails.getEmail());
         account.setPassword(accountDetails.getPassword());
-        account.setRole(accountDetails.getRole());
+        account.setRole_id(accountDetails.getRole_id());
 
         Account updatedAccount = accountRepository.save(account);
         return updatedAccount;

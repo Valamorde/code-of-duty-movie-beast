@@ -44,7 +44,7 @@ public class EventController {
         event.setLocation(eventDetails.getLocation());
         event.setDuration(eventDetails.getDuration());
         event.setPrice(eventDetails.getPrice());
-        event.setEventDate(eventDetails.getEventDate());
+        event.setEvent_date(eventDetails.getEvent_date());
 
         Event updatedEvent = eventRepository.save(event);
         return updatedEvent;

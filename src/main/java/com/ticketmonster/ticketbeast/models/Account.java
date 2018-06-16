@@ -12,39 +12,55 @@ import java.util.Date;
 @Entity
 @Table(name = "accounts")
 @EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value = {"createdAt"}, allowGetters = true, allowSetters = true)
+@JsonIgnoreProperties(value = {"created_at"}, allowGetters = true, allowSetters = true)
 public class Account implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Column(name = "account_id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private long account_id;
 
+    @Column(name = "email")
     @NotBlank
     private String email;
 
+    @Column(name = "password")
     @NotBlank
     private String password;
 
+    @Column(name = "role_id")
     @NotBlank
-    private int role;
+    private int role_id;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
-    private Date createdAt;
+    private Date created_at;
 
     public Account() {
     }
 
-    public Account(@NotBlank String email, @NotBlank String password, @NotBlank int role, Date createdAt) {
+    public Account(@NotBlank String email, @NotBlank String password, @NotBlank int role_id, Date created_at) {
         this.email = email;
         this.password = password;
-        this.role = role;
-        this.createdAt = createdAt;
+        this.role_id = role_id;
+        this.created_at = created_at;
     }
 
-    public int getId() {
-        return id;
+    public User getUser() {
+        return user;
+    }
+
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
+
+    public long getAccount_id() {
+        return account_id;
     }
 
     public String getEmail() {
@@ -63,15 +79,19 @@ public class Account implements Serializable {
         this.password = password;
     }
 
-    public int getRole() {
-        return role;
+    public int getRole_id() {
+        return role_id;
     }
 
-    public void setRole(int role) {
-        this.role = role;
+    public void setRole_id(int role_id) {
+        this.role_id = role_id;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
+    public Date getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(Date created_at) {
+        this.created_at = created_at;
     }
 }
