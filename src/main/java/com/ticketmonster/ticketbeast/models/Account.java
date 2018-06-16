@@ -1,4 +1,4 @@
-package com.ticketmonster.models;
+package com.ticketmonster.ticketbeast.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.CreatedDate;
@@ -10,53 +10,65 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name = "users")
+@Table(name = "accounts")
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(value = {"createdAt"}, allowGetters = true, allowSetters = true)
-public class User implements Serializable {
+public class Account implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @NotBlank
-    private String lastName;
+    private String email;
 
     @NotBlank
-    private String firstName;
+    private String password;
+
+    @NotBlank
+    private int role;
 
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
     private Date createdAt;
 
-    public User() {
+    public Account() {
     }
 
-    public User(@NotBlank String lastName, @NotBlank String firstName, Date createdAt) {
-        this.lastName = lastName;
-        this.firstName = firstName;
+    public Account(@NotBlank String email, @NotBlank String password, @NotBlank int role, Date createdAt) {
+        this.email = email;
+        this.password = password;
+        this.role = role;
         this.createdAt = createdAt;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getEmail() {
+        return email;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getPassword() {
+        return password;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
     }
 
     public Date getCreatedAt() {

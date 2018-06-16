@@ -1,9 +1,9 @@
-package com.ticketmonster.controllers;
+package com.ticketmonster.ticketbeast.controllers;
 
 
-import com.ticketmonster.exceptions.ResourceNotFoundException;
-import com.ticketmonster.models.User;
-import com.ticketmonster.repositories.UserRepository;
+import com.ticketmonster.ticketbeast.exceptions.ResourceNotFoundException;
+import com.ticketmonster.ticketbeast.models.User;
+import com.ticketmonster.ticketbeast.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/user_api")
 public class UserController {
 
     @Autowired

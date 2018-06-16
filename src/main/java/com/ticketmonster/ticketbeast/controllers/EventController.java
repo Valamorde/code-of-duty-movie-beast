@@ -1,9 +1,9 @@
-package com.ticketmonster.controllers;
+package com.ticketmonster.ticketbeast.controllers;
 
 
-import com.ticketmonster.exceptions.ResourceNotFoundException;
-import com.ticketmonster.models.Event;
-import com.ticketmonster.repositories.EventRepository;
+import com.ticketmonster.ticketbeast.exceptions.ResourceNotFoundException;
+import com.ticketmonster.ticketbeast.models.Event;
+import com.ticketmonster.ticketbeast.repositories.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/event_api")
 public class EventController {
 
     @Autowired
@@ -53,7 +53,7 @@ public class EventController {
     // Delete a Event
     @DeleteMapping("/events/{id}")
     public ResponseEntity<?> deleteEvent(@PathVariable(value = "id") Long id) {
-        Event event = eventRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Event","Id",id));
+        Event event = eventRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Event", "Id", id));
 
         eventRepository.delete(event);
 

@@ -1,6 +1,6 @@
-package com.ticketmonster.repositories;
+package com.ticketmonster.ticketbeast.repositories;
 
-import com.ticketmonster.models.Event;
+import com.ticketmonster.ticketbeast.models.Event;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

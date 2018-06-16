@@ -1,4 +1,4 @@
-package com.ticketmonster.models;
+package com.ticketmonster.ticketbeast.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.CreatedDate;
