@@ -4,7 +4,7 @@
 
 a) Navigate to the directory you want to work in.    
 
-b) Clone the repository by running "git clone https:/bitbucket.org/Valamorde/cod-ticket-monster.git" (without quotes in CMD, PowerShell or GitBash etc.)    
+b) Clone the repository by running "git clone https://bitbucket.org/Valamorde/cod-ticket-monster.git" (without quotes in CMD, PowerShell or GitBash etc.)    
 
 c) Open the new folder (cod-ticket-monster) in explorer or CD through CMD, PowerShell, GitBash    
 
