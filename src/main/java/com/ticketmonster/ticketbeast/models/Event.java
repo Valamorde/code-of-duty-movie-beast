@@ -1,6 +1,5 @@
 package com.ticketmonster.ticketbeast.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -13,28 +12,26 @@ import java.util.Date;
 @Entity
 @Table(name = "events")
 @EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value = {"created_at"}, allowGetters = true, allowSetters = true)
 public class Event implements Serializable {
 
     @Id
     @Column(name = "event_id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long event_id;
 
     @Column(name = "name")
-    @NotBlank
     private String name;
 
     @Column(name = "location")
-    @NotBlank
     private String location;
 
     @Column(name = "duration")
-    @NotBlank
     private int duration;
 
+    @Column(name = "available_tickets")
+    private int available_tickets;
+
     @Column(name = "price")
-    @NotBlank
     private BigDecimal price;
 
     @Column(name = "event_date", nullable = false, updatable = false)
@@ -50,17 +47,12 @@ public class Event implements Serializable {
     public Event() {
     }
 
-    public Event(@NotBlank String name, @NotBlank String location, @NotBlank int duration, @NotBlank BigDecimal price, Date event_date, Date created_at) {
-        this.name = name;
-        this.location = location;
-        this.duration = duration;
-        this.price = price;
-        this.event_date = event_date;
-        this.created_at = created_at;
-    }
-
     public long getEvent_id() {
         return event_id;
+    }
+
+    public void setEvent_id(long event_id) {
+        this.event_id = event_id;
     }
 
     public String getName() {
@@ -87,6 +79,14 @@ public class Event implements Serializable {
         this.duration = duration;
     }
 
+    public int getAvailable_tickets() {
+        return available_tickets;
+    }
+
+    public void setAvailable_tickets(int available_tickets) {
+        this.available_tickets = available_tickets;
+    }
+
     public BigDecimal getPrice() {
         return price;
     }
@@ -105,5 +105,9 @@ public class Event implements Serializable {
 
     public Date getCreated_at() {
         return created_at;
+    }
+
+    public void setCreated_at(Date created_at) {
+        this.created_at = created_at;
     }
 }

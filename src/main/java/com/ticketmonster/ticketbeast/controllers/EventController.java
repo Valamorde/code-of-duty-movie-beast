@@ -12,11 +12,10 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/event_api")
 public class EventController {
 
     @Autowired
-    EventRepository eventRepository;
+    private EventRepository eventRepository;
 
     // Get All Events
     @GetMapping("/events")

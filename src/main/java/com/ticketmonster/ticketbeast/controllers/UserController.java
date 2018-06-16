@@ -1,5 +1,6 @@
 package com.ticketmonster.ticketbeast.controllers;
 
+import java.security.Principal;
 
 import com.ticketmonster.ticketbeast.exceptions.ResourceNotFoundException;
 import com.ticketmonster.ticketbeast.models.User;
@@ -12,11 +13,16 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user_api")
 public class UserController {
 
     @Autowired
     UserRepository userRepository;
+
+    // Get User
+    @RequestMapping("/user")
+    public Principal user(Principal user) {
+        return user;
+    }
 
     // Get All Users
     @GetMapping("/users")
@@ -50,7 +56,7 @@ public class UserController {
     // Delete a User
     @DeleteMapping("/users/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable(value = "id") Long id) {
-        User user = userRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("User","Id",id));
+        User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "Id", id));
 
         userRepository.delete(user);
 
