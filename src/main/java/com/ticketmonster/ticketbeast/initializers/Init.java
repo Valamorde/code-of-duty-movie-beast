@@ -7,6 +7,7 @@ import com.ticketmonster.ticketbeast.repositories.EventRepository;
 import com.ticketmonster.ticketbeast.repositories.UserRepository;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,16 +27,20 @@ public class Init {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
+
+
     @PostConstruct
     @Transactional
     public void init() {
-        IntStream.range(0, 20).forEach((i -> {
+        IntStream.range(0, 10).forEach((i -> {
             Event event = new Event();
             event.setEvent_date(DateUtils.round(DateUtils.addDays(new Date(), i / 2), Calendar.DATE));
-            event.setAvailable_tickets(100);
+            event.setAvailable_tickets(100*i/2);
             event.setCreated_at(DateUtils.round(DateUtils.addDays(new Date(), i / 2), Calendar.DATE));
-            event.setDuration(2);
-            event.setPrice(new BigDecimal(50, MathContext.DECIMAL64));
+            event.setDuration(120);
+            event.setPrice(new BigDecimal(10*i, MathContext.DECIMAL64));
             event.setLocation("Dummy Location");
             event.setName("Dummy Event");
             eventRepository.save(event);
@@ -45,16 +50,18 @@ public class Init {
         user.setEmail("user@dummy.com");
         user.setFirst_name("Dummy");
         user.setLast_name("DummyDum");
-        user.setPassword("12345");
-        user.setRole(Role.USER);
+        user.setPassword(bCryptPasswordEncoder.encode("1234"));
+        user.setRole("USER");
+        user.setEnabled(true);
         userRepository.save(user);
 
         user = new User();
         user.setEmail("admin@dummy.com");
         user.setFirst_name("ADummy");
         user.setLast_name("ADummyDum");
-        user.setPassword("12345");
-        user.setRole(Role.ADMIN);
+        user.setPassword(bCryptPasswordEncoder.encode("1234"));
+        user.setRole("ADMIN");
+        user.setEnabled(true);
         userRepository.save(user);
     }
 }

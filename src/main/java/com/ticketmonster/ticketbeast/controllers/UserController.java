@@ -2,19 +2,20 @@ package com.ticketmonster.ticketbeast.controllers;
 
 import com.ticketmonster.ticketbeast.exceptions.CustomException;
 import com.ticketmonster.ticketbeast.exceptions.ResourceNotFoundException;
-import com.ticketmonster.ticketbeast.models.Role;
 import com.ticketmonster.ticketbeast.models.User;
 import com.ticketmonster.ticketbeast.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 
+@Component
 @RestController
 public class UserController {
 
@@ -25,15 +26,12 @@ public class UserController {
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
     // Login
-    @CrossOrigin
-    @RequestMapping("/login")
+    @PostMapping("/login")
     public Principal user(Principal user) {
-        System.out.println(user.toString() + "logging in");
         return user;
     }
 
     // Register a new User
-    @CrossOrigin
     @PostMapping("/register")
     public ResponseEntity<?> createUser(@Valid @RequestBody User newUser) {
         if (userRepository.findByEmail(newUser.getEmail()) != null) {
@@ -42,7 +40,7 @@ public class UserController {
                     HttpStatus.CONFLICT);
         }
         newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
-        newUser.setRole(Role.USER);
+        newUser.setRole("USER");
         newUser.setEnabled(true);
         return new ResponseEntity<User>(userRepository.save(newUser), HttpStatus.CREATED);
     }

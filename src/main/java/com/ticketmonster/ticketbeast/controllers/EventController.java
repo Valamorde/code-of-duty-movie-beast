@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.ws.rs.Produces;
 import java.util.List;
 
 @RestController
@@ -19,6 +20,7 @@ public class EventController {
 
     // Get All Events
     @GetMapping("/events")
+    @Produces("application/json")
     public List<Event> getAllEvents() {
         System.out.println("getting all events");
         return eventRepository.findAll();
@@ -26,6 +28,7 @@ public class EventController {
 
     // Get a Single Event
     @GetMapping("/events/{id}")
+    @Produces("application/json")
     public Event getEventById(@PathVariable(value = "id") Long id) {
         return eventRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Event", "Id", id));
     }
