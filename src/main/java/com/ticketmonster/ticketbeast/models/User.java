@@ -4,7 +4,8 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -18,13 +19,15 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long user_id;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false, unique = true)
+    @Email(message = "Please provide a valid e-mail")
+    @NotEmpty(message = "Please provide an e-mail")
     private String email;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column
+    @Column(name = "role")
     private Role role;
 
     @Column(name = "last_name")
@@ -37,6 +40,17 @@ public class User implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
     private Date created_at;
+
+    @Column(name = "enabled", nullable = false, updatable = true)
+    private boolean enabled;
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
 
     public User() {
     }

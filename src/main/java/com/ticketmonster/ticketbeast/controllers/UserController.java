@@ -1,15 +1,18 @@
 package com.ticketmonster.ticketbeast.controllers;
 
-import java.security.Principal;
-
+import com.ticketmonster.ticketbeast.exceptions.CustomException;
 import com.ticketmonster.ticketbeast.exceptions.ResourceNotFoundException;
+import com.ticketmonster.ticketbeast.models.Role;
 import com.ticketmonster.ticketbeast.models.User;
 import com.ticketmonster.ticketbeast.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -18,10 +21,30 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
-    // Get User
-    @RequestMapping("/user")
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    // Login
+    @CrossOrigin
+    @RequestMapping("/login")
     public Principal user(Principal user) {
+        System.out.println(user.toString() + "logging in");
         return user;
+    }
+
+    // Register a new User
+    @CrossOrigin
+    @PostMapping("/register")
+    public ResponseEntity<?> createUser(@Valid @RequestBody User newUser) {
+        if (userRepository.findByEmail(newUser.getEmail()) != null) {
+            return new ResponseEntity<>(
+                    new CustomException("Sorry, a user with the email: " + newUser.getEmail() + "already exists. "),
+                    HttpStatus.CONFLICT);
+        }
+        newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
+        newUser.setRole(Role.USER);
+        newUser.setEnabled(true);
+        return new ResponseEntity<User>(userRepository.save(newUser), HttpStatus.CREATED);
     }
 
     // Get All Users
@@ -34,12 +57,6 @@ public class UserController {
     @GetMapping("/users/{id}")
     public User getUserById(@PathVariable(value = "id") Long id) {
         return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "Id", id));
-    }
-
-    // Create a new User
-    @PostMapping("/users")
-    public User createUser(@Valid @RequestBody User user) {
-        return userRepository.save(user);
     }
 
     // Update a User

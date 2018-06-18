@@ -20,6 +20,7 @@ public class EventController {
     // Get All Events
     @GetMapping("/events")
     public List<Event> getAllEvents() {
+        System.out.println("getting all events");
         return eventRepository.findAll();
     }
 
