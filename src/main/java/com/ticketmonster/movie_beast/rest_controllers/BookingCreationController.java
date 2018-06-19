@@ -18,34 +18,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-@RestController(value = "/booking")
+@RestController
 public class BookingCreationController {
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
     private BookingRepository bookingRepository;
+
+ @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private ShowRepository showRepository;
 
     @PostMapping("/bookTicket")
-    public ResponseEntity<?> bookTicket()/*(@RequestBody Integer event_id, @RequestBody String seat, @RequestBody Integer numberOfTickets) */{
+    public ResponseEntity<?> bookTicket()/*(@RequestBody Integer event_id, @RequestBody String seat, @RequestBody Integer numberOfTickets) */ {
 
         int show_id = 2;
         int numberOfTickets = 2;
         int seat = 1;
         Show show = showRepository.getOne(show_id);
 
-        if(numberOfTickets <= show.getAvailable_seats()){
+        if (numberOfTickets <= show.getAvailable_seats()) {
             //Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             //User user = userRepository.findByEmail(authentication.getPrincipal().toString());
             User user = userRepository.findByEmail("admin@dummy.com");
 
             List<Booking> bookings = new ArrayList<Booking>();
 
-            for (int i = 0; i < numberOfTickets; i++){
+            for (int i = 0; i < numberOfTickets; i++) {
                 Booking booking = new Booking();
                 booking.setShow_id(show.getShow_id());
                 booking.setUser_id(user.getUser_id());
@@ -63,7 +63,7 @@ public class BookingCreationController {
         }
     }
 
-    //    @GetMapping(path = "myTickets/{event_id}/printTicket.pdf", produces = "application/pdf") // FIXME:
+    //    @GetMapping(path = "/{event_id}/printTicket.pdf", produces = "application/pdf") // FIXME:
     //    public ResponseEntity<?> printTicket() {
     //        PDDocument pdf = new PDDocument();
     //

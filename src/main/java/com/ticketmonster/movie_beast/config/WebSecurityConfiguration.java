@@ -1,7 +1,6 @@
 package com.ticketmonster.movie_beast.config;
 
-import com.ticketmonster.deprecated_logic_for_reference.config.HttpLogoutSuccessHandler;
-import com.ticketmonster.deprecated_logic_for_reference.repositories.UserRepository;
+import com.ticketmonster.movie_beast.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
@@ -37,8 +36,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(dataSource)
-                .usersByUsernameQuery("SELECT email, password, enabled FROM users WHERE email = ?")
-                .authoritiesByUsernameQuery("SELECT email, role FROM users WHERE email = ?") // Redundant? FIXME
+                .usersByUsernameQuery("SELECT email, password, enabled FROM user WHERE email = ?")
+                .authoritiesByUsernameQuery("SELECT email, role FROM user WHERE email = ?") // Redundant? FIXME
                 .passwordEncoder(passwordEncoder());
     }
 
@@ -47,7 +46,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.cors().and()
                 .authorizeRequests()
                 .antMatchers("/", "/register", "/login", "/logout").permitAll()
-                .antMatchers("/events", "/events/**").fullyAuthenticated()
+                .antMatchers("/theatres", "/theatres/**", "/movies", "/movies/**", "/bookings", "/bookings/**").fullyAuthenticated()
                 .antMatchers("/users", "/users/**").access("hasAuthority('ADMIN')").and()
                 .logout()
                 .permitAll()

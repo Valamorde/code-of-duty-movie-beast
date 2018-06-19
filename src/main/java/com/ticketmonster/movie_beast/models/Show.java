@@ -3,13 +3,14 @@ package com.ticketmonster.movie_beast.models;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
-@Table(name = "show")
+@Table(name = "shows")
 @EntityListeners(AuditingEntityListener.class)
-public class Show {
+public class Show implements Serializable {
 
     @Id
     @Column(name = "show_id")
@@ -29,10 +30,10 @@ public class Show {
     @Column(name = "show_duration_in_minutes")
     private Integer show_duration_in_minutes;
 
-    @Column(name = "available_seats", nullable = false)
+    @Column(name = "available_seats")
     private Integer available_seats;
 
-    @Column(name = "show_cost", nullable = false)
+    @Column(name = "show_cost")
     private BigDecimal show_cost;
 
     public Show() {

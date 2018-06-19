@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.ticketmonster</groupId>
-    <artifactId>ticket-beast</artifactId>
+    <artifactId>movie-beast</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
 

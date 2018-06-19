@@ -12,26 +12,26 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Component
-@RestController(value = "/movie")
+@RestController("/movies")
 public class MovieManipulationController {
 
     @Autowired
     MovieRepository movieRepository;
 
     // Get All Movies
-    @GetMapping("/all")
+    @GetMapping("/movies/all")
     public List<Movie> getAllMovies() {
         return movieRepository.findAll();
     }
 
     // Get a Single Movie
-    @GetMapping("/{id}")
+    @GetMapping("/movies/{id}")
     public Movie getMovieById(@PathVariable(value = "id") Integer id) {
         return movieRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Movie", "Id", id));
     }
 
     // Update a Movie
-    @PutMapping("/{id}")
+    @PutMapping("/movies/{id}")
     public Movie updateMovie(@PathVariable(value = "id") Integer id, @Valid @RequestBody Movie movieDetails) {
         Movie movie = movieRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Movie", "Id", id));
         movie.setMovie_name(movieDetails.getMovie_name());
@@ -42,7 +42,7 @@ public class MovieManipulationController {
     }
 
     // Delete a Movie
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/movies/{id}")
     public ResponseEntity<?> deleteMovie(@PathVariable(value = "id") Integer id) {
         Movie movie = movieRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Movie", "Id", id));
 

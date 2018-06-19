@@ -1,4 +1,4 @@
-package com.ticketmonster.deprecated_logic_for_reference;
+package com.ticketmonster.movie_beast;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class TicketBeastApplicationTests {
+public class MovieBeastApplicationTests {
 
 	@Test
 	public void contextLoads() {

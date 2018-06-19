@@ -12,26 +12,26 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Component
-@RestController(value = "/theatre")
+@RestController("/theatres")
 public class TheatreManipulationController {
 
     @Autowired
     TheatreRepository theatreRepository;
 
     // Get All Theatres
-    @GetMapping("/all")
+    @GetMapping("/theatres/all")
     public List<Theatre> getAllTheatres() {
         return theatreRepository.findAll();
     }
 
     // Get a Single Theatre
-    @GetMapping("/{id}")
+    @GetMapping("/theatres/{id}")
     public Theatre getTheatreById(@PathVariable(value = "id") Integer id) {
         return theatreRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Theatre", "Id", id));
     }
 
     // Update a Theatre
-    @PutMapping("/{id}")
+    @PutMapping("/theatres/{id}")
     public Theatre updateTheatre(@PathVariable(value = "id") Integer id, @Valid @RequestBody Theatre TheatreDetails) {
         Theatre theatre = theatreRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Theatre", "Id", id));
         theatre.setTheatre_name(TheatreDetails.getTheatre_name());
@@ -41,7 +41,7 @@ public class TheatreManipulationController {
     }
 
     // Delete a Theatre
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/theatres/{id}")
     public ResponseEntity<?> deleteTheatre(@PathVariable(value = "id") Integer id) {
         Theatre theatre = theatreRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Theatre", "Id", id));
 

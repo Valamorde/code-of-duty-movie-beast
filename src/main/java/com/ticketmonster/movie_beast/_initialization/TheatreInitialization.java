@@ -33,7 +33,7 @@ public class TheatreInitialization {
     @PostConstruct
     @Transactional
     public void init() {
-        IntStream.range(0, 19).forEach((i -> {
+        IntStream.range(0, 20).forEach((i -> {
             Theatre theatre = new Theatre();
             theatre.setTheatre_name(theatreNames.get(i));
             theatre.setTheatre_address(theatreAddresses.get(i));

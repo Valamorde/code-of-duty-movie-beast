@@ -29,7 +29,7 @@ public class MovieInitialization {
     @PostConstruct
     @Transactional
     public void init() {
-        IntStream.range(0, 4).forEach((i -> {
+        IntStream.range(0, 5).forEach((i -> {
             Movie movie = new Movie();
             movie.setMovie_name(movieNames.get(i));
             movie.setMovie_description(movieDescriptions.get(i));

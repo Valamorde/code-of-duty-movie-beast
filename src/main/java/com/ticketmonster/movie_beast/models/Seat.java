@@ -3,11 +3,12 @@ package com.ticketmonster.movie_beast.models;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "seat")
 @EntityListeners(AuditingEntityListener.class)
-public class Seat {
+public class Seat implements Serializable {
 
     @Id
     @Column(name = "seat_id")
@@ -24,7 +25,7 @@ public class Seat {
     private Integer booking_id;
 
     @Column(name = "theatre_id")
-    private  Integer theatre_id;
+    private Integer theatre_id;
 
     public Seat() {
     }
@@ -37,28 +38,28 @@ public class Seat {
         return show_id;
     }
 
-    public boolean isSeat_status() {
-        return seat_status;
-    }
-
-    public Integer getBooking_id() {
-        return booking_id;
-    }
-
-    public Integer getTheatre_id() {
-        return theatre_id;
-    }
-
     public void setShow_id(Integer show_id) {
         this.show_id = show_id;
+    }
+
+    public boolean isSeat_status() {
+        return seat_status;
     }
 
     public void setSeat_status(boolean seat_status) {
         this.seat_status = seat_status;
     }
 
+    public Integer getBooking_id() {
+        return booking_id;
+    }
+
     public void setBooking_id(Integer booking_id) {
         this.booking_id = booking_id;
+    }
+
+    public Integer getTheatre_id() {
+        return theatre_id;
     }
 
     public void setTheatre_id(Integer theatre_id) {

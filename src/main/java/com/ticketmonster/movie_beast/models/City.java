@@ -3,11 +3,12 @@ package com.ticketmonster.movie_beast.models;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "city")
 @EntityListeners(AuditingEntityListener.class)
-public class City {
+public class City implements Serializable {
 
     @Id
     @Column(name = "city_id")

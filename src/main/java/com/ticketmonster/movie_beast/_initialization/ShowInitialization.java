@@ -23,7 +23,7 @@ public class ShowInitialization {
     @PostConstruct
     @Transactional
     public void init() {
-        IntStream.range(0, 19).forEach((i -> {
+        IntStream.range(0, 20).forEach((i -> {
             Show show = new Show();
             show.setShow_duration_in_minutes((i+1)*10);
             show.setShow_cost(new BigDecimal(7, MathContext.DECIMAL64));

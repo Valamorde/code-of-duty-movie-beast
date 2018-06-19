@@ -1,4 +1,4 @@
-
+mvnw
 target/
 .metadata
 bin/
@@ -15,9 +15,6 @@ local.properties
 *.cmd
 mvnw.*
 *.mvnw
-*.7z
-*.zip
-*.rar
 
 # External tool builders
 .externalToolBuilders/

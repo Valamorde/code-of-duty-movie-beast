@@ -25,7 +25,7 @@ public class CityInitialization {
     @PostConstruct
     @Transactional
     public void init() {
-        IntStream.range(0, 19).forEach((i -> {
+        IntStream.range(0, 20).forEach((i -> {
             City city = new City();
             city.setCity_name(cities.get(i));
             cityRepository.save(city);

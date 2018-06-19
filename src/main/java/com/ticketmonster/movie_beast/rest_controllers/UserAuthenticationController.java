@@ -18,7 +18,7 @@ import javax.ws.rs.Produces;
 import java.security.Principal;
 
 @Component
-@RestController(value = "/user")
+@RestController("/auth")
 public class UserAuthenticationController {
 
     @Autowired

@@ -12,26 +12,26 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Component
-@RestController(value = "/city")
+@RestController("/cities")
 public class CityManipulationController {
 
     @Autowired
     CityRepository cityRepository;
 
     // Get All Cities
-    @GetMapping("/all")
+    @GetMapping("/cities/all")
     public List<City> getAllCities() {
         return cityRepository.findAll();
     }
 
     // Get a Single City
-    @GetMapping("/{id}")
+    @GetMapping("/cities/{id}")
     public City getCityById(@PathVariable(value = "id") Integer id) {
         return cityRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("City", "Id", id));
     }
 
     // Update a City
-    @PutMapping("/{id}")
+    @PutMapping("/cities/{id}")
     public City updateCity(@PathVariable(value = "id") Integer id, @Valid @RequestBody City cityDetails) {
         City city = cityRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("City", "Id", id));
         city.setCity_name(cityDetails.getCity_name());
@@ -41,7 +41,7 @@ public class CityManipulationController {
     }
 
     // Delete a City
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/cities/{id}")
     public ResponseEntity<?> deleteCity(@PathVariable(value = "id") Integer id) {
         City city = cityRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("City", "Id", id));
 

@@ -12,26 +12,26 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Component
-@RestController(value = "/show")
+@RestController("/shows")
 public class ShowManipulationController {
 
     @Autowired
     ShowRepository showRepository;
 
     // Get All Shows
-    @GetMapping("/all")
+    @GetMapping("/shows/all")
     public List<Show> getAllShows() {
         return showRepository.findAll();
     }
 
     // Get a Single Show
-    @GetMapping("/{id}")
+    @GetMapping("/shows/{id}")
     public Show getShowById(@PathVariable(value = "id") Integer id) {
         return showRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Show", "Id", id));
     }
 
     // Update a Show
-    @PutMapping("/{id}")
+    @PutMapping("/shows/{id}")
     public Show updateShow(@PathVariable(value = "id") Integer id, @Valid @RequestBody Show showDetails) {
         Show show = showRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Show", "Id", id));
         show.setAvailable_seats(showDetails.getAvailable_seats());
@@ -41,7 +41,7 @@ public class ShowManipulationController {
     }
 
     // Delete a Show
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/shows/{id}")
     public ResponseEntity<?> deleteShow(@PathVariable(value = "id") Integer id) {
         Show show = showRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Show", "Id", id));
 

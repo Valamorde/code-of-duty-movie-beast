@@ -3,11 +3,12 @@ package com.ticketmonster.movie_beast.models;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "movie")
 @EntityListeners(AuditingEntityListener.class)
-public class Movie {
+public class Movie implements Serializable {
 
     @Id
     @Column(name = "movie_id")
@@ -31,12 +32,12 @@ public class Movie {
         return movie_name;
     }
 
-    public String getMovie_description() {
-        return movie_description;
-    }
-
     public void setMovie_name(String movie_name) {
         this.movie_name = movie_name;
+    }
+
+    public String getMovie_description() {
+        return movie_description;
     }
 
     public void setMovie_description(String movie_description) {
