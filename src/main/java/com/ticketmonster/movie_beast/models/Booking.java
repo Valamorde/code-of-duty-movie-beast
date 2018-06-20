@@ -14,7 +14,8 @@ public class Booking implements Serializable {
 
     @Id
     @Column(name = "booking_id")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "booking_generator")
+    @SequenceGenerator(name = "booking_generator", sequenceName = "booking_seq")
     private Integer booking_id;
 
     @Column(name = "user_id")

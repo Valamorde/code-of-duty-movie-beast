@@ -14,7 +14,8 @@ public class Show implements Serializable {
 
     @Id
     @Column(name = "show_id")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "show_generator")
+    @SequenceGenerator(name="show_generator", sequenceName = "show_seq")
     private Integer show_id;
 
     @Column(name = "theatre_id")

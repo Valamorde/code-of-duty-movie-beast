@@ -12,7 +12,8 @@ public class Seat implements Serializable {
 
     @Id
     @Column(name = "seat_id")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seat_generator")
+    @SequenceGenerator(name="seat_generator", sequenceName = "seat_seq")
     private Integer seat_id;
 
     @Column(name = "show_id")

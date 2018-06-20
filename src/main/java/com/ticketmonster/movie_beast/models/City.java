@@ -12,7 +12,8 @@ public class City implements Serializable {
 
     @Id
     @Column(name = "city_id")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "city_generator")
+    @SequenceGenerator(name="city_generator", sequenceName = "city_seq")
     private Integer city_id;
 
     @Column(name = "city_name")

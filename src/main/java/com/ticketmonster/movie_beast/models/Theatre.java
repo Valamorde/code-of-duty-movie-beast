@@ -13,7 +13,8 @@ public class Theatre implements Serializable {
 
     @Id
     @Column(name = "theatre_id")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "theatre_generator")
+    @SequenceGenerator(name="theatre_generator", sequenceName = "theatre_seq")
     private Integer theatre_id;
 
     @Column(name = "city_id")

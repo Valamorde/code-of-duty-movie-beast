@@ -12,7 +12,8 @@ public class Movie implements Serializable {
 
     @Id
     @Column(name = "movie_id")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "movie_generator")
+    @SequenceGenerator(name="movie_generator", sequenceName = "movie_seq")
     private Integer movie_id;
 
     @Column(name = "movie_name")

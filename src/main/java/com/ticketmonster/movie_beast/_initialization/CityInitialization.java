@@ -17,7 +17,7 @@ public class CityInitialization {
 
     List<String> cities = new ArrayList<String>(Arrays.asList("Athina", "Piraias", "Peristeri", "Kallithea", "Nikaia", "Keratsini",
             "Ilion", "Gliphada", "Zographos", "Ilioupoli", "Aigaleo", "Nea Smirni", "Khalandri", "Amarousion", "Koridallos", "Nea Ionia",
-            "Avios Dimitrios", "Palaio Phaliro", "Kiphisia", "Vironas"));
+            "Agios Dimitrios", "Palaio Phaliro", "Kiphisia", "Vironas"));
 
     @Autowired
     CityRepository cityRepository;
