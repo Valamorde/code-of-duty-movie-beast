@@ -24,7 +24,7 @@ public class BookingCreationController {
     @Autowired
     private BookingRepository bookingRepository;
 
- @Autowired
+    @Autowired
     private UserRepository userRepository;
 
     @Autowired

@@ -16,8 +16,7 @@ import java.util.stream.IntStream;
 public class CityInitialization {
 
     List<String> cities = new ArrayList<String>(Arrays.asList("Athina", "Piraias", "Peristeri", "Kallithea", "Nikaia", "Keratsini",
-            "Ilion", "Gliphada", "Zographos", "Ilioupoli", "Aigaleo", "Nea Smirni", "Khalandri", "Amarousion", "Koridallos", "Nea Ionia",
-            "Agios Dimitrios", "Palaio Phaliro", "Kiphisia", "Vironas"));
+            "Ilion", "Gliphada", "Zographos", "Ilioupoli"));
 
     @Autowired
     CityRepository cityRepository;
@@ -25,7 +24,7 @@ public class CityInitialization {
     @PostConstruct
     @Transactional
     public void init() {
-        IntStream.range(0, 20).forEach((i -> {
+        IntStream.range(0, 10).forEach((i -> {
             City city = new City();
             city.setCity_name(cities.get(i));
             cityRepository.save(city);

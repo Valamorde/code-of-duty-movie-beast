@@ -23,14 +23,16 @@ public class ShowInitialization {
     @PostConstruct
     @Transactional
     public void init() {
-        IntStream.range(0, 20).forEach((i -> {
+        IntStream.range(0, 10).forEach((i -> {
+            int random = (int) (Math.random() * 5 + 1);
+            random = (random == 0 || random == 6) ? 1 : random;
             Show show = new Show();
-            show.setShow_duration_in_minutes((i+1)*10);
+            show.setShow_duration_in_minutes((i + 1) * 10);
             show.setShow_cost(new BigDecimal(7, MathContext.DECIMAL64));
-            show.setTheatre_id(i+1);
-            show.setMovie_id((i+1 < 5)?i+1:4);
+            show.setTheatre_id(i + 1);
+            show.setMovie_id(random);
             show.setShow_date(DateUtils.round(DateUtils.addDays(new Date(), i / 2), Calendar.DATE));
-            show.setAvailable_seats(50);
+            show.setAvailable_seats(10);
             showRepository.save(show);
         }));
     }

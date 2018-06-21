@@ -13,20 +13,23 @@ public class Seat implements Serializable {
     @Id
     @Column(name = "seat_id")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seat_generator")
-    @SequenceGenerator(name="seat_generator", sequenceName = "seat_seq")
+    @SequenceGenerator(name = "seat_generator", sequenceName = "seat_seq")
     private Integer seat_id;
 
     @Column(name = "show_id")
     private Integer show_id;
 
-    @Column(name = "seat_status")
-    private boolean seat_status;
+    @Column(name = "seat_reserved")
+    private boolean seat_reserved;
 
-    @Column(name = "booking_id")
+    @Column(name = "booking_id", nullable = true)
     private Integer booking_id;
 
     @Column(name = "theatre_id")
     private Integer theatre_id;
+
+    @Column(name = "paid")
+    private boolean paid;
 
     public Seat() {
     }
@@ -43,12 +46,12 @@ public class Seat implements Serializable {
         this.show_id = show_id;
     }
 
-    public boolean isSeat_status() {
-        return seat_status;
+    public boolean isSeat_reserved() {
+        return seat_reserved;
     }
 
-    public void setSeat_status(boolean seat_status) {
-        this.seat_status = seat_status;
+    public void setSeat_reserved(boolean seat_reserved) {
+        this.seat_reserved = seat_reserved;
     }
 
     public Integer getBooking_id() {
@@ -65,5 +68,13 @@ public class Seat implements Serializable {
 
     public void setTheatre_id(Integer theatre_id) {
         this.theatre_id = theatre_id;
+    }
+
+    public boolean isPaid() {
+        return paid;
+    }
+
+    public void setPaid(boolean paid) {
+        this.paid = paid;
     }
 }
