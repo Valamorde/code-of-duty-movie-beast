@@ -1,20 +1,14 @@
 package com.ticketmonster.movie_beast.rest_controllers;
 
-import com.ticketmonster.movie_beast.custom_exceptions.CustomException;
 import com.ticketmonster.movie_beast.custom_exceptions.ResourceNotFoundException;
-import com.ticketmonster.movie_beast.models.Role;
 import com.ticketmonster.movie_beast.models.User;
-import com.ticketmonster.movie_beast.repositories.UserRepository;
+import com.ticketmonster.movie_beast.repositories.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.ws.rs.Produces;
-import java.security.Principal;
 import java.util.List;
 
 @Component
@@ -22,7 +16,7 @@ import java.util.List;
 public class UserManipulationController {
 
     @Autowired
-    UserRepository userRepository;
+    IUserRepository userRepository;
 
     // Get All Users
     @GetMapping("/users/all")

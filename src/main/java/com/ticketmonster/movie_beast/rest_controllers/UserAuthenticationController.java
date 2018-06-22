@@ -3,7 +3,7 @@ package com.ticketmonster.movie_beast.rest_controllers;
 import com.ticketmonster.movie_beast.custom_exceptions.CustomException;
 import com.ticketmonster.movie_beast.models.Role;
 import com.ticketmonster.movie_beast.models.User;
-import com.ticketmonster.movie_beast.repositories.UserRepository;
+import com.ticketmonster.movie_beast.repositories.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +22,7 @@ import java.security.Principal;
 public class UserAuthenticationController {
 
     @Autowired
-    UserRepository userRepository;
+    IUserRepository userRepository;
 
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;

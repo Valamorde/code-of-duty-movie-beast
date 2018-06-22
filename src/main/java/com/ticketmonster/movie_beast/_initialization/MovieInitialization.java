@@ -1,7 +1,7 @@
 package com.ticketmonster.movie_beast._initialization;
 
 import com.ticketmonster.movie_beast.models.Movie;
-import com.ticketmonster.movie_beast.repositories.MovieRepository;
+import com.ticketmonster.movie_beast.repositories.IMovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +24,7 @@ public class MovieInitialization {
 
 
     @Autowired
-    MovieRepository movieRepository;
+    IMovieRepository movieRepository;
 
     @PostConstruct
     @Transactional

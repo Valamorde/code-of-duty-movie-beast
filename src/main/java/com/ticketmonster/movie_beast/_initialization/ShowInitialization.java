@@ -1,7 +1,7 @@
 package com.ticketmonster.movie_beast._initialization;
 
 import com.ticketmonster.movie_beast.models.Show;
-import com.ticketmonster.movie_beast.repositories.ShowRepository;
+import com.ticketmonster.movie_beast.repositories.IShowRepository;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,7 +18,7 @@ import java.util.stream.IntStream;
 public class ShowInitialization {
 
     @Autowired
-    ShowRepository showRepository;
+    IShowRepository showRepository;
 
     @PostConstruct
     @Transactional

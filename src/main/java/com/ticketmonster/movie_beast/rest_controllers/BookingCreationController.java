@@ -4,9 +4,9 @@ import com.ticketmonster.movie_beast.custom_exceptions.CustomException;
 import com.ticketmonster.movie_beast.models.Booking;
 import com.ticketmonster.movie_beast.models.Show;
 import com.ticketmonster.movie_beast.models.User;
-import com.ticketmonster.movie_beast.repositories.BookingRepository;
-import com.ticketmonster.movie_beast.repositories.ShowRepository;
-import com.ticketmonster.movie_beast.repositories.UserRepository;
+import com.ticketmonster.movie_beast.repositories.IBookingRepository;
+import com.ticketmonster.movie_beast.repositories.IShowRepository;
+import com.ticketmonster.movie_beast.repositories.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,13 +22,13 @@ import java.util.List;
 public class BookingCreationController {
 
     @Autowired
-    private BookingRepository bookingRepository;
+    private IBookingRepository bookingRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    private IUserRepository userRepository;
 
     @Autowired
-    private ShowRepository showRepository;
+    private IShowRepository showRepository;
 
     @PostMapping("/bookTicket")
     public ResponseEntity<?> bookTicket()/*(@RequestBody Integer event_id, @RequestBody String seat, @RequestBody Integer numberOfTickets) */ {

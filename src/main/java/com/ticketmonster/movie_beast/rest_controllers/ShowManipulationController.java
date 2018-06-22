@@ -2,7 +2,7 @@ package com.ticketmonster.movie_beast.rest_controllers;
 
 import com.ticketmonster.movie_beast.custom_exceptions.ResourceNotFoundException;
 import com.ticketmonster.movie_beast.models.Show;
-import com.ticketmonster.movie_beast.repositories.ShowRepository;
+import com.ticketmonster.movie_beast.repositories.IShowRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -16,7 +16,7 @@ import java.util.List;
 public class ShowManipulationController {
 
     @Autowired
-    ShowRepository showRepository;
+    IShowRepository showRepository;
 
     // Get All Shows
     @GetMapping("/shows/all")

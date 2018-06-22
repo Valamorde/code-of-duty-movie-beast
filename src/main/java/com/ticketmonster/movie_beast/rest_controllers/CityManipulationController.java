@@ -2,7 +2,7 @@ package com.ticketmonster.movie_beast.rest_controllers;
 
 import com.ticketmonster.movie_beast.custom_exceptions.ResourceNotFoundException;
 import com.ticketmonster.movie_beast.models.City;
-import com.ticketmonster.movie_beast.repositories.CityRepository;
+import com.ticketmonster.movie_beast.repositories.ICityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -16,7 +16,7 @@ import java.util.List;
 public class CityManipulationController {
 
     @Autowired
-    CityRepository cityRepository;
+    ICityRepository cityRepository;
 
     // Get All Cities
     @GetMapping("/cities/all")

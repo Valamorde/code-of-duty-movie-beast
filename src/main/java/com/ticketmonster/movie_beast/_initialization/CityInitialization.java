@@ -1,7 +1,7 @@
 package com.ticketmonster.movie_beast._initialization;
 
 import com.ticketmonster.movie_beast.models.City;
-import com.ticketmonster.movie_beast.repositories.CityRepository;
+import com.ticketmonster.movie_beast.repositories.ICityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +19,7 @@ public class CityInitialization {
             "Ilion", "Gliphada", "Zographos", "Ilioupoli"));
 
     @Autowired
-    CityRepository cityRepository;
+    ICityRepository cityRepository;
 
     @PostConstruct
     @Transactional

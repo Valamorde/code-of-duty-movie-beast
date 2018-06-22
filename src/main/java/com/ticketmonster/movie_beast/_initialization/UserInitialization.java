@@ -2,7 +2,7 @@ package com.ticketmonster.movie_beast._initialization;
 
 import com.ticketmonster.movie_beast.models.Role;
 import com.ticketmonster.movie_beast.models.User;
-import com.ticketmonster.movie_beast.repositories.UserRepository;
+import com.ticketmonster.movie_beast.repositories.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -14,7 +14,7 @@ import javax.annotation.PostConstruct;
 public class UserInitialization {
 
     @Autowired
-    UserRepository userRepository;
+    IUserRepository userRepository;
 
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -24,7 +24,7 @@ public class UserInitialization {
     public void init(){
         User user = new User();
         user.setEmail("user@dummy.com");
-        user.setFull_name("Dummy Dummyson");
+        user.setFull_name("User Userson");
         user.setPassword(bCryptPasswordEncoder.encode("1234"));
         user.setRole(Role.USER.name());
         user.setEnabled(true);
