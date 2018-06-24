@@ -1,6 +1,6 @@
 package com.ticketmonster.movie_beast.rest_controllers;
 
-import com.ticketmonster.movie_beast.custom_exceptions.CustomException;
+import com.ticketmonster.movie_beast.helpers.custom_exceptions.CustomException;
 import com.ticketmonster.movie_beast.models.Role;
 import com.ticketmonster.movie_beast.models.User;
 import com.ticketmonster.movie_beast.repositories.IUserRepository;

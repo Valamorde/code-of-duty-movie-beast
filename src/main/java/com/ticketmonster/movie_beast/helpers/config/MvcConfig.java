@@ -1,4 +1,4 @@
-package com.ticketmonster.movie_beast.config;
+package com.ticketmonster.movie_beast.helpers.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

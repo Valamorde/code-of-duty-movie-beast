@@ -1,4 +1,4 @@
-package com.ticketmonster.movie_beast.custom_exceptions;
+package com.ticketmonster.movie_beast.helpers.custom_exceptions;
 
 public class CustomException {
 

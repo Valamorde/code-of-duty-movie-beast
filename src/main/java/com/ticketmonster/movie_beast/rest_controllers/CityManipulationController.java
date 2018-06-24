@@ -1,6 +1,6 @@
 package com.ticketmonster.movie_beast.rest_controllers;
 
-import com.ticketmonster.movie_beast.custom_exceptions.ResourceNotFoundException;
+import com.ticketmonster.movie_beast.helpers.custom_exceptions.ResourceNotFoundException;
 import com.ticketmonster.movie_beast.models.City;
 import com.ticketmonster.movie_beast.repositories.ICityRepository;
 import org.springframework.beans.factory.annotation.Autowired;

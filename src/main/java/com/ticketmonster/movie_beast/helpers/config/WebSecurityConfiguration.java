@@ -1,4 +1,4 @@
-package com.ticketmonster.movie_beast.config;
+package com.ticketmonster.movie_beast.helpers.config;
 
 import com.ticketmonster.movie_beast.repositories.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +11,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.sql.DataSource;
 
@@ -47,12 +50,13 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/",
                         "/register",
-                        "/login").permitAll()
+                        "/login","/users", "/users/**").permitAll()
                 .antMatchers("/theatres", "/theatres/**",
                         "/movies", "/movies/**",
                         "/cities", "/cities/**",
                         "/logout").fullyAuthenticated()
-                .antMatchers("/users", "/users/**").access("hasAuthority('ADMIN')").and()
+                .and()
+                //.antMatchers("/users", "/users/**").access("hasAuthority('ADMIN')").and()
                 .logout()
                 .permitAll()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST"))
@@ -61,5 +65,20 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .sessionManagement().invalidSessionUrl("/login").maximumSessions(1).expiredUrl("/login").and()
                 .sessionCreationPolicy(SessionCreationPolicy.NEVER) // <- TODO: figure out optimal SessionCreationPolicy
                 .and().csrf().disable(); // <- TODO: enable csrf when done.
+    }
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurerAdapter() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**")
+                        .allowedOrigins("http://localhost:4200")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS")
+                        .allowedHeaders("Content-Type", "Date", "Total-Count", "loginInfo")
+                        .exposedHeaders("Content-Type", "Date", "Total-Count", "loginInfo")
+                        .maxAge(3600);
+            }
+        };
     }
 }

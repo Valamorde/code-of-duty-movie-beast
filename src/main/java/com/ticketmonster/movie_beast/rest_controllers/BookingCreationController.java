@@ -1,7 +1,7 @@
 package com.ticketmonster.movie_beast.rest_controllers;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.ticketmonster.movie_beast.custom_exceptions.CustomException;
+import com.ticketmonster.movie_beast.helpers.custom_exceptions.CustomException;
 import com.ticketmonster.movie_beast.models.Booking;
 import com.ticketmonster.movie_beast.models.Seat;
 import com.ticketmonster.movie_beast.models.Show;

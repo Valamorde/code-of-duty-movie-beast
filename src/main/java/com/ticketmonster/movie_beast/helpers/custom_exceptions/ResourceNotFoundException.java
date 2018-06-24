@@ -1,4 +1,4 @@
-package com.ticketmonster.movie_beast.custom_exceptions;
+package com.ticketmonster.movie_beast.helpers.custom_exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
