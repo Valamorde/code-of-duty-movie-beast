@@ -6,42 +6,42 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "movie")
+@Table(name = "movies")
 @EntityListeners(AuditingEntityListener.class)
 public class Movie implements Serializable {
 
     @Id
-    @Column(name = "movie_id")
+    @Column(name = "movieId")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "movie_generator")
     @SequenceGenerator(name="movie_generator", sequenceName = "movie_seq")
-    private Integer movie_id;
+    private Integer movieId;
 
-    @Column(name = "movie_name")
-    private String movie_name;
+    @Column(name = "movieName")
+    private String movieName;
 
-    @Column(name = "movie_description")
-    private String movie_description;
+    @Column(name = "movieDescription")
+    private String movieDescription;
 
     public Movie() {
     }
 
-    public Integer getMovie_id() {
-        return movie_id;
+    public Integer getMovieId() {
+        return movieId;
     }
 
-    public String getMovie_name() {
-        return movie_name;
+    public String getMovieName() {
+        return movieName;
     }
 
-    public void setMovie_name(String movie_name) {
-        this.movie_name = movie_name;
+    public void setMovieName(String movieName) {
+        this.movieName = movieName;
     }
 
-    public String getMovie_description() {
-        return movie_description;
+    public String getMovieDescription() {
+        return movieDescription;
     }
 
-    public void setMovie_description(String movie_description) {
-        this.movie_description = movie_description;
+    public void setMovieDescription(String movieDescription) {
+        this.movieDescription = movieDescription;
     }
 }

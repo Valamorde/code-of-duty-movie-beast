@@ -1,6 +1,6 @@
 package com.ticketmonster.movie_beast.helpers.custom_exceptions;
 
-public class CustomException {
+public class CustomException extends RuntimeException{
 
     private String errorMessage;
 

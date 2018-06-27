@@ -7,76 +7,76 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name = "theatre")
+@Table(name = "theatres")
 @EntityListeners(AuditingEntityListener.class)
 public class Theatre implements Serializable {
 
     @Id
-    @Column(name = "theatre_id")
+    @Column(name = "theatreId")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "theatre_generator")
     @SequenceGenerator(name="theatre_generator", sequenceName = "theatre_seq")
-    private Integer theatre_id;
+    private Integer theatreId;
 
-    @Column(name = "city_id")
-    private Integer city_id;
+    @Column(name = "cityId")
+    private Integer cityId;
 
-    @Column(name = "movie_id")
-    private Integer movie_id;
+    @Column(name = "movieId")
+    private Integer movieId;
 
-    @Column(name = "movie_release_date")
+    @Column(name = "movieReleaseDate")
     @Temporal(TemporalType.DATE)
-    private Date movie_release_date;
+    private Date movieReleaseDate;
 
-    @Column(name = "theatre_name")
-    private String theatre_name;
+    @Column(name = "theatreName")
+    private String theatreName;
 
-    @Column(name = "theatre_address")
-    private String theatre_address;
+    @Column(name = "theatreAddress")
+    private String theatreAddress;
 
     public Theatre() {
     }
 
-    public Integer getTheatre_id() {
-        return theatre_id;
+    public Integer getTheatreId() {
+        return theatreId;
     }
 
-    public Integer getCity_id() {
-        return city_id;
+    public Integer getCityId() {
+        return cityId;
     }
 
-    public void setCity_id(Integer city_id) {
-        this.city_id = city_id;
+    public void setCityId(Integer cityId) {
+        this.cityId = cityId;
     }
 
-    public Integer getMovie_id() {
-        return movie_id;
+    public Integer getMovieId() {
+        return movieId;
     }
 
-    public void setMovie_id(Integer movie_id) {
-        this.movie_id = movie_id;
+    public void setMovieId(Integer movieId) {
+        this.movieId = movieId;
     }
 
-    public Date getMovie_release_date() {
-        return movie_release_date;
+    public Date getMovieReleaseDate() {
+        return movieReleaseDate;
     }
 
-    public void setMovie_release_date(Date movie_release_date) {
-        this.movie_release_date = movie_release_date;
+    public void setMovieReleaseDate(Date movieReleaseDate) {
+        this.movieReleaseDate = movieReleaseDate;
     }
 
-    public String getTheatre_name() {
-        return theatre_name;
+    public String getTheatreName() {
+        return theatreName;
     }
 
-    public void setTheatre_name(String theatre_name) {
-        this.theatre_name = theatre_name;
+    public void setTheatreName(String theatreName) {
+        this.theatreName = theatreName;
     }
 
-    public String getTheatre_address() {
-        return theatre_address;
+    public String getTheatreAddress() {
+        return theatreAddress;
     }
 
-    public void setTheatre_address(String theatre_address) {
-        this.theatre_address = theatre_address;
+    public void setTheatreAddress(String theatreAddress) {
+        this.theatreAddress = theatreAddress;
     }
 }

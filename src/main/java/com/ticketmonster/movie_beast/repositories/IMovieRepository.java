@@ -11,6 +11,5 @@ import java.util.List;
 @Repository
 public interface IMovieRepository extends JpaRepository<Movie, Integer> {
 
-    @Query("SELECT m FROM Movie m WHERE m.movie_name LIKE :movie_name")
-    List<Movie> findAllByName(@Param("movie_name") String movie_name);
+    List<Movie> findAllByMovieNameLike(String movieName);
 }

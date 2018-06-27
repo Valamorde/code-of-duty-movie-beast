@@ -12,8 +12,8 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Component
-@RestController("/cities")
-public class CityManipulationController {
+@RestController
+public class CityController {
 
     @Autowired
     ICityRepository cityRepository;
@@ -34,7 +34,7 @@ public class CityManipulationController {
     @PutMapping("/cities/{id}")
     public City updateCity(@PathVariable(value = "id") Integer id, @Valid @RequestBody City cityDetails) {
         City city = cityRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("City", "Id", id));
-        city.setCity_name(cityDetails.getCity_name());
+        city.setCityName(cityDetails.getCityName());
 
         City updatedUser = cityRepository.save(city);
         return updatedUser;

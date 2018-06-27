@@ -13,7 +13,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.sql.DataSource;
 
@@ -22,13 +21,16 @@ import javax.sql.DataSource;
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    IUserRepository userRepository;
+    private IUserRepository userRepository;
 
     @Autowired
-    DataSource dataSource;
+    private DataSource dataSource;
 
     @Autowired
-    private HttpLogoutSuccessHandler logoutSuccessHandler;
+    private CustomLogoutSuccessHandler logoutSuccessHandler;
+
+    @Autowired
+    private CustomAuthenticationSuccessHandler authenticationSuccessHandler;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -39,24 +41,25 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(dataSource)
-                .usersByUsernameQuery("SELECT email, password, enabled FROM user WHERE email = ?")
-                .authoritiesByUsernameQuery("SELECT email, role FROM user WHERE email = ?")
+                .usersByUsernameQuery("SELECT email, password, enabled FROM users WHERE email = ?")
+                .authoritiesByUsernameQuery("SELECT email, role FROM users WHERE email = ?")
                 .passwordEncoder(passwordEncoder());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and()
+                .formLogin()
+                .loginProcessingUrl("/login").successHandler(authenticationSuccessHandler).and()
                 .authorizeRequests()
                 .antMatchers("/",
                         "/register",
-                        "/login","/users", "/users/**").permitAll()
-                .antMatchers("/theatres", "/theatres/**",
+                        "/login").permitAll()
+                .antMatchers("/theatres", "/theatres/**", "/seatReservation", "/seatReservation/**",
                         "/movies", "/movies/**",
                         "/cities", "/cities/**",
                         "/logout").fullyAuthenticated()
-                .and()
-                //.antMatchers("/users", "/users/**").access("hasAuthority('ADMIN')").and()
+                .antMatchers("/users", "/users/**").access("hasAuthority('ADMIN')").and()
                 .logout()
                 .permitAll()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST"))
@@ -69,7 +72,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Bean
     public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurerAdapter() {
+        return new MvcConfig() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")

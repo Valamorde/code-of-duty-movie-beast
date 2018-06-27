@@ -24,7 +24,7 @@ public class UserInitialization {
     public void init(){
         User user = new User();
         user.setEmail("user@dummy.com");
-        user.setFull_name("User Userson");
+        user.setFullName("User Userson");
         user.setPassword(bCryptPasswordEncoder.encode("1234"));
         user.setRole(Role.USER.name());
         user.setEnabled(true);
@@ -32,7 +32,7 @@ public class UserInitialization {
 
         user = new User();
         user.setEmail("admin@dummy.com");
-        user.setFull_name("Admin Adminson");
+        user.setFullName("Admin Adminson");
         user.setPassword(bCryptPasswordEncoder.encode("1234"));
         user.setRole(Role.ADMIN.name());
         user.setEnabled(true);

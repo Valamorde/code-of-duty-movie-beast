@@ -12,8 +12,8 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Component
-@RestController("/movies")
-public class MovieManipulationController {
+@RestController
+public class MovieController {
 
     @Autowired
     IMovieRepository movieRepository;
@@ -34,8 +34,8 @@ public class MovieManipulationController {
     @PutMapping("/movies/{id}")
     public Movie updateMovie(@PathVariable(value = "id") Integer id, @Valid @RequestBody Movie movieDetails) {
         Movie movie = movieRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Movie", "Id", id));
-        movie.setMovie_name(movieDetails.getMovie_name());
-        movie.setMovie_description(movieDetails.getMovie_description());
+        movie.setMovieName(movieDetails.getMovieName());
+        movie.setMovieDescription(movieDetails.getMovieDescription());
 
         Movie updatedMovie = movieRepository.save(movie);
         return updatedMovie;

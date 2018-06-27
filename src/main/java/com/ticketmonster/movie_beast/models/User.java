@@ -14,15 +14,15 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 @EntityListeners(AuditingEntityListener.class)
 public class User implements UserDetails {
 
     @Id
-    @Column(name = "user_id")
+    @Column(name = "userId")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_generator")
     @SequenceGenerator(name = "user_generator", sequenceName = "user_seq")
-    private Integer user_id;
+    private Integer userId;
 
     @Column(name = "email")
     @Email(message = "Please provide a valid e-mail")
@@ -33,8 +33,8 @@ public class User implements UserDetails {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
-    @Column(name = "full_name")
-    private String full_name;
+    @Column(name = "fullName")
+    private String fullName;
 
     @Column(name = "enabled")
     private boolean enabled;
@@ -61,8 +61,8 @@ public class User implements UserDetails {
         this.enabled = enabled;
     }
 
-    public Integer getUser_id() {
-        return user_id;
+    public Integer getUserId() {
+        return userId;
     }
 
     public String getEmail() {
@@ -105,12 +105,12 @@ public class User implements UserDetails {
         return true;
     }
 
-    public String getFull_name() {
-        return full_name;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFull_name(String full_name) {
-        this.full_name = full_name;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     @JsonIgnore

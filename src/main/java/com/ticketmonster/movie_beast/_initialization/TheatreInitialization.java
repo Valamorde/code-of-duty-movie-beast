@@ -33,11 +33,11 @@ public class TheatreInitialization {
             Theatre theatre = new Theatre();
             int random = (int) (Math.random() * 5 + 1);
             random = (random == 0 || random == 6) ? 1 : random;
-            theatre.setTheatre_name(theatreNames.get(i));
-            theatre.setTheatre_address(theatreAddresses.get(i));
-            theatre.setCity_id(i+1);
-            theatre.setMovie_id(random);
-            theatre.setMovie_release_date(DateUtils.round(DateUtils.addDays(new Date(), i / 2), Calendar.DATE));
+            theatre.setTheatreName(theatreNames.get(i));
+            theatre.setTheatreAddress(theatreAddresses.get(i));
+            theatre.setCityId(i+1);
+            theatre.setMovieId(random);
+            theatre.setMovieReleaseDate(DateUtils.round(DateUtils.addDays(new Date(), i / 2), Calendar.DATE));
             theatreRepository.save(theatre);
         }));
     }

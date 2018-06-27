@@ -11,12 +11,8 @@ import java.util.List;
 @Repository
 public interface IShowRepository extends JpaRepository<Show, Integer> {
 
-    @Query("SELECT s FROM Show s WHERE s.theatre_id = :theatre_id")
-    List<Show> findByTheatreId(@Param("theatre_id") Integer theatre_id);
-
-    @Query("SELECT s FROM Show s WHERE s.movie_id = :movie_id")
-    List<Show> findByMovieId(@Param("movie_id") Integer movie_id);
-
-    @Query("SELECT s FROM Show s WHERE s.available_seats >= :available_seats")
-    List<Show> findByAvailableSeats(@Param("available_seats") Integer available_seats);
+    List<Show> findAllByTheatreId(Integer theatreId);
+    List<Show> findAllByMovieId(Integer movieId);
+    List<Show> findAllByAvailableSeats(Integer availableSeats);
+    Show findByShowId(Integer showId);
 }

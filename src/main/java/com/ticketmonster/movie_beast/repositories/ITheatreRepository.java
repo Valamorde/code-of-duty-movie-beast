@@ -11,9 +11,7 @@ import java.util.List;
 @Repository
 public interface ITheatreRepository extends JpaRepository<Theatre, Integer> {
 
-    @Query("SELECT t FROM Theatre t WHERE t.movie_id = :movie_id")
-    List<Theatre> findByMovieId(@Param("movie_id") Integer movie_id);
 
-    @Query("SELECT t FROM Theatre t WHERE t.city_id = :city_id")
-    List<Theatre> findByCityId(@Param("city_id") Integer city_id);
+    List<Theatre> findAllByMovieId(Integer movieId);
+    List<Theatre> findAllByCityId(Integer cityId);
 }

@@ -13,82 +13,95 @@ import java.util.Date;
 public class Show implements Serializable {
 
     @Id
-    @Column(name = "show_id")
+    @Column(name = "showId")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "show_generator")
     @SequenceGenerator(name="show_generator", sequenceName = "show_seq")
-    private Integer show_id;
+    private Integer showId;
 
-    @Column(name = "theatre_id")
-    private Integer theatre_id;
+    @Column(name = "theatreId")
+    private Integer theatreId;
 
-    @Column(name = "movie_id")
-    private Integer movie_id;
+    @Column(name = "movieId")
+    private Integer movieId;
 
-    @Column(name = "show_date")
+    @Column(name = "showDate")
     @Temporal(TemporalType.DATE)
-    private Date show_date;
+    private Date showDate;
 
-    @Column(name = "show_duration_in_minutes")
-    private Integer show_duration_in_minutes;
+    @Column(name = "showDurationInMinutes")
+    private Integer showDurationInMinutes;
 
-    @Column(name = "available_seats")
-    private Integer available_seats;
+    @Column(name = "initialSeats")
+    private Integer initialSeats;
 
-    @Column(name = "show_cost")
-    private BigDecimal show_cost;
+    @Column(name = "availableSeats")
+    private Integer availableSeats;
+
+    @Column(name = "showCost")
+    private BigDecimal showCost;
 
     public Show() {
     }
 
-    public Integer getShow_id() {
-        return show_id;
+    public Integer getShowId() {
+        return showId;
     }
 
-    public Integer getTheatre_id() {
-        return theatre_id;
+    public Integer getTheatreId() {
+        return theatreId;
     }
 
-    public void setTheatre_id(Integer theatre_id) {
-        this.theatre_id = theatre_id;
+    public void setTheatreId(Integer theatreId) {
+        this.theatreId = theatreId;
     }
 
-    public Integer getMovie_id() {
-        return movie_id;
+    public Integer getMovieId() {
+        return movieId;
     }
 
-    public void setMovie_id(Integer movie_id) {
-        this.movie_id = movie_id;
+    public void setMovieId(Integer movieId) {
+        this.movieId = movieId;
     }
 
-    public Date getShow_date() {
-        return show_date;
+    public Date getShowDate() {
+        return showDate;
     }
 
-    public void setShow_date(Date show_date) {
-        this.show_date = show_date;
+    public void setShowDate(Date showDate) {
+        this.showDate = showDate;
     }
 
-    public Integer getShow_duration_in_minutes() {
-        return show_duration_in_minutes;
+    public Integer getShowDurationInMinutes() {
+        return showDurationInMinutes;
     }
 
-    public void setShow_duration_in_minutes(Integer show_duration_in_minutes) {
-        this.show_duration_in_minutes = show_duration_in_minutes;
+    public void setShowDurationInMinutes(Integer showDurationInMinutes) {
+        this.showDurationInMinutes = showDurationInMinutes;
     }
 
-    public Integer getAvailable_seats() {
-        return available_seats;
+    public Integer getAvailableSeats() {
+        return availableSeats;
     }
 
-    public void setAvailable_seats(Integer available_seats) {
-        this.available_seats = available_seats;
+    public void setAvailableSeats(Integer availableSeats) {
+        this.availableSeats = availableSeats;
     }
 
-    public BigDecimal getShow_cost() {
-        return show_cost;
+    public BigDecimal getShowCost() {
+        return showCost;
     }
 
-    public void setShow_cost(BigDecimal show_cost) {
-        this.show_cost = show_cost;
+    public void setShowCost(BigDecimal showCost) {
+        this.showCost = showCost;
     }
+
+    public Integer getInitialSeats() {
+        return initialSeats;
+    }
+
+    public void setInitialSeats(Integer initialSeats) {
+        this.initialSeats = initialSeats;
+    }
+
+
 }

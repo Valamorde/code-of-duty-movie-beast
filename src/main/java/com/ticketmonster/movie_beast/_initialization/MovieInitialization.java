@@ -31,8 +31,8 @@ public class MovieInitialization {
     public void init() {
         IntStream.range(0, 5).forEach((i -> {
             Movie movie = new Movie();
-            movie.setMovie_name(movieNames.get(i));
-            movie.setMovie_description(movieDescriptions.get(i));
+            movie.setMovieName(movieNames.get(i));
+            movie.setMovieDescription(movieDescriptions.get(i));
             movieRepository.save(movie);
         }));
     }

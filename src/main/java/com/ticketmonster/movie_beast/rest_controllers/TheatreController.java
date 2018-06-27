@@ -12,8 +12,8 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Component
-@RestController("/theatres")
-public class TheatreManipulationController {
+@RestController
+public class TheatreController {
 
     @Autowired
     ITheatreRepository theatreRepository;
@@ -34,7 +34,7 @@ public class TheatreManipulationController {
     @PutMapping("/theatres/{id}")
     public Theatre updateTheatre(@PathVariable(value = "id") Integer id, @Valid @RequestBody Theatre TheatreDetails) {
         Theatre theatre = theatreRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Theatre", "Id", id));
-        theatre.setTheatre_name(TheatreDetails.getTheatre_name());
+        theatre.setTheatreName(TheatreDetails.getTheatreName());
 
         Theatre updatedTheatre = theatreRepository.save(theatre);
         return updatedTheatre;

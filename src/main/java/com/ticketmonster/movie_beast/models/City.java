@@ -6,31 +6,31 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "city")
+@Table(name = "cities")
 @EntityListeners(AuditingEntityListener.class)
 public class City implements Serializable {
 
     @Id
-    @Column(name = "city_id")
+    @Column(name = "cityId")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "city_generator")
     @SequenceGenerator(name="city_generator", sequenceName = "city_seq")
-    private Integer city_id;
+    private Integer cityId;
 
-    @Column(name = "city_name")
-    private String city_name;
+    @Column(name = "cityName")
+    private String cityName;
 
     public City() {
     }
 
-    public Integer getCity_id() {
-        return city_id;
+    public Integer getCityId() {
+        return cityId;
     }
 
-    public String getCity_name() {
-        return city_name;
+    public String getCityName() {
+        return cityName;
     }
 
-    public void setCity_name(String city_name) {
-        this.city_name = city_name;
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
     }
 }

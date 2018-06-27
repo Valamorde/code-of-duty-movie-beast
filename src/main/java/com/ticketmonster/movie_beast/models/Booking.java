@@ -8,76 +8,76 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
-@Table(name = "booking")
+@Table(name = "bookings")
 @EntityListeners(AuditingEntityListener.class)
 public class Booking implements Serializable {
 
     @Id
-    @Column(name = "booking_id")
+    @Column(name = "bookingId")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "booking_generator")
     @SequenceGenerator(name = "booking_generator", sequenceName = "booking_seq")
-    private Integer booking_id;
+    private Integer bookingId;
 
-    @Column(name = "user_id")
-    private Integer user_id;
+    @Column(name = "userId")
+    private Integer userId;
 
-    @Column(name = "booking_date", nullable = false)
+    @Column(name = "bookingDate", nullable = false)
     @Temporal(TemporalType.DATE)
-    private Date booking_date;
+    private Date bookingDate;
 
-    @Column(name = "show_id")
-    private Integer show_id;
+    @Column(name = "showId")
+    private Integer showId;
 
-    @Column(name = "booking_cost")
-    private BigDecimal booking_cost;
+    @Column(name = "bookingCost")
+    private BigDecimal bookingCost;
 
-    @Column(name = "seat_id")
-    private Integer seat_id;
+    @Column(name = "seatReservationId")
+    private Integer seatReservationId;
 
     public Booking() {
     }
 
-    public Integer getBooking_id() {
-        return booking_id;
+    public Integer getBookingId() {
+        return bookingId;
     }
 
-    public Integer getUser_id() {
-        return user_id;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public Date getBooking_date() {
-        return booking_date;
+    public Date getBookingDate() {
+        return bookingDate;
     }
 
-    public void setBooking_date(Date booking_date) {
-        this.booking_date = booking_date;
+    public void setBookingDate(Date bookingDate) {
+        this.bookingDate = bookingDate;
     }
 
-    public Integer getShow_id() {
-        return show_id;
+    public Integer getShowId() {
+        return showId;
     }
 
-    public void setShow_id(Integer show_id) {
-        this.show_id = show_id;
+    public void setShowId(Integer showId) {
+        this.showId = showId;
     }
 
-    public BigDecimal getBooking_cost() {
-        return booking_cost;
+    public BigDecimal getBookingCost() {
+        return bookingCost;
     }
 
-    public void setBooking_cost(BigDecimal booking_cost) {
-        this.booking_cost = booking_cost;
+    public void setBookingCost(BigDecimal bookingCost) {
+        this.bookingCost = bookingCost;
     }
 
-    public Integer getSeat_id() {
-        return seat_id;
+    public Integer getSeatReservationId() {
+        return seatReservationId;
     }
 
-    public void setSeat_id(Integer seat_id) {
-        this.seat_id = seat_id;
+    public void setSeatReservationId(Integer seatReservationId) {
+        this.seatReservationId = seatReservationId;
     }
 }

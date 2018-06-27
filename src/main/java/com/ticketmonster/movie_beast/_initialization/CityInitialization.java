@@ -26,7 +26,7 @@ public class CityInitialization {
     public void init() {
         IntStream.range(0, 10).forEach((i -> {
             City city = new City();
-            city.setCity_name(cities.get(i));
+            city.setCityName(cities.get(i));
             cityRepository.save(city);
         }));
     }

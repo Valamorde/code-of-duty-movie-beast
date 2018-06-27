@@ -12,8 +12,8 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Component
-@RestController("/shows")
-public class ShowManipulationController {
+@RestController
+public class ShowController {
 
     @Autowired
     IShowRepository showRepository;
@@ -34,7 +34,7 @@ public class ShowManipulationController {
     @PutMapping("/shows/{id}")
     public Show updateShow(@PathVariable(value = "id") Integer id, @Valid @RequestBody Show showDetails) {
         Show show = showRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Show", "Id", id));
-        show.setAvailable_seats(showDetails.getAvailable_seats());
+        show.setAvailableSeats(showDetails.getAvailableSeats());
 
         Show updatedShow = showRepository.save(show);
         return updatedShow;

@@ -11,12 +11,7 @@ import java.util.List;
 @Repository
 public interface IUserRepository extends JpaRepository<User, Integer> {
 
-    @Query("SELECT u FROM User u WHERE u.email = :email")
-    User findByEmail(@Param("email") String email);
-
-    @Query("SELECT u FROM User u WHERE u.full_name = :full_name")
-    User findByFullName(@Param("full_name") String full_name);
-
-    @Query("SELECT u FROM User u WHERE u.role = :role")
-    List<User> findByRole(@Param("role") String role);
+    User findByEmail(String email);
+    User findByFullName(String fullName);
+    List<User> findAllByRole(String role);
 }
