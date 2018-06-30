@@ -1,13 +1,18 @@
 package com.ticketmonster.movie_beast.services.implementations;
 
+import com.ticketmonster.movie_beast.helpers.config.CustomAccessHandler;
 import com.ticketmonster.movie_beast.models.Booking;
 import com.ticketmonster.movie_beast.models.SeatReservation;
 import com.ticketmonster.movie_beast.models.User;
 import com.ticketmonster.movie_beast.repositories.IBookingRepository;
 import com.ticketmonster.movie_beast.repositories.ISeatReservationRepository;
 import com.ticketmonster.movie_beast.repositories.IShowRepository;
+import com.ticketmonster.movie_beast.repositories.IUserRepository;
 import com.ticketmonster.movie_beast.services._interfaces.IBookingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,9 +31,20 @@ public class BookingServiceImpl implements IBookingService {
     @Autowired
     IShowRepository showRepository;
 
-    @Transactional
-    public List<Booking> bookTicket(User user) {
+    @Autowired
+    IUserRepository userRepository;
 
+    @Autowired
+    CustomAccessHandler customAccessHandler;
+
+    @Transactional
+    public ResponseEntity<?> bookTickets(Authentication authentication) {
+
+        if (authentication == null) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+
+        User user = userRepository.findByEmail(authentication.getName());
         List<SeatReservation> reservedSeats = seatReservationRepository.findAllBySeatReservedIsTrueAndSeatPaidIsFalseAndUserIdIs(user.getUserId());
         List<Booking> bookings = new ArrayList<>();
 
@@ -46,24 +62,69 @@ public class BookingServiceImpl implements IBookingService {
             seatReservation.setSeatPaid(true);
             seatReservationRepository.save(seatReservation);
         }
-
-        return bookings;
+        return new ResponseEntity<>(bookings, HttpStatus.OK);
     }
 
-    //TODO: enable user to cancel their own tickets
     @Transactional
-    public Booking cancelTicket(Integer bookingId){
+    public ResponseEntity<?> cancelSingleTicket(Integer bookingId) {
 
         Booking booking = bookingRepository.findByBookingId(bookingId);
         SeatReservation seatReservation = seatReservationRepository.findByBookingId(bookingId);
-
+        List<Booking> bookingList = bookingRepository.findAllByUserId(booking.getUserId());
         bookingRepository.delete(booking);
+        bookingList.remove(booking);
         seatReservation.setUserId(null);
         seatReservation.setBookingId(null);
         seatReservation.setSeatPaid(false);
         seatReservation.setSeatReserved(false);
         seatReservationRepository.save(seatReservation);
 
-        return null;
+        return new ResponseEntity<>(bookingList, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<?> findAllBookings(Authentication authentication) {
+        User user = userRepository.findByEmail(authentication.getName());
+        if (customAccessHandler.userIsAdmin(user)) {
+            return new ResponseEntity<>(bookingRepository.findAll(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+    }
+
+    @Override
+    public ResponseEntity<?> findSingleBooking(Authentication authentication, Integer bookingId) {
+        User user = userRepository.findByEmail(authentication.getName());
+        if (customAccessHandler.userIsAuthorizedToViewSpecifiedContent(bookingRepository.findByBookingId(bookingId).getUserId(), user)) {
+            return new ResponseEntity<>(bookingRepository.findByBookingId(bookingId), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+    }
+
+    @Override
+    public ResponseEntity<?> updateSingleBooking(Authentication authentication, Integer bookingId, Booking newBooking) {
+        User user = userRepository.findByEmail((authentication.getName()));
+        Booking booking = bookingRepository.getOne(bookingId);
+        if (customAccessHandler.userIsAuthorizedToViewSpecifiedContent(booking.getUserId(), user)) {
+            booking.setUserId(newBooking.getUserId());
+            booking.setBookingDate(newBooking.getBookingDate());
+            booking.setShowId(newBooking.getShowId());
+            return new ResponseEntity<>(bookingRepository.save(booking), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+    }
+
+    @Override
+    public ResponseEntity<?> deleteSingleBooking(Authentication authentication, Integer bookingId) {
+        User user = userRepository.findByEmail((authentication.getName()));
+        Booking booking = bookingRepository.getOne(bookingId);
+        if (customAccessHandler.userIsAdmin(user)) {
+            bookingRepository.delete(booking);
+            return new ResponseEntity<>(bookingRepository.findAllByUserId(user.getUserId()), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
     }
 }

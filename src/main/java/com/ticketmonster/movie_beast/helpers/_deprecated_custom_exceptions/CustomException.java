@@ -1,4 +1,4 @@
-package com.ticketmonster.movie_beast.helpers.custom_exceptions;
+package com.ticketmonster.movie_beast.helpers._deprecated_custom_exceptions;
 
 public class CustomException extends RuntimeException{
 

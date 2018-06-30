@@ -1,6 +1,6 @@
 package com.ticketmonster.movie_beast.rest_controllers;
 
-import com.ticketmonster.movie_beast.helpers.custom_exceptions.ResourceNotFoundException;
+import com.ticketmonster.movie_beast.helpers._deprecated_custom_exceptions.ResourceNotFoundException;
 import com.ticketmonster.movie_beast.models.Show;
 import com.ticketmonster.movie_beast.repositories.IShowRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class ShowController {
     IShowRepository showRepository;
 
     // Get All Shows
-    @GetMapping("/shows/all")
+    @GetMapping("/shows")
     public List<Show> getAllShows() {
         return showRepository.findAll();
     }
@@ -36,8 +36,7 @@ public class ShowController {
         Show show = showRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Show", "Id", id));
         show.setAvailableSeats(showDetails.getAvailableSeats());
 
-        Show updatedShow = showRepository.save(show);
-        return updatedShow;
+        return showRepository.save(show);
     }
 
     // Delete a Show

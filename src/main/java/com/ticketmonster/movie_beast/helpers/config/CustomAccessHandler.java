@@ -6,13 +6,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomAccessHandler {
 
-    public boolean isUserAuthorizedToViewSpecifiedId(Integer requestedId, User user) {
-        if (user.getRole().equals("ADMIN")) {
-            return true;
-        } else if (user.getRole().equals("USER") && user.getUserId().equals(requestedId)) {
+    public boolean userIsAuthorizedToViewSpecifiedContent(Integer requestedId, User user) {
+        if (userIsAdmin(user)) {
             return true;
         } else {
-            return false;
+            return user.getRole().equals("USER") && user.getUserId().equals(requestedId);
         }
+    }
+
+    public boolean userIsAdmin(User user){
+        return user.getRole().equals("ADMIN");
     }
 }

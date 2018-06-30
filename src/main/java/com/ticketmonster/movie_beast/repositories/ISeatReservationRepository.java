@@ -16,5 +16,6 @@ public interface ISeatReservationRepository extends JpaRepository<SeatReservatio
     SeatReservation findByBookingId(Integer bookingId);
     List<SeatReservation> findAllBySeatReservedIsTrueAndSeatPaidIsFalse();
     List<SeatReservation> findAllBySeatReservedIsTrueAndSeatPaidIsFalseAndUserIdIs(Integer userId);
+    List<SeatReservation> findAllByUserId(Integer userId);
     SeatReservation findBySeatId(Integer seatId);
 }

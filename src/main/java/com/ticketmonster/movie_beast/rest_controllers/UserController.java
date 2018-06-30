@@ -1,28 +1,23 @@
 package com.ticketmonster.movie_beast.rest_controllers;
 
 import com.ticketmonster.movie_beast.helpers.config.CustomAccessHandler;
-import com.ticketmonster.movie_beast.helpers.custom_exceptions.CustomException;
-import com.ticketmonster.movie_beast.helpers.custom_exceptions.ResourceNotFoundException;
-import com.ticketmonster.movie_beast.models.Booking;
-import com.ticketmonster.movie_beast.models.Role;
-import com.ticketmonster.movie_beast.models.SeatReservation;
 import com.ticketmonster.movie_beast.models.User;
 import com.ticketmonster.movie_beast.repositories.IBookingRepository;
 import com.ticketmonster.movie_beast.repositories.ISeatReservationRepository;
 import com.ticketmonster.movie_beast.repositories.IUserRepository;
+import com.ticketmonster.movie_beast.services.implementations.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import java.security.Principal;
-import java.util.List;
 
 @Component
 @RestController
@@ -43,6 +38,9 @@ public class UserController {
     @Autowired
     CustomAccessHandler customAccessHandler;
 
+    @Autowired
+    UserServiceImpl userService;
+
     /**
      * Allows the user to Login
      *
@@ -50,8 +48,9 @@ public class UserController {
      * @return logged in user
      */
     @PostMapping("/login")
+    @Consumes("application/json")
+    @Produces("application/json")
     public Principal user(Principal user) {
-
         return user;
     }
 
@@ -62,104 +61,112 @@ public class UserController {
      * @return created user, 201 OR CustomException, 409
      */
     @PostMapping("/register")
+    @Consumes("application/json")
     @Produces("application/json")
-    public ResponseEntity<?> createUser(@Valid @RequestBody User newUser) {
-        if (userRepository.findByEmail(newUser.getEmail()) != null) {
-            return new ResponseEntity<>(
-                    new CustomException("Sorry but email: <" + newUser.getEmail() + "> already exists."),
-                    HttpStatus.CONFLICT);
+    public ResponseEntity<?> registerNewUser(@Valid @RequestBody User newUser) {
+        try {
+            return userService.createNewUser(newUser);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
-        newUser.setRole(Role.USER.name());
-        newUser.setEnabled(true);
-        return new ResponseEntity<User>(userRepository.save(newUser), HttpStatus.CREATED);
     }
 
     /**
      * @return a list of registered users
      */
     @GetMapping("/users")
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    @Produces("application/json")
+    public ResponseEntity<?> getAllUsers() {
+        try {
+            return userService.findAllUsers();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     /**
-     * @param uId - INTEGER, a user's id
+     * @param userId - INTEGER, a user's id
      * @return specified user's details
      */
-    @GetMapping("/users/{uid}")
-    public User getUserById(@PathVariable(value = "uid") Integer uId) {
-        return userRepository.findById(uId).orElseThrow(() -> new ResourceNotFoundException("User", "Id", uId));
+    @GetMapping("/users/{userId}")
+    @Produces("application/json")
+    public ResponseEntity<?> getSingleUser(@PathVariable(value = "userId") Integer userId) {
+        try {
+            return userService.findSingleUser(SecurityContextHolder.getContext().getAuthentication(), userId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     /**
-     * @param uId - INTEGER, a user's id
+     * @param userId - INTEGER, a user's id
      * @return specified user's basket of seat reservations
      */
-    @GetMapping("/users/{uid}/basket")
-    public ResponseEntity<?> getUserBasket(@PathVariable(value = "uid") Integer uId) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = userRepository.findByEmail(authentication.getName());
-
-        if (customAccessHandler.isUserAuthorizedToViewSpecifiedId(uId, user)) {
-            return new ResponseEntity<>(seatReservationRepository.findAllBySeatReservedIsTrueAndSeatPaidIsFalseAndUserIdIs(uId), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+    @GetMapping("/users/{userId}/basket")
+    @Produces("application/json")
+    public ResponseEntity<?> getUserBasket(@PathVariable(value = "userId") Integer userId) {
+        try {
+            return userService.getUserBasket(SecurityContextHolder.getContext().getAuthentication(), userId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
     /**
-     * @param uId - INTEGER, a user's id
+     * @param userId - INTEGER, a user's id
      * @return specified user's bookings
      */
-    @GetMapping("/users/{uid}/bookings")
-    public ResponseEntity<?> getAllUserBookings(@PathVariable(value = "uid") Integer uId) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = userRepository.findByEmail(authentication.getName());
-
-        if (customAccessHandler.isUserAuthorizedToViewSpecifiedId(uId, user)) {
-            return new ResponseEntity<>(bookingRepository.findAllByUserId(uId), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+    @GetMapping("/users/{userId}/bookings")
+    public ResponseEntity<?> getAllUserBookings(@PathVariable(value = "userId") Integer userId) {
+        try {
+            return userService.getAllUserBookings(SecurityContextHolder.getContext().getAuthentication(), userId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
     /**
-     * @param uId - INTEGER, a user's id
-     * @param bId - INTEGER, a booking's id
+     * @param userId - INTEGER, a user's id
+     * @param bookingId - INTEGER, a booking's id
      * @return specified user's specified booking
      */
-    @GetMapping("/users/{uid}/bookings/{bid}")
-    public ResponseEntity<?> getSingleUserBooking(@PathVariable(value = "uid") Integer uId, @PathVariable(value = "bid") Integer bId) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = userRepository.findByEmail(authentication.getName());
-
-        if (customAccessHandler.isUserAuthorizedToViewSpecifiedId(uId, user)) {
-            return new ResponseEntity<>(bookingRepository.findByBookingIdAndUserId(bId, uId), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+    @GetMapping("/users/{userId}/bookings/{bookingId}")
+    public ResponseEntity<?> getSingleUserBooking(@PathVariable(value = "userId") Integer userId, @PathVariable(value = "bookingId") Integer bookingId) {
+        try {
+            return userService.getSingleUserBooking(SecurityContextHolder.getContext().getAuthentication(), userId, bookingId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
 
     // Update a User
-    @PutMapping("/users/{uid}")
-    public User updateUser(@PathVariable(value = "uid") Integer id, @Valid @RequestBody User userDetails) {
-        User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "Id", id));
-        user.setFullName(userDetails.getFullName());
-        user.setEmail(userDetails.getEmail());
-        user.setPassword(bCryptPasswordEncoder.encode(userDetails.getPassword()));
-        User updatedUser = userRepository.save(user);
-        return updatedUser;
+    @PutMapping("/users/{userId}")
+    @Produces("application/json")
+    public ResponseEntity<?> updateUser(@PathVariable(value = "userId") Integer userId, @Valid @RequestBody User userDetails) {
+        try {
+            return userService.updateSingleUser(SecurityContextHolder.getContext().getAuthentication(), userId, userDetails);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     // Delete a User
-    @DeleteMapping("/users/{uid}")
-    public ResponseEntity<?> deleteUser(@PathVariable(value = "uid") Integer id) {
-        User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "Id", id));
-
-        userRepository.delete(user);
-
-        return ResponseEntity.ok().build();
+    @DeleteMapping("/users/{userId}")
+    @Produces("application/json")
+    public ResponseEntity<?> deleteUser(@PathVariable(value = "userId") Integer userId) {
+        try {
+            return userService.deleteUserAndCleanup(SecurityContextHolder.getContext().getAuthentication(), userId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 }

@@ -1,6 +1,6 @@
 package com.ticketmonster.movie_beast.rest_controllers;
 
-import com.ticketmonster.movie_beast.helpers.custom_exceptions.ResourceNotFoundException;
+import com.ticketmonster.movie_beast.helpers._deprecated_custom_exceptions.ResourceNotFoundException;
 import com.ticketmonster.movie_beast.models.City;
 import com.ticketmonster.movie_beast.repositories.ICityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,15 +19,15 @@ public class CityController {
     ICityRepository cityRepository;
 
     // Get All Cities
-    @GetMapping("/cities/all")
+    @GetMapping("/cities")
     public List<City> getAllCities() {
         return cityRepository.findAll();
     }
 
     // Get a Single City
-    @GetMapping("/cities/{id}")
-    public City getCityById(@PathVariable(value = "id") Integer id) {
-        return cityRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("City", "Id", id));
+    @GetMapping("/cities/{cId}")
+    public City getCityById(@PathVariable(value = "cId") Integer cId) {
+        return cityRepository.findById(cId).orElseThrow(() -> new ResourceNotFoundException("City", "Id", cId));
     }
 
     // Update a City
@@ -36,8 +36,7 @@ public class CityController {
         City city = cityRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("City", "Id", id));
         city.setCityName(cityDetails.getCityName());
 
-        City updatedUser = cityRepository.save(city);
-        return updatedUser;
+        return cityRepository.save(city);
     }
 
     // Delete a City

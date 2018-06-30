@@ -29,8 +29,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private CustomLogoutSuccessHandler logoutSuccessHandler;
 
-    @Autowired
-    private CustomAuthenticationSuccessHandler authenticationSuccessHandler;
+//    @Autowired
+//    private CustomAuthenticationSuccessHandler authenticationSuccessHandler;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -49,8 +49,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and()
-                .formLogin()
-                .loginProcessingUrl("/login").successHandler(authenticationSuccessHandler).and()
+                //.formLogin() //FIXME: <- temporarily disabled to allow CORS Authentication from Angular  ----
+                //.loginProcessingUrl("/login").successHandler(authenticationSuccessHandler).and() //FIXME: <-|
                 .authorizeRequests()
                 .antMatchers("/",
                         "/register",
@@ -76,10 +76,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:4200")
+                        .allowedOrigins("*") //FIXME: <- change to http://localhost:4200/
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS")
-                        .allowedHeaders("Content-Type", "Date", "Total-Count", "loginInfo")
-                        .exposedHeaders("Content-Type", "Date", "Total-Count", "loginInfo")
+                        .allowedHeaders("Content-Type", "Date", "Total-Count", "loginInfo", "application/json", "Authorization")
+                        .exposedHeaders("Content-Type", "Date", "Total-Count", "loginInfo", "application/json", "Authorization")
                         .maxAge(3600);
             }
         };

@@ -1,6 +1,6 @@
 package com.ticketmonster.movie_beast.rest_controllers;
 
-import com.ticketmonster.movie_beast.helpers.custom_exceptions.ResourceNotFoundException;
+import com.ticketmonster.movie_beast.helpers._deprecated_custom_exceptions.ResourceNotFoundException;
 import com.ticketmonster.movie_beast.models.Movie;
 import com.ticketmonster.movie_beast.repositories.IMovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class MovieController {
     IMovieRepository movieRepository;
 
     // Get All Movies
-    @GetMapping("/movies/all")
+    @GetMapping("/movies")
     public List<Movie> getAllMovies() {
         return movieRepository.findAll();
     }
@@ -37,8 +37,7 @@ public class MovieController {
         movie.setMovieName(movieDetails.getMovieName());
         movie.setMovieDescription(movieDetails.getMovieDescription());
 
-        Movie updatedMovie = movieRepository.save(movie);
-        return updatedMovie;
+        return movieRepository.save(movie);
     }
 
     // Delete a Movie

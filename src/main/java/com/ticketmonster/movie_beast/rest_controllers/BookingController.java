@@ -1,24 +1,19 @@
 package com.ticketmonster.movie_beast.rest_controllers;
 
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.ticketmonster.movie_beast.helpers.custom_exceptions.CustomException;
-import com.ticketmonster.movie_beast.helpers.custom_exceptions.ResourceNotFoundException;
 import com.ticketmonster.movie_beast.models.Booking;
-import com.ticketmonster.movie_beast.models.User;
 import com.ticketmonster.movie_beast.repositories.IBookingRepository;
 import com.ticketmonster.movie_beast.repositories.IUserRepository;
 import com.ticketmonster.movie_beast.services.implementations.BookingServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
-import java.util.List;
+import javax.ws.rs.Produces;
 
 @Component
 @RestController
@@ -35,63 +30,74 @@ public class BookingController {
 
     // Book Reserved Seats
     @PostMapping("/bookings/final")
+    @Produces("application/json")
     public ResponseEntity<?> finalizeBookings() {
         try {
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            User user = userRepository.findByEmail(authentication.getName());
-
-            return new ResponseEntity<>(bookingService.bookTicket(user), HttpStatus.OK);
+            return bookingService.bookTickets(SecurityContextHolder.getContext().getAuthentication());
         } catch (Exception e) {
-            return new ResponseEntity<>(new CustomException("Sorry but it seems that the seat you requested is unavailable."),
-                    HttpStatus.BAD_REQUEST);
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
     // Cancel a Booked Ticket
     @PostMapping("/bookings/cancel")
     @Consumes("application/json")
-    public ResponseEntity<?> cancelBooking(@RequestBody ObjectNode bookingNode) {
+    public ResponseEntity<?> cancelBooking(@Valid @RequestBody Booking booking) {
         try {
-            Integer bookingId = bookingNode.get("bookingId").asInt();
-
-            return new ResponseEntity<>(bookingService.cancelTicket(bookingId), HttpStatus.OK);
+            return bookingService.cancelSingleTicket(booking.getBookingId());
         } catch (Exception e) {
-            return new ResponseEntity<>(new CustomException("Sorry but it seems that the booking could not be cancelled."),
-                    HttpStatus.BAD_REQUEST);
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
     // Get All Bookings
     @GetMapping("/bookings")
-    public List<Booking> getAllBookings() {
-        return bookingRepository.findAll();
+    @Produces("application/json")
+    public ResponseEntity<?> getAllBookings() {
+        try {
+            return bookingService.findAllBookings(SecurityContextHolder.getContext().getAuthentication());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     // Get a Single Booking
     @GetMapping("/bookings/{id}")
-    public Booking getBookingById(@PathVariable(value = "id") Integer id) {
-        return bookingRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Booking", "Id", id));
+    @Produces("application/json")
+    public ResponseEntity<?> getBookingById(@PathVariable(value = "id") Integer id) {
+        try {
+            return bookingService.findSingleBooking(SecurityContextHolder.getContext().getAuthentication(), id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     // Update a Booking
     @PutMapping("/bookings/{id}")
-    public Booking updateBooking(@PathVariable(value = "id") Integer id, @Valid @RequestBody Booking bookingDetails) {
-        Booking booking = bookingRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Booking", "Id", id));
-        booking.setUserId(bookingDetails.getUserId());
-        booking.setBookingDate(bookingDetails.getBookingDate());
-        booking.setShowId(bookingDetails.getShowId());
-
-        Booking updatedBooking = bookingRepository.save(booking);
-        return updatedBooking;
+    @Consumes("application/json")
+    @Produces("application/json")
+    public ResponseEntity<?> updateBooking(@PathVariable(value = "id") Integer id, @Valid @RequestBody Booking bookingDetails) {
+        try {
+            return bookingService.updateSingleBooking(SecurityContextHolder.getContext().getAuthentication(), id, bookingDetails);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
-    // Delete a Booking
+    // Allows Admin to delete a Booking
     @DeleteMapping("/bookings/{id}")
+    @Produces("application/json")
     public ResponseEntity<?> deleteBooking(@PathVariable(value = "id") Integer id) {
-        Booking booking = bookingRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Booking", "Id", id));
-
-        bookingRepository.delete(booking);
-
-        return ResponseEntity.ok().build();
+        try {
+            return bookingService.deleteSingleBooking(SecurityContextHolder.getContext().getAuthentication(), id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 }

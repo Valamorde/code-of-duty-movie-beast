@@ -1,6 +1,6 @@
 package com.ticketmonster.movie_beast.rest_controllers;
 
-import com.ticketmonster.movie_beast.helpers.custom_exceptions.ResourceNotFoundException;
+import com.ticketmonster.movie_beast.helpers._deprecated_custom_exceptions.ResourceNotFoundException;
 import com.ticketmonster.movie_beast.models.Theatre;
 import com.ticketmonster.movie_beast.repositories.ITheatreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +36,7 @@ public class TheatreController {
         Theatre theatre = theatreRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Theatre", "Id", id));
         theatre.setTheatreName(TheatreDetails.getTheatreName());
 
-        Theatre updatedTheatre = theatreRepository.save(theatre);
-        return updatedTheatre;
+        return theatreRepository.save(theatre);
     }
 
     // Delete a Theatre
