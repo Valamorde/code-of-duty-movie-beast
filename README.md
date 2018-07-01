@@ -32,9 +32,17 @@ e) To ensure you enjoy the benefits of _git_ make sure to use **GitBash**.
 
 \* Minimum Requirements    
 \* Challenge 1    
-\* Challenge 2 _(Except Admin reports & Password Reset)_    
+\* Challenge 2 \*    
 \* Challenge 3    
 \* Challenge 4    
+
+# Goals Pending (Back-End)    
+
+\* Entity Relationships    
+\* Admin Reports    
+\* Password Reset    
+\* Make sure all "communication" with Front-End works as expected    
+\* Refactor "Integer ids" in Entities with corresponding "Entity Classes" _(may the force be with us regarding this one)_    
 
 # Note to Front-End    
 
