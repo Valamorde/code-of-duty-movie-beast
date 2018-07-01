@@ -1,31 +1,27 @@
-## This is simply a structural placeholder of the master branch, nothing to do yet.
+# Welcome to Markos' branch.    
 
-## How to use Git (Just in case someone forgot)
+## How to use this branch as template for your work    
 
-a) Navigate to the directory you want to work in.    
+a) `git fetch`    
 
-b) Clone the repository by running "git clone https://bitbucket.org/Valamorde/cod-ticket-monster.git" (without quotes in CMD, PowerShell or GitBash etc.)    
+b) `git pull origin markos`    
 
-c) Open the new folder (cod-ticket-monster) in explorer or CD through CMD, PowerShell, GitBash    
+c) `git checkout -b _your-new-branch-name_    
 
-d) Run "git checkout -b [name_of_your_new_branch]"    
-
-e) Do what you need to do    
-
-f) When done run "git status", "git add [name_of_the_file_you_want_to_stage_or_period_for_all]", "git commit -m '[your_message_here_KISS]'", "git push origin [name_of_your_new_branch]"    
-
-g) You're done.    
+d) **Read this README file** & do your thing    
 
 
-## Important
+## Important Guidelines
 
-a) We are following the Git Workflow (master, develop, release, feature(s))    
+a) We are following the Git Workflow (`master`, `develop`, `release`, `feature(s)`)    
 
-b) On a daily basis before doing anything run "git fetch origin [name_of_your_branch]" followed by "git pull origin [name_of_your_branch]" to make sure you re not having any conflicts    
+b) On a daily basis before doing anything run `git fetch` followed by `git status` & `git pull origin [name_of_your_branch]` to make sure you re not having any conflicts    
 
-c) At the end of the day always commit and push your changes.    
+c) Follow project structure _at all times_. **Only commit & push the files that will be merged**    
+
+d) At the end of the day always commit and push your changes! **Make sure to add a proper commit message**    
+
+e) To ensure you enjoy the benefits of _git_ make sure to use **GitBash**.       
 
 
-## Having questions about Git? Check this out:    
-
-https://github.com/Kunena/Kunena-Forum/wiki/Create-a-new-branch-with-git-and-manage-branches    
+## Having questions about Git? [Check this out](https://github.com/Kunena/Kunena-Forum/wiki/Create-a-new-branch-with-git-and-manage-branches).  
