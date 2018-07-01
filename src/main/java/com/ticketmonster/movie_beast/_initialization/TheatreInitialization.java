@@ -1,7 +1,7 @@
 package com.ticketmonster.movie_beast._initialization;
 
 import com.ticketmonster.movie_beast.models.Theatre;
-import com.ticketmonster.movie_beast.repositories.ITheatreRepository;
+import com.ticketmonster.movie_beast.repositories.TheatreRepository;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -24,7 +24,7 @@ public class TheatreInitialization {
             "STREET, 1, TOWN 6","STREET, 1, TOWN 7","STREET, 1, TOWN 8","STREET, 1, TOWN 9","STREET, 1, TOWN 10"));
 
     @Autowired
-    ITheatreRepository theatreRepository;
+    TheatreRepository theatreRepository;
 
     @PostConstruct
     @Transactional

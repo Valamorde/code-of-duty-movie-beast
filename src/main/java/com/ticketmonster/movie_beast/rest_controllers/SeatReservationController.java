@@ -1,8 +1,9 @@
 package com.ticketmonster.movie_beast.rest_controllers;
 
 import com.ticketmonster.movie_beast.models.SeatReservation;
-import com.ticketmonster.movie_beast.repositories.IUserRepository;
-import com.ticketmonster.movie_beast.services.implementations.SeatReservationServiceImpl;
+import com.ticketmonster.movie_beast.repositories.UserRepository;
+import com.ticketmonster.movie_beast.services.impl.SeatReservationServiceImpl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ import javax.ws.rs.Produces;
 public class SeatReservationController {
 
     @Autowired
-    private IUserRepository userRepository;
+    private UserRepository userRepository;
 
     @Autowired
     private SeatReservationServiceImpl seatReservationService;

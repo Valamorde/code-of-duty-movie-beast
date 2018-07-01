@@ -1,4 +1,4 @@
-package com.ticketmonster.movie_beast.services._interfaces;
+package com.ticketmonster.movie_beast.services;
 
 import com.ticketmonster.movie_beast.models.Booking;
 import com.ticketmonster.movie_beast.models.User;
@@ -8,7 +8,7 @@ import org.springframework.security.core.Authentication;
 import java.awt.print.Book;
 import java.util.List;
 
-public interface IBookingService {
+public interface BookingService {
 
     ResponseEntity<?> bookTickets(Authentication authentication);
     ResponseEntity<?> cancelSingleTicket(Integer bookingId);

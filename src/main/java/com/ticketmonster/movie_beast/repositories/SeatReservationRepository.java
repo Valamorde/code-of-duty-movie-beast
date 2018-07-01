@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ISeatReservationRepository extends JpaRepository<SeatReservation, Integer> {
+public interface SeatReservationRepository extends JpaRepository<SeatReservation, Integer> {
 
     List<SeatReservation> findAllByTheatreId(Integer theatreId);
     List<SeatReservation> findAllByShowId(Integer showId);

@@ -1,14 +1,15 @@
-package com.ticketmonster.movie_beast.services.implementations;
+package com.ticketmonster.movie_beast.services.impl;
 
 import com.ticketmonster.movie_beast.helpers.config.CustomAccessHandler;
 import com.ticketmonster.movie_beast.models.Booking;
 import com.ticketmonster.movie_beast.models.SeatReservation;
 import com.ticketmonster.movie_beast.models.User;
-import com.ticketmonster.movie_beast.repositories.IBookingRepository;
-import com.ticketmonster.movie_beast.repositories.ISeatReservationRepository;
-import com.ticketmonster.movie_beast.repositories.IShowRepository;
-import com.ticketmonster.movie_beast.repositories.IUserRepository;
-import com.ticketmonster.movie_beast.services._interfaces.IBookingService;
+import com.ticketmonster.movie_beast.repositories.BookingRepository;
+import com.ticketmonster.movie_beast.repositories.SeatReservationRepository;
+import com.ticketmonster.movie_beast.repositories.ShowRepository;
+import com.ticketmonster.movie_beast.repositories.UserRepository;
+import com.ticketmonster.movie_beast.services.BookingService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,19 +21,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class BookingServiceImpl implements IBookingService {
+public class BookingServiceImpl implements BookingService {
 
     @Autowired
-    IBookingRepository bookingRepository;
+    BookingRepository bookingRepository;
 
     @Autowired
-    ISeatReservationRepository seatReservationRepository;
+    SeatReservationRepository seatReservationRepository;
 
     @Autowired
-    IShowRepository showRepository;
+    ShowRepository showRepository;
 
     @Autowired
-    IUserRepository userRepository;
+    UserRepository userRepository;
 
     @Autowired
     CustomAccessHandler customAccessHandler;

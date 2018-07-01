@@ -1,12 +1,13 @@
-package com.ticketmonster.movie_beast.services.implementations;
+package com.ticketmonster.movie_beast.services.impl;
 
 import com.ticketmonster.movie_beast.models.SeatReservation;
 import com.ticketmonster.movie_beast.models.Show;
 import com.ticketmonster.movie_beast.models.User;
-import com.ticketmonster.movie_beast.repositories.ISeatReservationRepository;
-import com.ticketmonster.movie_beast.repositories.IShowRepository;
-import com.ticketmonster.movie_beast.repositories.IUserRepository;
-import com.ticketmonster.movie_beast.services._interfaces.ISeatReservationService;
+import com.ticketmonster.movie_beast.repositories.SeatReservationRepository;
+import com.ticketmonster.movie_beast.repositories.ShowRepository;
+import com.ticketmonster.movie_beast.repositories.UserRepository;
+import com.ticketmonster.movie_beast.services.SeatReservationService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,16 +18,16 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class SeatReservationServiceImpl implements ISeatReservationService {
+public class SeatReservationServiceImpl implements SeatReservationService {
 
     @Autowired
-    IShowRepository showRepository;
+    ShowRepository showRepository;
 
     @Autowired
-    ISeatReservationRepository seatReservationRepository;
+    SeatReservationRepository seatReservationRepository;
 
     @Autowired
-    IUserRepository userRepository;
+    UserRepository userRepository;
 
     @Override
     @Transactional

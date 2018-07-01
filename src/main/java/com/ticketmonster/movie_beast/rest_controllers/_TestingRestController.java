@@ -1,6 +1,6 @@
 package com.ticketmonster.movie_beast.rest_controllers;
 
-import com.ticketmonster.movie_beast.repositories.ICityRepository;
+import com.ticketmonster.movie_beast.repositories.CityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class _TestingRestController {
 
     @Autowired
-    ICityRepository cityRepository;
+    CityRepository cityRepository;
 
     @GetMapping("/test/city/{tcid}")
     public ResponseEntity<?> testCityTheatre(@PathVariable(value = "tcid") Integer id) {

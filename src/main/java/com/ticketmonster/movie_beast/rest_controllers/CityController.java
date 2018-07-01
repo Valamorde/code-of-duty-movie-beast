@@ -1,51 +1,70 @@
 package com.ticketmonster.movie_beast.rest_controllers;
 
-import com.ticketmonster.movie_beast.helpers._deprecated_custom_exceptions.ResourceNotFoundException;
-import com.ticketmonster.movie_beast.models.City;
-import com.ticketmonster.movie_beast.repositories.ICityRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 import javax.validation.Valid;
-import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.ticketmonster.movie_beast.models.City;
+import com.ticketmonster.movie_beast.services.CityService;
 
 @Component
 @RestController
 public class CityController {
 
-    @Autowired
-    ICityRepository cityRepository;
+	@Autowired
+	private CityService CityService;
+	
 
-    // Get All Cities
+ // Get All Cities
     @GetMapping("/cities")
-    public List<City> getAllCities() {
-        return cityRepository.findAll();
-    }
+    public ResponseEntity<List<City>> getAllCities() {
+		List<City> list = CityService.getAllCities();
+		return new ResponseEntity<List<City>>(list, HttpStatus.OK);
+	}
 
     // Get a Single City
     @GetMapping("/cities/{cId}")
-    public City getCityById(@PathVariable(value = "cId") Integer cId) {
-        return cityRepository.findById(cId).orElseThrow(() -> new ResourceNotFoundException("City", "Id", cId));
-    }
+    public ResponseEntity<City> getCityById(@PathVariable("cId") Integer cId) {
+    	try {
+    		City city = CityService.getCityById(cId);
+    	    return new ResponseEntity<City>(city, HttpStatus.OK);
+    	 } catch (Exception e) {
+             e.printStackTrace();
+             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+         }
+	}
 
-    // Update a City
+    
+ // Update a City
     @PutMapping("/cities/{id}")
-    public City updateCity(@PathVariable(value = "id") Integer id, @Valid @RequestBody City cityDetails) {
-        City city = cityRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("City", "Id", id));
-        city.setCityName(cityDetails.getCityName());
-
-        return cityRepository.save(city);
+    public ResponseEntity<City> updateCity(@PathVariable(value = "id") Integer id, @Valid @RequestBody City cityDetails) {
+    	try {
+    		City city = CityService.getCityById(id);
+    		city.setCityName(cityDetails.getCityName());
+    		CityService.updateCity(city);
+    		 return new ResponseEntity<City>(city, HttpStatus.OK);
+    	 } catch (Exception e) {
+             e.printStackTrace();
+             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+         }
+    	
     }
 
     // Delete a City
     @DeleteMapping("/cities/{id}")
     public ResponseEntity<?> deleteCity(@PathVariable(value = "id") Integer id) {
-        City city = cityRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("City", "Id", id));
-
-        cityRepository.delete(city);
-
+        CityService.deleteCity(id);
         return ResponseEntity.ok().build();
-    }
+   }
 }

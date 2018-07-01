@@ -1,6 +1,6 @@
 package com.ticketmonster.movie_beast.helpers.config;
 
-import com.ticketmonster.movie_beast.repositories.IUserRepository;
+import com.ticketmonster.movie_beast.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +21,7 @@ import javax.sql.DataSource;
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private IUserRepository userRepository;
+    private UserRepository userRepository;
 
     @Autowired
     private DataSource dataSource;

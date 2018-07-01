@@ -1,6 +1,6 @@
 package com.ticketmonster.movie_beast.repositories;
 
-import com.ticketmonster.movie_beast.models.Movie;
+import com.ticketmonster.movie_beast.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -9,7 +9,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface IMovieRepository extends JpaRepository<Movie, Integer> {
+public interface UserRepository extends JpaRepository<User, Integer> {
 
-    List<Movie> findAllByMovieNameLike(String movieName);
+    User findByEmail(String email);
+    User findByFullName(String fullName);
+    List<User> findAllByRole(String role);
 }

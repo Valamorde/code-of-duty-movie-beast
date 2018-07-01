@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ICityRepository extends JpaRepository<City, Integer> {
+public interface CityRepository extends JpaRepository<City, Integer> {
 
     City findByCityName(String cityName);
     City findByCityId(Integer cityId);

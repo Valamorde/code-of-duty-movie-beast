@@ -2,7 +2,7 @@ package com.ticketmonster.movie_beast._initialization;
 
 import com.ticketmonster.movie_beast.models.Role;
 import com.ticketmonster.movie_beast.models.User;
-import com.ticketmonster.movie_beast.repositories.IUserRepository;
+import com.ticketmonster.movie_beast.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -14,7 +14,7 @@ import javax.annotation.PostConstruct;
 public class UserInitialization {
 
     @Autowired
-    IUserRepository userRepository;
+    UserRepository userRepository;
 
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;

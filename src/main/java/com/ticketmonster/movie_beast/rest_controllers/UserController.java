@@ -2,10 +2,11 @@ package com.ticketmonster.movie_beast.rest_controllers;
 
 import com.ticketmonster.movie_beast.helpers.config.CustomAccessHandler;
 import com.ticketmonster.movie_beast.models.User;
-import com.ticketmonster.movie_beast.repositories.IBookingRepository;
-import com.ticketmonster.movie_beast.repositories.ISeatReservationRepository;
-import com.ticketmonster.movie_beast.repositories.IUserRepository;
-import com.ticketmonster.movie_beast.services.implementations.UserServiceImpl;
+import com.ticketmonster.movie_beast.repositories.BookingRepository;
+import com.ticketmonster.movie_beast.repositories.SeatReservationRepository;
+import com.ticketmonster.movie_beast.repositories.UserRepository;
+import com.ticketmonster.movie_beast.services.impl.UserServiceImpl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,16 +25,16 @@ import java.security.Principal;
 public class UserController {
 
     @Autowired
-    IUserRepository userRepository;
+    UserRepository userRepository;
 
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    ISeatReservationRepository seatReservationRepository;
+    SeatReservationRepository seatReservationRepository;
 
     @Autowired
-    IBookingRepository bookingRepository;
+    BookingRepository bookingRepository;
 
     @Autowired
     CustomAccessHandler customAccessHandler;

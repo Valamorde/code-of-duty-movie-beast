@@ -1,7 +1,7 @@
 package com.ticketmonster.movie_beast._initialization;
 
 import com.ticketmonster.movie_beast.models.SeatReservation;
-import com.ticketmonster.movie_beast.repositories.ISeatReservationRepository;
+import com.ticketmonster.movie_beast.repositories.SeatReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,7 +13,7 @@ import java.util.stream.IntStream;
 public class SeatReservationInitialization {
 
     @Autowired
-    ISeatReservationRepository seatRepository;
+    SeatReservationRepository seatRepository;
 
     @PostConstruct
     @Transactional

@@ -1,51 +1,68 @@
 package com.ticketmonster.movie_beast.rest_controllers;
 
-import com.ticketmonster.movie_beast.helpers._deprecated_custom_exceptions.ResourceNotFoundException;
-import com.ticketmonster.movie_beast.models.Theatre;
-import com.ticketmonster.movie_beast.repositories.ITheatreRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 import javax.validation.Valid;
-import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.ticketmonster.movie_beast.models.Theatre;
+import com.ticketmonster.movie_beast.services.impl.TheatreServiceImpl;
 
 @Component
 @RestController
 public class TheatreController {
 
-    @Autowired
-    ITheatreRepository theatreRepository;
+	@Autowired
+	private TheatreServiceImpl TheatreService;
 
-    // Get All Theatres
-    @GetMapping("/theatres/all")
-    public List<Theatre> getAllTheatres() {
-        return theatreRepository.findAll();
-    }
+	// Get All Theatres
+	@GetMapping("/theatres/all")
+	public ResponseEntity<List<Theatre>> getAllTheatres() {
+		List<Theatre> list = TheatreService.getAllTheatres();
+		return new ResponseEntity<List<Theatre>>(list, HttpStatus.OK);
+	}
 
-    // Get a Single Theatre
-    @GetMapping("/theatres/{id}")
-    public Theatre getTheatreById(@PathVariable(value = "id") Integer id) {
-        return theatreRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Theatre", "Id", id));
-    }
+	// Get a Single Theatre
+	@GetMapping("/theatres/{id}")
+	public ResponseEntity<Theatre> getTheatreById(@PathVariable(value = "id") Integer id) {
+		try {
+			Theatre theatre = TheatreService.getTheatreById(id);
+			return new ResponseEntity<Theatre>(theatre, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+	}
 
-    // Update a Theatre
-    @PutMapping("/theatres/{id}")
-    public Theatre updateTheatre(@PathVariable(value = "id") Integer id, @Valid @RequestBody Theatre TheatreDetails) {
-        Theatre theatre = theatreRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Theatre", "Id", id));
-        theatre.setTheatreName(TheatreDetails.getTheatreName());
+	// Update a Theatre
+	@PutMapping("/theatres/{id}")
+	public ResponseEntity<Theatre> updateTheatre(@PathVariable(value = "id") Integer id,
+			@Valid @RequestBody Theatre TheatreDetails) {
+		try {
+			Theatre theatre = TheatreService.getTheatreById(id);
+			theatre.setTheatreName(theatre.getTheatreName());
+			TheatreService.updateTheatre(theatre);
+			return new ResponseEntity<Theatre>(theatre, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+	}
 
-        return theatreRepository.save(theatre);
-    }
-
-    // Delete a Theatre
-    @DeleteMapping("/theatres/{id}")
-    public ResponseEntity<?> deleteTheatre(@PathVariable(value = "id") Integer id) {
-        Theatre theatre = theatreRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Theatre", "Id", id));
-
-        theatreRepository.delete(theatre);
-
-        return ResponseEntity.ok().build();
-    }
+	// Delete a Theatre
+	@DeleteMapping("/theatres/{id}")
+	public ResponseEntity<?> deleteTheatre(@PathVariable(value = "id") Integer id) {
+		TheatreService.deleteTheatre(id);
+		return ResponseEntity.ok().build();
+	}
 }

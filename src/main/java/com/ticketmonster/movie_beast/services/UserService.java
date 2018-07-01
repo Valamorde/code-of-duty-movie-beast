@@ -1,10 +1,10 @@
-package com.ticketmonster.movie_beast.services._interfaces;
+package com.ticketmonster.movie_beast.services;
 
 import com.ticketmonster.movie_beast.models.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 
-public interface IUserService {
+public interface UserService {
 
     ResponseEntity<?> deleteUserAndCleanup(Authentication authentication, Integer userId);
     ResponseEntity<?> createNewUser(User user);
