@@ -1,5 +1,6 @@
 package com.ticketmonster.movie_beast.helpers.config;
 
+import com.ticketmonster.movie_beast.helpers.handlers.CustomLogoutSuccessHandler;
 import com.ticketmonster.movie_beast.repositories.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;

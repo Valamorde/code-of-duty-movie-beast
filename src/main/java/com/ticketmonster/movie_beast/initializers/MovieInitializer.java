@@ -1,19 +1,18 @@
-package com.ticketmonster.movie_beast._initialization;
+package com.ticketmonster.movie_beast.initializers;
 
 import com.ticketmonster.movie_beast.models.Movie;
 import com.ticketmonster.movie_beast.repositories.IMovieRepository;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.IntStream;
 
 @Component
-public class MovieInitialization {
+public class MovieInitializer {
 
     List<String> movieNames = new ArrayList<String>(Arrays.asList("The Commuter", "The Death of Stalin", "Black Panther", "The Rider", "Annihilation"));
     List<String> movieDescriptions = new ArrayList<String>(Arrays.asList("Michael MacCauley, a former police officer goes through the same routine train commute to work and back every day only to be fired from his job as a life insurance salesman after ten years.",
@@ -33,6 +32,7 @@ public class MovieInitialization {
             Movie movie = new Movie();
             movie.setMovieName(movieNames.get(i));
             movie.setMovieDescription(movieDescriptions.get(i));
+            movie.setMovieReleaseDate(DateUtils.round(DateUtils.addDays(new Date(), i / 2), Calendar.DATE));
             movieRepository.save(movie);
         }));
     }

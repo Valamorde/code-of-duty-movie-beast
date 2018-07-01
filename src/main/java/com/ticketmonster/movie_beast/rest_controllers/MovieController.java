@@ -1,52 +1,83 @@
 package com.ticketmonster.movie_beast.rest_controllers;
 
-import com.ticketmonster.movie_beast.helpers._deprecated_custom_exceptions.ResourceNotFoundException;
 import com.ticketmonster.movie_beast.models.Movie;
-import com.ticketmonster.movie_beast.repositories.IMovieRepository;
+import com.ticketmonster.movie_beast.services._interfaces.IMovieService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.Produces;
 
 @Component
 @RestController
 public class MovieController {
 
     @Autowired
-    IMovieRepository movieRepository;
+    IMovieService movieService;
 
     // Get All Movies
     @GetMapping("/movies")
-    public List<Movie> getAllMovies() {
-        return movieRepository.findAll();
+    @Produces("application/json")
+    public ResponseEntity<?> getAllMovies() {
+        try {
+            return movieService.getAllMovies();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     // Get a Single Movie
-    @GetMapping("/movies/{id}")
-    public Movie getMovieById(@PathVariable(value = "id") Integer id) {
-        return movieRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Movie", "Id", id));
+    @GetMapping("/movies/{movieId}")
+    @Produces("application/json")
+    public ResponseEntity<?> getMovieById(@PathVariable(value = "movieId") Integer movieId) {
+        try {
+            return movieService.getSingleMovie(movieId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    // Create a New Movie
+    @PostMapping("/movies")
+    @Consumes("application/json")
+    @Produces("application/json")
+    public ResponseEntity<?> createNewMovie(@Valid @RequestBody Movie newMovie) {
+        try {
+            return movieService.createNewMovie(newMovie, SecurityContextHolder.getContext().getAuthentication());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     // Update a Movie
-    @PutMapping("/movies/{id}")
-    public Movie updateMovie(@PathVariable(value = "id") Integer id, @Valid @RequestBody Movie movieDetails) {
-        Movie movie = movieRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Movie", "Id", id));
-        movie.setMovieName(movieDetails.getMovieName());
-        movie.setMovieDescription(movieDetails.getMovieDescription());
-
-        return movieRepository.save(movie);
+    @PutMapping("/movies/{movieId}")
+    @Consumes("application/json")
+    @Produces("application/json")
+    public ResponseEntity<?> updateMovie(@PathVariable(value = "movieId") Integer movieId, @Valid @RequestBody Movie movieDetails) {
+        try {
+            return movieService.updateSingleMovie(movieId, movieDetails, SecurityContextHolder.getContext().getAuthentication());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     // Delete a Movie
-    @DeleteMapping("/movies/{id}")
-    public ResponseEntity<?> deleteMovie(@PathVariable(value = "id") Integer id) {
-        Movie movie = movieRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Movie", "Id", id));
-
-        movieRepository.delete(movie);
-
-        return ResponseEntity.ok().build();
+    @DeleteMapping("/movies/{movieId}")
+    public ResponseEntity<?> deleteMovie(@PathVariable(value = "movieId") Integer movieId) {
+        try {
+            return movieService.deleteSingleMovie(movieId, SecurityContextHolder.getContext().getAuthentication());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 }

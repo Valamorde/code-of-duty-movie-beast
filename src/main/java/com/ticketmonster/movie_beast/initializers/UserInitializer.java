@@ -1,4 +1,4 @@
-package com.ticketmonster.movie_beast._initialization;
+package com.ticketmonster.movie_beast.initializers;
 
 import com.ticketmonster.movie_beast.models.Role;
 import com.ticketmonster.movie_beast.models.User;
@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.PostConstruct;
 
 @Component
-public class UserInitialization {
+public class UserInitializer {
 
     @Autowired
     IUserRepository userRepository;

@@ -1,5 +1,6 @@
 package com.ticketmonster.movie_beast;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @EnableJpaAuditing
 @ComponentScan
 @CrossOrigin
+@JsonAutoDetect
 public class MovieBeastApplication {
 
     public static void main(String[] args) {

@@ -1,6 +1,8 @@
-package com.ticketmonster.movie_beast._initialization;
+package com.ticketmonster.movie_beast.initializers;
 
+import com.ticketmonster.movie_beast.models.SeatReservation;
 import com.ticketmonster.movie_beast.models.Show;
+import com.ticketmonster.movie_beast.repositories.ISeatReservationRepository;
 import com.ticketmonster.movie_beast.repositories.IShowRepository;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +17,13 @@ import java.util.Date;
 import java.util.stream.IntStream;
 
 @Component
-public class ShowInitialization {
+public class ShowInitializer {
 
     @Autowired
     IShowRepository showRepository;
+
+    @Autowired
+    ISeatReservationRepository seatReservationRepository;
 
     @PostConstruct
     @Transactional
@@ -35,6 +40,14 @@ public class ShowInitialization {
             show.setAvailableSeats(10);
             show.setInitialSeats(10);
             showRepository.save(show);
+            IntStream.range(0, show.getAvailableSeats()).forEach((j -> {
+                SeatReservation seat = new SeatReservation();
+                seat.setTheatreId(i + 1);
+                seat.setShowId(i + 1);
+                seat.setSeatReserved(false);
+                seat.setSeatPaid(false);
+                seatReservationRepository.save(seat);
+            }));
         }));
     }
 }

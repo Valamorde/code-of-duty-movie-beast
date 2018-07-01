@@ -1,6 +1,6 @@
 package com.ticketmonster.movie_beast.services.implementations;
 
-import com.ticketmonster.movie_beast.helpers.config.CustomAccessHandler;
+import com.ticketmonster.movie_beast.helpers.handlers.CustomAccessHandler;
 import com.ticketmonster.movie_beast.models.Booking;
 import com.ticketmonster.movie_beast.models.SeatReservation;
 import com.ticketmonster.movie_beast.models.User;
@@ -37,8 +37,9 @@ public class BookingServiceImpl implements IBookingService {
     @Autowired
     CustomAccessHandler customAccessHandler;
 
+    @Override
     @Transactional
-    public ResponseEntity<?> bookTickets(Authentication authentication) {
+    public ResponseEntity<?> bookAllInBasket(Authentication authentication) {
 
         if (authentication == null) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
@@ -49,6 +50,9 @@ public class BookingServiceImpl implements IBookingService {
         List<Booking> bookings = new ArrayList<>();
 
         for (int i = 0; i < reservedSeats.size(); i++) {
+            if (customAccessHandler.userIsAuthorizedToViewSpecifiedContent(reservedSeats.get(i).getUserId(), user)) {
+                return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+            }
             Booking booking = new Booking();
             booking.setShowId(reservedSeats.get(i).getShowId());
             booking.setSeatReservationId(reservedSeats.get(i).getSeatId());
@@ -65,6 +69,8 @@ public class BookingServiceImpl implements IBookingService {
         return new ResponseEntity<>(bookings, HttpStatus.OK);
     }
 
+    // TODO: add user check
+    @Override
     @Transactional
     public ResponseEntity<?> cancelSingleTicket(Integer bookingId) {
 
@@ -83,7 +89,8 @@ public class BookingServiceImpl implements IBookingService {
     }
 
     @Override
-    public ResponseEntity<?> findAllBookings(Authentication authentication) {
+    @Transactional
+    public ResponseEntity<?> getAllBookings(Authentication authentication) {
         User user = userRepository.findByEmail(authentication.getName());
         if (customAccessHandler.userIsAdmin(user)) {
             return new ResponseEntity<>(bookingRepository.findAll(), HttpStatus.OK);
@@ -93,7 +100,8 @@ public class BookingServiceImpl implements IBookingService {
     }
 
     @Override
-    public ResponseEntity<?> findSingleBooking(Authentication authentication, Integer bookingId) {
+    @Transactional
+    public ResponseEntity<?> getSingleBooking(Authentication authentication, Integer bookingId) {
         User user = userRepository.findByEmail(authentication.getName());
         if (customAccessHandler.userIsAuthorizedToViewSpecifiedContent(bookingRepository.findByBookingId(bookingId).getUserId(), user)) {
             return new ResponseEntity<>(bookingRepository.findByBookingId(bookingId), HttpStatus.OK);
@@ -103,6 +111,7 @@ public class BookingServiceImpl implements IBookingService {
     }
 
     @Override
+    @Transactional
     public ResponseEntity<?> updateSingleBooking(Authentication authentication, Integer bookingId, Booking newBooking) {
         User user = userRepository.findByEmail((authentication.getName()));
         Booking booking = bookingRepository.getOne(bookingId);
@@ -117,6 +126,7 @@ public class BookingServiceImpl implements IBookingService {
     }
 
     @Override
+    @Transactional
     public ResponseEntity<?> deleteSingleBooking(Authentication authentication, Integer bookingId) {
         User user = userRepository.findByEmail((authentication.getName()));
         Booking booking = bookingRepository.getOne(bookingId);

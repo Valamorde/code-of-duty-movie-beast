@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * This class is used to easily test Business logic through REST.
+ * If you need to test something try it here first and then move it to the right file.
+ */
 @RestController("/testing")
 public class _TestingRestController {
 

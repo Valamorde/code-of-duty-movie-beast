@@ -33,7 +33,7 @@ public class BookingController {
     @Produces("application/json")
     public ResponseEntity<?> finalizeBookings() {
         try {
-            return bookingService.bookTickets(SecurityContextHolder.getContext().getAuthentication());
+            return bookingService.bookAllInBasket(SecurityContextHolder.getContext().getAuthentication());
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -57,7 +57,7 @@ public class BookingController {
     @Produces("application/json")
     public ResponseEntity<?> getAllBookings() {
         try {
-            return bookingService.findAllBookings(SecurityContextHolder.getContext().getAuthentication());
+            return bookingService.getAllBookings(SecurityContextHolder.getContext().getAuthentication());
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -69,7 +69,7 @@ public class BookingController {
     @Produces("application/json")
     public ResponseEntity<?> getBookingById(@PathVariable(value = "id") Integer id) {
         try {
-            return bookingService.findSingleBooking(SecurityContextHolder.getContext().getAuthentication(), id);
+            return bookingService.getSingleBooking(SecurityContextHolder.getContext().getAuthentication(), id);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

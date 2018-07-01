@@ -4,6 +4,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name = "movies")
@@ -13,7 +14,7 @@ public class Movie implements Serializable {
     @Id
     @Column(name = "movieId")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "movie_generator")
-    @SequenceGenerator(name="movie_generator", sequenceName = "movie_seq")
+    @SequenceGenerator(name = "movie_generator", sequenceName = "movie_seq")
     private Integer movieId;
 
     @Column(name = "movieName")
@@ -22,7 +23,19 @@ public class Movie implements Serializable {
     @Column(name = "movieDescription")
     private String movieDescription;
 
+    @Column(name = "movieReleaseDate")
+    @Temporal(TemporalType.DATE)
+    private Date movieReleaseDate;
+
     public Movie() {
+    }
+
+    public Date getMovieReleaseDate() {
+        return movieReleaseDate;
+    }
+
+    public void setMovieReleaseDate(Date movieReleaseDate) {
+        this.movieReleaseDate = movieReleaseDate;
     }
 
     public Integer getMovieId() {

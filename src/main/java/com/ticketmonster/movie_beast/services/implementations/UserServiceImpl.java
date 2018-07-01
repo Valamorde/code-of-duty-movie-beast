@@ -1,6 +1,6 @@
 package com.ticketmonster.movie_beast.services.implementations;
 
-import com.ticketmonster.movie_beast.helpers.config.CustomAccessHandler;
+import com.ticketmonster.movie_beast.helpers.handlers.CustomAccessHandler;
 import com.ticketmonster.movie_beast.models.*;
 import com.ticketmonster.movie_beast.repositories.IBookingRepository;
 import com.ticketmonster.movie_beast.repositories.ISeatReservationRepository;
@@ -73,6 +73,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    @Transactional
     public ResponseEntity<?> createNewUser(User user) {
         if (userRepository.findByEmail(user.getEmail()) != null) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
@@ -85,11 +86,13 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    @Transactional
     public ResponseEntity<?> findAllUsers() {
         return new ResponseEntity<>(userRepository.findAll(), HttpStatus.OK);
     }
 
     @Override
+    @Transactional
     public ResponseEntity<?> findSingleUser(Authentication authentication, Integer userId) {
         User user = userRepository.findByEmail(authentication.getName());
         if (customAccessHandler.userIsAuthorizedToViewSpecifiedContent(userId, user)) {
@@ -100,6 +103,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    @Transactional
     public ResponseEntity<?> getUserBasket(Authentication authentication, Integer userId) {
         User user = userRepository.findByEmail(authentication.getName());
 
@@ -111,6 +115,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    @Transactional
     public ResponseEntity<?> getAllUserBookings(Authentication authentication, Integer userId) {
         User user = userRepository.findByEmail(authentication.getName());
 
@@ -122,6 +127,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    @Transactional
     public ResponseEntity<?> getSingleUserBooking(Authentication authentication, Integer userId, Integer bookingId) {
         User user = userRepository.findByEmail(authentication.getName());
 
@@ -133,6 +139,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    @Transactional
     public ResponseEntity<?> updateSingleUser(Authentication authentication, Integer userId, User userDetails) {
         User authUser = userRepository.findByEmail(authentication.getName());
         User targetUser = userRepository.getOne(userId);

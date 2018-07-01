@@ -1,4 +1,4 @@
-package com.ticketmonster.movie_beast._initialization;
+package com.ticketmonster.movie_beast.initializers;
 
 import com.ticketmonster.movie_beast.models.City;
 import com.ticketmonster.movie_beast.repositories.ICityRepository;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 @Component
-public class CityInitialization {
+public class CityInitializer {
 
     List<String> cities = new ArrayList<String>(Arrays.asList("Athina", "Piraias", "Peristeri", "Kallithea", "Nikaia", "Keratsini",
             "Ilion", "Gliphada", "Zographos", "Ilioupoli"));

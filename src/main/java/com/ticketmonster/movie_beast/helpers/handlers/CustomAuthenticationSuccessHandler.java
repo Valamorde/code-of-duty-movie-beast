@@ -1,4 +1,4 @@
-package com.ticketmonster.movie_beast.helpers.config;
+package com.ticketmonster.movie_beast.helpers.handlers;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.DefaultRedirectStrategy;

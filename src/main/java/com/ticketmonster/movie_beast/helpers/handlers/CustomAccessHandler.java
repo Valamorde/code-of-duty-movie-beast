@@ -1,4 +1,4 @@
-package com.ticketmonster.movie_beast.helpers.config;
+package com.ticketmonster.movie_beast.helpers.handlers;
 
 import com.ticketmonster.movie_beast.models.User;
 import org.springframework.stereotype.Component;
