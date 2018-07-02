@@ -21,4 +21,6 @@ public interface IUserService {
     ResponseEntity<?> getSingleUserBooking(Authentication authentication, Integer userId, Integer bookingId);
 
     ResponseEntity<?> updateSingleUser(Authentication authentication, Integer userId, User userDetails);
+
+    ResponseEntity<?> resetPassword(Authentication authentication, Integer userId);
 }

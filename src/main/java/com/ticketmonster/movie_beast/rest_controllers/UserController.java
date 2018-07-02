@@ -158,6 +158,17 @@ public class UserController {
         }
     }
 
+    // Reset user password
+    @PutMapping("/users/{userId}/passwordReset")
+    public ResponseEntity<?> resetPassword(@PathVariable(value = "userId") Integer userId){
+        try{
+            return userService.resetPassword(SecurityContextHolder.getContext().getAuthentication(), userId);
+        } catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
     // Delete a User
     @DeleteMapping("/users/{userId}")
     @Produces("application/json")

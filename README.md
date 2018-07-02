@@ -40,10 +40,10 @@ e) To ensure you enjoy the benefits of _git_ make sure to use **GitBash**.
 
 \* Entity Relationships    
 \* Admin Reports    
-\* Password Reset    
+\* ~~Password Reset~~    
 \* Make sure all "communication" with Front-End works as expected    
 \* Refactor "Integer ids" in Entities with corresponding "Entity Classes" _(may the force be with us regarding this one)_    
-
+\* Replace dummy data with actual data    
 # Note to Front-End    
 
-All REST endpoints are _[available here](http://localhost:8080/movie-beast/swagger-ui.html)_ **while server is running**.    
+### All REST endpoints are _[available here](http://localhost:8080/movie-beast/swagger-ui.html)_ **while server is running**.    

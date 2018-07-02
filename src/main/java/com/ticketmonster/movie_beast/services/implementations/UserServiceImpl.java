@@ -153,4 +153,18 @@ public class UserServiceImpl implements IUserService {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
     }
+
+    @Override
+    @Transactional
+    public ResponseEntity<?> resetPassword(Authentication authentication, Integer userId) {
+        User authUser = userRepository.findByEmail(authentication.getName());
+        User targetUser = userRepository.getOne(userId);
+
+        if (customAccessHandler.userIsAdmin(authUser)) {
+            targetUser.setPassword(bCryptPasswordEncoder.encode("1234"));
+            return new ResponseEntity<>(userRepository.save(targetUser), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+    }
 }
