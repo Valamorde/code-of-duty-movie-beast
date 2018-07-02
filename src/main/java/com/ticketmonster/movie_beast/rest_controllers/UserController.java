@@ -1,43 +1,33 @@
 package com.ticketmonster.movie_beast.rest_controllers;
 
-import com.ticketmonster.movie_beast.helpers.config.CustomAccessHandler;
-import com.ticketmonster.movie_beast.models.User;
-import com.ticketmonster.movie_beast.repositories.BookingRepository;
-import com.ticketmonster.movie_beast.repositories.SeatReservationRepository;
-import com.ticketmonster.movie_beast.repositories.UserRepository;
-import com.ticketmonster.movie_beast.services.impl.UserServiceImpl;
+import java.security.Principal;
+
+import javax.validation.Valid;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.Produces;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.Produces;
-import java.security.Principal;
+import com.ticketmonster.movie_beast.models.User;
+import com.ticketmonster.movie_beast.services.impl.UserServiceImpl;
 
 @Component
 @RestController
 public class UserController {
 
-    @Autowired
-    UserRepository userRepository;
-
-    @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    @Autowired
-    SeatReservationRepository seatReservationRepository;
-
-    @Autowired
-    BookingRepository bookingRepository;
-
-    @Autowired
-    CustomAccessHandler customAccessHandler;
 
     @Autowired
     UserServiceImpl userService;
@@ -48,10 +38,10 @@ public class UserController {
      * @param user - email and password
      * @return logged in user
      */
-    @PostMapping("/login")
-    @Consumes("application/json")
-    @Produces("application/json")
+    @CrossOrigin
+    @RequestMapping("/login")
     public Principal user(Principal user) {
+    	System.out.println(user.getName());
         return user;
     }
 

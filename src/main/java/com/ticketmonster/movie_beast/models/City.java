@@ -11,7 +11,12 @@ import java.util.List;
 @EntityListeners(AuditingEntityListener.class)
 public class City implements Serializable {
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
     @Column(name = "cityId")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "city_generator")
     @SequenceGenerator(name = "city_generator", sequenceName = "city_seq")

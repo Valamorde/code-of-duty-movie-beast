@@ -1,0 +1,44 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/@angular/material/prebuilt-themes/indigo-pink.css";
+.card-container.card {
+
+    background-color: rgba(255,255,255,0.8);
+}
+
+mat-card {
+    max-width: 80%;
+    margin: 2em auto;
+    text-align: center;
+  }
+  
+  mat-toolbar-row {
+    justify-content: space-between;
+  }
+  
+  .done {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    color: white;
+  }
+
+  mat-card {
+    max-width: 85%;
+    margin: 2em auto;
+    text-align: center;
+}
+
+.mat-card-header {
+  display: block!important;
+  flex-direction: row;
+}
+
+.navbar-inverse {
+  background-color: transparent!important;
+   border-color: transparent!important;
+}
+
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
+  color: #fff;
+  background-color: transparent!important;
+}

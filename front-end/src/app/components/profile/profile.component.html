@@ -1,0 +1,63 @@
+
+<nav  class="navbar navbar-inverse">
+  <div class="container-fluid">
+
+    <ul class="nav navbar-nav">
+      <li class="active"  ><a>Home</a></li>
+
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+
+      <li><a href="#"><span class="glyphicon glyphicon-log-in" (click)="logOut()"></span> LogOut</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- Jumbotron Header
+  <header class="jumbotron my-4">
+    <h1 class="display-3">  <strong>{{currentUser.fullName}}</strong>, Welcome to your app </h1>
+    <p class="lead"> welcome to your profile
+    </p>
+    <div class="row">
+
+    </div>
+  </header> -->
+
+  
+<div>
+    <mat-toolbar color="primary">
+      <span><mat-icon>home</mat-icon></span>
+  
+      <span>Home</span>
+  
+      <button mat-icon-button [mat-menu-trigger-for]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </mat-toolbar>
+    <mat-menu x-position="before" #menu="matMenu">
+      <button mat-menu-item>Option 1</button>
+      <button mat-menu-item>Option 2</button>
+    </mat-menu>
+  
+    <mat-card>
+      <button mat-button>All</button>
+      <button mat-raised-button>Of</button>
+      <button mat-raised-button color="primary">The</button>
+      <button mat-raised-button color="accent">Buttons</button>
+    </mat-card>
+  
+    <span class="done">
+      <button mat-fab>
+        <mat-icon>check circle</mat-icon>
+      </button>
+    </span>
+  </div>
+
+</div>
+
+
+
+
+

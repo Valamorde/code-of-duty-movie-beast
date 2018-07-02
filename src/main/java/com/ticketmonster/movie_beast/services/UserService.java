@@ -14,4 +14,6 @@ public interface UserService {
     ResponseEntity<?> getAllUserBookings(Authentication authentication, Integer userId);
     ResponseEntity<?> getSingleUserBooking(Authentication authentication, Integer userId, Integer bookingId);
     ResponseEntity<?> updateSingleUser(Authentication authentication, Integer userId, User userDetails);
+    User find(String email);
+    
 }

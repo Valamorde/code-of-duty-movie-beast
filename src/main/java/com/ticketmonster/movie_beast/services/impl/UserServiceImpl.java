@@ -147,4 +147,11 @@ public class UserServiceImpl implements UserService {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
     }
+    
+    @Override
+    public User find(String email) {
+		return userRepository.findOneByEmail(email);
+	}
+
+    
 }
