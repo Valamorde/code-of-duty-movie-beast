@@ -46,8 +46,8 @@ public class UserController {
      * @param newUser - requires email, password, fullname
      * @return created user, 201 OR CustomException, 409
      */
-    @PostMapping(value = "/auth/register", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> registerNewUser(@Valid @RequestBody User newUser) {
+    @PostMapping(value = "/register", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> registerNewUser(@RequestBody User newUser) {
         try {
             System.out.println("IN AUTH/REGISTER");
             return userService.createNewUser(newUser);
