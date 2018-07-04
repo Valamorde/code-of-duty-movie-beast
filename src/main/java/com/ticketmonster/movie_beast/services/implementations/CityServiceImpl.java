@@ -55,7 +55,7 @@ public class CityServiceImpl implements ICityService {
     public ResponseEntity<?> updateSingleCity(Integer cityId, City cityDetails, Authentication authentication) {
         User user = userRepository.findByEmail(authentication.getName());
         if (customAccessHandler.userIsAdmin(user)) {
-            City city = cityRepository.findByCityId(cityId);
+            City city = cityRepository.getOne(cityId);
             city.setCityName(cityDetails.getCityName());
             city.setTheatres(cityDetails.getTheatres());
             return new ResponseEntity<>(cityRepository.save(city), HttpStatus.OK);

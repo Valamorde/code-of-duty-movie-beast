@@ -1,5 +1,7 @@
 package com.ticketmonster.movie_beast.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -7,6 +9,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "seat_reservations")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @EntityListeners(AuditingEntityListener.class)
 public class SeatReservation implements Serializable {
 
@@ -22,17 +25,16 @@ public class SeatReservation implements Serializable {
     @Column(name = "seatReserved")
     private boolean seatReserved;
 
-    @Column(name = "bookingId", nullable = true)
-    private Integer bookingId;
-
-    @Column(name = "theatreId")
-    private Integer theatreId;
-
     @Column(name = "seatPaid")
     private boolean seatPaid;
 
     @Column(name = "userId")
     private Integer userId;
+
+    @JsonIgnore
+    @OneToOne
+    @JoinColumn(name = "bookingId")
+    private Booking booking;
 
     public SeatReservation() {
     }
@@ -57,22 +59,6 @@ public class SeatReservation implements Serializable {
         this.seatReserved = seatReserved;
     }
 
-    public Integer getBookingId() {
-        return bookingId;
-    }
-
-    public void setBookingId(Integer bookingId) {
-        this.bookingId = bookingId;
-    }
-
-    public Integer getTheatreId() {
-        return theatreId;
-    }
-
-    public void setTheatreId(Integer theatreId) {
-        this.theatreId = theatreId;
-    }
-
     public boolean isSeatPaid() {
         return seatPaid;
     }
@@ -87,5 +73,13 @@ public class SeatReservation implements Serializable {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public Booking getBooking() {
+        return booking;
+    }
+
+    public void setBooking(Booking booking) {
+        this.booking = booking;
     }
 }

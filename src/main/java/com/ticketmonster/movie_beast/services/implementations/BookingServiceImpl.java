@@ -50,19 +50,18 @@ public class BookingServiceImpl implements IBookingService {
         List<Booking> bookings = new ArrayList<>();
 
         for (int i = 0; i < reservedSeats.size(); i++) {
-            if (customAccessHandler.userIsAuthorizedToViewSpecifiedContent(reservedSeats.get(i).getUserId(), user)) {
+            if (!customAccessHandler.userIsAuthorizedToViewSpecifiedContent(reservedSeats.get(i).getUserId(), user)) {
                 return new ResponseEntity<>(HttpStatus.FORBIDDEN);
             }
             Booking booking = new Booking();
-            booking.setShowId(reservedSeats.get(i).getShowId());
-            booking.setSeatReservationId(reservedSeats.get(i).getSeatId());
+            booking.setSeatReservation(reservedSeats.get(i));
             booking.setUserId(reservedSeats.get(i).getUserId());
             booking.setBookingCost(showRepository.findByShowId(reservedSeats.get(i).getShowId()).getShowCost());
             booking.setBookingDate(showRepository.findByShowId(reservedSeats.get(i).getShowId()).getShowDate());
             bookings.add(bookingRepository.save(booking));
 
-            SeatReservation seatReservation = seatReservationRepository.findBySeatId(reservedSeats.get(i).getSeatId());
-            seatReservation.setBookingId(bookings.get(i).getBookingId());
+            SeatReservation seatReservation = seatReservationRepository.getOne(reservedSeats.get(i).getSeatId());
+            seatReservation.setBooking(bookings.get(i));
             seatReservation.setSeatPaid(true);
             seatReservationRepository.save(seatReservation);
         }
@@ -74,13 +73,13 @@ public class BookingServiceImpl implements IBookingService {
     @Transactional
     public ResponseEntity<?> cancelSingleTicket(Integer bookingId) {
 
-        Booking booking = bookingRepository.findByBookingId(bookingId);
-        SeatReservation seatReservation = seatReservationRepository.findByBookingId(bookingId);
+        Booking booking = bookingRepository.getOne(bookingId);
+        SeatReservation seatReservation = seatReservationRepository.findByBooking(booking);
         List<Booking> bookingList = bookingRepository.findAllByUserId(booking.getUserId());
         bookingRepository.delete(booking);
         bookingList.remove(booking);
         seatReservation.setUserId(null);
-        seatReservation.setBookingId(null);
+        seatReservation.setBooking(null);
         seatReservation.setSeatPaid(false);
         seatReservation.setSeatReserved(false);
         seatReservationRepository.save(seatReservation);
@@ -103,8 +102,8 @@ public class BookingServiceImpl implements IBookingService {
     @Transactional
     public ResponseEntity<?> getSingleBooking(Authentication authentication, Integer bookingId) {
         User user = userRepository.findByEmail(authentication.getName());
-        if (customAccessHandler.userIsAuthorizedToViewSpecifiedContent(bookingRepository.findByBookingId(bookingId).getUserId(), user)) {
-            return new ResponseEntity<>(bookingRepository.findByBookingId(bookingId), HttpStatus.OK);
+        if (customAccessHandler.userIsAuthorizedToViewSpecifiedContent(bookingRepository.getOne(bookingId).getUserId(), user)) {
+            return new ResponseEntity<>(bookingRepository.getOne(bookingId), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
@@ -118,7 +117,6 @@ public class BookingServiceImpl implements IBookingService {
         if (customAccessHandler.userIsAuthorizedToViewSpecifiedContent(booking.getUserId(), user)) {
             booking.setUserId(newBooking.getUserId());
             booking.setBookingDate(newBooking.getBookingDate());
-            booking.setShowId(newBooking.getShowId());
             return new ResponseEntity<>(bookingRepository.save(booking), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);

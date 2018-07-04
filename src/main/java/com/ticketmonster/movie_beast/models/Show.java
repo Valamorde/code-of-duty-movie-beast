@@ -1,25 +1,26 @@
 package com.ticketmonster.movie_beast.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "shows")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @EntityListeners(AuditingEntityListener.class)
 public class Show implements Serializable {
 
     @Id
     @Column(name = "showId")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "show_generator")
-    @SequenceGenerator(name="show_generator", sequenceName = "show_seq")
+    @SequenceGenerator(name = "show_generator", sequenceName = "show_seq")
     private Integer showId;
-
-    @Column(name = "theatreId")
-    private Integer theatreId;
 
     @Column(name = "movieId")
     private Integer movieId;
@@ -27,9 +28,6 @@ public class Show implements Serializable {
     @Column(name = "showDate")
     @Temporal(TemporalType.DATE)
     private Date showDate;
-
-    @Column(name = "showDurationInMinutes")
-    private Integer showDurationInMinutes;
 
     @Column(name = "initialSeats")
     private Integer initialSeats;
@@ -40,19 +38,15 @@ public class Show implements Serializable {
     @Column(name = "showCost")
     private BigDecimal showCost;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "showId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<SeatReservation> seats;
+
     public Show() {
     }
 
     public Integer getShowId() {
         return showId;
-    }
-
-    public Integer getTheatreId() {
-        return theatreId;
-    }
-
-    public void setTheatreId(Integer theatreId) {
-        this.theatreId = theatreId;
     }
 
     public Integer getMovieId() {
@@ -69,14 +63,6 @@ public class Show implements Serializable {
 
     public void setShowDate(Date showDate) {
         this.showDate = showDate;
-    }
-
-    public Integer getShowDurationInMinutes() {
-        return showDurationInMinutes;
-    }
-
-    public void setShowDurationInMinutes(Integer showDurationInMinutes) {
-        this.showDurationInMinutes = showDurationInMinutes;
     }
 
     public Integer getAvailableSeats() {
@@ -103,5 +89,11 @@ public class Show implements Serializable {
         this.initialSeats = initialSeats;
     }
 
+    public List<SeatReservation> getSeats() {
+        return seats;
+    }
 
+    public void setSeats(List<SeatReservation> seats) {
+        this.seats = seats;
+    }
 }

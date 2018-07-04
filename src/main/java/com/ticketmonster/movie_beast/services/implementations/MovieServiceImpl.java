@@ -45,7 +45,8 @@ public class MovieServiceImpl implements IMovieService {
             Movie movie = new Movie();
             movie.setMovieName(newMovie.getMovieName());
             movie.setMovieDescription(newMovie.getMovieDescription());
-            movie.setMovieReleaseDate(movie.getMovieReleaseDate());
+            movie.setMovieReleaseDate(newMovie.getMovieReleaseDate());
+            movie.setShows(newMovie.getShows());
             return new ResponseEntity<>(movieRepository.save(movie), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
@@ -60,7 +61,8 @@ public class MovieServiceImpl implements IMovieService {
             Movie movie = movieRepository.getOne(movieId);
             movie.setMovieName(movieDetails.getMovieName());
             movie.setMovieDescription(movieDetails.getMovieDescription());
-            movie.setMovieReleaseDate(movie.getMovieReleaseDate());
+            movie.setMovieReleaseDate(movieDetails.getMovieReleaseDate());
+            movie.setShows(movieDetails.getShows());
             return new ResponseEntity<>(movieRepository.save(movie), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);

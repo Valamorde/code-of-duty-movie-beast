@@ -6,6 +6,7 @@ import com.ticketmonster.movie_beast.repositories.IUserRepository;
 import com.ticketmonster.movie_beast.services.implementations.BookingServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -29,8 +30,7 @@ public class BookingController {
     private BookingServiceImpl bookingService;
 
     // Book Reserved Seats
-    @PostMapping("/bookings/final")
-    @Produces("application/json")
+    @PostMapping(value = "/bookings/final", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> finalizeBookings() {
         try {
             return bookingService.bookAllInBasket(SecurityContextHolder.getContext().getAuthentication());
@@ -41,8 +41,7 @@ public class BookingController {
     }
 
     // Cancel a Booked Ticket
-    @PostMapping("/bookings/cancel")
-    @Consumes("application/json")
+    @PostMapping(value = "/bookings/cancel", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> cancelBooking(@Valid @RequestBody Booking booking) {
         try {
             return bookingService.cancelSingleTicket(booking.getBookingId());
@@ -53,8 +52,7 @@ public class BookingController {
     }
 
     // Get All Bookings
-    @GetMapping("/bookings")
-    @Produces("application/json")
+    @GetMapping(value = "/bookings", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getAllBookings() {
         try {
             return bookingService.getAllBookings(SecurityContextHolder.getContext().getAuthentication());
@@ -65,8 +63,7 @@ public class BookingController {
     }
 
     // Get a Single Booking
-    @GetMapping("/bookings/{id}")
-    @Produces("application/json")
+    @GetMapping(value = "/bookings/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getBookingById(@PathVariable(value = "id") Integer id) {
         try {
             return bookingService.getSingleBooking(SecurityContextHolder.getContext().getAuthentication(), id);
@@ -77,9 +74,7 @@ public class BookingController {
     }
 
     // Update a Booking
-    @PutMapping("/bookings/{id}")
-    @Consumes("application/json")
-    @Produces("application/json")
+    @PutMapping(value = "/bookings/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> updateBooking(@PathVariable(value = "id") Integer id, @Valid @RequestBody Booking bookingDetails) {
         try {
             return bookingService.updateSingleBooking(SecurityContextHolder.getContext().getAuthentication(), id, bookingDetails);
@@ -90,8 +85,7 @@ public class BookingController {
     }
 
     // Allows Admin to delete a Booking
-    @DeleteMapping("/bookings/{id}")
-    @Produces("application/json")
+    @DeleteMapping(value = "/bookings/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deleteBooking(@PathVariable(value = "id") Integer id) {
         try {
             return bookingService.deleteSingleBooking(SecurityContextHolder.getContext().getAuthentication(), id);

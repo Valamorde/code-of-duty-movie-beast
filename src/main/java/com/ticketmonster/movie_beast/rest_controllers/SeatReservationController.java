@@ -5,6 +5,7 @@ import com.ticketmonster.movie_beast.repositories.IUserRepository;
 import com.ticketmonster.movie_beast.services.implementations.SeatReservationServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -25,9 +26,7 @@ public class SeatReservationController {
     @Autowired
     private SeatReservationServiceImpl seatReservationService;
 
-    @PostMapping("/seatReservation")
-    @Consumes("application/json")
-    @Produces("application/json")
+    @PostMapping(value = "/seatReservation", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> reserveSeat(@RequestBody SeatReservation seatReservation) {
         try {
             return seatReservationService.reserveTicket(seatReservation.getShowId(), seatReservation.getSeatId(),
@@ -38,9 +37,7 @@ public class SeatReservationController {
         }
     }
 
-    @PostMapping("/cancelReservation")
-    @Consumes("application/json")
-    @Produces("application/json")
+    @PostMapping(value = "/cancelReservation", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> cancelReservation(@RequestBody SeatReservation reservation) {
         try {
             return seatReservationService.cancelReservation(reservation.getSeatId(), SecurityContextHolder.getContext().getAuthentication());

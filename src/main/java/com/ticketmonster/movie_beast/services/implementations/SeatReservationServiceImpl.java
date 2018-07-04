@@ -60,8 +60,10 @@ public class SeatReservationServiceImpl implements ISeatReservationService {
 
             showRepository.save(show);
             seatReservationRepository.save(bookedSeat);
+            return new ResponseEntity<>(bookedSeat, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(bookedSeat, HttpStatus.OK);
     }
 
     @Override
@@ -73,9 +75,9 @@ public class SeatReservationServiceImpl implements ISeatReservationService {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
 
-        SeatReservation seatReservation = seatReservationRepository.findBySeatId(seatId);
+        SeatReservation seatReservation = seatReservationRepository.getOne(seatId);
         seatReservation.setUserId(null);
-        seatReservation.setBookingId(null);
+        seatReservation.setBooking(null);
         seatReservation.setSeatPaid(false);
         seatReservation.setSeatReserved(false);
 

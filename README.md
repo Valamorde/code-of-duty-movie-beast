@@ -1,4 +1,5 @@
 # Welcome to Markos' branch.    
+### root path : http://localhost:8080/api/
 
 ## \*You will find achieved goals at the end of this README file    
 
@@ -32,13 +33,13 @@ e) To ensure you enjoy the benefits of _git_ make sure to use **GitBash**.
 
 \* Minimum Requirements    
 \* Challenge 1    
-\* Challenge 2 \*    
+\* Challenge 2 (\*)    
 \* Challenge 3    
 \* Challenge 4    
 
 # Goals Pending (Back-End)    
 
-\* Entity Relationships    
+\* ~~Entity Relationships~~    
 \* Admin Reports    
 \* ~~Password Reset~~    
 \* Make sure all "communication" with Front-End works as expected    
@@ -46,4 +47,4 @@ e) To ensure you enjoy the benefits of _git_ make sure to use **GitBash**.
 \* Replace dummy data with actual data    
 # Note to Front-End    
 
-### All REST endpoints are _[available here](http://localhost:8080/movie-beast/swagger-ui.html)_ **while server is running**.    
+### All REST endpoints are _[available here](http://localhost:8080/api/swagger-ui.html)_ **while server is running**.    

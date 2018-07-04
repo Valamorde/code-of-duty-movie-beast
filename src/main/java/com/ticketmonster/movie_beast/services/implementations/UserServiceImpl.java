@@ -53,12 +53,12 @@ public class UserServiceImpl implements IUserService {
                 seatReservation.setSeatPaid(false);
                 seatReservation.setUserId(null);
 
-                if (seatReservation.getBookingId() != null) {
-                    Booking booking = bookingRepository.findByBookingId(seatReservation.getBookingId());
+                if (seatReservation.getBooking().getBookingId() != null) {
+                    Booking booking = bookingRepository.getOne(seatReservation.getBooking().getBookingId());
                     bookingRepository.delete(booking);
                 }
 
-                seatReservation.setBookingId(null);
+                seatReservation.setBooking(null);
                 Show show = showRepository.findByShowId(seatReservation.getShowId());
                 show.setAvailableSeats(show.getAvailableSeats() + 1);
                 showRepository.save(show);
@@ -79,7 +79,7 @@ public class UserServiceImpl implements IUserService {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         } else {
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-            user.setRole(Role.USER.name());
+            user.setRole(Role.ROLE_USER.name());
             user.setEnabled(true);
             return new ResponseEntity<>(userRepository.save(user), HttpStatus.CREATED);
         }

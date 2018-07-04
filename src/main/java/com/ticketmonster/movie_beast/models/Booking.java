@@ -1,5 +1,7 @@
 package com.ticketmonster.movie_beast.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -9,6 +11,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "bookings")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @EntityListeners(AuditingEntityListener.class)
 public class Booking implements Serializable {
 
@@ -25,14 +28,12 @@ public class Booking implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date bookingDate;
 
-    @Column(name = "showId")
-    private Integer showId;
-
     @Column(name = "bookingCost")
     private BigDecimal bookingCost;
 
-    @Column(name = "seatReservationId")
-    private Integer seatReservationId;
+    @JsonIgnore
+    @OneToOne(mappedBy = "booking", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private SeatReservation seatReservation;
 
     public Booking() {
     }
@@ -57,14 +58,6 @@ public class Booking implements Serializable {
         this.bookingDate = bookingDate;
     }
 
-    public Integer getShowId() {
-        return showId;
-    }
-
-    public void setShowId(Integer showId) {
-        this.showId = showId;
-    }
-
     public BigDecimal getBookingCost() {
         return bookingCost;
     }
@@ -73,11 +66,11 @@ public class Booking implements Serializable {
         this.bookingCost = bookingCost;
     }
 
-    public Integer getSeatReservationId() {
-        return seatReservationId;
+    public SeatReservation getSeatReservation() {
+        return seatReservation;
     }
 
-    public void setSeatReservationId(Integer seatReservationId) {
-        this.seatReservationId = seatReservationId;
+    public void setSeatReservation(SeatReservation seatReservation) {
+        this.seatReservation = seatReservation;
     }
 }

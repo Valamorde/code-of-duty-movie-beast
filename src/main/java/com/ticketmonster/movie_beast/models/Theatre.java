@@ -1,12 +1,16 @@
 package com.ticketmonster.movie_beast.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name = "theatres")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @EntityListeners(AuditingEntityListener.class)
 public class Theatre implements Serializable {
 
@@ -19,14 +23,15 @@ public class Theatre implements Serializable {
     @Column(name = "cityId")
     private Integer cityId;
 
-    @Column(name = "movieId")
-    private Integer movieId;
-
     @Column(name = "theatreName")
     private String theatreName;
 
     @Column(name = "theatreAddress")
     private String theatreAddress;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "theatreId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Movie> movies;
 
     public Theatre() {
     }
@@ -43,14 +48,6 @@ public class Theatre implements Serializable {
         this.cityId = cityId;
     }
 
-    public Integer getMovieId() {
-        return movieId;
-    }
-
-    public void setMovieId(Integer movieId) {
-        this.movieId = movieId;
-    }
-
     public String getTheatreName() {
         return theatreName;
     }
@@ -65,5 +62,13 @@ public class Theatre implements Serializable {
 
     public void setTheatreAddress(String theatreAddress) {
         this.theatreAddress = theatreAddress;
+    }
+
+    public Set<Movie> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(Set<Movie> movies) {
+        this.movies = movies;
     }
 }

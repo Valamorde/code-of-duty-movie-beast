@@ -5,11 +5,22 @@
 
     <groupId>com.ticketmonster</groupId>
     <artifactId>movie-beast</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.9-SNAPSHOT</version>
     <packaging>war</packaging>
 
     <name>movie-beast</name>
     <description>Movie Reservation REST API</description>
+
+    <developers>
+        <developer>
+            <name>Markos Korvesis</name>
+            <email>korvesism@gmail.com</email>
+        </developer>
+        <developer>
+            <name>Angeliki Alampanou</name>
+            <email>alampanoua@gmail.com</email>
+        </developer>
+    </developers>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -22,6 +33,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
+        <jjwt.version>0.9.0</jjwt.version>
     </properties>
 
     <dependencies>
@@ -51,12 +63,6 @@
             <artifactId>spring-data-rest-core</artifactId>
             <version>2.0.0.RELEASE</version>
         </dependency>
-
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-devtools</artifactId>-->
-            <!--<scope>runtime</scope>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -179,6 +185,11 @@
             <groupId>xalan</groupId>
             <artifactId>xalan</artifactId>
             <version>2.7.1</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${jjwt.version}</version>
         </dependency>
     </dependencies>
 

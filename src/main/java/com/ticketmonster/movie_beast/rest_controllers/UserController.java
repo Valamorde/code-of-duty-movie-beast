@@ -8,6 +8,7 @@ import com.ticketmonster.movie_beast.repositories.IUserRepository;
 import com.ticketmonster.movie_beast.services.implementations.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -21,6 +22,7 @@ import java.security.Principal;
 
 @Component
 @RestController
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 public class UserController {
 
     @Autowired
@@ -48,8 +50,6 @@ public class UserController {
      * @return logged in user
      */
     @PostMapping("/login")
-    @Consumes("application/json")
-    @Produces("application/json")
     public Principal user(Principal user) {
         return user;
     }
@@ -60,9 +60,7 @@ public class UserController {
      * @param newUser - requires email, password, fullname
      * @return created user, 201 OR CustomException, 409
      */
-    @PostMapping("/register")
-    @Consumes("application/json")
-    @Produces("application/json")
+    @PostMapping(value = "/register", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> registerNewUser(@Valid @RequestBody User newUser) {
         try {
             return userService.createNewUser(newUser);
@@ -75,8 +73,7 @@ public class UserController {
     /**
      * @return a list of registered users
      */
-    @GetMapping("/users")
-    @Produces("application/json")
+    @GetMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getAllUsers() {
         try {
             return userService.findAllUsers();
@@ -90,8 +87,7 @@ public class UserController {
      * @param userId - INTEGER, a user's id
      * @return specified user's details
      */
-    @GetMapping("/users/{userId}")
-    @Produces("application/json")
+    @GetMapping(value = "/users/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getSingleUser(@PathVariable(value = "userId") Integer userId) {
         try {
             return userService.findSingleUser(SecurityContextHolder.getContext().getAuthentication(), userId);
@@ -105,8 +101,7 @@ public class UserController {
      * @param userId - INTEGER, a user's id
      * @return specified user's basket of seat reservations
      */
-    @GetMapping("/users/{userId}/basket")
-    @Produces("application/json")
+    @GetMapping(value = "/users/{userId}/basket", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getUserBasket(@PathVariable(value = "userId") Integer userId) {
         try {
             return userService.getUserBasket(SecurityContextHolder.getContext().getAuthentication(), userId);
@@ -120,7 +115,7 @@ public class UserController {
      * @param userId - INTEGER, a user's id
      * @return specified user's bookings
      */
-    @GetMapping("/users/{userId}/bookings")
+    @GetMapping(value = "/users/{userId}/bookings", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getAllUserBookings(@PathVariable(value = "userId") Integer userId) {
         try {
             return userService.getAllUserBookings(SecurityContextHolder.getContext().getAuthentication(), userId);
@@ -135,7 +130,7 @@ public class UserController {
      * @param bookingId - INTEGER, a booking's id
      * @return specified user's specified booking
      */
-    @GetMapping("/users/{userId}/bookings/{bookingId}")
+    @GetMapping(value = "/users/{userId}/bookings/{bookingId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getSingleUserBooking(@PathVariable(value = "userId") Integer userId, @PathVariable(value = "bookingId") Integer bookingId) {
         try {
             return userService.getSingleUserBooking(SecurityContextHolder.getContext().getAuthentication(), userId, bookingId);
@@ -147,8 +142,7 @@ public class UserController {
 
 
     // Update a User
-    @PutMapping("/users/{userId}")
-    @Produces("application/json")
+    @PutMapping(value = "/users/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> updateUser(@PathVariable(value = "userId") Integer userId, @Valid @RequestBody User userDetails) {
         try {
             return userService.updateSingleUser(SecurityContextHolder.getContext().getAuthentication(), userId, userDetails);
@@ -159,7 +153,7 @@ public class UserController {
     }
 
     // Reset user password
-    @PutMapping("/users/{userId}/passwordReset")
+    @PutMapping(value = "/users/{userId}/passwordReset", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> resetPassword(@PathVariable(value = "userId") Integer userId){
         try{
             return userService.resetPassword(SecurityContextHolder.getContext().getAuthentication(), userId);
@@ -170,8 +164,7 @@ public class UserController {
     }
 
     // Delete a User
-    @DeleteMapping("/users/{userId}")
-    @Produces("application/json")
+    @DeleteMapping(value = "/users/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deleteUser(@PathVariable(value = "userId") Integer userId) {
         try {
             return userService.deleteUserAndCleanup(SecurityContextHolder.getContext().getAuthentication(), userId);

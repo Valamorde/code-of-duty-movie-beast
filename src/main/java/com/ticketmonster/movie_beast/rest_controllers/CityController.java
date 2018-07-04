@@ -4,6 +4,7 @@ import com.ticketmonster.movie_beast.models.City;
 import com.ticketmonster.movie_beast.services.implementations.CityServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -21,8 +22,7 @@ public class CityController {
     CityServiceImpl cityService;
 
     // Get All Cities
-    @GetMapping("/cities")
-    @Produces("application/json")
+    @GetMapping(value = "/cities", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getAllCities() {
         try {
             return cityService.getAllCities();
@@ -33,8 +33,7 @@ public class CityController {
     }
 
     // Get a Single City
-    @GetMapping("/cities/{cityId}")
-    @Produces("application/json")
+    @GetMapping(value = "/cities/{cityId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getCityById(@PathVariable(value = "cityId") Integer cityId) {
         try {
             return cityService.getSingleCity(cityId);
@@ -45,9 +44,7 @@ public class CityController {
     }
 
     // Create a New City
-    @PostMapping("/cities")
-    @Consumes("application/json")
-    @Produces("application/json")
+    @PostMapping(value = "/cities", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createNewCity(@Valid @RequestBody City newCity) {
         try {
             return cityService.createNewCity(newCity, SecurityContextHolder.getContext().getAuthentication());
@@ -58,9 +55,7 @@ public class CityController {
     }
 
     // Update a City
-    @PutMapping("/cities/{cityId}")
-    @Consumes("application/json")
-    @Produces("application/json")
+    @PutMapping(value = "/cities/{cityId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> updateCity(@PathVariable(value = "cityId") Integer cityId, @Valid @RequestBody City cityDetails) {
         try {
             return cityService.updateSingleCity(cityId, cityDetails, SecurityContextHolder.getContext().getAuthentication());
@@ -71,8 +66,7 @@ public class CityController {
     }
 
     // Delete a City
-    @DeleteMapping("/cities/{cityId}")
-    @Produces("application/json")
+    @DeleteMapping(value = "/cities/{cityId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deleteCity(@PathVariable(value = "cityId") Integer cityId) {
         try {
             return cityService.deleteSingleCity(cityId, SecurityContextHolder.getContext().getAuthentication());

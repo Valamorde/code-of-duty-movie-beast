@@ -48,8 +48,6 @@ public class ShowServiceImpl implements IShowService {
             show.setMovieId(newShow.getMovieId());
             show.setShowCost(newShow.getShowCost());
             show.setShowDate(newShow.getShowDate());
-            show.setShowDurationInMinutes(newShow.getShowDurationInMinutes());
-            show.setTheatreId(newShow.getTheatreId());
             return new ResponseEntity<>(showRepository.save(show), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
@@ -67,8 +65,6 @@ public class ShowServiceImpl implements IShowService {
             show.setMovieId(showDetails.getMovieId());
             show.setShowCost(showDetails.getShowCost());
             show.setShowDate(showDetails.getShowDate());
-            show.setShowDurationInMinutes(showDetails.getShowDurationInMinutes());
-            show.setTheatreId(showDetails.getTheatreId());
             return new ResponseEntity<>(showRepository.save(show), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);

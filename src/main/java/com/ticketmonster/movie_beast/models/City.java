@@ -1,5 +1,7 @@
 package com.ticketmonster.movie_beast.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -8,6 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "cities")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @EntityListeners(AuditingEntityListener.class)
 public class City implements Serializable {
 
@@ -20,7 +23,8 @@ public class City implements Serializable {
     @Column(name = "cityName")
     private String cityName;
 
-    @OneToMany(mappedBy = "cityId", cascade = CascadeType.ALL)
+    @JsonIgnore
+    @OneToMany(mappedBy = "cityId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Theatre> theatres;
 
     public City() {

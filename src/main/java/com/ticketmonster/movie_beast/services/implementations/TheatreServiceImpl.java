@@ -41,7 +41,6 @@ public class TheatreServiceImpl implements ITheatreService {
             Theatre theatre = new Theatre();
             theatre.setTheatreName(newTheatre.getTheatreName());
             theatre.setCityId(newTheatre.getCityId());
-            theatre.setMovieId(newTheatre.getMovieId());
             theatre.setTheatreAddress(newTheatre.getTheatreAddress());
             return new ResponseEntity<>(theatreRepository.save(theatre), HttpStatus.OK);
         } else {
@@ -56,7 +55,6 @@ public class TheatreServiceImpl implements ITheatreService {
             Theatre theatre = theatreRepository.getOne(theatreId);
             theatre.setTheatreName(theatreDetails.getTheatreName());
             theatre.setCityId(theatreDetails.getCityId());
-            theatre.setMovieId(theatreDetails.getMovieId());
             theatre.setTheatreAddress(theatreDetails.getTheatreAddress());
             return new ResponseEntity<>(theatreRepository.save(theatre), HttpStatus.OK);
         } else {
