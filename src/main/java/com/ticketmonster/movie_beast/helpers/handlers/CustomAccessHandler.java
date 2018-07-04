@@ -1,5 +1,6 @@
 package com.ticketmonster.movie_beast.helpers.handlers;
 
+import com.ticketmonster.movie_beast.models.Role;
 import com.ticketmonster.movie_beast.models.User;
 import org.springframework.stereotype.Component;
 
@@ -10,11 +11,11 @@ public class CustomAccessHandler {
         if (userIsAdmin(user)) {
             return true;
         } else {
-            return user.getRole().equals("ROLE_USER") && user.getUserId().equals(requestedId);
+            return user.getRole().equals(Role.ROLE_USER) && user.getUserId().equals(requestedId);
         }
     }
 
     public boolean userIsAdmin(User user){
-        return user.getRole().equals("ROLE_ADMIN");
+        return user.getRole().equals(Role.ROLE_ADMIN);
     }
 }

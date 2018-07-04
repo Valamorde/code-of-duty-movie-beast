@@ -38,7 +38,7 @@ public class AuthenticationController {
     @Qualifier("jwtUserDetailsService")
     private UserDetailsService userDetailsService;
 
-    @PostMapping(value = "${jwt.route.authentication.path}")
+    @PostMapping("${jwt.route.authentication.path}")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest) throws AuthenticationException {
 
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
@@ -51,7 +51,7 @@ public class AuthenticationController {
         return ResponseEntity.ok(new JwtAuthenticationResponse(token));
     }
 
-    @PostMapping(value = "${jwt.route.authentication.refresh}")
+    @PostMapping("${jwt.route.authentication.refresh}")
     public ResponseEntity<?> refreshAndGetAuthenticationToken(HttpServletRequest request) {
         String authToken = request.getHeader(tokenHeader);
         final String token = authToken.substring(7);

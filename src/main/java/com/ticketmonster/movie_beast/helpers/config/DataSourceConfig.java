@@ -7,7 +7,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class MvcConfig implements WebMvcConfigurer {
+public class DataSourceConfig implements WebMvcConfigurer {
 
     @Value("${spring.datasource.driver-class-name}")
     private String dbDriver;

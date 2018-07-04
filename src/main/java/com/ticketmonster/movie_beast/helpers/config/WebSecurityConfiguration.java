@@ -1,12 +1,10 @@
 package com.ticketmonster.movie_beast.helpers.config;
 
-import com.ticketmonster.movie_beast.helpers.handlers.CustomAuthenticationSuccessHandler;
 import com.ticketmonster.movie_beast.helpers.handlers.CustomLogoutSuccessHandler;
 import com.ticketmonster.movie_beast.helpers.security.JwtAuthenticationEntryPoint;
 import com.ticketmonster.movie_beast.helpers.security.JwtAuthorizationTokenFilter;
 import com.ticketmonster.movie_beast.helpers.security.JwtTokenUtil;
 import com.ticketmonster.movie_beast.helpers.security.service.JwtUserDetailsService;
-import com.ticketmonster.movie_beast.repositories.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,61 +24,17 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import javax.sql.DataSource;
-
 @Configurable
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private DataSource dataSource;
-    @Autowired
     private CustomLogoutSuccessHandler logoutSuccessHandler;
-//    @Autowired
-//    private CustomAuthenticationSuccessHandler authenticationSuccessHandler;
     @Autowired
     private JwtAuthenticationEntryPoint unauthorizedHandler;
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
-
-    //    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.cors().and().httpBasic().and()
-//                //.formLogin() //FIXME: <- temporarily disabled to allow CORS Authentication from Angular  ----
-//                //.loginProcessingUrl("/login").successHandler(authenticationSuccessHandler).and() //FIXME: <-|
-//                .authorizeRequests()
-//                .antMatchers("/",
-//                        "/register",
-//                        "/login", "/error", "/logout").permitAll()
-//                .antMatchers("/theatres", "/theatres/**", "/seatReservation", "/seatReservation/**",
-//                        "/movies", "/movies/**",
-//                        "/cities", "/cities/**", "/users/**").authenticated()
-//                .antMatchers("/users").access("hasAuthority('ROLE_ADMIN')").and()
-//                .logout()
-//                .permitAll()
-//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST"))
-//                .logoutSuccessHandler(logoutSuccessHandler).logoutSuccessUrl("/login").invalidateHttpSession(true).and()
-//                .sessionManagement().invalidSessionUrl("/login").maximumSessions(1).expiredUrl("/login").and()
-//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // <- TODO: figure out optimal SessionCreationPolicy
-//                .and().csrf().disable();                                 // <- TODO: enable csrf when done.
-//                //.addFilterBefore(new CORSFilter(), ChannelProcessingFilter.class);
-//    }
-//
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new MvcConfig() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:4200/")
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS")
-                        .allowedHeaders("Content-Type", "Date", "Total-Count", "loginInfo", "application/json", "Authorization")
-                        .exposedHeaders("Content-Type", "Date", "Total-Count", "loginInfo", "application/json", "Authorization")
-                        .maxAge(3600);
-            }
-        };
-    }
     @Autowired
     private JwtUserDetailsService jwtUserDetailsService;
     @Value("${jwt.header}")
@@ -89,17 +43,23 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     private String authenticationPath;
 
     @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-
+    public WebMvcConfigurer corsConfigurer() {
+        return new DataSourceConfig() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**")
+                        .allowedOrigins("*")
+                        .allowedMethods("*") // "GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"
+                        .allowedHeaders("*") // "Content-Type", "Date", "Total-Count", "loginInfo", "application/json", "Authorization"
+                        .exposedHeaders("Content-Type", "Date", "Total-Count", "loginInfo", "application/json", "Authorization")
+                        .maxAge(3600);
+            }
+        };
     }
 
-    @Autowired
-    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication().dataSource(dataSource)
-                .usersByUsernameQuery("SELECT email, password, enabled FROM users WHERE email = ?")
-                .authoritiesByUsernameQuery("SELECT email, role FROM users WHERE email = ?")
-                .passwordEncoder(passwordEncoder());
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
     @Autowired
@@ -117,19 +77,21 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable();
-        http.httpBasic();
-        http.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+        http.cors().and().csrf().disable().httpBasic().and()
+        .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
-                .antMatchers("/", "/auth/**", "/register/**","/error/**").permitAll()
-                .antMatchers("/cities/**", "/theatres/**", "/movies/**","/shows/**",
-                        "/bookings/**", "/seatReservation/**").authenticated()
+                .antMatchers("/", "/auth/**", "/register/**", "/error/**", "/login/**").permitAll()
+                .antMatchers("/cities/**", "/theatres/**", "/movies/**", "/shows/**",
+                        "/bookings/**", "/seatReservation/**").fullyAuthenticated()
                 .antMatchers("/users").access("hasAuthority('ROLE_ADMIN')")
                 .anyRequest().authenticated();
+
         http.logout().permitAll().logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST"))
                 .logoutSuccessHandler(logoutSuccessHandler).invalidateHttpSession(true);
-        http.addFilterBefore(new JwtAuthorizationTokenFilter(userDetailsService(), jwtTokenUtil, tokenHeader), UsernamePasswordAuthenticationFilter.class);
+
+        JwtAuthorizationTokenFilter authenticationTokenFilter = new JwtAuthorizationTokenFilter(userDetailsService(), jwtTokenUtil, tokenHeader);
+        http.addFilterBefore(authenticationTokenFilter, UsernamePasswordAuthenticationFilter.class).headers().cacheControl();
     }
 
     @Override
@@ -160,5 +122,4 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/webjars/**")//
                 .antMatchers("/public");
     }
-
 }

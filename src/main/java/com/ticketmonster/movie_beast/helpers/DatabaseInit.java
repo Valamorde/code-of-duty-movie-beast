@@ -98,7 +98,7 @@ public class DatabaseInit {
         user.setPassword(bCryptPasswordEncoder.encode("1234"));
         user.setRole(Role.ROLE_USER.name());
         user.setEnabled(true);
-        user.setLastPasswordResetDate(DateUtils.round(DateUtils.addDays(new Date(), 0), Calendar.DATE));
+        user.setLastPasswordResetDate(new Date());
         userRepository.save(user);
 
         user = new User();
@@ -107,7 +107,7 @@ public class DatabaseInit {
         user.setPassword(bCryptPasswordEncoder.encode("1234"));
         user.setRole(Role.ROLE_ADMIN.name());
         user.setEnabled(true);
-        user.setLastPasswordResetDate(DateUtils.round(DateUtils.addDays(new Date(), 0), Calendar.DATE));
+        user.setLastPasswordResetDate(new Date());
         userRepository.save(user);
     }
 }
