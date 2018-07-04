@@ -1,4 +1,4 @@
-package com.ticketmonster.movie_beast.rest_controllers;
+package com.ticketmonster.movie_beast.controllers.rest;
 
 import com.ticketmonster.movie_beast.helpers.handlers.CustomAccessHandler;
 import com.ticketmonster.movie_beast.models.User;
@@ -16,9 +16,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.Produces;
-import java.security.Principal;
 
 @Component
 @RestController
@@ -44,28 +41,19 @@ public class UserController {
     UserServiceImpl userService;
 
     /**
-     * Allows the user to Login
-     *
-     * @param user - email and password
-     * @return logged in user
-     */
-    @PostMapping("/login")
-    public Principal user(Principal user) {
-        return user;
-    }
-
-    /**
      * Allows the user to create an account
      *
      * @param newUser - requires email, password, fullname
      * @return created user, 201 OR CustomException, 409
      */
-    @PostMapping(value = "/register", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/auth/register", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> registerNewUser(@Valid @RequestBody User newUser) {
         try {
+            System.out.println("IN AUTH/REGISTER");
             return userService.createNewUser(newUser);
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("EXCEPTION THROWN");
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
@@ -126,7 +114,7 @@ public class UserController {
     }
 
     /**
-     * @param userId - INTEGER, a user's id
+     * @param userId    - INTEGER, a user's id
      * @param bookingId - INTEGER, a booking's id
      * @return specified user's specified booking
      */
@@ -154,10 +142,10 @@ public class UserController {
 
     // Reset user password
     @PutMapping(value = "/users/{userId}/passwordReset", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> resetPassword(@PathVariable(value = "userId") Integer userId){
-        try{
+    public ResponseEntity<?> resetPassword(@PathVariable(value = "userId") Integer userId) {
+        try {
             return userService.resetPassword(SecurityContextHolder.getContext().getAuthentication(), userId);
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

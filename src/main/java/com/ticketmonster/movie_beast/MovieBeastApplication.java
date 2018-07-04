@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @SpringBootApplication
 @EnableJpaAuditing
 @ComponentScan
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @JsonAutoDetect
 public class MovieBeastApplication {
 

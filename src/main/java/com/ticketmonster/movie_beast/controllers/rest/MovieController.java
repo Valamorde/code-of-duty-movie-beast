@@ -1,4 +1,4 @@
-package com.ticketmonster.movie_beast.rest_controllers;
+package com.ticketmonster.movie_beast.controllers.rest;
 
 import com.ticketmonster.movie_beast.models.Movie;
 import com.ticketmonster.movie_beast.services._interfaces.IMovieService;
@@ -16,6 +16,7 @@ import javax.ws.rs.Produces;
 
 @Component
 @RestController
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 public class MovieController {
 
     @Autowired

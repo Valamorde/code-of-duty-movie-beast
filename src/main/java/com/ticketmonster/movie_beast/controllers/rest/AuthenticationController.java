@@ -1,4 +1,4 @@
-package com.ticketmonster.movie_beast.rest_controllers;
+package com.ticketmonster.movie_beast.controllers.rest;
 
 import com.ticketmonster.movie_beast.helpers.security.JwtAuthenticationRequest;
 import com.ticketmonster.movie_beast.helpers.security.JwtTokenUtil;
@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 public class AuthenticationController {
 
     @Value("${jwt.header}")

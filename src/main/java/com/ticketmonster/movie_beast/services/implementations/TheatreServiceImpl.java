@@ -26,12 +26,12 @@ public class TheatreServiceImpl implements ITheatreService {
 
     @Override
     public ResponseEntity<?> getAllTheatres() {
-        return null;
+        return new ResponseEntity<>(theatreRepository.findAll(), HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<?> getSingleTheatre(Integer theatreId) {
-        return null;
+        return new ResponseEntity<>(theatreRepository.getOne(theatreId), HttpStatus.OK);
     }
 
     @Override

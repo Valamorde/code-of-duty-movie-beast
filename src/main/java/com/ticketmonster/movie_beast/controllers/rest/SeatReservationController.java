@@ -1,4 +1,4 @@
-package com.ticketmonster.movie_beast.rest_controllers;
+package com.ticketmonster.movie_beast.controllers.rest;
 
 import com.ticketmonster.movie_beast.models.SeatReservation;
 import com.ticketmonster.movie_beast.repositories.IUserRepository;
@@ -9,15 +9,14 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.Produces;
-
 @Component
 @RestController
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 public class SeatReservationController {
 
     @Autowired
@@ -26,7 +25,7 @@ public class SeatReservationController {
     @Autowired
     private SeatReservationServiceImpl seatReservationService;
 
-    @PostMapping(value = "/seatReservation", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/seatReservations/reserve", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> reserveSeat(@RequestBody SeatReservation seatReservation) {
         try {
             return seatReservationService.reserveTicket(seatReservation.getShowId(), seatReservation.getSeatId(),
@@ -37,7 +36,7 @@ public class SeatReservationController {
         }
     }
 
-    @PostMapping(value = "/cancelReservation", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/seatReservation/cancel", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> cancelReservation(@RequestBody SeatReservation reservation) {
         try {
             return seatReservationService.cancelReservation(reservation.getSeatId(), SecurityContextHolder.getContext().getAuthentication());

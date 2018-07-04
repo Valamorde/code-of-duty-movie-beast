@@ -1,7 +1,8 @@
-package com.ticketmonster.movie_beast.rest_controllers;
+package com.ticketmonster.movie_beast.controllers.rest;
 
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,6 +10,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController("/error")
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 public class CustomErrorController implements ErrorController {
 
     private static final String PATH = "/error";

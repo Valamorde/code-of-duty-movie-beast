@@ -22,6 +22,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -33,16 +34,11 @@ import javax.sql.DataSource;
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private IUserRepository userRepository;
-
-    @Autowired
     private DataSource dataSource;
-
     @Autowired
     private CustomLogoutSuccessHandler logoutSuccessHandler;
-
-    @Autowired
-    private CustomAuthenticationSuccessHandler authenticationSuccessHandler;
+//    @Autowired
+//    private CustomAuthenticationSuccessHandler authenticationSuccessHandler;
     @Autowired
     private JwtAuthenticationEntryPoint unauthorizedHandler;
     @Autowired
@@ -77,7 +73,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("*") //FIXME: <- change to http://localhost:4200/
+                        .allowedOrigins("http://localhost:4200/")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS")
                         .allowedHeaders("Content-Type", "Date", "Total-Count", "loginInfo", "application/json", "Authorization")
                         .exposedHeaders("Content-Type", "Date", "Total-Count", "loginInfo", "application/json", "Authorization")
@@ -126,10 +122,13 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
-                .antMatchers("/", "/auth/**").permitAll()
+                .antMatchers("/", "/auth/**", "/error/**").permitAll()
+                .antMatchers("/cities/**", "/theatres/**", "/movies/**","/shows/**",
+                        "/bookings/**", "/seatReservation/**").authenticated()
                 .antMatchers("/users").access("hasAuthority('ROLE_ADMIN')")
                 .anyRequest().authenticated();
-
+        http.logout().permitAll().logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST"))
+                .logoutSuccessHandler(logoutSuccessHandler).invalidateHttpSession(true);
         http.addFilterBefore(new JwtAuthorizationTokenFilter(userDetailsService(), jwtTokenUtil, tokenHeader), UsernamePasswordAuthenticationFilter.class);
     }
 
