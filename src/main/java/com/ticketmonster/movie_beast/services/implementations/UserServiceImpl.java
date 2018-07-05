@@ -7,7 +7,6 @@ import com.ticketmonster.movie_beast.repositories.ISeatReservationRepository;
 import com.ticketmonster.movie_beast.repositories.IShowRepository;
 import com.ticketmonster.movie_beast.repositories.IUserRepository;
 import com.ticketmonster.movie_beast.services._interfaces.IUserService;
-import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +15,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -84,7 +82,7 @@ public class UserServiceImpl implements IUserService {
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
             user.setRole(Role.ROLE_USER.name());
             user.setEnabled(true);
-            user.setLastPasswordResetDate(DateUtils.round(DateUtils.addDays(new Date(), 0), Calendar.DATE));
+            user.setLastPasswordResetDate(new Date());
             return new ResponseEntity<>(userRepository.save(user), HttpStatus.CREATED);
         }
     }

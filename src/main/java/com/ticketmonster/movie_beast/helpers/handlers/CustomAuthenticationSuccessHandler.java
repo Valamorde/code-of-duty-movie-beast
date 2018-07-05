@@ -17,6 +17,6 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
-        redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "http://localhost:4200/"); //FIXME: redirection after successful login
+        redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "http://localhost:4200/"); //FIXME: redirection after successful loggedUser
     }
 }

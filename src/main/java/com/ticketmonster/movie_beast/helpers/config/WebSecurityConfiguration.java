@@ -48,7 +48,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("*")
+                        .allowedOrigins("*") // http://localhost:4200/
                         .allowedMethods("*") // "GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"
                         .allowedHeaders("*") // "Content-Type", "Date", "Total-Count", "loginInfo", "application/json", "Authorization"
                         .exposedHeaders("Content-Type", "Date", "Total-Count", "loginInfo", "application/json", "Authorization")
@@ -77,11 +77,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable().httpBasic().and()
+        http.cors().and().csrf().disable()//.httpBasic().and()
         .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
-                .antMatchers("/", "/auth/**", "/register/**", "/error/**", "/login/**").permitAll()
+                .antMatchers("/", "/auth/**", "/register/**", "/error/**", "/loggedUser/**").permitAll()
                 .antMatchers("/cities/**", "/theatres/**", "/movies/**", "/shows/**",
                         "/bookings/**", "/seatReservation/**").fullyAuthenticated()
                 .antMatchers("/users").access("hasAuthority('ROLE_ADMIN')")

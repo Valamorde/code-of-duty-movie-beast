@@ -41,8 +41,8 @@ public class UserController {
     @Autowired
     UserServiceImpl userService;
 
-    @RequestMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Principal login(Principal user) {
+    @RequestMapping(value = "/loggedUser", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Principal loggedUser(Principal user) {
         return user;
     }
 
