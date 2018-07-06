@@ -34,14 +34,24 @@ public class Movie implements Serializable {
     @Column(name = "movieDurationInMinutes")
     private Integer movieDurationInMinutes;
 
-    @Column(name = "theatreId")
-    private Integer theatreId;
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "theatreId")
+    private Theatre theatre;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "movieId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Show> shows;
 
     public Movie() {
+    }
+
+    public Theatre getTheatre() {
+        return theatre;
+    }
+
+    public void setTheatre(Theatre theatre) {
+        this.theatre = theatre;
     }
 
     public Integer getMovieDurationInMinutes() {
@@ -86,13 +96,5 @@ public class Movie implements Serializable {
 
     public void setShows(List<Show> shows) {
         this.shows = shows;
-    }
-
-    public Integer getTheatreId() {
-        return theatreId;
-    }
-
-    public void setTheatreId(Integer theatreId) {
-        this.theatreId = theatreId;
     }
 }

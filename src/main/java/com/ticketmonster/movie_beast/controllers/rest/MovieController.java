@@ -1,7 +1,7 @@
 package com.ticketmonster.movie_beast.controllers.rest;
 
+import com.ticketmonster.movie_beast.controllers.middleware.MovieMediator;
 import com.ticketmonster.movie_beast.models.Movie;
-import com.ticketmonster.movie_beast.services._interfaces.IMovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,13 +20,13 @@ import javax.ws.rs.Produces;
 public class MovieController {
 
     @Autowired
-    IMovieService movieService;
+    private MovieMediator movieMediator;
 
     // Get All Movies
     @GetMapping(value = "/movies", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getAllMovies() {
         try {
-            return movieService.getAllMovies();
+            return movieMediator.getAllMovies();
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -37,7 +37,7 @@ public class MovieController {
     @GetMapping(value = "/movies/{movieId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getMovieById(@PathVariable(value = "movieId") Integer movieId) {
         try {
-            return movieService.getSingleMovie(movieId);
+            return movieMediator.getSingleMovie(movieId);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -45,12 +45,10 @@ public class MovieController {
     }
 
     // Create a New Movie
-    @PostMapping("/movies")
-    @Consumes("application/json")
-    @Produces("application/json")
+    @PostMapping(value = "/movies", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createNewMovie(@Valid @RequestBody Movie newMovie) {
         try {
-            return movieService.createNewMovie(newMovie, SecurityContextHolder.getContext().getAuthentication());
+            return movieMediator.createNewMovie(newMovie, SecurityContextHolder.getContext().getAuthentication());
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -58,12 +56,10 @@ public class MovieController {
     }
 
     // Update a Movie
-    @PutMapping("/movies/{movieId}")
-    @Consumes("application/json")
-    @Produces("application/json")
+    @PutMapping(value = "/movies/{movieId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> updateMovie(@PathVariable(value = "movieId") Integer movieId, @Valid @RequestBody Movie movieDetails) {
         try {
-            return movieService.updateSingleMovie(movieId, movieDetails, SecurityContextHolder.getContext().getAuthentication());
+            return movieMediator.updateSingleMovie(movieId, movieDetails, SecurityContextHolder.getContext().getAuthentication());
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -74,7 +70,7 @@ public class MovieController {
     @DeleteMapping("/movies/{movieId}")
     public ResponseEntity<?> deleteMovie(@PathVariable(value = "movieId") Integer movieId) {
         try {
-            return movieService.deleteSingleMovie(movieId, SecurityContextHolder.getContext().getAuthentication());
+            return movieMediator.deleteSingleMovie(movieId, SecurityContextHolder.getContext().getAuthentication());
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

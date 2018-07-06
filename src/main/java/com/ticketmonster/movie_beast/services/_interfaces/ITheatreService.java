@@ -8,11 +8,11 @@ public interface ITheatreService {
 
     ResponseEntity<?> getAllTheatres();
 
-    ResponseEntity<?> getSingleTheatre(Integer theatreId);
+    ResponseEntity<?> getSingleTheatre(Theatre theatre);
 
     ResponseEntity<?> createNewTheatre(Theatre newTheatre, Authentication authentication);
 
-    ResponseEntity<?> updateSingleTheatre(Integer theatreId, Theatre theatreDetails, Authentication authentication);
+    ResponseEntity<?> updateSingleTheatre(Theatre theatre, Theatre theatreDetails, Authentication authentication);
 
-    ResponseEntity<?> deleteSingleTheatre(Integer theatreId, Authentication authentication);
+    ResponseEntity<?> deleteSingleTheatre(Theatre theatre, Authentication authentication);
 }

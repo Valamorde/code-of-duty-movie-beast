@@ -1,26 +1,27 @@
 package com.ticketmonster.movie_beast.services._interfaces;
 
+import com.ticketmonster.movie_beast.models.Booking;
 import com.ticketmonster.movie_beast.models.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 
 public interface IUserService {
 
-    ResponseEntity<?> deleteUserAndCleanup(Authentication authentication, Integer userId);
+    ResponseEntity<?> deleteUserAndCleanup(Authentication authentication, User user);
 
     ResponseEntity<?> createNewUser(User user);
 
-    ResponseEntity<?> findAllUsers();
+    ResponseEntity<?> getAllUsers();
 
-    ResponseEntity<?> findSingleUser(Authentication authentication, Integer userId);
+    ResponseEntity<?> getSingleUser(Authentication authentication, User targetUser);
 
-    ResponseEntity<?> getUserBasket(Authentication authentication, Integer userId);
+    ResponseEntity<?> getUserBasket(Authentication authentication, User targetUser);
 
-    ResponseEntity<?> getAllUserBookings(Authentication authentication, Integer userId);
+    ResponseEntity<?> getAllUserBookings(Authentication authentication, User targetUser);
 
-    ResponseEntity<?> getSingleUserBooking(Authentication authentication, Integer userId, Integer bookingId);
+    ResponseEntity<?> getSingleUserBooking(Authentication authentication, User targetUser, Booking booking);
 
-    ResponseEntity<?> updateSingleUser(Authentication authentication, Integer userId, User userDetails);
+    ResponseEntity<?> updateSingleUser(Authentication authentication, User targetUser, User userDetails);
 
-    ResponseEntity<?> resetPassword(Authentication authentication, Integer userId);
+    ResponseEntity<?> resetPassword(Authentication authentication, User targetUser);
 }

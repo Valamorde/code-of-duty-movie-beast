@@ -16,13 +16,13 @@ import org.springframework.stereotype.Service;
 public class TheatreServiceImpl implements ITheatreService {
 
     @Autowired
-    IUserRepository userRepository;
+    private IUserRepository userRepository;
 
     @Autowired
-    ITheatreRepository theatreRepository;
+    private ITheatreRepository theatreRepository;
 
     @Autowired
-    CustomAccessHandler customAccessHandler;
+    private CustomAccessHandler customAccessHandler;
 
     @Override
     public ResponseEntity<?> getAllTheatres() {
@@ -30,8 +30,8 @@ public class TheatreServiceImpl implements ITheatreService {
     }
 
     @Override
-    public ResponseEntity<?> getSingleTheatre(Integer theatreId) {
-        return new ResponseEntity<>(theatreRepository.getOne(theatreId), HttpStatus.OK);
+    public ResponseEntity<?> getSingleTheatre(Theatre theatre) {
+        return new ResponseEntity<>(theatreRepository.getOne(theatre.getTheatreId()), HttpStatus.OK);
     }
 
     @Override
@@ -40,8 +40,9 @@ public class TheatreServiceImpl implements ITheatreService {
         if (customAccessHandler.userIsAdmin(user)) {
             Theatre theatre = new Theatre();
             theatre.setTheatreName(newTheatre.getTheatreName());
-            theatre.setCityId(newTheatre.getCityId());
+            theatre.setCity(newTheatre.getCity());
             theatre.setTheatreAddress(newTheatre.getTheatreAddress());
+            theatre.setMovies(newTheatre.getMovies());
             return new ResponseEntity<>(theatreRepository.save(theatre), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
@@ -49,12 +50,11 @@ public class TheatreServiceImpl implements ITheatreService {
     }
 
     @Override
-    public ResponseEntity<?> updateSingleTheatre(Integer theatreId, Theatre theatreDetails, Authentication authentication) {
+    public ResponseEntity<?> updateSingleTheatre(Theatre theatre, Theatre theatreDetails, Authentication authentication) {
         User user = userRepository.findByEmail(authentication.getName());
         if (customAccessHandler.userIsAdmin(user)) {
-            Theatre theatre = theatreRepository.getOne(theatreId);
             theatre.setTheatreName(theatreDetails.getTheatreName());
-            theatre.setCityId(theatreDetails.getCityId());
+            theatre.setCity(theatreDetails.getCity());
             theatre.setTheatreAddress(theatreDetails.getTheatreAddress());
             return new ResponseEntity<>(theatreRepository.save(theatre), HttpStatus.OK);
         } else {
@@ -63,10 +63,10 @@ public class TheatreServiceImpl implements ITheatreService {
     }
 
     @Override
-    public ResponseEntity<?> deleteSingleTheatre(Integer theatreId, Authentication authentication) {
+    public ResponseEntity<?> deleteSingleTheatre(Theatre theatre, Authentication authentication) {
         User user = userRepository.findByEmail(authentication.getName());
         if (customAccessHandler.userIsAdmin(user)) {
-            theatreRepository.delete(theatreRepository.getOne(theatreId));
+            theatreRepository.delete(theatre);
             return new ResponseEntity<>(theatreRepository.findAll(), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);

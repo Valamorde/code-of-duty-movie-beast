@@ -24,7 +24,7 @@ public class City implements Serializable {
     private String cityName;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "cityId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Theatre> theatres;
 
     public City() {

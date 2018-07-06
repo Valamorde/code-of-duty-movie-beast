@@ -19,36 +19,48 @@ public class SeatReservation implements Serializable {
     @SequenceGenerator(name = "seat_generator", sequenceName = "seat_seq")
     private Integer seatId;
 
-    @Column(name = "showId")
-    private Integer showId;
-
     @Column(name = "seatReserved")
     private boolean seatReserved;
 
     @Column(name = "seatPaid")
     private boolean seatPaid;
 
-    @Column(name = "userId")
-    private Integer userId;
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId")
+    private User user;
 
     @JsonIgnore
     @OneToOne
     @JoinColumn(name = "bookingId")
     private Booking booking;
 
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "showId")
+    private Show show;
+
     public SeatReservation() {
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Show getShow() {
+        return show;
+    }
+
+    public void setShow(Show show) {
+        this.show = show;
     }
 
     public Integer getSeatId() {
         return seatId;
-    }
-
-    public Integer getShowId() {
-        return showId;
-    }
-
-    public void setShowId(Integer showId) {
-        this.showId = showId;
     }
 
     public boolean isSeatReserved() {
@@ -65,14 +77,6 @@ public class SeatReservation implements Serializable {
 
     public void setSeatPaid(boolean seatPaid) {
         this.seatPaid = seatPaid;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
     }
 
     public Booking getBooking() {

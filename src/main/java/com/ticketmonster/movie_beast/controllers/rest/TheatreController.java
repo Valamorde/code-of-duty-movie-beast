@@ -1,7 +1,7 @@
 package com.ticketmonster.movie_beast.controllers.rest;
 
+import com.ticketmonster.movie_beast.controllers.middleware.TheatreMediator;
 import com.ticketmonster.movie_beast.models.Theatre;
-import com.ticketmonster.movie_beast.services._interfaces.ITheatreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,13 +18,13 @@ import javax.validation.Valid;
 public class TheatreController {
 
     @Autowired
-    ITheatreService theatreService;
+    private TheatreMediator theatreMediator;
 
     // Get All Theatres
     @GetMapping(value = "/theatres", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getAllTheatres() {
         try {
-            return theatreService.getAllTheatres();
+            return theatreMediator.getAllTheatres();
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -35,7 +35,7 @@ public class TheatreController {
     @GetMapping(value = "/theatres/{theatreId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getTheatreById(@PathVariable(value = "theatreId") Integer theatreId) {
         try {
-            return theatreService.getSingleTheatre(theatreId);
+            return theatreMediator.getSingleTheatre(theatreId);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -43,10 +43,10 @@ public class TheatreController {
     }
 
     // Create a New Theatre
-    @PostMapping(value = "/theatres", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/theatres", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createNewTheatre(@Valid @RequestBody Theatre newTheatre) {
         try {
-            return theatreService.createNewTheatre(newTheatre, SecurityContextHolder.getContext().getAuthentication());
+            return theatreMediator.createNewTheatre(newTheatre, SecurityContextHolder.getContext().getAuthentication());
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -54,10 +54,10 @@ public class TheatreController {
     }
 
     // Update a Theatre
-    @PutMapping(value = "/theatres/{theatreId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/theatres/{theatreId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> updateTheatre(@PathVariable(value = "theatreId") Integer theatreId, @Valid @RequestBody Theatre theatreDetails) {
         try {
-            return theatreService.updateSingleTheatre(theatreId, theatreDetails, SecurityContextHolder.getContext().getAuthentication());
+            return theatreMediator.updateSingleTheatre(theatreId, theatreDetails, SecurityContextHolder.getContext().getAuthentication());
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -68,7 +68,7 @@ public class TheatreController {
     @DeleteMapping(value = "/theatres/{theatreId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deleteTheatre(@PathVariable(value = "theatreId") Integer theatreId) {
         try {
-            return theatreService.deleteSingleTheatre(theatreId, SecurityContextHolder.getContext().getAuthentication());
+            return theatreMediator.deleteSingleTheatre(theatreId, SecurityContextHolder.getContext().getAuthentication());
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

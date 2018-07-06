@@ -22,37 +22,38 @@ import java.util.List;
 public class UserServiceImpl implements IUserService {
 
     @Autowired
-    IUserRepository userRepository;
+    private IUserRepository userRepository;
 
     @Autowired
-    IBookingRepository bookingRepository;
+    private IBookingRepository bookingRepository;
 
     @Autowired
-    ISeatReservationRepository seatReservationRepository;
+    private ISeatReservationRepository seatReservationRepository;
 
     @Autowired
-    IShowRepository showRepository;
+    private IShowRepository showRepository;
 
     @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    CustomAccessHandler customAccessHandler;
+    private CustomAccessHandler customAccessHandler;
 
     @Override
     @Transactional
-    public ResponseEntity<?> deleteUserAndCleanup(Authentication authentication, Integer userId) {
+    public ResponseEntity<?> deleteUserAndCleanup(Authentication authentication, User user) {
         User authUser = userRepository.findByEmail(authentication.getName());
-        User targetUser = userRepository.getOne(userId);
+        User targetUser = userRepository.getOne(user.getUserId());
 
-        if (customAccessHandler.userIsAuthorizedToViewSpecifiedContent(userId, authUser)) {
-            List<SeatReservation> seatReservationList = seatReservationRepository.findAllByUserId(targetUser.getUserId());
+        if (customAccessHandler.userIsAuthorizedToViewSpecifiedContent(targetUser, authUser)) {
+            List<SeatReservation> seatReservationList = seatReservationRepository.findAllByUser(targetUser);
 
             for (int i = 0; i < seatReservationList.size(); i++) {
                 SeatReservation seatReservation = seatReservationList.get(i);
                 seatReservation.setSeatReserved(false);
                 seatReservation.setSeatPaid(false);
-                seatReservation.setUserId(null);
+                seatReservation.setUser(null);
+                seatReservation.setBooking(null);
 
                 if (seatReservation.getBooking().getBookingId() != null) {
                     Booking booking = bookingRepository.getOne(seatReservation.getBooking().getBookingId());
@@ -60,7 +61,7 @@ public class UserServiceImpl implements IUserService {
                 }
 
                 seatReservation.setBooking(null);
-                Show show = showRepository.findByShowId(seatReservation.getShowId());
+                Show show = showRepository.getOne(seatReservation.getShow().getShowId());
                 show.setAvailableSeats(show.getAvailableSeats() + 1);
                 showRepository.save(show);
                 seatReservationRepository.save(seatReservation);
@@ -89,67 +90,71 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     @Transactional
-    public ResponseEntity<?> findAllUsers() {
+    public ResponseEntity<?> getAllUsers() {
         return new ResponseEntity<>(userRepository.findAll(), HttpStatus.OK);
     }
 
     @Override
     @Transactional
-    public ResponseEntity<?> findSingleUser(Authentication authentication, Integer userId) {
-        User user = userRepository.findByEmail(authentication.getName());
-        if (customAccessHandler.userIsAuthorizedToViewSpecifiedContent(userId, user)) {
-            return new ResponseEntity<>(userRepository.findById(userId), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }
-    }
-
-    @Override
-    @Transactional
-    public ResponseEntity<?> getUserBasket(Authentication authentication, Integer userId) {
-        User user = userRepository.findByEmail(authentication.getName());
-
-        if (customAccessHandler.userIsAuthorizedToViewSpecifiedContent(userId, user)) {
-            return new ResponseEntity<>(seatReservationRepository.findAllBySeatReservedIsTrueAndSeatPaidIsFalseAndUserIdIs(userId), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }
-    }
-
-    @Override
-    @Transactional
-    public ResponseEntity<?> getAllUserBookings(Authentication authentication, Integer userId) {
-        User user = userRepository.findByEmail(authentication.getName());
-
-        if (customAccessHandler.userIsAuthorizedToViewSpecifiedContent(userId, user)) {
-            return new ResponseEntity<>(bookingRepository.findAllByUserId(userId), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }
-    }
-
-    @Override
-    @Transactional
-    public ResponseEntity<?> getSingleUserBooking(Authentication authentication, Integer userId, Integer bookingId) {
-        User user = userRepository.findByEmail(authentication.getName());
-
-        if (customAccessHandler.userIsAuthorizedToViewSpecifiedContent(userId, user)) {
-            return new ResponseEntity<>(bookingRepository.findByBookingIdAndUserId(bookingId, userId), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }
-    }
-
-    @Override
-    @Transactional
-    public ResponseEntity<?> updateSingleUser(Authentication authentication, Integer userId, User userDetails) {
+    public ResponseEntity<?> getSingleUser(Authentication authentication, User targetUser) {
         User authUser = userRepository.findByEmail(authentication.getName());
-        User targetUser = userRepository.getOne(userId);
 
-        if (customAccessHandler.userIsAuthorizedToViewSpecifiedContent(userId, authUser)) {
+        if (customAccessHandler.userIsAuthorizedToViewSpecifiedContent(targetUser, authUser)) {
+            return new ResponseEntity<>(userRepository.getOne(targetUser.getUserId()), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+    }
+
+    @Override
+    @Transactional
+    public ResponseEntity<?> getUserBasket(Authentication authentication, User targetUser) {
+        User authUser = userRepository.findByEmail(authentication.getName());
+
+        if (customAccessHandler.userIsAuthorizedToViewSpecifiedContent(targetUser, authUser)) {
+            return new ResponseEntity<>(seatReservationRepository.findAllBySeatReservedIsTrueAndSeatPaidIsFalseAndUserIs(targetUser), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+    }
+
+    @Override
+    @Transactional
+    public ResponseEntity<?> getAllUserBookings(Authentication authentication, User targetUser) {
+        User authUser = userRepository.findByEmail(authentication.getName());
+
+        if (customAccessHandler.userIsAuthorizedToViewSpecifiedContent(targetUser, authUser)) {
+            return new ResponseEntity<>(bookingRepository.findAllByUser(targetUser), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+    }
+
+    @Override
+    @Transactional
+    public ResponseEntity<?> getSingleUserBooking(Authentication authentication, User targetUser, Booking booking) {
+        User authUser = userRepository.findByEmail(authentication.getName());
+
+        if (customAccessHandler.userIsAuthorizedToViewSpecifiedContent(targetUser, authUser)) {
+            return new ResponseEntity<>(bookingRepository.getOne(booking.getBookingId()), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+    }
+
+    @Override
+    @Transactional
+    public ResponseEntity<?> updateSingleUser(Authentication authentication, User targetUser, User userDetails) {
+        User authUser = userRepository.findByEmail(authentication.getName());
+
+        if (customAccessHandler.userIsAuthorizedToViewSpecifiedContent(targetUser, authUser)) {
             targetUser.setFullName(userDetails.getFullName());
             targetUser.setEmail(userDetails.getEmail());
             targetUser.setPassword(bCryptPasswordEncoder.encode(userDetails.getPassword()));
+            targetUser.setRole(userDetails.getRole());
+            targetUser.setBookings(userDetails.getBookings());
+            targetUser.setSeatReservations(userDetails.getSeatReservations());
+            targetUser.setEnabled(userDetails.isEnabled());
             return new ResponseEntity<>(userRepository.save(targetUser), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
@@ -158,9 +163,8 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     @Transactional
-    public ResponseEntity<?> resetPassword(Authentication authentication, Integer userId) {
+    public ResponseEntity<?> resetPassword(Authentication authentication, User targetUser) {
         User authUser = userRepository.findByEmail(authentication.getName());
-        User targetUser = userRepository.getOne(userId);
 
         if (customAccessHandler.userIsAdmin(authUser)) {
             targetUser.setPassword(bCryptPasswordEncoder.encode("1234"));

@@ -17,13 +17,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class CityServiceImpl implements ICityService {
 
     @Autowired
-    ICityRepository cityRepository;
+    private ICityRepository cityRepository;
 
     @Autowired
-    IUserRepository userRepository;
+    private IUserRepository userRepository;
 
     @Autowired
-    CustomAccessHandler customAccessHandler;
+    private CustomAccessHandler customAccessHandler;
 
     @Override
     public ResponseEntity<?> getAllCities() {
@@ -32,16 +32,29 @@ public class CityServiceImpl implements ICityService {
 
     @Override
     @Transactional
-    public ResponseEntity<?> getSingleCity(Integer cityId) {
-        return new ResponseEntity<>(cityRepository.getOne(cityId), HttpStatus.OK);
+    public ResponseEntity<?> getSingleCity(City city) {
+        return new ResponseEntity<>(cityRepository.getOne(city.getCityId()), HttpStatus.OK);
     }
 
     @Override
     @Transactional
-    public ResponseEntity<?> createNewCity(City cityDetails, Authentication authentication) {
+    public ResponseEntity<?> createNewCity(City newCity, Authentication authentication) {
         User user = userRepository.findByEmail(authentication.getName());
         if (customAccessHandler.userIsAdmin(user)) {
             City city = new City();
+            city.setCityName(newCity.getCityName());
+            city.setTheatres(newCity.getTheatres());
+            return new ResponseEntity<>(cityRepository.save(city), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+    }
+
+    @Override
+    @Transactional
+    public ResponseEntity<?> updateSingleCity(City city, City cityDetails, Authentication authentication) {
+        User user = userRepository.findByEmail(authentication.getName());
+        if (customAccessHandler.userIsAdmin(user)) {
             city.setCityName(cityDetails.getCityName());
             city.setTheatres(cityDetails.getTheatres());
             return new ResponseEntity<>(cityRepository.save(city), HttpStatus.OK);
@@ -52,24 +65,10 @@ public class CityServiceImpl implements ICityService {
 
     @Override
     @Transactional
-    public ResponseEntity<?> updateSingleCity(Integer cityId, City cityDetails, Authentication authentication) {
+    public ResponseEntity<?> deleteSingleCity(City city, Authentication authentication) {
         User user = userRepository.findByEmail(authentication.getName());
         if (customAccessHandler.userIsAdmin(user)) {
-            City city = cityRepository.getOne(cityId);
-            city.setCityName(cityDetails.getCityName());
-            city.setTheatres(cityDetails.getTheatres());
-            return new ResponseEntity<>(cityRepository.save(city), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }
-    }
-
-    @Override
-    @Transactional
-    public ResponseEntity<?> deleteSingleCity(Integer cityId, Authentication authentication) {
-        User user = userRepository.findByEmail(authentication.getName());
-        if (customAccessHandler.userIsAdmin(user)) {
-            cityRepository.delete(cityRepository.getOne(cityId));
+            cityRepository.delete(city);
             return new ResponseEntity<>(cityRepository.findAll(), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);

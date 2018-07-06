@@ -2,6 +2,8 @@ package com.ticketmonster.movie_beast.repositories;
 
 import com.ticketmonster.movie_beast.models.Booking;
 import com.ticketmonster.movie_beast.models.SeatReservation;
+import com.ticketmonster.movie_beast.models.Show;
+import com.ticketmonster.movie_beast.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,13 +12,13 @@ import java.util.List;
 @Repository
 public interface ISeatReservationRepository extends JpaRepository<SeatReservation, Integer> {
 
-    List<SeatReservation> findAllByShowId(Integer showId);
+    List<SeatReservation> findAllByShow(Show show);
 
     SeatReservation findByBooking(Booking booking);
 
     List<SeatReservation> findAllBySeatReservedIsTrueAndSeatPaidIsFalse();
 
-    List<SeatReservation> findAllBySeatReservedIsTrueAndSeatPaidIsFalseAndUserIdIs(Integer userId);
+    List<SeatReservation> findAllBySeatReservedIsTrueAndSeatPaidIsFalseAndUserIs(User user);
 
-    List<SeatReservation> findAllByUserId(Integer userId);
+    List<SeatReservation> findAllByUser(User user);
 }

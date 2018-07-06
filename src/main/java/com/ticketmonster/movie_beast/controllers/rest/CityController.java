@@ -1,7 +1,7 @@
 package com.ticketmonster.movie_beast.controllers.rest;
 
+import com.ticketmonster.movie_beast.controllers.middleware.CityMediator;
 import com.ticketmonster.movie_beast.models.City;
-import com.ticketmonster.movie_beast.services.implementations.CityServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,13 +18,13 @@ import javax.validation.Valid;
 public class CityController {
 
     @Autowired
-    CityServiceImpl cityService;
+    private CityMediator cityMediator;
 
     // Get All Cities
     @GetMapping(value = "/cities", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getAllCities() {
         try {
-            return cityService.getAllCities();
+            return cityMediator.getAllCities();
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -35,7 +35,7 @@ public class CityController {
     @GetMapping(value = "/cities/{cityId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getCityById(@PathVariable(value = "cityId") Integer cityId) {
         try {
-            return cityService.getSingleCity(cityId);
+            return cityMediator.getSingleCity(cityId);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -43,10 +43,10 @@ public class CityController {
     }
 
     // Create a New City
-    @PostMapping(value = "/cities", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/cities", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createNewCity(@Valid @RequestBody City newCity) {
         try {
-            return cityService.createNewCity(newCity, SecurityContextHolder.getContext().getAuthentication());
+            return cityMediator.createNewCity(newCity, SecurityContextHolder.getContext().getAuthentication());
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -54,10 +54,10 @@ public class CityController {
     }
 
     // Update a City
-    @PutMapping(value = "/cities/{cityId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/cities/{cityId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> updateCity(@PathVariable(value = "cityId") Integer cityId, @Valid @RequestBody City cityDetails) {
         try {
-            return cityService.updateSingleCity(cityId, cityDetails, SecurityContextHolder.getContext().getAuthentication());
+            return cityMediator.updateSingleCity(cityId, cityDetails, SecurityContextHolder.getContext().getAuthentication());
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -68,7 +68,7 @@ public class CityController {
     @DeleteMapping(value = "/cities/{cityId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deleteCity(@PathVariable(value = "cityId") Integer cityId) {
         try {
-            return cityService.deleteSingleCity(cityId, SecurityContextHolder.getContext().getAuthentication());
+            return cityMediator.deleteSingleCity(cityId, SecurityContextHolder.getContext().getAuthentication());
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

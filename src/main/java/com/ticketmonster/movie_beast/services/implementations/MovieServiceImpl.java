@@ -17,13 +17,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class MovieServiceImpl implements IMovieService {
 
     @Autowired
-    IUserRepository userRepository;
+    private IUserRepository userRepository;
 
     @Autowired
-    CustomAccessHandler customAccessHandler;
+    private CustomAccessHandler customAccessHandler;
 
     @Autowired
-    IMovieRepository movieRepository;
+    private IMovieRepository movieRepository;
 
     @Override
     @Transactional
@@ -33,8 +33,8 @@ public class MovieServiceImpl implements IMovieService {
 
     @Override
     @Transactional
-    public ResponseEntity<?> getSingleMovie(Integer movieId) {
-        return new ResponseEntity<>(movieRepository.getOne(movieId), HttpStatus.OK);
+    public ResponseEntity<?> getSingleMovie(Movie movie) {
+        return new ResponseEntity<>(movieRepository.getOne(movie.getMovieId()), HttpStatus.OK);
     }
 
     @Override
@@ -47,6 +47,8 @@ public class MovieServiceImpl implements IMovieService {
             movie.setMovieDescription(newMovie.getMovieDescription());
             movie.setMovieReleaseDate(newMovie.getMovieReleaseDate());
             movie.setShows(newMovie.getShows());
+            movie.setTheatre(newMovie.getTheatre());
+            movie.setMovieDurationInMinutes(newMovie.getMovieDurationInMinutes());
             return new ResponseEntity<>(movieRepository.save(movie), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
@@ -55,14 +57,15 @@ public class MovieServiceImpl implements IMovieService {
 
     @Override
     @Transactional
-    public ResponseEntity<?> updateSingleMovie(Integer movieId, Movie movieDetails, Authentication authentication) {
+    public ResponseEntity<?> updateSingleMovie(Movie movie, Movie movieDetails, Authentication authentication) {
         User user = userRepository.findByEmail(authentication.getName());
         if (customAccessHandler.userIsAdmin(user)) {
-            Movie movie = movieRepository.getOne(movieId);
             movie.setMovieName(movieDetails.getMovieName());
             movie.setMovieDescription(movieDetails.getMovieDescription());
             movie.setMovieReleaseDate(movieDetails.getMovieReleaseDate());
             movie.setShows(movieDetails.getShows());
+            movie.setTheatre(movieDetails.getTheatre());
+            movie.setMovieDurationInMinutes(movieDetails.getMovieDurationInMinutes());
             return new ResponseEntity<>(movieRepository.save(movie), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
@@ -71,10 +74,10 @@ public class MovieServiceImpl implements IMovieService {
 
     @Override
     @Transactional
-    public ResponseEntity<?> deleteSingleMovie(Integer movieId, Authentication authentication) {
+    public ResponseEntity<?> deleteSingleMovie(Movie movie, Authentication authentication) {
         User user = userRepository.findByEmail(authentication.getName());
         if (customAccessHandler.userIsAdmin(user)) {
-            movieRepository.delete(movieRepository.getOne(movieId));
+            movieRepository.delete(movie);
             return new ResponseEntity<>(movieRepository.findAll(), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);

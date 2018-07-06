@@ -20,8 +20,9 @@ public class Theatre implements Serializable {
     @SequenceGenerator(name = "theatre_generator", sequenceName = "theatre_seq")
     private Integer theatreId;
 
-    @Column(name = "cityId")
-    private Integer cityId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "cityId")
+    private City city;
 
     @Column(name = "theatreName")
     private String theatreName;
@@ -30,22 +31,22 @@ public class Theatre implements Serializable {
     private String theatreAddress;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "theatreId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "theatre", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Movie> movies;
 
     public Theatre() {
     }
 
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
     public Integer getTheatreId() {
         return theatreId;
-    }
-
-    public Integer getCityId() {
-        return cityId;
-    }
-
-    public void setCityId(Integer cityId) {
-        this.cityId = cityId;
     }
 
     public String getTheatreName() {

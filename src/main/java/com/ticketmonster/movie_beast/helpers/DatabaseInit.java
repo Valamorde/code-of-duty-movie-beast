@@ -57,7 +57,7 @@ public class DatabaseInit {
             random = (random == 0 || random == 6) ? 1 : random;
             theatre.setTheatreName(theatreNames.get(i));
             theatre.setTheatreAddress(theatreAddresses.get(i));
-            theatre.setCityId(i + 1);
+            theatre.setCity(cityRepository.getOne(i + 1));
             theatreRepository.save(theatre);
         }
 
@@ -69,7 +69,7 @@ public class DatabaseInit {
             movie.setMovieDescription(movieDescriptions.get(i));
             movie.setMovieReleaseDate(DateUtils.round(DateUtils.addDays(new Date(), i / 2), Calendar.DATE));
             movie.setMovieDurationInMinutes(90);
-            movie.setTheatreId(random);
+            movie.setTheatre(theatreRepository.getOne(random));
             movieRepository.save(movie);
         }
 
@@ -78,14 +78,14 @@ public class DatabaseInit {
             random = (random == 0 || random == 6) ? 1 : random;
             Show show = new Show();
             show.setShowCost(new BigDecimal(3.5, MathContext.DECIMAL64));
-            show.setMovieId(random);
+            show.setMovie(movieRepository.getOne(random));
             show.setShowDate(DateUtils.round(DateUtils.addDays(new Date(), i / 2), Calendar.DATE));
             show.setAvailableSeats(10);
             show.setInitialSeats(10);
             showRepository.save(show);
             for (int j = 0; j < 5; j++) {
                 SeatReservation seat = new SeatReservation();
-                seat.setShowId(i + 1);
+                seat.setShow(showRepository.getOne(i + 1));
                 seat.setSeatReserved(false);
                 seat.setSeatPaid(false);
                 seatReservationRepository.save(seat);

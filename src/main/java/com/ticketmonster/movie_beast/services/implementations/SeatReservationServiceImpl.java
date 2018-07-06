@@ -1,7 +1,6 @@
 package com.ticketmonster.movie_beast.services.implementations;
 
 import com.ticketmonster.movie_beast.models.SeatReservation;
-import com.ticketmonster.movie_beast.models.Show;
 import com.ticketmonster.movie_beast.models.User;
 import com.ticketmonster.movie_beast.repositories.ISeatReservationRepository;
 import com.ticketmonster.movie_beast.repositories.IShowRepository;
@@ -20,17 +19,17 @@ import java.util.List;
 public class SeatReservationServiceImpl implements ISeatReservationService {
 
     @Autowired
-    IShowRepository showRepository;
+    private IShowRepository showRepository;
 
     @Autowired
-    ISeatReservationRepository seatReservationRepository;
+    private ISeatReservationRepository seatReservationRepository;
 
     @Autowired
-    IUserRepository userRepository;
+    private IUserRepository userRepository;
 
     @Override
     @Transactional
-    public ResponseEntity<?> reserveTicket(Integer showId, Integer seat, Authentication authentication) {
+    public ResponseEntity<?> reserveTicket(SeatReservation seatReservation, Authentication authentication) {
 
         User user = userRepository.findByEmail(authentication.getName());
         if (user == null) {
@@ -40,9 +39,7 @@ public class SeatReservationServiceImpl implements ISeatReservationService {
 //        Integer seatIndex = 0;        //FIXME: <-find common ground with frontend, decide to keep or delete
 //        boolean isSeatAvailable = false;        //FIXME: <-find common ground with frontend, decide to keep or delete
 
-        Show show = showRepository.findByShowId(showId);
-
-        List<SeatReservation> showSeats = seatReservationRepository.findAllByShowId(show.getShowId());
+        List<SeatReservation> showSeats = seatReservationRepository.findAllByShow(seatReservation.getShow());
 
 //        for (int i = 0; i < showSeats.size(); i++) {        //FIXME: <-find common ground with frontend, decide to keep or delete
 //            if (showSeats.get(seat).getBookingId() == null) {        //FIXME: <-find common ground with frontend, decide to keep or delete
@@ -51,14 +48,14 @@ public class SeatReservationServiceImpl implements ISeatReservationService {
 //            }        //FIXME: <-find common ground with frontend, decide to keep or delete
 //        }        //FIXME: <-find common ground with frontend, decide to keep or delete
 
-        SeatReservation bookedSeat = seatReservationRepository.getOne(seat);
+        SeatReservation bookedSeat = seatReservationRepository.getOne(seatReservation.getSeatId());
 
-        if (show.getAvailableSeats() >= 1 && !bookedSeat.isSeatReserved()) {
-            bookedSeat.setUserId(user.getUserId());
+        if (seatReservation.getShow().getAvailableSeats() >= 1 && !bookedSeat.isSeatReserved()) {
+            bookedSeat.setUser(user);
             bookedSeat.setSeatReserved(true);
-            show.setAvailableSeats(show.getAvailableSeats() - 1);
+            seatReservation.getShow().setAvailableSeats(seatReservation.getShow().getAvailableSeats() - 1);
 
-            showRepository.save(show);
+            showRepository.save(seatReservation.getShow());
             seatReservationRepository.save(bookedSeat);
             return new ResponseEntity<>(bookedSeat, HttpStatus.OK);
         } else {
@@ -68,15 +65,13 @@ public class SeatReservationServiceImpl implements ISeatReservationService {
 
     @Override
     @Transactional
-    public ResponseEntity<?> cancelReservation(Integer seatId, Authentication authentication) {
+    public ResponseEntity<?> cancelReservation(SeatReservation seatReservation, Authentication authentication) {
 
         User user = userRepository.findByEmail(authentication.getName());
         if (user == null) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
-
-        SeatReservation seatReservation = seatReservationRepository.getOne(seatId);
-        seatReservation.setUserId(null);
+        seatReservation.setUser(null);
         seatReservation.setBooking(null);
         seatReservation.setSeatPaid(false);
         seatReservation.setSeatReserved(false);

@@ -8,13 +8,13 @@ public interface IBookingService {
 
     ResponseEntity<?> bookAllInBasket(Authentication authentication);
 
-    ResponseEntity<?> cancelSingleTicket(Integer bookingId);
+    ResponseEntity<?> cancelSingleTicket(Booking booking);
 
     ResponseEntity<?> getAllBookings(Authentication authentication);
 
-    ResponseEntity<?> getSingleBooking(Authentication authentication, Integer bookingId);
+    ResponseEntity<?> getSingleBooking(Authentication authentication, Booking booking);
 
-    ResponseEntity<?> updateSingleBooking(Authentication authentication, Integer bookingId, Booking newBooking);
+    ResponseEntity<?> updateSingleBooking(Authentication authentication, Booking booking, Booking newBooking);
 
-    ResponseEntity<?> deleteSingleBooking(Authentication authentication, Integer bookingId);
+    ResponseEntity<?> deleteSingleBooking(Authentication authentication, Booking booking);
 }

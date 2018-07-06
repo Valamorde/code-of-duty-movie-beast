@@ -25,16 +25,16 @@ import java.util.List;
 public class _TestingRestController {
 
     @Autowired
-    ICityRepository cityRepository;
+    private ICityRepository cityRepository;
 
     @Autowired
-    IMovieRepository movieRepository;
+    private IMovieRepository movieRepository;
 
     @Autowired
-    ITheatreRepository theatreRepository;
+    private ITheatreRepository theatreRepository;
 
     @Autowired
-    IUserRepository userRepository;
+    private IUserRepository userRepository;
 
     @GetMapping(value = "/test/city/{cityId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> testCityTheatre(@PathVariable(value = "cityId") Integer cityId) {

@@ -2,6 +2,7 @@ package com.ticketmonster.movie_beast.controllers.rest;
 
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +21,7 @@ public class CustomErrorController implements ErrorController {
         return PATH;
     }
 
-    @RequestMapping(PATH)
+    @RequestMapping(value = PATH, produces = MediaType.APPLICATION_JSON_VALUE)
     public String handleError(HttpServletRequest request) {
         Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
 

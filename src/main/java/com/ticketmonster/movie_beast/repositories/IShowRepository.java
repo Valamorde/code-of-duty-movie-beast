@@ -6,6 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IShowRepository extends JpaRepository<Show, Integer> {
-
-    Show findByShowId(Integer showId);
 }

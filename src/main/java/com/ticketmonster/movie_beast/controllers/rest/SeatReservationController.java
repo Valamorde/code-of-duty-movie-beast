@@ -1,7 +1,6 @@
 package com.ticketmonster.movie_beast.controllers.rest;
 
 import com.ticketmonster.movie_beast.models.SeatReservation;
-import com.ticketmonster.movie_beast.repositories.IUserRepository;
 import com.ticketmonster.movie_beast.services.implementations.SeatReservationServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,26 +19,22 @@ import org.springframework.web.bind.annotation.RestController;
 public class SeatReservationController {
 
     @Autowired
-    private IUserRepository userRepository;
-
-    @Autowired
     private SeatReservationServiceImpl seatReservationService;
 
-    @PostMapping(value = "/seatReservations/reserve", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/seatReservations/reserve", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> reserveSeat(@RequestBody SeatReservation seatReservation) {
         try {
-            return seatReservationService.reserveTicket(seatReservation.getShowId(), seatReservation.getSeatId(),
-                    SecurityContextHolder.getContext().getAuthentication());
+            return seatReservationService.reserveTicket(seatReservation, SecurityContextHolder.getContext().getAuthentication());
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
-    @PostMapping(value = "/seatReservation/cancel", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/seatReservation/cancel", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> cancelReservation(@RequestBody SeatReservation reservation) {
         try {
-            return seatReservationService.cancelReservation(reservation.getSeatId(), SecurityContextHolder.getContext().getAuthentication());
+            return seatReservationService.cancelReservation(reservation, SecurityContextHolder.getContext().getAuthentication());
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

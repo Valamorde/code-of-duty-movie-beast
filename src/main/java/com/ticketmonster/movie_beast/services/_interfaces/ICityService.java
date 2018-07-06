@@ -8,11 +8,11 @@ public interface ICityService {
 
     ResponseEntity<?> getAllCities();
 
-    ResponseEntity<?> getSingleCity(Integer cityId);
+    ResponseEntity<?> getSingleCity(City city);
 
     ResponseEntity<?> createNewCity(City newCity, Authentication authentication);
 
-    ResponseEntity<?> updateSingleCity(Integer cityId, City cityDetails, Authentication authentication);
+    ResponseEntity<?> updateSingleCity(City city, City cityDetails, Authentication authentication);
 
-    ResponseEntity<?> deleteSingleCity(Integer cityId, Authentication authentication);
+    ResponseEntity<?> deleteSingleCity(City city, Authentication authentication);
 }

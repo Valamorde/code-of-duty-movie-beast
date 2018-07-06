@@ -21,9 +21,6 @@ public class Booking implements Serializable {
     @SequenceGenerator(name = "booking_generator", sequenceName = "booking_seq")
     private Integer bookingId;
 
-    @Column(name = "userId")
-    private Integer userId;
-
     @Column(name = "bookingDate", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date bookingDate;
@@ -32,22 +29,27 @@ public class Booking implements Serializable {
     private BigDecimal bookingCost;
 
     @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId")
+    private User user;
+
+    @JsonIgnore
     @OneToOne(mappedBy = "booking", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private SeatReservation seatReservation;
 
     public Booking() {
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public Integer getBookingId() {
         return bookingId;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
     }
 
     public Date getBookingDate() {

@@ -1,5 +1,6 @@
 package com.ticketmonster.movie_beast.controllers.rest;
 
+import com.ticketmonster.movie_beast.controllers.middleware.ShowMediator;
 import com.ticketmonster.movie_beast.models.Show;
 import com.ticketmonster.movie_beast.services._interfaces.IShowService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +19,13 @@ import javax.validation.Valid;
 public class ShowController {
 
     @Autowired
-    IShowService showService;
+    private ShowMediator showMediator;
 
     // Get All Shows
     @GetMapping(value = "/shows", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getAllShows() {
         try {
-            return showService.getAllShows();
+            return showMediator.getAllShows();
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -35,7 +36,7 @@ public class ShowController {
     @GetMapping(value = "/shows/{showId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getShowById(@PathVariable(value = "showId") Integer showId) {
         try {
-            return showService.getSingleShow(showId);
+            return showMediator.getSingleShow(showId);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -43,10 +44,10 @@ public class ShowController {
     }
 
     // Create a New Show
-    @PostMapping(value = "/shows", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/shows", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createNewShow(@Valid @RequestBody Show newShow) {
         try {
-            return showService.createNewShow(newShow, SecurityContextHolder.getContext().getAuthentication());
+            return showMediator.createNewShow(newShow, SecurityContextHolder.getContext().getAuthentication());
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -54,10 +55,10 @@ public class ShowController {
     }
 
     // Update a Show
-    @PutMapping(value = "/shows/{showId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/shows/{showId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> updateShow(@PathVariable(value = "showId") Integer showId, @Valid @RequestBody Show showDetails) {
         try {
-            return showService.updateSingleShow(showId, showDetails, SecurityContextHolder.getContext().getAuthentication());
+            return showMediator.updateSingleShow(showId, showDetails, SecurityContextHolder.getContext().getAuthentication());
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -68,7 +69,7 @@ public class ShowController {
     @DeleteMapping(value = "/shows/{showId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deleteShow(@PathVariable(value = "showId") Integer showId) {
         try {
-            return showService.deleteSingleShow(showId, SecurityContextHolder.getContext().getAuthentication());
+            return showMediator.deleteSingleShow(showId, SecurityContextHolder.getContext().getAuthentication());
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

@@ -1,8 +1,7 @@
 package com.ticketmonster.movie_beast.controllers.rest;
 
+import com.ticketmonster.movie_beast.controllers.middleware.BookingMediator;
 import com.ticketmonster.movie_beast.models.Booking;
-import com.ticketmonster.movie_beast.repositories.IBookingRepository;
-import com.ticketmonster.movie_beast.repositories.IUserRepository;
 import com.ticketmonster.movie_beast.services.implementations.BookingServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,19 +17,13 @@ import javax.validation.Valid;
 public class BookingController {
 
     @Autowired
-    private IBookingRepository bookingRepository;
-
-    @Autowired
-    private IUserRepository userRepository;
-
-    @Autowired
-    private BookingServiceImpl bookingService;
+    private BookingMediator bookingMediator;
 
     // Book Reserved Seats
-    @PostMapping(value = "/bookings/final", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> finalizeBookings() {
+    @PostMapping(value = "/bookings/checkout", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> checkout() {
         try {
-            return bookingService.bookAllInBasket(SecurityContextHolder.getContext().getAuthentication());
+            return bookingMediator.bookAllInBasket(SecurityContextHolder.getContext().getAuthentication());
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -38,10 +31,10 @@ public class BookingController {
     }
 
     // Cancel a Booked Ticket
-    @PostMapping(value = "/bookings/cancel", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/bookings/cancel", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> cancelBooking(@Valid @RequestBody Booking booking) {
         try {
-            return bookingService.cancelSingleTicket(booking.getBookingId());
+            return bookingMediator.cancelTicket(booking);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -52,7 +45,7 @@ public class BookingController {
     @GetMapping(value = "/bookings", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getAllBookings() {
         try {
-            return bookingService.getAllBookings(SecurityContextHolder.getContext().getAuthentication());
+            return bookingMediator.getAll(SecurityContextHolder.getContext().getAuthentication());
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -60,10 +53,10 @@ public class BookingController {
     }
 
     // Get a Single Booking
-    @GetMapping(value = "/bookings/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getBookingById(@PathVariable(value = "id") Integer id) {
+    @GetMapping(value = "/bookings/{bookingId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getBookingById(@PathVariable(value = "bookingId") Integer bookingId) {
         try {
-            return bookingService.getSingleBooking(SecurityContextHolder.getContext().getAuthentication(), id);
+            return bookingMediator.getBooking(SecurityContextHolder.getContext().getAuthentication(), bookingId);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -71,10 +64,10 @@ public class BookingController {
     }
 
     // Update a Booking
-    @PutMapping(value = "/bookings/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> updateBooking(@PathVariable(value = "id") Integer id, @Valid @RequestBody Booking bookingDetails) {
+    @PutMapping(value = "/bookings/{bookingId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> updateBooking(@PathVariable(value = "bookingId") Integer bookingId, @Valid @RequestBody Booking bookingDetails) {
         try {
-            return bookingService.updateSingleBooking(SecurityContextHolder.getContext().getAuthentication(), id, bookingDetails);
+            return bookingMediator.updateBooking(SecurityContextHolder.getContext().getAuthentication(), bookingId, bookingDetails);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -82,10 +75,10 @@ public class BookingController {
     }
 
     // Allows Admin to delete a Booking
-    @DeleteMapping(value = "/bookings/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> deleteBooking(@PathVariable(value = "id") Integer id) {
+    @DeleteMapping(value = "/bookings/{bookingId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> deleteBooking(@PathVariable(value = "bookingId") Integer bookingId) {
         try {
-            return bookingService.deleteSingleBooking(SecurityContextHolder.getContext().getAuthentication(), id);
+            return bookingMediator.deleteBooking(SecurityContextHolder.getContext().getAuthentication(),bookingId);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

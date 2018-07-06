@@ -17,13 +17,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class ShowServiceImpl implements IShowService {
 
     @Autowired
-    IUserRepository userRepository;
+    private IUserRepository userRepository;
 
     @Autowired
-    IShowRepository showRepository;
+    private IShowRepository showRepository;
 
     @Autowired
-    CustomAccessHandler customAccessHandler;
+    private CustomAccessHandler customAccessHandler;
 
     @Override
     @Transactional
@@ -33,8 +33,8 @@ public class ShowServiceImpl implements IShowService {
 
     @Override
     @Transactional
-    public ResponseEntity<?> getSingleShow(Integer showId) {
-        return new ResponseEntity<>(showRepository.getOne(showId), HttpStatus.OK);
+    public ResponseEntity<?> getSingleShow(Show show) {
+        return new ResponseEntity<>(showRepository.getOne(show.getShowId()), HttpStatus.OK);
     }
 
     @Override
@@ -45,9 +45,10 @@ public class ShowServiceImpl implements IShowService {
             Show show = new Show();
             show.setAvailableSeats(newShow.getAvailableSeats());
             show.setInitialSeats(newShow.getInitialSeats());
-            show.setMovieId(newShow.getMovieId());
+            show.setMovie(newShow.getMovie());
             show.setShowCost(newShow.getShowCost());
             show.setShowDate(newShow.getShowDate());
+            show.setMovie(newShow.getMovie());
             return new ResponseEntity<>(showRepository.save(show), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
@@ -56,15 +57,15 @@ public class ShowServiceImpl implements IShowService {
 
     @Override
     @Transactional
-    public ResponseEntity<?> updateSingleShow(Integer showId, Show showDetails, Authentication authentication) {
+    public ResponseEntity<?> updateSingleShow(Show show, Show showDetails, Authentication authentication) {
         User user = userRepository.findByEmail(authentication.getName());
         if (customAccessHandler.userIsAdmin(user)) {
-            Show show = showRepository.getOne(showId);
             show.setAvailableSeats(showDetails.getAvailableSeats());
             show.setInitialSeats(showDetails.getInitialSeats());
-            show.setMovieId(showDetails.getMovieId());
+            show.setMovie(showDetails.getMovie());
             show.setShowCost(showDetails.getShowCost());
             show.setShowDate(showDetails.getShowDate());
+            show.setSeats(showDetails.getSeats());
             return new ResponseEntity<>(showRepository.save(show), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
@@ -73,10 +74,10 @@ public class ShowServiceImpl implements IShowService {
 
     @Override
     @Transactional
-    public ResponseEntity<?> deleteSingleShow(Integer showId, Authentication authentication) {
+    public ResponseEntity<?> deleteSingleShow(Show show, Authentication authentication) {
         User user = userRepository.findByEmail(authentication.getName());
         if (customAccessHandler.userIsAdmin(user)) {
-            showRepository.delete(showRepository.getOne(showId));
+            showRepository.delete(show);
             return new ResponseEntity<>(showRepository.findAll(), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);

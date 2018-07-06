@@ -22,9 +22,6 @@ public class Show implements Serializable {
     @SequenceGenerator(name = "show_generator", sequenceName = "show_seq")
     private Integer showId;
 
-    @Column(name = "movieId")
-    private Integer movieId;
-
     @Column(name = "showDate")
     @Temporal(TemporalType.DATE)
     private Date showDate;
@@ -39,22 +36,27 @@ public class Show implements Serializable {
     private BigDecimal showCost;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "showId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "show", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<SeatReservation> seats;
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "movieId")
+    private Movie movie;
 
     public Show() {
     }
 
+    public Movie getMovie() {
+        return movie;
+    }
+
+    public void setMovie(Movie movie) {
+        this.movie = movie;
+    }
+
     public Integer getShowId() {
         return showId;
-    }
-
-    public Integer getMovieId() {
-        return movieId;
-    }
-
-    public void setMovieId(Integer movieId) {
-        this.movieId = movieId;
     }
 
     public Date getShowDate() {
