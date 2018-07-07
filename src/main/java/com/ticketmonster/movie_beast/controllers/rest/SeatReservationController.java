@@ -1,5 +1,6 @@
 package com.ticketmonster.movie_beast.controllers.rest;
 
+import com.ticketmonster.movie_beast.controllers.middleware.SeatReservationMediator;
 import com.ticketmonster.movie_beast.models.SeatReservation;
 import com.ticketmonster.movie_beast.services.implementations.SeatReservationServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +21,13 @@ public class SeatReservationController {
 
     @Autowired
     private SeatReservationServiceImpl seatReservationService;
+    @Autowired
+    private SeatReservationMediator seatReservationMediator;
 
     @PostMapping(value = "/seatReservations/reserve", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> reserveSeat(@RequestBody SeatReservation seatReservation) {
         try {
-            return seatReservationService.reserveTicket(seatReservation, SecurityContextHolder.getContext().getAuthentication());
+            return seatReservationMediator.reserveTicket(seatReservation, SecurityContextHolder.getContext().getAuthentication());
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -34,7 +37,7 @@ public class SeatReservationController {
     @PostMapping(value = "/seatReservation/cancel", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> cancelReservation(@RequestBody SeatReservation reservation) {
         try {
-            return seatReservationService.cancelReservation(reservation, SecurityContextHolder.getContext().getAuthentication());
+            return seatReservationMediator.cancelReservation(reservation, SecurityContextHolder.getContext().getAuthentication());
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

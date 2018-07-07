@@ -20,7 +20,7 @@ public class BookingController {
     private BookingMediator bookingMediator;
 
     // Book Reserved Seats
-    @PostMapping(value = "/bookings/checkout", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/checkoutBasket", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> checkout() {
         try {
             return bookingMediator.bookAllInBasket(SecurityContextHolder.getContext().getAuthentication());
@@ -31,7 +31,7 @@ public class BookingController {
     }
 
     // Cancel a Booked Ticket
-    @PostMapping(value = "/bookings/cancel", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/cancelBooking", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> cancelBooking(@Valid @RequestBody Booking booking) {
         try {
             return bookingMediator.cancelTicket(booking);
