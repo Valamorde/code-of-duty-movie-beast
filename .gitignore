@@ -15,8 +15,7 @@ local.properties
 *.cmd
 mvnw.*
 *.mvnw
-cod-ticket-monster.7z
-markos.7z
+*.7z
 
 # External tool builders
 .externalToolBuilders/
@@ -85,8 +84,6 @@ markos.7z
 /nbdist/
 /.nb-gradle/
 
-# Created by https://www.gitignore.io/api/angular
-
 ### Angular ###
 ## Angular ##
 # compiled output
@@ -117,6 +114,3 @@ testem.log
 
 #System Files
 .DS_Store
-
-
-# End of https://www.gitignore.io/api/angular
