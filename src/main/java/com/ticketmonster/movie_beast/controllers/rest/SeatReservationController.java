@@ -20,8 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class SeatReservationController {
 
     @Autowired
-    private SeatReservationServiceImpl seatReservationService;
-    @Autowired
     private SeatReservationMediator seatReservationMediator;
 
     @PostMapping(value = "/seatReservations/reserve", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)

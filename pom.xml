@@ -5,10 +5,10 @@
 
     <groupId>com.ticketmonster</groupId>
     <artifactId>movie-beast</artifactId>
-    <version>0.0.9-SNAPSHOT</version>
+    <version>1.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>movie-beast</name>
+    <name>Movie Beast</name>
     <description>Movie Reservation REST API</description>
 
     <developers>
@@ -185,6 +185,11 @@
             <groupId>xalan</groupId>
             <artifactId>xalan</artifactId>
             <version>2.7.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>javase</artifactId>
+            <version>2.0</version>
         </dependency>
         <dependency>
             <groupId>io.jsonwebtoken</groupId>

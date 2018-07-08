@@ -41,7 +41,7 @@ e) To ensure you enjoy the benefits of _git_ make sure to use **GitBash**.
 # Goals Pending (Back-End)    
 
 \* ~~Entity Relationships~~    
-\* Admin Reports    
+\* ~~Admin Reports~~    
 \* ~~Password Reset~~    
 \* Make sure all "communication" with Front-End works as expected (40%)    
 \* ~~Refactor "Integer ids" in Entities with corresponding "Entity Classes" _(may the force be with us regarding this one)_~~    

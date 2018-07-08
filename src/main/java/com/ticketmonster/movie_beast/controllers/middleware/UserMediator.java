@@ -4,11 +4,15 @@ import com.ticketmonster.movie_beast.models.Booking;
 import com.ticketmonster.movie_beast.models.User;
 import com.ticketmonster.movie_beast.repositories.IBookingRepository;
 import com.ticketmonster.movie_beast.repositories.IUserRepository;
+import com.ticketmonster.movie_beast.services.implementations.BookingServiceImpl;
 import com.ticketmonster.movie_beast.services.implementations.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * The User Mediator sits between the REST & Service Layers
@@ -26,6 +30,8 @@ public class UserMediator {
     private UserServiceImpl userService;
     @Autowired
     private IBookingRepository bookingRepository;
+    @Autowired
+    private BookingServiceImpl bookingService;
 
     public ResponseEntity<?> createNewUser(User newUser) {
         return userService.createNewUser(newUser);
@@ -69,5 +75,11 @@ public class UserMediator {
     public ResponseEntity<?> deleteUserAndCleanup(Authentication authentication, Integer userId){
         User targetUser = userRepository.getOne(userId);
         return userService.deleteUserAndCleanup(authentication, targetUser);
+    }
+
+
+    public void printTicket(Integer userId, HttpServletResponse res, HttpServletRequest req){
+        User user = userRepository.getOne(userId);
+        bookingService.printTickets(user,res,req);
     }
 }

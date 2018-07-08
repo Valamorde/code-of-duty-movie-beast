@@ -1,5 +1,6 @@
 package com.ticketmonster.movie_beast.controllers.rest;
 
+import com.ticketmonster.movie_beast.controllers.middleware.BookingMediator;
 import com.ticketmonster.movie_beast.controllers.middleware.UserMediator;
 import com.ticketmonster.movie_beast.helpers.handlers.CustomAccessHandler;
 import com.ticketmonster.movie_beast.models.User;
@@ -16,6 +17,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.security.Principal;
 
@@ -101,6 +104,12 @@ public class UserController {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @GetMapping(value = "/users/{userId}/bookings/pdf", produces = MediaType.APPLICATION_PDF_VALUE)
+    public ResponseEntity<?> printTickets(@PathVariable(value = "userId") Integer userId, HttpServletRequest req, HttpServletResponse res){
+        userMediator.printTicket(userId, res, req);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     /**

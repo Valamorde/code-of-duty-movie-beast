@@ -8,14 +8,24 @@ import com.ticketmonster.movie_beast.repositories.IBookingRepository;
 import com.ticketmonster.movie_beast.repositories.ISeatReservationRepository;
 import com.ticketmonster.movie_beast.repositories.IUserRepository;
 import com.ticketmonster.movie_beast.services._interfaces.IBookingService;
+import net.sf.jasperreports.engine.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
+import java.io.InputStream;
+import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -32,6 +42,12 @@ public class BookingServiceImpl implements IBookingService {
 
     @Autowired
     private CustomAccessHandler customAccessHandler;
+
+    @Autowired
+    private ApplicationContext context;
+
+    @Autowired
+    private DataSource dataSource;
 
     @Override
     @Transactional
@@ -126,6 +142,32 @@ public class BookingServiceImpl implements IBookingService {
             return new ResponseEntity<>(bookingRepository.findAllByUser(user), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+    }
+
+    @Override
+    public void printTickets(User user, HttpServletResponse res, HttpServletRequest req) {
+        try {
+            Connection conn = dataSource.getConnection();
+
+            String jrxml = "ticketreport";
+            Resource resource = context.getResource("classpath:/static/" + jrxml + ".jrxml");
+
+            InputStream inputStream = resource.getInputStream();
+
+            JasperReport report = JasperCompileManager.compileReport(inputStream);
+
+            HashMap params = new HashMap();
+            params.put("id", user.getUserId());
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(report, params, conn);
+
+            res.setContentType(MediaType.APPLICATION_PDF_VALUE);
+
+            res.setHeader("Content-Disposition", "filename=\"tickets" + ".pdf\"");
+            JasperExportManager.exportReportToPdfStream(jasperPrint, res.getOutputStream());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
