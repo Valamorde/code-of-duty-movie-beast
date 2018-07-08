@@ -78,8 +78,8 @@ public class UserMediator {
     }
 
 
-    public void printTicket(Integer userId, HttpServletResponse res, HttpServletRequest req){
-        User user = userRepository.getOne(userId);
+    public void printTicket(Authentication authentication, HttpServletResponse res, HttpServletRequest req){
+        User user = userRepository.findByEmail(authentication.getName());
         bookingService.printTickets(user,res,req);
     }
 }

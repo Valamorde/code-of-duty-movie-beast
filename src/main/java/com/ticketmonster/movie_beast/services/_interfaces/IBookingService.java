@@ -23,4 +23,6 @@ public interface IBookingService {
     ResponseEntity<?> deleteSingleBooking(Authentication authentication, Booking booking);
 
     void printTickets(User user, HttpServletResponse res, HttpServletRequest req);
+
+    void printTicketReport(User user, HttpServletResponse res, HttpServletRequest req);
 }

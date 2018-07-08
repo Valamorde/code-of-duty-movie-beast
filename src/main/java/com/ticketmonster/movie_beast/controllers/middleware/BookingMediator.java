@@ -1,12 +1,17 @@
 package com.ticketmonster.movie_beast.controllers.middleware;
 
 import com.ticketmonster.movie_beast.models.Booking;
+import com.ticketmonster.movie_beast.models.User;
 import com.ticketmonster.movie_beast.repositories.IBookingRepository;
+import com.ticketmonster.movie_beast.repositories.IUserRepository;
 import com.ticketmonster.movie_beast.services.implementations.BookingServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * The Booking Mediator sits between the REST & Service Layers
@@ -22,6 +27,8 @@ public class BookingMediator {
     private BookingServiceImpl bookingService;
     @Autowired
     private IBookingRepository bookingRepository;
+    @Autowired
+    private IUserRepository userRepository;
 
     public ResponseEntity<?> getBooking(Authentication authentication, Integer bookingId) {
         Booking booking = bookingRepository.getOne(bookingId);
@@ -48,5 +55,10 @@ public class BookingMediator {
 
     public ResponseEntity<?> cancelTicket(Booking booking) {
         return bookingService.cancelSingleTicket(booking);
+    }
+
+    public void printTicketReport(Authentication authentication, HttpServletResponse res, HttpServletRequest req){
+        User user = userRepository.findByEmail(authentication.getName());
+        bookingService.printTicketReport(user, res, req);
     }
 }

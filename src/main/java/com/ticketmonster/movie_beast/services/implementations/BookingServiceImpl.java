@@ -62,7 +62,7 @@ public class BookingServiceImpl implements IBookingService {
         List<Booking> bookings = new ArrayList<>();
 
         for (int i = 0; i < reservedSeats.size(); i++) {
-            if (!customAccessHandler.userIsAuthorizedToViewSpecifiedContent(reservedSeats.get(i).getUser(), user)) {
+            if (customAccessHandler.userIsAuthorizedToViewSpecifiedContent(reservedSeats.get(i).getUser(), user)) {
                 return new ResponseEntity<>(HttpStatus.FORBIDDEN);
             }
             Booking booking = new Booking();
@@ -150,7 +150,7 @@ public class BookingServiceImpl implements IBookingService {
         try {
             Connection conn = dataSource.getConnection();
 
-            String jrxml = "ticketreport";
+            String jrxml = "userBookedTickets";
             Resource resource = context.getResource("classpath:/static/" + jrxml + ".jrxml");
 
             InputStream inputStream = resource.getInputStream();
@@ -166,6 +166,31 @@ public class BookingServiceImpl implements IBookingService {
 
             res.setHeader("Content-Disposition", "filename=\"tickets" + ".pdf\"");
             JasperExportManager.exportReportToPdfStream(jasperPrint, res.getOutputStream());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void printTicketReport(User user, HttpServletResponse res, HttpServletRequest req) {
+        try {
+            Connection conn = dataSource.getConnection();
+
+            String jrxml = "adminTicketReport";
+            Resource resource = context.getResource("classpath:/static/" + jrxml + ".jrxml");
+
+            InputStream inputStream = resource.getInputStream();
+
+            JasperReport report = JasperCompileManager.compileReport(inputStream);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(report, null, conn);
+
+            res.setContentType(MediaType.APPLICATION_PDF_VALUE);
+
+            res.setHeader("Content-Disposition", "filename=\"tickets" + ".pdf\"");
+            JasperExportManager.exportReportToPdfStream(jasperPrint, res.getOutputStream());
+
+            HashMap params = new HashMap();
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -16,6 +16,6 @@ public class CustomAccessHandler {
     }
 
     public boolean userIsAdmin(User user){
-        return user.getRole().equals(Role.ROLE_ADMIN.name());
+        return user.getRole().equals(Role.ROLE_ADMIN);
     }
 }

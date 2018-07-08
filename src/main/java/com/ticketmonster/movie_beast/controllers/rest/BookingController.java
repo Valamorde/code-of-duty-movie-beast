@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 @RestController
@@ -61,6 +63,13 @@ public class BookingController {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+    }
+
+    //Generate Bookings Report
+    @GetMapping(value = "/bookingsReport", produces = MediaType.APPLICATION_PDF_VALUE)
+    public ResponseEntity<?> printTicketReport(HttpServletRequest req, HttpServletResponse res){
+        bookingMediator.printTicketReport(SecurityContextHolder.getContext().getAuthentication(), res, req);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     // Update a Booking

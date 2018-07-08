@@ -107,8 +107,8 @@ public class UserController {
     }
 
     @GetMapping(value = "/users/{userId}/bookings/pdf", produces = MediaType.APPLICATION_PDF_VALUE)
-    public ResponseEntity<?> printTickets(@PathVariable(value = "userId") Integer userId, HttpServletRequest req, HttpServletResponse res){
-        userMediator.printTicket(userId, res, req);
+    public ResponseEntity<?> printTickets(HttpServletRequest req, HttpServletResponse res){
+        userMediator.printTicket(SecurityContextHolder.getContext().getAuthentication(), res, req);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

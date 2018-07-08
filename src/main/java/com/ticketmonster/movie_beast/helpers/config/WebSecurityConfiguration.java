@@ -84,7 +84,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/auth","/auth/**", "/register","/register/**", "/error/**", "/loggedUser/**").permitAll()
                 .antMatchers("/cities/**", "/theatres/**", "/movies/**", "/shows/**",
                         "/bookings/**", "/seatReservation/**").fullyAuthenticated()
-                .antMatchers("/users").access("hasAuthority('ROLE_ADMIN')")
+                .antMatchers("/users", "/bookingsReport").access("hasAuthority('ROLE_ADMIN')")
                 .anyRequest().authenticated();
 
         http.logout().permitAll().logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST"))
