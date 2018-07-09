@@ -15,6 +15,7 @@ import javax.validation.Valid;
 /**
  * This Rest Controller is responsible for the Shows category.
  * It allows the user to view all or a single show and the admin to create, update or delete a specific or all shows.
+ *
  * @author nancyatnic
  */
 @Component
@@ -27,6 +28,7 @@ public class ShowController {
 
     /**
      * Allows the user to view all the shows
+     *
      * @return gets all shows, or returns bad request
      */
     @GetMapping(value = "/shows", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -41,6 +43,7 @@ public class ShowController {
 
     /**
      * Allows the user to view a single show
+     *
      * @param showId
      * @return returns specific show
      */
@@ -56,6 +59,7 @@ public class ShowController {
 
     /**
      * Allows the admin to create a new show
+     *
      * @param newShow
      * @return saves new show, or status error
      */
@@ -71,6 +75,7 @@ public class ShowController {
 
     /**
      * Allows the admin to update a show
+     *
      * @param showId
      * @param showDetails
      * @return saves updates, or status error
@@ -87,6 +92,7 @@ public class ShowController {
 
     /**
      * Allows the admin to delete a show
+     *
      * @param showId
      * @return list of current shows, or status error
      */

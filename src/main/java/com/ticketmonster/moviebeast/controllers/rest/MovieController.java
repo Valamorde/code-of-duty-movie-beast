@@ -15,6 +15,7 @@ import javax.validation.Valid;
 /**
  * This Rest Controller is responsible for the Movies category.
  * It allows the user to view all or a single movie and the admin to create, update or delete a specific or all movies.
+ *
  * @author nancyatnic
  */
 @Component
@@ -27,6 +28,7 @@ public class MovieController {
 
     /**
      * Allows the user to view all movies
+     *
      * @return list with all movies
      */
     @GetMapping(value = "/movies", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -41,6 +43,7 @@ public class MovieController {
 
     /**
      * Allows the user to view a single movie
+     *
      * @param movieId
      * @return specific movie
      */
@@ -55,7 +58,24 @@ public class MovieController {
     }
 
     /**
+     * Allows the user to view a single movie's shows
+     *
+     * @param movieId
+     * @return a list of the specified movie's shos
+     */
+    @GetMapping(value = "/movies/{movieId}/shows", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getShowByMovie(@PathVariable(value = "movieId") Integer movieId) {
+        try {
+            return movieMediator.getShowByMovie(movieId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    /**
      * Allows the admin to create a new movie
+     *
      * @param newMovie
      * @return
      */
@@ -71,6 +91,7 @@ public class MovieController {
 
     /**
      * Allows the admin to update a movie
+     *
      * @param movieId
      * @param movieDetails
      * @return saves new movie (status ok), or status error
@@ -87,6 +108,7 @@ public class MovieController {
 
     /**
      * Allows the admin to delete a movie
+     *
      * @param movieId
      * @return current list of movies, or status error
      */

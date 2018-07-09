@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  * This Rest Controller is responsible for the Seat Reservation.
  * It allows the user to make and cancel a seat reservation, after they have logged in.
  * In case of error, throws a 400 - Bad Request message.
+ *
  * @author nancyatnic
  */
 @Component
@@ -29,6 +30,7 @@ public class SeatReservationController {
 
     /**
      * Allows user to make a seat reservation
+     *
      * @param seatReservation
      * @return if user is not registered-> status error, if registered: books seat, or status error
      */
@@ -44,6 +46,7 @@ public class SeatReservationController {
 
     /**
      * Allows the user to cancel a seat reservation
+     *
      * @param reservation
      * @return if user is not registered-> status error, if registered: saves changes, or status error
      */

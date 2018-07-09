@@ -10,9 +10,11 @@ public interface IMovieService {
 
     ResponseEntity<?> getSingleMovie(Movie movie);
 
+    ResponseEntity<?> getShowByMovie(Movie movie);
+
     ResponseEntity<?> createNewMovie(Movie newMovie, Authentication authentication);
 
     ResponseEntity<?> updateSingleMovie(Movie movie, Movie movieDetails, Authentication authentication);
 
-    ResponseEntity<?> deleteSingleMovie(Movie movieId, Authentication authentication);
+    ResponseEntity<?> deleteSingleMovie(Movie movie, Authentication authentication);
 }

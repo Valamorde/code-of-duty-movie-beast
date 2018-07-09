@@ -18,6 +18,7 @@ import java.security.Principal;
 /**
  * This Rest Controller is responsible for the Users.
  * It allows the user to create an account and the admin to update or delete a user and reset a password.
+ *
  * @author nancyatnic
  */
 @Component
@@ -35,6 +36,7 @@ public class UserController {
 
     /**
      * Allows the user to create an account
+     *
      * @param newUser - requires email, password, full name
      * @return created user, 201 OR CustomException, 409
      */
@@ -104,7 +106,7 @@ public class UserController {
     }
 
     @GetMapping(value = "/users/{userId}/bookings/pdf", produces = MediaType.APPLICATION_PDF_VALUE)
-    public ResponseEntity<?> printTickets(HttpServletRequest req, HttpServletResponse res){
+    public ResponseEntity<?> printTickets(HttpServletRequest req, HttpServletResponse res) {
         userMediator.printTicket(SecurityContextHolder.getContext().getAuthentication(), res, req);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -127,6 +129,7 @@ public class UserController {
 
     /**
      * Allows the admin to update a user's info
+     *
      * @param userId
      * @param userDetails
      * @return saves updates, or status error
@@ -143,6 +146,7 @@ public class UserController {
 
     /**
      * Allows the admin to reset a user's password
+     *
      * @param userId
      * @return saves updates, or status error
      */
@@ -158,6 +162,7 @@ public class UserController {
 
     /**
      * Allows admin to delete a user
+     *
      * @param userId
      * @return deletes user (status ok), or status error
      */

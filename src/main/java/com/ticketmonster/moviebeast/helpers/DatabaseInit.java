@@ -31,15 +31,17 @@ public class DatabaseInit {
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    private List<String> cities = new ArrayList<String>(Arrays.asList("Athina", "Piraias", "Peristeri", "Kallithea", "Nikaia"));
-    private List<String> theatreNames = new ArrayList<String>(Arrays.asList("COSMOS 1", "COSMOS 2", "COSMOS 3", "COSMOS 4", "COSMOS 5"));
-    private List<String> theatreAddresses = new ArrayList<String>(Arrays.asList("STREET, 1, TOWN 1", "STREET, 2, TOWN 2", "STREET, 3, TOWN 3", "STREET, 4, TOWN 4", "STREET, 5, TOWN 5"));
-    private List<String> movieNames = new ArrayList<String>(Arrays.asList("The Commuter", "The Death of Stalin", "Black Panther", "The Rider", "Annihilation"));
-    private List<String> movieDescriptions = new ArrayList<String>(Arrays.asList("Michael MacCauley, a former police officer goes through the same routine train commute to work and back every day only to be fired from his job as a life insurance salesman after ten years.",
+    private final List<String> cities = new ArrayList<String>(Arrays.asList("Athina", "Piraias", "Peristeri", "Kallithea", "Nikaia"));
+    private final List<String> theatreNames = new ArrayList<String>(Arrays.asList("COSMOS 1", "COSMOS 2", "COSMOS 3", "COSMOS 4", "COSMOS 5"));
+    private final List<String> theatreAddresses = new ArrayList<String>(Arrays.asList("STREET, 1, TOWN 1", "STREET, 2, TOWN 2", "STREET, 3, TOWN 3", "STREET, 4, TOWN 4", "STREET, 5, TOWN 5"));
+    private final List<String> movieNames = new ArrayList<String>(Arrays.asList("The Commuter", "The Death of Stalin", "Black Panther", "The Rider", "Annihilation"));
+    private final List<String> movieDescriptions = new ArrayList<String>(Arrays.asList("Michael MacCauley, a former police officer goes through the same routine train commute to work and back every day only to be fired from his job as a life insurance salesman after ten years.",
             "Pianist Maria Yudina hides a note in a recording for Joseph Stalin, saying he has ruined the country. As Stalin reads it in his dacha, he is paralysed by a cerebral haemorrhage. The members of the Central Committee are alerted.",
             "Five African tribes war over a meteorite containing vibranium. One warrior ingests a \"heart-shaped herb\" affected by the metal and gains superhuman abilities, becoming the first \"Black Panther\" and forms the nation of Wakanda.",
             "Brady lives in financial poverty with his father Tim and his younger sister Lilly who suffers from brain damage from an accident at a bullriding competition. Doctors have told him he can no longer ride, or else his seizures will get worse.",
             "At the U.S. government's Area X facility on a southern coast, cellular biology professor and former U.S. Army soldier Lena undergoes a quarantined debriefing about an expedition into an anomaly called \"the shimmer\"."));
+    private final List<String> trailerURLs = new ArrayList<>(Arrays.asList("aDshY43Ol2U","E9eAshaPvYw","dxWvtMOGAhw","AlrWRttLTkg","89OP78l9oF0"));
+    private final List<Integer> movieDurations = new ArrayList<>(Arrays.asList(105,107,135,105,120));
 
     @PostConstruct
     @Transactional
@@ -68,8 +70,9 @@ public class DatabaseInit {
             movie.setMovieName(movieNames.get(i));
             movie.setMovieDescription(movieDescriptions.get(i));
             movie.setMovieReleaseDate(DateUtils.round(DateUtils.addDays(new Date(), i / 2), Calendar.DATE));
-            movie.setMovieDurationInMinutes(90);
+            movie.setMovieDurationInMinutes(movieDurations.get(i));
             movie.setTheatre(theatreRepository.getOne(random));
+            movie.setTrailerURL(trailerURLs.get(i));
             movieRepository.save(movie);
         }
 

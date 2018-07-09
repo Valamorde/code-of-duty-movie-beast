@@ -38,6 +38,11 @@ public class MovieServiceImpl implements IMovieService {
     }
 
     @Override
+    public ResponseEntity<?> getShowByMovie(Movie movie) {
+        return new ResponseEntity<>(movie.getShows(), HttpStatus.OK);
+    }
+
+    @Override
     @Transactional
     public ResponseEntity<?> createNewMovie(Movie newMovie, Authentication authentication) {
         User user = userRepository.findByEmail(authentication.getName());
@@ -49,6 +54,7 @@ public class MovieServiceImpl implements IMovieService {
             movie.setShows(newMovie.getShows());
             movie.setTheatre(newMovie.getTheatre());
             movie.setMovieDurationInMinutes(newMovie.getMovieDurationInMinutes());
+            movie.setTrailerURL(newMovie.getTrailerURL());
             return new ResponseEntity<>(movieRepository.save(movie), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
@@ -66,6 +72,7 @@ public class MovieServiceImpl implements IMovieService {
             movie.setShows(movieDetails.getShows());
             movie.setTheatre(movieDetails.getTheatre());
             movie.setMovieDurationInMinutes(movieDetails.getMovieDurationInMinutes());
+            movie.setTrailerURL(movieDetails.getTrailerURL());
             return new ResponseEntity<>(movieRepository.save(movie), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);

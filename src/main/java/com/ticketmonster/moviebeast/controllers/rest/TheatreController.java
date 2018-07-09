@@ -15,6 +15,7 @@ import javax.validation.Valid;
 /**
  * This Rest Controller is responsible for the Theatre category.
  * It allows the user to view all or a single theatre and the admin to create, update or delete a specific or all theatres.
+ *
  * @author nancyatnic
  */
 @Component
@@ -27,6 +28,7 @@ public class TheatreController {
 
     /**
      * Allows the user to view all the theatres
+     *
      * @return list of theatres, or status error
      */
     @GetMapping(value = "/theatres", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -41,6 +43,7 @@ public class TheatreController {
 
     /**
      * Allows the user to view a single theatre
+     *
      * @param theatreId
      * @return specific theatre, or status error
      */
@@ -56,6 +59,7 @@ public class TheatreController {
 
     /**
      * Allows the admin to create a new theatre
+     *
      * @param newTheatre
      * @return saves new theatre, or status error
      */
@@ -71,6 +75,7 @@ public class TheatreController {
 
     /**
      * Allows the admin to update a theatre
+     *
      * @param theatreId
      * @param theatreDetails
      * @return saves updates, or status error
@@ -87,6 +92,7 @@ public class TheatreController {
 
     /**
      * Allows the admin to delete a theatre
+     *
      * @param theatreId
      * @return list of current theatres, or status error
      */

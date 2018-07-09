@@ -48,9 +48,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("*") // http://localhost:4200/
-                        .allowedMethods("*") // "GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"
-                        .allowedHeaders("*") // "Content-Type", "Date", "Total-Count", "loginInfo", "application/json", "Authorization"
+                        .allowedOrigins("http://localhost:4200") // http://localhost:4200/
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS") // "GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"
+                        .allowedHeaders("Content-Type", "Date", "Total-Count", "loginInfo", "application/json", "Authorization") // "Content-Type", "Date", "Total-Count", "loginInfo", "application/json", "Authorization"
                         .exposedHeaders("Content-Type", "Date", "Total-Count", "loginInfo", "application/json", "Authorization")
                         .maxAge(3600);
             }

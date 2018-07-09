@@ -15,8 +15,8 @@ import javax.validation.Valid;
 
 /**
  * This Rest Controller is responsible for the tickets' booking and the rest of the actions following.
- *It allows the user to book(pay) his reserved seats, cancel a booking, view all of his bookings or a single one, by id search.
- *It also allows the admin to update and delete any booking.
+ * It allows the user to book(pay) his reserved seats, cancel a booking, view all of his bookings or a single one, by id search.
+ * It also allows the admin to update and delete any booking.
  */
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
@@ -27,6 +27,7 @@ public class BookingController {
 
     /**
      * Allows the user to book his reserved seats
+     *
      * @return user's booking
      */
     @PostMapping(value = "/checkoutBasket", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -41,6 +42,7 @@ public class BookingController {
 
     /**
      * Allows the user to cancel a Booked Ticket
+     *
      * @param booking
      * @return user's current booking list
      */
@@ -56,6 +58,7 @@ public class BookingController {
 
     /**
      * Allows the user to get all his Bookings
+     *
      * @return list of total user bookings, or status error
      */
     @GetMapping(value = "/bookings", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -70,6 +73,7 @@ public class BookingController {
 
     /**
      * Allows the user to get a Single Booking
+     *
      * @param bookingId
      * @return user's single booking, or status error
      */
@@ -85,18 +89,20 @@ public class BookingController {
 
     /**
      * Allows the admin to print a bookings report
+     *
      * @param req - incoming request
      * @param res - outgoing response
      * @return Http Status
      */
     @GetMapping(value = "/bookingsReport", produces = MediaType.APPLICATION_PDF_VALUE)
-    public ResponseEntity<?> printTicketReport(HttpServletRequest req, HttpServletResponse res){
+    public ResponseEntity<?> printTicketReport(HttpServletRequest req, HttpServletResponse res) {
         bookingMediator.printTicketReport(SecurityContextHolder.getContext().getAuthentication(), res, req);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     /**
      * Allows an admin to update a Booking
+     *
      * @param bookingId
      * @param bookingDetails
      * @return saves booking changes (status ok), or status error
@@ -113,13 +119,14 @@ public class BookingController {
 
     /**
      * Allows an admin to delete a Booking
+     *
      * @param bookingId
      * @return current list of user's bookings, or status error
      */
     @DeleteMapping(value = "/bookings/{bookingId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deleteBooking(@PathVariable(value = "bookingId") Integer bookingId) {
         try {
-            return bookingMediator.deleteBooking(SecurityContextHolder.getContext().getAuthentication(),bookingId);
+            return bookingMediator.deleteBooking(SecurityContextHolder.getContext().getAuthentication(), bookingId);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

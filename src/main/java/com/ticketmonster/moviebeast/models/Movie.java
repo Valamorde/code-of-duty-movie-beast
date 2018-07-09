@@ -27,8 +27,11 @@ public class Movie implements Serializable {
     @Column(name = "movieDescription")
     private String movieDescription;
 
+    @Column(name = "trailerURL")
+    private String trailerURL;
+
     @Column(name = "movieReleaseDate")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date movieReleaseDate;
 
     @Column(name = "movieDurationInMinutes")
@@ -96,5 +99,13 @@ public class Movie implements Serializable {
 
     public void setShows(List<Show> shows) {
         this.shows = shows;
+    }
+
+    public String getTrailerURL() {
+        return trailerURL;
+    }
+
+    public void setTrailerURL(String trailerURL) {
+        this.trailerURL = trailerURL;
     }
 }

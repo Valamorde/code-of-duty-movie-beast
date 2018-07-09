@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * This Rest Controller is responsible for handling the custom errors on the server.
  * Depending on the status code, it returns a message on the web page, stating the nature of the error.
+ *
  * @author nancyatnic
  */
 @RestController("/error")
@@ -41,7 +42,7 @@ public class CustomErrorController implements ErrorController {
                 return "error-401";
             } else if (statusCode == HttpStatus.FORBIDDEN.value()) {
                 return "error-403";
-            }else if(statusCode == HttpStatus.BAD_REQUEST.value()){
+            } else if (statusCode == HttpStatus.BAD_REQUEST.value()) {
                 return "error-400";
             }
         }

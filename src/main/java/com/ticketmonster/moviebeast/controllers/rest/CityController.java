@@ -15,6 +15,7 @@ import javax.validation.Valid;
 /**
  * This Rest Controller is responsible for the Cities category.
  * It allows the user to view all or a single city and the admin to create, update or delete a specific or all cities.
+ *
  * @author nancyatnic
  */
 @Component
@@ -27,6 +28,7 @@ public class CityController {
 
     /**
      * Allows the user to view all cities
+     *
      * @return list of all cities
      */
     @GetMapping(value = "/cities", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -41,6 +43,7 @@ public class CityController {
 
     /**
      * Allows the user to view a single city
+     *
      * @param cityId
      * @return specific city
      */
@@ -56,6 +59,7 @@ public class CityController {
 
     /**
      * Allows the admin to create a new city
+     *
      * @param newCity
      * @return saves new city (status ok), or status error
      */
@@ -71,6 +75,7 @@ public class CityController {
 
     /**
      * Allows the admin to update a city
+     *
      * @param cityId
      * @param cityDetails
      * @return saves city's updates (status ok), or status error
@@ -87,6 +92,7 @@ public class CityController {
 
     /**
      * Allows the admin to delete a city
+     *
      * @param cityId
      * @return current list of cities, or status error
      */
