@@ -31,14 +31,13 @@ public class Movie implements Serializable {
     private String trailerURL;
 
     @Column(name = "movieReleaseDate")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date movieReleaseDate;
 
     @Column(name = "movieDurationInMinutes")
     private Integer movieDurationInMinutes;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "theatreId")
     private Theatre theatre;
 

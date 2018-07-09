@@ -23,7 +23,7 @@ public class Show implements Serializable {
     private Integer showId;
 
     @Column(name = "showDate")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date showDate;
 
     @Column(name = "initialSeats")
@@ -39,8 +39,7 @@ public class Show implements Serializable {
     @OneToMany(mappedBy = "show", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<SeatReservation> seats;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "movieId")
     private Movie movie;
 

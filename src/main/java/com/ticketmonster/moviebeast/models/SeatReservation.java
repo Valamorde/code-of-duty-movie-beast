@@ -25,8 +25,7 @@ public class SeatReservation implements Serializable {
     @Column(name = "seatPaid")
     private boolean seatPaid;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "userId")
     private User user;
 
@@ -35,8 +34,7 @@ public class SeatReservation implements Serializable {
     @JoinColumn(name = "bookingId")
     private Booking booking;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "showId")
     private Show show;
 

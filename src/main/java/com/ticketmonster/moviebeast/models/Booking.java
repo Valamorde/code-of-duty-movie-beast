@@ -28,8 +28,7 @@ public class Booking implements Serializable {
     @Column(name = "bookingCost")
     private BigDecimal bookingCost;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "userId")
     private User user;
 
