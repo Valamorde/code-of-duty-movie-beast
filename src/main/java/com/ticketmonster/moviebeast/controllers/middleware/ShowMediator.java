@@ -32,6 +32,11 @@ public class ShowMediator {
         return showService.getSingleShow(show);
     }
 
+    public ResponseEntity<?> getSeatsByShow(Integer showId){
+        Show show = showRepository.getOne(showId);
+        return showService.getSeatsByShow(show);
+    }
+
     public ResponseEntity<?> createNewShow(Show newShow, Authentication authentication) {
         return showService.createNewShow(newShow, authentication);
     }

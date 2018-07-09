@@ -39,6 +39,12 @@ public class ShowServiceImpl implements IShowService {
 
     @Override
     @Transactional
+    public ResponseEntity<?> getSeatsByShow(Show show){
+        return new ResponseEntity<>(show.getSeats(), HttpStatus.OK);
+    }
+
+    @Override
+    @Transactional
     public ResponseEntity<?> createNewShow(Show newShow, Authentication authentication) {
         User user = userRepository.findByEmail(authentication.getName());
         if (customAccessHandler.userIsAdmin(user)) {

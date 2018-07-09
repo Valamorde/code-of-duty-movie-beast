@@ -8,10 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * This Rest Controller is responsible for the Seat Reservation.
@@ -27,6 +24,11 @@ public class SeatReservationController {
 
     @Autowired
     private SeatReservationMediator seatReservationMediator;
+
+    @GetMapping(value = "/seats", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getAllSeats(){
+        return seatReservationMediator.getAllSeats();
+    }
 
     /**
      * Allows user to make a seat reservation

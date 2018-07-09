@@ -58,6 +58,22 @@ public class ShowController {
     }
 
     /**
+     * Allows the user to view a single show's seats
+     *
+     * @param showId
+     * @return a list of the specified show's seats
+     */
+    @GetMapping(value = "/shows/{showId}/seats", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getSeatsByShow(@PathVariable(value = "showId") Integer showId) {
+        try {
+            return showMediator.getSeatsByShow(showId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    /**
      * Allows the admin to create a new show
      *
      * @param newShow

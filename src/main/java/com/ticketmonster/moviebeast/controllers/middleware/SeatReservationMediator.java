@@ -23,6 +23,10 @@ public class SeatReservationMediator {
     @Autowired
     private SeatReservationServiceImpl seatReservationService;
 
+    public ResponseEntity<?> getAllSeats(){
+        return seatReservationService.getAllSeats();
+    }
+
     public ResponseEntity<?> reserveTicket(SeatReservation seatReservation, Authentication authentication){
         SeatReservation seat = seatReservationRepository.getOne(seatReservation.getSeatId());
         return seatReservationService.reserveTicket(seat, authentication);

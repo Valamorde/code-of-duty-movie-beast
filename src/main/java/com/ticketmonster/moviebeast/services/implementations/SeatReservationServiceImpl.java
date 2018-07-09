@@ -28,6 +28,11 @@ public class SeatReservationServiceImpl implements ISeatReservationService {
     private IUserRepository userRepository;
 
     @Override
+    public ResponseEntity<?> getAllSeats(){
+        return new ResponseEntity<>(seatReservationRepository.findAll(), HttpStatus.OK);
+    }
+
+    @Override
     @Transactional
     public ResponseEntity<?> reserveTicket(SeatReservation seatReservation, Authentication authentication) {
 

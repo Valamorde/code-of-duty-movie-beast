@@ -6,6 +6,8 @@ import org.springframework.security.core.Authentication;
 
 public interface ISeatReservationService {
 
+    ResponseEntity<?> getAllSeats();
+
     ResponseEntity<?> reserveTicket(SeatReservation seatReservation, Authentication authentication);
 
     ResponseEntity<?> cancelReservation(SeatReservation seatReservation, Authentication authentication);

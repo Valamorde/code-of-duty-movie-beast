@@ -94,19 +94,19 @@ public class DatabaseInit {
     ));
 
     @Autowired
-    ICityRepository cityRepository;
+    private ICityRepository cityRepository;
     @Autowired
-    ITheatreRepository theatreRepository;
+    private ITheatreRepository theatreRepository;
     @Autowired
-    IMovieRepository movieRepository;
+    private IMovieRepository movieRepository;
     @Autowired
-    IShowRepository showRepository;
+    private IShowRepository showRepository;
     @Autowired
-    ISeatReservationRepository seatReservationRepository;
+    private ISeatReservationRepository seatReservationRepository;
     @Autowired
-    IUserRepository userRepository;
+    private IUserRepository userRepository;
     @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @PostConstruct
     @Transactional
@@ -202,7 +202,7 @@ public class DatabaseInit {
 
         user = new User();
         user.setEmail("rudolf.dalidis@gmail.com");
-        user.setFullName("Rudolf Dalidis");
+        user.setFullName("Rudolf Dalides");
         user.setPassword(bCryptPasswordEncoder.encode("dev4"));
         user.setRole(Role.ROLE_ADMIN.name());
         user.setEnabled(true);
@@ -211,7 +211,7 @@ public class DatabaseInit {
 
         user = new User();
         user.setEmail("paulinamparniadaki@hotmail.com");
-        user.setFullName("Paulina Barniadakis");
+        user.setFullName("Paulina Barniadaces");
         user.setPassword(bCryptPasswordEncoder.encode("dev5"));
         user.setRole(Role.ROLE_ADMIN.name());
         user.setEnabled(true);

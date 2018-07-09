@@ -10,6 +10,8 @@ public interface IShowService {
 
     ResponseEntity<?> getSingleShow(Show show);
 
+    ResponseEntity<?> getSeatsByShow(Show show);
+
     ResponseEntity<?> createNewShow(Show newShow, Authentication authentication);
 
     ResponseEntity<?> updateSingleShow(Show show, Show showDetails, Authentication authentication);
