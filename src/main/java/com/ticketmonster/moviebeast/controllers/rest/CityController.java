@@ -26,6 +26,7 @@ public class CityController {
     @Autowired
     private CityMediator cityMediator;
 
+    //<editor-fold desc="User Operations">
     /**
      * Allows the user to view all cities
      *
@@ -56,14 +57,16 @@ public class CityController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+    //</editor-fold>
 
+    //<editor-fold desc="Admin Operations">
     /**
      * Allows the admin to create a new city
      *
      * @param newCity
      * @return saves new city (status ok), or status error
      */
-    @PostMapping(value = "/cities", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/admin/cities", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createNewCity(@Valid @RequestBody City newCity) {
         try {
             return cityMediator.createNewCity(newCity, SecurityContextHolder.getContext().getAuthentication());
@@ -80,7 +83,7 @@ public class CityController {
      * @param cityDetails
      * @return saves city's updates (status ok), or status error
      */
-    @PutMapping(value = "/cities/{cityId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/admin/cities/{cityId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> updateCity(@PathVariable(value = "cityId") Integer cityId, @Valid @RequestBody City cityDetails) {
         try {
             return cityMediator.updateSingleCity(cityId, cityDetails, SecurityContextHolder.getContext().getAuthentication());
@@ -96,7 +99,7 @@ public class CityController {
      * @param cityId
      * @return current list of cities, or status error
      */
-    @DeleteMapping(value = "/cities/{cityId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "/admin/cities/{cityId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deleteCity(@PathVariable(value = "cityId") Integer cityId) {
         try {
             return cityMediator.deleteSingleCity(cityId, SecurityContextHolder.getContext().getAuthentication());
@@ -105,4 +108,5 @@ public class CityController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+    //</editor-fold>
 }

@@ -77,14 +77,14 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable()//.httpBasic().and()
-        .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+        http.cors().and().csrf().disable()
+                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
-                .antMatchers("/", "/auth","/auth/**", "/register","/register/**", "/error/**", "/loggedUser/**").permitAll()
+                .antMatchers("/", "/auth", "/auth/**", "/register", "/register/**", "/error/**").permitAll()
                 .antMatchers("/cities/**", "/theatres/**", "/movies/**", "/shows/**",
-                        "/bookings/**", "/seatReservation/**").fullyAuthenticated()
-                .antMatchers("/users", "/bookingsReport").access("hasAuthority('ROLE_ADMIN')")
+                        "/bookings/**", "/seatReservation/**", "/loggedUser/**", "/users/**").authenticated()
+                .antMatchers("/admin/**").access("hasAuthority('ROLE_ADMIN')")
                 .anyRequest().authenticated();
 
         http.logout().permitAll().logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST"))

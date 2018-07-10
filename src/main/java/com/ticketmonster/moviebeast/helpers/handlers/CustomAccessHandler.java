@@ -11,11 +11,11 @@ public class CustomAccessHandler {
         if (userIsAdmin(user)) {
             return true;
         } else {
-            return user.getRole().equals(Role.ROLE_USER) && user.getUserId().equals(targetUser.getUserId());
+            return user.getRole().equals(Role.ROLE_USER.name()) && user.getUserId().equals(targetUser.getUserId());
         }
     }
 
     public boolean userIsAdmin(User user){
-        return user.getRole().equals(Role.ROLE_ADMIN);
+        return user.getRole().equals(Role.ROLE_ADMIN.name());
     }
 }

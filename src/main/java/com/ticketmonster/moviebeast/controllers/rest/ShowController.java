@@ -26,6 +26,7 @@ public class ShowController {
     @Autowired
     private ShowMediator showMediator;
 
+    //<editor-fold desc="User Operations">
     /**
      * Allows the user to view all the shows
      *
@@ -72,14 +73,16 @@ public class ShowController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+    //</editor-fold>
 
+    //<editor-fold desc="Admin Operations">
     /**
      * Allows the admin to create a new show
      *
      * @param newShow
      * @return saves new show, or status error
      */
-    @PostMapping(value = "/shows", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/admin/shows", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createNewShow(@Valid @RequestBody Show newShow) {
         try {
             return showMediator.createNewShow(newShow, SecurityContextHolder.getContext().getAuthentication());
@@ -96,7 +99,7 @@ public class ShowController {
      * @param showDetails
      * @return saves updates, or status error
      */
-    @PutMapping(value = "/shows/{showId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/admin/shows/{showId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> updateShow(@PathVariable(value = "showId") Integer showId, @Valid @RequestBody Show showDetails) {
         try {
             return showMediator.updateSingleShow(showId, showDetails, SecurityContextHolder.getContext().getAuthentication());
@@ -112,7 +115,7 @@ public class ShowController {
      * @param showId
      * @return list of current shows, or status error
      */
-    @DeleteMapping(value = "/shows/{showId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "/admin/shows/{showId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deleteShow(@PathVariable(value = "showId") Integer showId) {
         try {
             return showMediator.deleteSingleShow(showId, SecurityContextHolder.getContext().getAuthentication());
@@ -121,4 +124,5 @@ public class ShowController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+    //</editor-fold>
 }

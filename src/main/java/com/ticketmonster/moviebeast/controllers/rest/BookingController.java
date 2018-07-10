@@ -49,7 +49,7 @@ public class BookingController {
     @PostMapping(value = "/cancelBooking", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> cancelBooking(@Valid @RequestBody Booking booking) {
         try {
-            return bookingMediator.cancelTicket(booking);
+            return bookingMediator.cancelTicket(SecurityContextHolder.getContext().getAuthentication(), booking);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -87,6 +87,7 @@ public class BookingController {
         }
     }
 
+    //<editor-fold desc="Admin Operations">
     /**
      * Allows the admin to print a bookings report
      *
@@ -94,7 +95,7 @@ public class BookingController {
      * @param res - outgoing response
      * @return Http Status
      */
-    @GetMapping(value = "/bookingsReport", produces = MediaType.APPLICATION_PDF_VALUE)
+    @GetMapping(value = "/admin/bookingsReport", produces = MediaType.APPLICATION_PDF_VALUE)
     public ResponseEntity<?> printTicketReport(HttpServletRequest req, HttpServletResponse res) {
         bookingMediator.printTicketReport(SecurityContextHolder.getContext().getAuthentication(), res, req);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -107,7 +108,7 @@ public class BookingController {
      * @param bookingDetails
      * @return saves booking changes (status ok), or status error
      */
-    @PutMapping(value = "/bookings/{bookingId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/admin/bookings/{bookingId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> updateBooking(@PathVariable(value = "bookingId") Integer bookingId, @Valid @RequestBody Booking bookingDetails) {
         try {
             return bookingMediator.updateBooking(SecurityContextHolder.getContext().getAuthentication(), bookingId, bookingDetails);
@@ -123,7 +124,7 @@ public class BookingController {
      * @param bookingId
      * @return current list of user's bookings, or status error
      */
-    @DeleteMapping(value = "/bookings/{bookingId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "/admin/bookings/{bookingId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deleteBooking(@PathVariable(value = "bookingId") Integer bookingId) {
         try {
             return bookingMediator.deleteBooking(SecurityContextHolder.getContext().getAuthentication(), bookingId);
@@ -132,4 +133,5 @@ public class BookingController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+    //</editor-fold>
 }

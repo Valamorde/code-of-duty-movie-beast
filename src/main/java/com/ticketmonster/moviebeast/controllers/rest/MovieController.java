@@ -26,6 +26,7 @@ public class MovieController {
     @Autowired
     private MovieMediator movieMediator;
 
+    //<editor-fold desc="User Operations">
     /**
      * Allows the user to view all movies
      *
@@ -61,7 +62,7 @@ public class MovieController {
      * Allows the user to view a single movie's shows
      *
      * @param movieId
-     * @return a list of the specified movie's shos
+     * @return a list of the specified movie's shows
      */
     @GetMapping(value = "/movies/{movieId}/shows", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getShowByMovie(@PathVariable(value = "movieId") Integer movieId) {
@@ -72,14 +73,16 @@ public class MovieController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+    //</editor-fold>
 
+    //<editor-fold desc="Admin Operations">
     /**
      * Allows the admin to create a new movie
      *
      * @param newMovie
      * @return
      */
-    @PostMapping(value = "/movies", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/admin/movies", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createNewMovie(@Valid @RequestBody Movie newMovie) {
         try {
             return movieMediator.createNewMovie(newMovie, SecurityContextHolder.getContext().getAuthentication());
@@ -96,7 +99,7 @@ public class MovieController {
      * @param movieDetails
      * @return saves new movie (status ok), or status error
      */
-    @PutMapping(value = "/movies/{movieId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/admin/movies/{movieId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> updateMovie(@PathVariable(value = "movieId") Integer movieId, @Valid @RequestBody Movie movieDetails) {
         try {
             return movieMediator.updateSingleMovie(movieId, movieDetails, SecurityContextHolder.getContext().getAuthentication());
@@ -112,7 +115,7 @@ public class MovieController {
      * @param movieId
      * @return current list of movies, or status error
      */
-    @DeleteMapping("/movies/{movieId}")
+    @DeleteMapping("/admin/movies/{movieId}")
     public ResponseEntity<?> deleteMovie(@PathVariable(value = "movieId") Integer movieId) {
         try {
             return movieMediator.deleteSingleMovie(movieId, SecurityContextHolder.getContext().getAuthentication());
@@ -121,4 +124,5 @@ public class MovieController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+    //</editor-fold>
 }

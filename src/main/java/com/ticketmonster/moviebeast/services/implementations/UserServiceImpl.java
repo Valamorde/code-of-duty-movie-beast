@@ -98,7 +98,6 @@ public class UserServiceImpl implements IUserService {
     @Transactional
     public ResponseEntity<?> getSingleUser(Authentication authentication, User targetUser) {
         User authUser = userRepository.findByEmail(authentication.getName());
-
         if (customAccessHandler.userIsAuthorizedToViewSpecifiedContent(targetUser, authUser)) {
             return new ResponseEntity<>(userRepository.getOne(targetUser.getUserId()), HttpStatus.OK);
         } else {

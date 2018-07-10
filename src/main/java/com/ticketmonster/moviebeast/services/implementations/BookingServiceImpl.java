@@ -63,39 +63,48 @@ public class BookingServiceImpl implements IBookingService {
 
         for (int i = 0; i < reservedSeats.size(); i++) {
             if (customAccessHandler.userIsAuthorizedToViewSpecifiedContent(reservedSeats.get(i).getUser(), user)) {
+                Booking booking = new Booking();
+                booking.setSeatReservation(reservedSeats.get(i));
+                booking.setUser(reservedSeats.get(i).getUser());
+                booking.setBookingCost(booking.getSeatReservation().getShow().getShowCost());
+                booking.setBookingDate(booking.getSeatReservation().getShow().getShowDate());
+                bookings.add(bookingRepository.save(booking));
+
+                SeatReservation seatReservation = seatReservationRepository.getOne(reservedSeats.get(i).getSeatId());
+                seatReservation.setBooking(bookings.get(i));
+                seatReservation.setSeatPaid(true);
+                seatReservationRepository.save(seatReservation);
+            } else {
                 return new ResponseEntity<>(HttpStatus.FORBIDDEN);
             }
-            Booking booking = new Booking();
-            booking.setSeatReservation(reservedSeats.get(i));
-            booking.setUser(reservedSeats.get(i).getUser());
-            booking.setBookingCost(booking.getSeatReservation().getShow().getShowCost());
-            booking.setBookingDate(booking.getSeatReservation().getShow().getShowDate());
-            bookings.add(bookingRepository.save(booking));
-
-            SeatReservation seatReservation = seatReservationRepository.getOne(reservedSeats.get(i).getSeatId());
-            seatReservation.setBooking(bookings.get(i));
-            seatReservation.setSeatPaid(true);
-            seatReservationRepository.save(seatReservation);
         }
         return new ResponseEntity<>(bookings, HttpStatus.OK);
     }
 
-    // TODO: add user check
     @Override
     @Transactional
-    public ResponseEntity<?> cancelSingleTicket(Booking booking) {
+    public ResponseEntity<?> cancelSingleTicket(Authentication authentication, Booking booking) {
 
+        if (authentication == null) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+        User user = userRepository.findByEmail(authentication.getName());
         SeatReservation seatReservation = seatReservationRepository.findByBooking(booking);
-        List<Booking> bookingList = bookingRepository.findAllByUser(booking.getUser());
-        bookingRepository.delete(booking);
-        bookingList.remove(booking);
-        seatReservation.setUser(null);
-        seatReservation.setBooking(null);
-        seatReservation.setSeatPaid(false);
-        seatReservation.setSeatReserved(false);
-        seatReservationRepository.save(seatReservation);
 
-        return new ResponseEntity<>(bookingList, HttpStatus.OK);
+        if (customAccessHandler.userIsAuthorizedToViewSpecifiedContent(booking.getUser(), user)) {
+            List<Booking> bookingList = bookingRepository.findAllByUser(booking.getUser());
+            bookingRepository.delete(booking);
+            bookingList.remove(booking);
+            seatReservation.setUser(null);
+            seatReservation.setBooking(null);
+            seatReservation.setSeatPaid(false);
+            seatReservation.setSeatReserved(false);
+            seatReservationRepository.save(seatReservation);
+
+            return new ResponseEntity<>(bookingList, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
     }
 
     @Override

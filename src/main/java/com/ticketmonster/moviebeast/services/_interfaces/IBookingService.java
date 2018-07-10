@@ -12,7 +12,7 @@ public interface IBookingService {
 
     ResponseEntity<?> bookAllInBasket(Authentication authentication);
 
-    ResponseEntity<?> cancelSingleTicket(Booking booking);
+    ResponseEntity<?> cancelSingleTicket(Authentication authentication, Booking booking);
 
     ResponseEntity<?> getAllBookings(Authentication authentication);
 

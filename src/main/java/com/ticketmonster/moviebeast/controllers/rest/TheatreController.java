@@ -26,6 +26,7 @@ public class TheatreController {
     @Autowired
     private TheatreMediator theatreMediator;
 
+    //<editor-fold desc="User Operations">
     /**
      * Allows the user to view all the theatres
      *
@@ -56,14 +57,16 @@ public class TheatreController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+    //</editor-fold>
 
+    //<editor-fold desc="Admin Operations">
     /**
      * Allows the admin to create a new theatre
      *
      * @param newTheatre
      * @return saves new theatre, or status error
      */
-    @PostMapping(value = "/theatres", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/admin/theatres", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createNewTheatre(@Valid @RequestBody Theatre newTheatre) {
         try {
             return theatreMediator.createNewTheatre(newTheatre, SecurityContextHolder.getContext().getAuthentication());
@@ -80,7 +83,7 @@ public class TheatreController {
      * @param theatreDetails
      * @return saves updates, or status error
      */
-    @PutMapping(value = "/theatres/{theatreId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/admin/theatres/{theatreId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> updateTheatre(@PathVariable(value = "theatreId") Integer theatreId, @Valid @RequestBody Theatre theatreDetails) {
         try {
             return theatreMediator.updateSingleTheatre(theatreId, theatreDetails, SecurityContextHolder.getContext().getAuthentication());
@@ -96,7 +99,7 @@ public class TheatreController {
      * @param theatreId
      * @return list of current theatres, or status error
      */
-    @DeleteMapping(value = "/theatres/{theatreId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "/admin/theatres/{theatreId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deleteTheatre(@PathVariable(value = "theatreId") Integer theatreId) {
         try {
             return theatreMediator.deleteSingleTheatre(theatreId, SecurityContextHolder.getContext().getAuthentication());
@@ -105,4 +108,5 @@ public class TheatreController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+    //</editor-fold>
 }

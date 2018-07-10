@@ -53,8 +53,8 @@ public class BookingMediator {
         return bookingService.bookAllInBasket(authentication);
     }
 
-    public ResponseEntity<?> cancelTicket(Booking booking) {
-        return bookingService.cancelSingleTicket(booking);
+    public ResponseEntity<?> cancelTicket(Authentication authentication, Booking booking) {
+        return bookingService.cancelSingleTicket(authentication, booking);
     }
 
     public void printTicketReport(Authentication authentication, HttpServletResponse res, HttpServletRequest req){

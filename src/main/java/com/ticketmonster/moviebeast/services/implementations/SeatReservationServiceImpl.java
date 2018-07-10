@@ -41,17 +41,7 @@ public class SeatReservationServiceImpl implements ISeatReservationService {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
 
-//        Integer seatIndex = 0;        //FIXME: <-find common ground with frontend, decide to keep or delete
-//        boolean isSeatAvailable = false;        //FIXME: <-find common ground with frontend, decide to keep or delete
-
         List<SeatReservation> showSeats = seatReservationRepository.findAllByShow(seatReservation.getShow());
-
-//        for (int i = 0; i < showSeats.size(); i++) {        //FIXME: <-find common ground with frontend, decide to keep or delete
-//            if (showSeats.get(seat).getBookingId() == null) {        //FIXME: <-find common ground with frontend, decide to keep or delete
-//                isSeatAvailable = true;        //FIXME: <-find common ground with frontend, decide to keep or delete
-//                seatIndex = showSeats.get(seat).getSeatId();        //FIXME: <-find common ground with frontend, decide to keep or delete
-//            }        //FIXME: <-find common ground with frontend, decide to keep or delete
-//        }        //FIXME: <-find common ground with frontend, decide to keep or delete
 
         SeatReservation bookedSeat = seatReservationRepository.getOne(seatReservation.getSeatId());
 

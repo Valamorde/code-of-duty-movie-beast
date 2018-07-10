@@ -25,6 +25,11 @@ public class SeatReservationController {
     @Autowired
     private SeatReservationMediator seatReservationMediator;
 
+    /**
+     * Allows the user to get a list of all seats
+     *
+     * @return
+     */
     @GetMapping(value = "/seats", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getAllSeats(){
         return seatReservationMediator.getAllSeats();

@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 public class UserMediator {
 
     @Autowired
-    IUserRepository userRepository;
+    private IUserRepository userRepository;
     @Autowired
     private UserServiceImpl userService;
     @Autowired

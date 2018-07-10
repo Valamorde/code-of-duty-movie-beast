@@ -29,6 +29,13 @@ public class UserController {
     @Autowired
     private UserMediator userMediator;
 
+    //<editor-fold desc="User Operations">
+    /**
+     * Returns the logged user
+     *
+     * @param user
+     * @return the logged user
+     */
     @RequestMapping(value = "/loggedUser", produces = MediaType.APPLICATION_JSON_VALUE)
     public Principal loggedUser(Principal user) {
         return user;
@@ -44,19 +51,6 @@ public class UserController {
     public ResponseEntity<?> registerNewUser(@RequestBody User newUser) {
         try {
             return userMediator.createNewUser(newUser);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-    }
-
-    /**
-     * @return a list of registered users
-     */
-    @GetMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getAllUsers() {
-        try {
-            return userMediator.getAllUsers();
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -105,6 +99,13 @@ public class UserController {
         }
     }
 
+    /**
+     * Allows the user to print their booked tickets
+     *
+     * @param req - Http Request Properties
+     * @param res - Http Response Properties
+     * @return
+     */
     @GetMapping(value = "/users/{userId}/bookings/pdf", produces = MediaType.APPLICATION_PDF_VALUE)
     public ResponseEntity<?> printTickets(HttpServletRequest req, HttpServletResponse res) {
         userMediator.printTicket(SecurityContextHolder.getContext().getAuthentication(), res, req);
@@ -125,7 +126,21 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+    //</editor-fold>
 
+    //<editor-fold desc="Admin Operations">
+    /**
+     * @return a list of all users
+     */
+    @GetMapping(value = "/admin/users", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getAllUsers() {
+        try {
+            return userMediator.getAllUsers();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
 
     /**
      * Allows the admin to update a user's info
@@ -134,7 +149,7 @@ public class UserController {
      * @param userDetails
      * @return saves updates, or status error
      */
-    @PutMapping(value = "/users/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/admin/users/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> updateUser(@PathVariable(value = "userId") Integer userId, @Valid @RequestBody User userDetails) {
         try {
             return userMediator.updateSingleUser(SecurityContextHolder.getContext().getAuthentication(), userId, userDetails);
@@ -150,7 +165,7 @@ public class UserController {
      * @param userId
      * @return saves updates, or status error
      */
-    @PutMapping(value = "/users/{userId}/passwordReset", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/admin/users/{userId}/passwordReset", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> resetPassword(@PathVariable(value = "userId") Integer userId) {
         try {
             return userMediator.resetPassword(SecurityContextHolder.getContext().getAuthentication(), userId);
@@ -166,7 +181,7 @@ public class UserController {
      * @param userId
      * @return deletes user (status ok), or status error
      */
-    @DeleteMapping(value = "/users/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "/admin/users/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deleteUser(@PathVariable(value = "userId") Integer userId) {
         try {
             return userMediator.deleteUserAndCleanup(SecurityContextHolder.getContext().getAuthentication(), userId);
@@ -175,4 +190,5 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+    //</editor-fold>
 }
