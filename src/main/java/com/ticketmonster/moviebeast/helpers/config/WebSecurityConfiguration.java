@@ -101,7 +101,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .ignoring()
                 .antMatchers(
                         HttpMethod.POST,
-                        authenticationPath
+                        authenticationPath,
+                        "/register",
+                        "/register/**"
                 )
                 .and()
                 .ignoring()
