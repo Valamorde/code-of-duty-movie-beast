@@ -82,7 +82,7 @@ public class ShowController {
      * @param newShow
      * @return saves new show, or status error
      */
-    @PostMapping(value = "/admin/shows", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/admin/shows", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createNewShow(@Valid @RequestBody Show newShow) {
         try {
             return showMediator.createNewShow(newShow, SecurityContextHolder.getContext().getAuthentication());
@@ -99,7 +99,7 @@ public class ShowController {
      * @param showDetails
      * @return saves updates, or status error
      */
-    @PutMapping(value = "/admin/shows/{showId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/admin/shows/{showId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> updateShow(@PathVariable(value = "showId") Integer showId, @Valid @RequestBody Show showDetails) {
         try {
             return showMediator.updateSingleShow(showId, showDetails, SecurityContextHolder.getContext().getAuthentication());

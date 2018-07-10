@@ -46,7 +46,7 @@ public class BookingController {
      * @param booking
      * @return user's current booking list
      */
-    @PostMapping(value = "/cancelBooking", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/cancelBooking", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> cancelBooking(@Valid @RequestBody Booking booking) {
         try {
             return bookingMediator.cancelTicket(SecurityContextHolder.getContext().getAuthentication(), booking);
@@ -108,7 +108,7 @@ public class BookingController {
      * @param bookingDetails
      * @return saves booking changes (status ok), or status error
      */
-    @PutMapping(value = "/admin/bookings/{bookingId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/admin/bookings/{bookingId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> updateBooking(@PathVariable(value = "bookingId") Integer bookingId, @Valid @RequestBody Booking bookingDetails) {
         try {
             return bookingMediator.updateBooking(SecurityContextHolder.getContext().getAuthentication(), bookingId, bookingDetails);

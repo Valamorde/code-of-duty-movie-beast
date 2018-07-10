@@ -41,7 +41,7 @@ public class SeatReservationController {
      * @param seatReservation
      * @return if user is not registered-> status error, if registered: books seat, or status error
      */
-    @PostMapping(value = "/seatReservations/reserve", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/seatReservations/reserve", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> reserveSeat(@RequestBody SeatReservation seatReservation) {
         try {
             return seatReservationMediator.reserveTicket(seatReservation, SecurityContextHolder.getContext().getAuthentication());
@@ -57,7 +57,7 @@ public class SeatReservationController {
      * @param reservation
      * @return if user is not registered-> status error, if registered: saves changes, or status error
      */
-    @PostMapping(value = "/seatReservation/cancel", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/seatReservation/cancel", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> cancelReservation(@RequestBody SeatReservation reservation) {
         try {
             return seatReservationMediator.cancelReservation(reservation, SecurityContextHolder.getContext().getAuthentication());

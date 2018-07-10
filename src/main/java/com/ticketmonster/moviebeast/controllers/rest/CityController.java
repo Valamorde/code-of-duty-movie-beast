@@ -66,7 +66,7 @@ public class CityController {
      * @param newCity
      * @return saves new city (status ok), or status error
      */
-    @PostMapping(value = "/admin/cities", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/admin/cities", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createNewCity(@Valid @RequestBody City newCity) {
         try {
             return cityMediator.createNewCity(newCity, SecurityContextHolder.getContext().getAuthentication());
@@ -83,7 +83,7 @@ public class CityController {
      * @param cityDetails
      * @return saves city's updates (status ok), or status error
      */
-    @PutMapping(value = "/admin/cities/{cityId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/admin/cities/{cityId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> updateCity(@PathVariable(value = "cityId") Integer cityId, @Valid @RequestBody City cityDetails) {
         try {
             return cityMediator.updateSingleCity(cityId, cityDetails, SecurityContextHolder.getContext().getAuthentication());

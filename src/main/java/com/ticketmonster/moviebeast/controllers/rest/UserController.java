@@ -30,6 +30,7 @@ public class UserController {
     private UserMediator userMediator;
 
     //<editor-fold desc="User Operations">
+
     /**
      * Returns the logged user
      *
@@ -47,7 +48,7 @@ public class UserController {
      * @param newUser - requires email, password, full name
      * @return created user, 201 OR CustomException, 409
      */
-    @PostMapping(value = "/register", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/register", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> registerNewUser(@RequestBody User newUser) {
         try {
             return userMediator.createNewUser(newUser);
@@ -129,6 +130,7 @@ public class UserController {
     //</editor-fold>
 
     //<editor-fold desc="Admin Operations">
+
     /**
      * @return a list of all users
      */

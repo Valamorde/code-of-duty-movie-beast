@@ -82,7 +82,7 @@ public class MovieController {
      * @param newMovie
      * @return
      */
-    @PostMapping(value = "/admin/movies", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/admin/movies", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createNewMovie(@Valid @RequestBody Movie newMovie) {
         try {
             return movieMediator.createNewMovie(newMovie, SecurityContextHolder.getContext().getAuthentication());
@@ -99,7 +99,7 @@ public class MovieController {
      * @param movieDetails
      * @return saves new movie (status ok), or status error
      */
-    @PutMapping(value = "/admin/movies/{movieId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/admin/movies/{movieId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> updateMovie(@PathVariable(value = "movieId") Integer movieId, @Valid @RequestBody Movie movieDetails) {
         try {
             return movieMediator.updateSingleMovie(movieId, movieDetails, SecurityContextHolder.getContext().getAuthentication());

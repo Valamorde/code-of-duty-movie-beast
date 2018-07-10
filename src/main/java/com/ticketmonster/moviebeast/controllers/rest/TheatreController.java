@@ -66,7 +66,7 @@ public class TheatreController {
      * @param newTheatre
      * @return saves new theatre, or status error
      */
-    @PostMapping(value = "/admin/theatres", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/admin/theatres", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createNewTheatre(@Valid @RequestBody Theatre newTheatre) {
         try {
             return theatreMediator.createNewTheatre(newTheatre, SecurityContextHolder.getContext().getAuthentication());
@@ -83,7 +83,7 @@ public class TheatreController {
      * @param theatreDetails
      * @return saves updates, or status error
      */
-    @PutMapping(value = "/admin/theatres/{theatreId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/admin/theatres/{theatreId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> updateTheatre(@PathVariable(value = "theatreId") Integer theatreId, @Valid @RequestBody Theatre theatreDetails) {
         try {
             return theatreMediator.updateSingleTheatre(theatreId, theatreDetails, SecurityContextHolder.getContext().getAuthentication());
