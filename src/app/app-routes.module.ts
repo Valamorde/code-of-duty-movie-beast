@@ -14,12 +14,12 @@ import { SeatComponent } from './sitecomponents/movies/movieandshow/seat/seat.co
 
 
 const Routes: Routes = [
-    { path: '*', redirectTo: '/login' },
-    { path: 'Movies', component: MoviesComponent, canActivate: [AuthGuard] },
-    { path: 'Cities', component: CitiesComponent, canActivate: [AuthGuard] },
-    { path: 'Shows', component: ShowsComponent, canActivate: [AuthGuard] },
-    { path: 'Theaters', component: TheatersComponent, canActivate: [AuthGuard] },
-    { path: 'Basket', component: BasketComponent, canActivate: [AuthGuard] },
+    { path: '', redirectTo: '/movies', pathMatch: 'full' },
+    { path: 'movies', component: MoviesComponent, canActivate: [AuthGuard] },
+    { path: 'cities', component: CitiesComponent, canActivate: [AuthGuard] },
+    { path: 'shows', component: ShowsComponent, canActivate: [AuthGuard] },
+    { path: 'theaters', component: TheatersComponent, canActivate: [AuthGuard] },
+    { path: 'basket', component: BasketComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent },
     { path: 'signup', component: SignupComponent },
     { path: 'movieShow/:id', component: MovieandshowComponent, canActivate: [AuthGuard] },

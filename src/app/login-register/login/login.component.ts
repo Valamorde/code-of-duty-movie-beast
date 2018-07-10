@@ -10,8 +10,8 @@ import { Router } from '@angular/router'
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
- 
- 
+
+
 
 
 })
@@ -20,23 +20,23 @@ export class LoginComponent implements OnInit {
   loginUserData = {}
 
   constructor(private _auth: AuthService,
-              private _router: Router) { }
+    private _router: Router) { }
 
   ngOnInit() {
   }
 
-  loginUser () {
+  loginUser() {
     this._auth.loginUser(this.loginUserData)
-    .subscribe(
-      res => {
-        localStorage.setItem('token', res.token)
-        this._router.navigate(['/Movies'])
-      },
-      err => console.log(err)
-    ) 
+      .subscribe(
+        res => {
+          localStorage.setItem('token', res.token)
+          this._router.navigate(['/movies'])
+        },
+        err => console.log(err)
+      )
   }
-    navigate (){
-      this._router.navigate(['/signup'])
-    }
+  navigate() {
+    this._router.navigate(['/signup'])
+  }
 
 }
