@@ -1,0 +1,39 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<ul [@listStagger]="shows$">
+    <div class="col-md-12 no-padding lib-item" data-category="ui">
+        <div class="lib-panel">
+            <div class="row box-shadow">
+                <div class="col-md-6">
+                    <img class="lib-img" src='/assets/images/MoviesById/{{movie$.movieId}}.jpg'>
+                </div>
+                <div class="col-md-6">
+                    <div class="lib-row lib-header">
+                        {{movie$.movieName}}
+                        <div class="lib-header-seperator"></div>
+                    </div>
+                    <div class="lib-row lib-desc">
+                        {{movie$.movieDescription}}
+
+                        <h3>Show Details</h3>
+                        <ul *ngFor='let show of shows$;'>
+                            <div class="card bg-light mb-3" style="max-width: 28rem;">
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        <i class=" material-icons ">calendar_today </i>Date : {{show.showDate}}
+                                    </p>
+                                    <p class="card-text">
+                                        <i class=" material-icons ">attach_money </i>Price : {{show.showCost}}
+                                    </p>
+                                    <p class="card-text">
+                                        <i class="material-icons ">event_seat
+                                        </i> Available Seats : {{show.availableSeats}}</p>
+                                    <button class="btn btn-primary" routerLink="/seat/{{show.showId}}" routerLinkActive="active">Seats</button>
+                                </div>
+                            </div>
+
+
+                        </ul>
+                    </div>
+
+                </div>

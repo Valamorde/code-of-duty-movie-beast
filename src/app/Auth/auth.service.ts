@@ -5,11 +5,12 @@ import { Router } from '@angular/router'
 @Injectable()
 export class AuthService {
 
-  private _registerUrl = "http://localhost:8080/api/auth";
+  private _registerUrl = "http://localhost:8080/api/register";
   private _loginUrl = "http://localhost:8080/api/auth";
+  private _movieUrl = "http://localhost:8080/api/movies";
 
   constructor(private http: HttpClient,
-              private _router: Router) { }
+    private _router: Router) { }
 
   registerUser(user) {
     return this.http.post<any>(this._registerUrl, user)
@@ -24,9 +25,13 @@ export class AuthService {
   }
 
   loggedIn() {
-    return !!localStorage.getItem('token')    
+    return !!localStorage.getItem('token')
   }
 
+  logoutUser() {
+    localStorage.removeItem('token')
+    this._router.navigate(['/login'])
+  }
 
 
 }

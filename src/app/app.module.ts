@@ -11,13 +11,16 @@ import { ShowsComponent } from './sitecomponents/shows/shows.component';
 import { LoginComponent } from './login-register/login/login.component';
 import { SignupComponent } from './login-register/signup/signup.component';
 import { NavbarComponent } from './sitecomponents/navbar/navbar.component';
-import { FormsModule} from '@angular/forms'; 
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routes.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthService } from './Auth/auth.service';
 import { TokenInterceptorService } from './Auth/token-interceptor.service';
 import { AuthGuard } from './Auth/auth.guard.service';
 import { DataService } from './connection/data.service';
+import { MovieandshowComponent } from './sitecomponents/movies/movieandshow/movieandshow.component';
+import { SeatComponent } from './sitecomponents/movies/movieandshow/seat/seat.component';
+
 
 
 
@@ -31,12 +34,14 @@ import { DataService } from './connection/data.service';
     ShowsComponent,
     LoginComponent,
     SignupComponent,
-    NavbarComponent
+    NavbarComponent,
+    MovieandshowComponent,
+    SeatComponent
   ],
   imports: [
-    BrowserModule,   
+    BrowserModule,
     AppRoutingModule,
-    FormsModule,BrowserAnimationsModule,HttpClientModule, 
+    FormsModule, BrowserAnimationsModule, HttpClientModule,
 
   ],
   providers: [AuthService, AuthGuard, DataService, {

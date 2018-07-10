@@ -8,25 +8,29 @@ import { BasketComponent } from './sitecomponents/basket/basket.component';
 import { AuthGuard } from './Auth/auth.guard.service';
 import { LoginComponent } from './login-register/login/login.component';
 import { SignupComponent } from './login-register/signup/signup.component';
-import { NavbarComponent } from './sitecomponents/navbar/navbar.component';
+import { MovieandshowComponent } from './sitecomponents/movies/movieandshow/movieandshow.component';
+import { SeatComponent } from './sitecomponents/movies/movieandshow/seat/seat.component';
 
 
-const Routes: Routes = [ 
-    {path : '', component: NavbarComponent,canActivate: [AuthGuard] } ,
-{path : 'Movies', component : MoviesComponent,canActivate: [AuthGuard]},
-{path : 'Cities', component : CitiesComponent, canActivate: [AuthGuard]},
- {path : 'Shows', component : ShowsComponent, canActivate: [AuthGuard]},  
- {path : 'Theaters', component : TheatersComponent, canActivate: [AuthGuard]},
- {path : 'Basket', component : BasketComponent, canActivate: [AuthGuard]},
- {path : 'login', component : LoginComponent},
- {path : 'signup', component : SignupComponent}
- ]
+
+const Routes: Routes = [
+    { path: '*', redirectTo: '/login' },
+    { path: 'Movies', component: MoviesComponent, canActivate: [AuthGuard] },
+    { path: 'Cities', component: CitiesComponent, canActivate: [AuthGuard] },
+    { path: 'Shows', component: ShowsComponent, canActivate: [AuthGuard] },
+    { path: 'Theaters', component: TheatersComponent, canActivate: [AuthGuard] },
+    { path: 'Basket', component: BasketComponent, canActivate: [AuthGuard] },
+    { path: 'login', component: LoginComponent },
+    { path: 'signup', component: SignupComponent },
+    { path: 'movieShow/:id', component: MovieandshowComponent, canActivate: [AuthGuard] },
+    { path: 'seat/:idseat', component: SeatComponent, canActivate: [AuthGuard] }
+]
 
 
- 
+
 @NgModule({
     imports: [RouterModule.forRoot(Routes)],
-    exports: [RouterModule] 
+    exports: [RouterModule]
 })
 
 export class AppRoutingModule {

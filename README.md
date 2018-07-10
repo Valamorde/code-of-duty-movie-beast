@@ -1,20 +1,27 @@
-## This is simply a structural placeholder of the master branch, nothing to do yet.
+# Ticket
 
-## How to use Git (Just in case someone forgot)
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
 
-a) Navigate to the directory you want to work in. 
-b) Clone the repository by running "git clone https://Valamorde@bitbucket.org/Valamorde/cod-ticket-monster.git" (without quotes in CMD, PowerShell or GitBash etc.)
-c) Open the new folder (cod-ticket-monster) in explorer or CD through CMD, PowerShell, GitBash
-d) Run "git checkout -b [name_of_your_new_branch]"
-e) Do what you need to do
-f) When done run "git status", "git add [name_of_the_file_you_want_to_stage_or_period_for_all]", "git commit -m '[your_message_here_KISS]'", "git push origin [name_of_your_new_branch]"
-g) You're done.
+## Development server
 
-## Important
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-a) We are following the Git Workflow (master, develop, release, feature(s))
-b) On a daily basis before doing anything run "git fetch origin [name_of_your_branch]" followed by "git pull origin [name_of_your_branch]" to make sure you re not having any conflicts
-c) At the end of the day always commit and push your changes. 
+## Code scaffolding
 
-## Having questions about Git? Check this out:
-https://github.com/Kunena/Kunena-Forum/wiki/Create-a-new-branch-with-git-and-manage-branches
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+
+## Build
+
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+
+## Running unit tests
+
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

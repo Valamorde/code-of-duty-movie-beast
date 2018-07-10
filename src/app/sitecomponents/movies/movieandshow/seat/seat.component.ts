@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../connection/data.service'
+import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 import { trigger, style, transition, animate, query, stagger } from '@angular/animations';
 
-
 @Component({
-  selector: 'app-movies',
-  templateUrl: './movies.component.html',
-  styleUrls: ['./movies.component.css'],
+  selector: 'app-seat',
+  templateUrl: './seat.component.html',
+  styleUrls: ['./seat.component.css'],
 
   animations: [
     trigger('listStagger', [
@@ -33,22 +33,18 @@ import { trigger, style, transition, animate, query, stagger } from '@angular/an
   ]
 
 })
+export class SeatComponent implements OnInit {
+  seats$: Object;
 
-export class MoviesComponent implements OnInit {
-  movies$: Object;
 
-  constructor(private data: DataService) { }
+  constructor(private http: HttpClient, private route: ActivatedRoute, ) { }
+
   ngOnInit() {
-    this.data.getMovies().subscribe(
-      data => this.movies$ = data
-    )
-
-
-    // getVideos(id) {
-    //   var vid = Number(id);
-    // console.log(this.videos[vid].videoCode);
-    // console.log("TEST");
-    // return this.videos[vid].videoCode
-
+    this.getSeats().subscribe(
+      data => this.seats$ = data)
+  }
+  getSeats() {
+    const idseat = +this.route.snapshot.paramMap.get('idseat');
+    return this.http.get('http://localhost:8080/api/shows/' + idseat + '/seats')
   }
 }

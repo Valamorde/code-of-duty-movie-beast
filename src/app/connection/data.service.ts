@@ -6,15 +6,16 @@ import { HttpClient } from '@angular/common/http';
 })
 export class DataService {
 
-  constructor(private http: HttpClient ) { }
-  
-  getCities(){
+  constructor(private http: HttpClient) { }
+
+  getCities() {
     return this.http.get('http://localhost:8080/api/cities')
-  
+
   }
-  
-  getMovies(){
+
+  getMovies() {
     return this.http.get('http://localhost:8080/api/movies')
-  
-}
+
+  }
+
 }

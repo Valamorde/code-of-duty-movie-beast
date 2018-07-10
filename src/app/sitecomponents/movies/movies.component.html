@@ -5,41 +5,48 @@
     <span class="letter" data-letter="I">I</span>
     <span class="letter" data-letter="E">E</span>
     <span class="letter" data-letter="S">S</span>
-  </div>
-  
-  
-  
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+</div>
 
-  <ul [@listStagger]="movies$">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+    crossorigin="anonymous">
+
+<ul [@listStagger]="movies$">
+    <!-- <tr *ngFor="let movie of movies$;" [id]="movie.movieId"> -->
     <div class="col-md-12">
-            <div class="row card-group">
-        <div class="col-md-4" *ngFor="let movie of movies$;">
-            <div class="card">   
-               <div class="card-header">
-                  <img class="card-img" src='/assets/images/MoviesById/{{movie.movieId}}.jpg' alt="Card image">
-               </div>  
-               <div class="card-body">
-                  <h1 class="card-title">{{movie.movieName}}</h1>
-                  <div class="container">
-                     <div class="row">
-                        <div class="col-4 metadata">
-                           <i class="fa fa-clock" aria-hidden="true"></i> 
-                           <p>{{movie.movieDurationInMinutes}}</p>
+        <div class="row card-group">
+            <div class="col-md-4" *ngFor="let movie of movies$;">
+                <div class="card">
+                    <div class="card-header">
+                        <img class="card-img" src='/assets/images/MoviesById/{{movie.movieId}}.jpg' alt="Card image">
+                    </div>
+                    <div class="card-body">
+                        <h1 class="card-title">{{movie.movieName}}</h1>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-4 metadata">
+                                    <i class="fa fa-clock" aria-hidden="true"></i>
+                                    <p>{{movie.movieDurationInMinutes}}</p>
+                                </div>
+                                <div class="col-8 metadata">
+                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                    <p>{{movie.movieReleaseDate}}</p>
+
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-8 metadata">
-                            <i class="fa fa-calendar" aria-hidden="true"></i> 
-                            <p>{{movie.movieReleaseDate}}</p>
-                        </div>
-                     </div>
-                  </div>      
-                  <p class="card-text">{{movie.movieDescription}}</p>
-                  <!-- <a class="trailer-preview" href="https://youtu.be/ePbKGoIGAXY" target="new">
-                     <i class="fa fa-play" aria-hidden="true"></i> -->
-                     <!-- </a> -->
-               </div>
+                        <p class="card-text">{{movie.movieDescription}}</p>
+                        <a class="trailer-preview" href='https://www.youtube.com/watch?v={{movie.trailerURL}}' target="new">
+                            <i class="fa fa-play" aria-hidden="true"></i>
+                        </a>
+
+                        <a class="button" routerLink="/movieShow/{{movie.movieId}}" routerLinkActive="active" style="vertical-align:middle">
+                            <span> Shows </span>
+                        </a>
+
+
+                    </div>
+                </div>
             </div>
-  </div>
-  </div>
+        </div>
     </div>
-    </ul>
+</ul>
