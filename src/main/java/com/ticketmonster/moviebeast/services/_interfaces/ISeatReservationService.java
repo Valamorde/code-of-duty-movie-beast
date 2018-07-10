@@ -8,6 +8,8 @@ public interface ISeatReservationService {
 
     ResponseEntity<?> getAllSeats();
 
+    ResponseEntity<?> getSingleSeat(Integer seatId);
+
     ResponseEntity<?> reserveTicket(SeatReservation seatReservation, Authentication authentication);
 
     ResponseEntity<?> cancelReservation(SeatReservation seatReservation, Authentication authentication);

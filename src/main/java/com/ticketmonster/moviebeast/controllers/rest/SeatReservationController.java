@@ -36,6 +36,14 @@ public class SeatReservationController {
     }
 
     /**
+     * Allows the user to get a specific seat
+     */
+    @GetMapping(value = "/seats/{seatId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getSingleSeat(@PathVariable(value = "seatId") Integer seatId){
+        return seatReservationMediator.getSingleSeat(seatId);
+    }
+
+    /**
      * Allows user to make a seat reservation
      *
      * @param seatReservation

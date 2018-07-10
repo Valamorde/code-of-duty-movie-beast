@@ -33,6 +33,11 @@ public class SeatReservationServiceImpl implements ISeatReservationService {
     }
 
     @Override
+    public ResponseEntity<?> getSingleSeat(Integer seatId) {
+        return new ResponseEntity<>(seatReservationRepository.getOne(seatId), HttpStatus.OK);
+    }
+
+    @Override
     @Transactional
     public ResponseEntity<?> reserveTicket(SeatReservation seatReservation, Authentication authentication) {
 

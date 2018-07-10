@@ -27,6 +27,10 @@ public class SeatReservationMediator {
         return seatReservationService.getAllSeats();
     }
 
+    public ResponseEntity<?> getSingleSeat(Integer seatId){
+        return  seatReservationService.getSingleSeat(seatId);
+    }
+
     public ResponseEntity<?> reserveTicket(SeatReservation seatReservation, Authentication authentication){
         SeatReservation seat = seatReservationRepository.getOne(seatReservation.getSeatId());
         return seatReservationService.reserveTicket(seat, authentication);
