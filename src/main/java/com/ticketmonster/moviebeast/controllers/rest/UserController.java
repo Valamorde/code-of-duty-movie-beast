@@ -34,12 +34,12 @@ public class UserController {
     /**
      * Returns the logged user
      *
-     * @param user
+     * @param principal
      * @return the logged user
      */
     @RequestMapping(value = "/loggedUser", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Principal loggedUser(Principal user) {
-        return user;
+    public ResponseEntity<?> loggedUser(Principal principal) {
+        return userMediator.getLoggedUser(principal);
     }
 
     /**

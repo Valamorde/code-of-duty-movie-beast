@@ -15,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.security.Principal;
 import java.util.Date;
 import java.util.List;
 
@@ -103,6 +104,12 @@ public class UserServiceImpl implements IUserService {
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
+    }
+
+    @Override
+    public ResponseEntity<?> getLoggedUser(Principal principal) {
+        User user = userRepository.findByEmail(principal.getName());
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @Override

@@ -5,6 +5,8 @@ import com.ticketmonster.moviebeast.models.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 
+import java.security.Principal;
+
 public interface IUserService {
 
     ResponseEntity<?> deleteUserAndCleanup(Authentication authentication, User user);
@@ -14,6 +16,8 @@ public interface IUserService {
     ResponseEntity<?> getAllUsers();
 
     ResponseEntity<?> getSingleUser(Authentication authentication, User targetUser);
+
+    ResponseEntity<?> getLoggedUser(Principal principal);
 
     ResponseEntity<?> getUserBasket(Authentication authentication, User targetUser);
 

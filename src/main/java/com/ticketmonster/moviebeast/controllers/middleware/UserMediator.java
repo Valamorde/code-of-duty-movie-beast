@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.security.Principal;
 
 /**
  * The User Mediator sits between the REST & Service Layers
@@ -44,6 +45,10 @@ public class UserMediator {
     public ResponseEntity<?> getSingleUser(Authentication authentication, Integer userId) {
         User targetUser = userRepository.getOne(userId);
         return userService.getSingleUser(authentication, targetUser);
+    }
+
+    public ResponseEntity<?> getLoggedUser(Principal principal){
+        return userService.getLoggedUser(principal);
     }
 
     public ResponseEntity<?> getUserBasket(Authentication authentication, Integer userId) {
