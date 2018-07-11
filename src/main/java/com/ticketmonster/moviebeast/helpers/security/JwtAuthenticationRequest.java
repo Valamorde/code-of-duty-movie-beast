@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 /**
  * This token is returned with credentials that the user has provided in the login.
- * @author nancyatnic
  *
+ * @author nancyatnic
  */
 public class JwtAuthenticationRequest implements Serializable {
 

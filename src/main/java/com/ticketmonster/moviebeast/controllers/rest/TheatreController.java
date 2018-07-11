@@ -27,6 +27,7 @@ public class TheatreController {
     private TheatreMediator theatreMediator;
 
     //<editor-fold desc="User Operations">
+
     /**
      * Allows the user to view all the theatres
      *
@@ -60,6 +61,7 @@ public class TheatreController {
     //</editor-fold>
 
     //<editor-fold desc="Admin Operations">
+
     /**
      * Allows the admin to create a new theatre
      *

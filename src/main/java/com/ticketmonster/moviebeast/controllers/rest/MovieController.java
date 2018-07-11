@@ -27,6 +27,7 @@ public class MovieController {
     private MovieMediator movieMediator;
 
     //<editor-fold desc="User Operations">
+
     /**
      * Allows the user to view all movies
      *
@@ -76,6 +77,7 @@ public class MovieController {
     //</editor-fold>
 
     //<editor-fold desc="Admin Operations">
+
     /**
      * Allows the admin to create a new movie
      *

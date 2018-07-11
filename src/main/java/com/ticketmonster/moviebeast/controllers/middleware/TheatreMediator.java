@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  * and is responsible to map an ID to an Entity and perform any required checks
  * before passing it down to the Business Layer.
  * See ~>   com.ticketmonster.moviebeast.services.*.*Theatre*
- *     ~>   com.ticketmonster.moviebeast.controllers.rest.Theatre*
+ * ~>   com.ticketmonster.moviebeast.controllers.rest.Theatre*
  */
 @Component
 public class TheatreMediator {
@@ -23,26 +23,26 @@ public class TheatreMediator {
     @Autowired
     private TheatreServiceImpl theatreService;
 
-    public ResponseEntity<?> getAllTheatres(){
+    public ResponseEntity<?> getAllTheatres() {
         return theatreService.getAllTheatres();
     }
 
-    public ResponseEntity<?> getSingleTheatre(Integer theatreId){
+    public ResponseEntity<?> getSingleTheatre(Integer theatreId) {
         Theatre theatre = theatreRepository.getOne(theatreId);
         return theatreService.getSingleTheatre(theatre);
     }
 
-    public ResponseEntity<?> createNewTheatre(Theatre newTheatre, Authentication authentication){
+    public ResponseEntity<?> createNewTheatre(Theatre newTheatre, Authentication authentication) {
         return theatreService.createNewTheatre(newTheatre, authentication);
     }
 
-    public ResponseEntity<?> updateSingleTheatre(Integer theatreId, Theatre theatreDetails, Authentication authentication){
+    public ResponseEntity<?> updateSingleTheatre(Integer theatreId, Theatre theatreDetails, Authentication authentication) {
         Theatre theatre = theatreRepository.getOne(theatreId);
         return theatreService.updateSingleTheatre(theatre, theatreDetails, authentication);
     }
 
-    public ResponseEntity<?> deleteSingleTheatre(Integer theatreId, Authentication authentication){
+    public ResponseEntity<?> deleteSingleTheatre(Integer theatreId, Authentication authentication) {
         Theatre theatre = theatreRepository.getOne(theatreId);
-        return theatreService.deleteSingleTheatre(theatre,authentication);
+        return theatreService.deleteSingleTheatre(theatre, authentication);
     }
 }

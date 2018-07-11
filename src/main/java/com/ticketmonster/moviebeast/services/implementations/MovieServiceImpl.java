@@ -13,6 +13,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * The class MovieServiceImpl handles the actions regarding movies.
+ * Namely, it enables users to fetch info for all or a signle movie, and the admin to create, update and delete a movie.
+ */
 @Service
 public class MovieServiceImpl implements IMovieService {
 

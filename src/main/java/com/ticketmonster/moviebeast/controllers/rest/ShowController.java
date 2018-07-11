@@ -27,6 +27,7 @@ public class ShowController {
     private ShowMediator showMediator;
 
     //<editor-fold desc="User Operations">
+
     /**
      * Allows the user to view all the shows
      *
@@ -76,6 +77,7 @@ public class ShowController {
     //</editor-fold>
 
     //<editor-fold desc="Admin Operations">
+
     /**
      * Allows the admin to create a new show
      *

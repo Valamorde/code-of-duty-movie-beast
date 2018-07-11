@@ -18,8 +18,8 @@ import java.util.function.Function;
 /**
  * This helper is responsible for handling token info.
  * Checks token for username, date issued, expiration date.
- * @author nancyatnic
  *
+ * @author nancyatnic
  */
 @Component
 public class JwtTokenUtil implements Serializable {
@@ -67,6 +67,7 @@ public class JwtTokenUtil implements Serializable {
 
     /**
      * Checks if token is created before a password reset
+     *
      * @param created
      * @param lastPasswordReset
      * @return milliseconds
@@ -119,6 +120,7 @@ public class JwtTokenUtil implements Serializable {
 
     /**
      * If database credentials match with the ones provided, the token provides the exact user details
+     *
      * @param token
      * @param userDetails
      * @return email

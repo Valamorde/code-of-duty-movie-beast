@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  * and is responsible to map an ID to an Entity and perform any required checks
  * before passing it down to the Business Layer.
  * See ~>   com.ticketmonster.moviebeast.services.*.*Movie*
- *     ~>   com.ticketmonster.moviebeast.controllers.rest.Movie*
+ * ~>   com.ticketmonster.moviebeast.controllers.rest.Movie*
  */
 @Component
 public class MovieMediator {
@@ -32,7 +32,7 @@ public class MovieMediator {
         return movieService.getSingleMovie(movie);
     }
 
-    public ResponseEntity<?> getShowByMovie(Integer movieId){
+    public ResponseEntity<?> getShowByMovie(Integer movieId) {
         Movie movie = movieRepository.getOne(movieId);
         return movieService.getShowByMovie(movie);
     }

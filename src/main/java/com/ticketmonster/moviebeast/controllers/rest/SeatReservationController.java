@@ -31,7 +31,7 @@ public class SeatReservationController {
      * @return
      */
     @GetMapping(value = "/seats", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getAllSeats(){
+    public ResponseEntity<?> getAllSeats() {
         return seatReservationMediator.getAllSeats();
     }
 
@@ -39,7 +39,7 @@ public class SeatReservationController {
      * Allows the user to get a specific seat
      */
     @GetMapping(value = "/seats/{seatId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getSingleSeat(@PathVariable(value = "seatId") Integer seatId){
+    public ResponseEntity<?> getSingleSeat(@PathVariable(value = "seatId") Integer seatId) {
         return seatReservationMediator.getSingleSeat(seatId);
     }
 

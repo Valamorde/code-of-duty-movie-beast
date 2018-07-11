@@ -12,6 +12,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+/**
+ * This TheatreServiceImpl is responsible for the actions regarding the theatres.
+ * Namely, fetches info when a user asks for all or a single theatre, while allows the admin to create, update and delete a theatre.
+ */
 @Service
 public class TheatreServiceImpl implements ITheatreService {
 

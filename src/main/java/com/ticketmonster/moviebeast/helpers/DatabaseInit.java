@@ -15,6 +15,7 @@ import java.util.*;
 
 /**
  * This helper class is responsible for the database initialization. Contains fixed data for demo purposes.
+ *
  * @author nancyatnic
  */
 @Component

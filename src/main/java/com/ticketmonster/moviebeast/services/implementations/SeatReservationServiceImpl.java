@@ -15,6 +15,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * The SeatReservationService class is responsible for handling the actions regarding the tickets,
+ * meaning reserving a seat and canceling a reservation.
+ */
 @Service
 public class SeatReservationServiceImpl implements ISeatReservationService {
 
@@ -28,7 +32,7 @@ public class SeatReservationServiceImpl implements ISeatReservationService {
     private IUserRepository userRepository;
 
     @Override
-    public ResponseEntity<?> getAllSeats(){
+    public ResponseEntity<?> getAllSeats() {
         return new ResponseEntity<>(seatReservationRepository.findAll(), HttpStatus.OK);
     }
 

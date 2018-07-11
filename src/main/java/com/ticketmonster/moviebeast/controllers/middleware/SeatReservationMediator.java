@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  * and is responsible to map an ID to an Entity and perform any required checks
  * before passing it down to the Business Layer.
  * See ~>   com.ticketmonster.moviebeast.services.*.*SeatReservation*
- *     ~>   com.ticketmonster.moviebeast.controllers.rest.SeatReservation*
+ * ~>   com.ticketmonster.moviebeast.controllers.rest.SeatReservation*
  */
 @Component
 public class SeatReservationMediator {
@@ -23,20 +23,20 @@ public class SeatReservationMediator {
     @Autowired
     private SeatReservationServiceImpl seatReservationService;
 
-    public ResponseEntity<?> getAllSeats(){
+    public ResponseEntity<?> getAllSeats() {
         return seatReservationService.getAllSeats();
     }
 
-    public ResponseEntity<?> getSingleSeat(Integer seatId){
-        return  seatReservationService.getSingleSeat(seatId);
+    public ResponseEntity<?> getSingleSeat(Integer seatId) {
+        return seatReservationService.getSingleSeat(seatId);
     }
 
-    public ResponseEntity<?> reserveTicket(SeatReservation seatReservation, Authentication authentication){
+    public ResponseEntity<?> reserveTicket(SeatReservation seatReservation, Authentication authentication) {
         SeatReservation seat = seatReservationRepository.getOne(seatReservation.getSeatId());
         return seatReservationService.reserveTicket(seat, authentication);
     }
 
-    public ResponseEntity<?> cancelReservation(SeatReservation seatReservation, Authentication authentication){
+    public ResponseEntity<?> cancelReservation(SeatReservation seatReservation, Authentication authentication) {
         SeatReservation seat = seatReservationRepository.getOne(seatReservation.getSeatId());
         return seatReservationService.cancelReservation(seat, authentication);
     }

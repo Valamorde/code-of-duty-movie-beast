@@ -27,6 +27,7 @@ public class CityController {
     private CityMediator cityMediator;
 
     //<editor-fold desc="User Operations">
+
     /**
      * Allows the user to view all cities
      *
@@ -60,6 +61,7 @@ public class CityController {
     //</editor-fold>
 
     //<editor-fold desc="Admin Operations">
+
     /**
      * Allows the admin to create a new city
      *

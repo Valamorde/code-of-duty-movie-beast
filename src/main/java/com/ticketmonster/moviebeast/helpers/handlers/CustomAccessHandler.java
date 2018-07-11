@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component;
 
 /**
  * This handler is responsible for access. Triggers a check to see if the user is an admin or not, and if not, it returns the user details.
- * @author nancyatnic
  *
+ * @author nancyatnic
  */
 @Component
 public class CustomAccessHandler {
@@ -20,7 +20,7 @@ public class CustomAccessHandler {
         }
     }
 
-    public boolean userIsAdmin(User user){
+    public boolean userIsAdmin(User user) {
         return user.getRole().equals(Role.ROLE_ADMIN.name());
     }
 }

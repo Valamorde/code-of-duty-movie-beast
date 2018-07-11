@@ -19,6 +19,11 @@ import java.security.Principal;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * This UserServiceImpl is responsible for the actions regarding the users.
+ * Namely, fetches info when a user asks for all or a single booking or the basket,
+ * while allows the admin to create and update a user, get all user info, find a single user, get all user bookings and reset a password.
+ */
 @Service
 public class UserServiceImpl implements IUserService {
 

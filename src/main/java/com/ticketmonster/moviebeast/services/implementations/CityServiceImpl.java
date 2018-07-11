@@ -13,6 +13,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * This CityServiceImpl is responsible for the actions regarding the cities.
+ * Namely, fetches info when a user asks for all or a single city, while allows the admin to create, update and delete a city.
+ */
 @Service
 public class CityServiceImpl implements ICityService {
 

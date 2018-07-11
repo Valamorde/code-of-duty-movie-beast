@@ -28,6 +28,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * The class BookingServiceImpl is handling all the transactions for the bookings.
+ * Namely, it handles bookings, cancellations, updates for signle booking, deletions and printing of tickets booked.
+ */
 @Service
 public class BookingServiceImpl implements IBookingService {
 

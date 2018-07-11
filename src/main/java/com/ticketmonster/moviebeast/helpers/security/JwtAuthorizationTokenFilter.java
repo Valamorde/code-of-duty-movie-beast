@@ -19,8 +19,8 @@ import java.io.IOException;
 /**
  * Checks if the credentials the user provided match the ones stored in database, then loads user's info from database and provides a token.
  * Also, throws an error message, in case the token has expired or is not valid, or credentials are incorrect.
- * @author nancyatnic
  *
+ * @author nancyatnic
  */
 public class JwtAuthorizationTokenFilter extends OncePerRequestFilter {
 

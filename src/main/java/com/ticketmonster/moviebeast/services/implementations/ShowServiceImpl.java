@@ -13,6 +13,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * This ShowServiceImpl is responsible for the actions regarding the shows.
+ * Namely, fetches info when a user asks for all or a single show, while allows the admin to create, update and delete a show.
+ */
 @Service
 public class ShowServiceImpl implements IShowService {
 
@@ -39,7 +43,7 @@ public class ShowServiceImpl implements IShowService {
 
     @Override
     @Transactional
-    public ResponseEntity<?> getSeatsByShow(Show show){
+    public ResponseEntity<?> getSeatsByShow(Show show) {
         return new ResponseEntity<>(show.getSeats(), HttpStatus.OK);
     }
 

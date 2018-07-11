@@ -57,7 +57,7 @@ public class BookingMediator {
         return bookingService.cancelSingleTicket(authentication, booking);
     }
 
-    public void printTicketReport(Authentication authentication, HttpServletResponse res, HttpServletRequest req){
+    public void printTicketReport(Authentication authentication, HttpServletResponse res, HttpServletRequest req) {
         User user = userRepository.findByEmail(authentication.getName());
         bookingService.printTicketReport(user, res, req);
     }

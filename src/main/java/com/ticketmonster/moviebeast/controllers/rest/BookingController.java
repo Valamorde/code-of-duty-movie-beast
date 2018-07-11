@@ -88,6 +88,7 @@ public class BookingController {
     }
 
     //<editor-fold desc="Admin Operations">
+
     /**
      * Allows the admin to print a bookings report
      *

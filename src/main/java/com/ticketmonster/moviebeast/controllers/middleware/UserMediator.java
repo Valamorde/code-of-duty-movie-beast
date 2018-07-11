@@ -20,7 +20,7 @@ import java.security.Principal;
  * and is responsible to map an ID to an Entity and perform any required checks
  * before passing it down to the Business Layer.
  * See ~>   com.ticketmonster.moviebeast.services.*.*User*
- *     ~>   com.ticketmonster.moviebeast.controllers.rest.User*
+ * ~>   com.ticketmonster.moviebeast.controllers.rest.User*
  */
 @Component
 public class UserMediator {
@@ -47,7 +47,7 @@ public class UserMediator {
         return userService.getSingleUser(authentication, targetUser);
     }
 
-    public ResponseEntity<?> getLoggedUser(Principal principal){
+    public ResponseEntity<?> getLoggedUser(Principal principal) {
         return userService.getLoggedUser(principal);
     }
 
@@ -72,19 +72,19 @@ public class UserMediator {
         return userService.updateSingleUser(authentication, targetUser, userDetails);
     }
 
-    public ResponseEntity<?> resetPassword(Authentication authentication, Integer userId){
+    public ResponseEntity<?> resetPassword(Authentication authentication, Integer userId) {
         User targetUser = userRepository.getOne(userId);
         return userService.resetPassword(authentication, targetUser);
     }
 
-    public ResponseEntity<?> deleteUserAndCleanup(Authentication authentication, Integer userId){
+    public ResponseEntity<?> deleteUserAndCleanup(Authentication authentication, Integer userId) {
         User targetUser = userRepository.getOne(userId);
         return userService.deleteUserAndCleanup(authentication, targetUser);
     }
 
 
-    public void printTicket(Authentication authentication, HttpServletResponse res, HttpServletRequest req){
+    public void printTicket(Authentication authentication, HttpServletResponse res, HttpServletRequest req) {
         User user = userRepository.findByEmail(authentication.getName());
-        bookingService.printTickets(user,res,req);
+        bookingService.printTickets(user, res, req);
     }
 }
