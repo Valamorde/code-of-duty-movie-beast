@@ -17,11 +17,11 @@
                         <strong> E-mail: </strong> {{user$.email}} </span>
                 </li>
                 <li class="list-group-item text-white bg-secondary mb-3">
-                    <span *ngIf="enabled">
+                    <span *ngIf="user$.enabled">
                         <strong> Account Status: </strong>
                         <span> Good Standing</span>
                     </span>
-                    <span *ngIf="!enabled">
+                    <span *ngIf="!user$.enabled">
                         <strong> Account Status: </strong>
                         <span> Account Disabled</span>
                     </span>

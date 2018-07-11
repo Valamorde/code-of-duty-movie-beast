@@ -96,7 +96,9 @@ background-image: url(/assets/images/loginsignupbackground3.jpg);
   padding: 10px 50px;
   cursor: pointer;
   transition: .4s;
+  width: 180px;
 }
+
 #join-btn:hover {
     background: rgba(20, 20, 20, .8);
     padding: 10px 80px;
@@ -111,6 +113,7 @@ background-image: url(/assets/images/loginsignupbackground3.jpg);
     padding: 10px 50px;
     cursor: pointer;
     transition: .4s;
+    width: 180px;
   }
   #join-btn1:hover {
       background: rgba(20, 20, 20, .8);

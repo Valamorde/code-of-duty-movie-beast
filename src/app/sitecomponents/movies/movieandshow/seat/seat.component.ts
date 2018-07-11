@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
+import { Location } from "@angular/common";
 import { trigger, style, transition, animate, query, stagger } from '@angular/animations';
 
 @Component({
@@ -37,14 +38,29 @@ export class SeatComponent implements OnInit {
   seats$: Object;
 
 
-  constructor(private http: HttpClient, private route: ActivatedRoute, ) { }
+  constructor(
+    private http: HttpClient,
+    private route: ActivatedRoute,
+    private location: Location
+  ) { }
 
   ngOnInit() {
     this.getSeats().subscribe(
-      data => this.seats$ = data)
+      (data) => {
+        this.seats$ = data;
+        this.rememberPage();
+      }
+    )
   }
+
   getSeats() {
-    const idseat = +this.route.snapshot.paramMap.get('idseat');
-    return this.http.get('http://localhost:8080/api/shows/' + idseat + '/seats')
+    const idshow = +this.route.snapshot.paramMap.get('idshow');
+    return this.http.get('http://localhost:8080/api/shows/' + idshow + '/seats')
   }
+
+  rememberPage() {
+    localStorage.setItem('currentShowPage', this.location.path());
+  }
+
+
 }

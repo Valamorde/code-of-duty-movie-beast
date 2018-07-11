@@ -20,7 +20,9 @@ import { AuthGuard } from './Auth/auth.guard.service';
 import { DataService } from './connection/data.service';
 import { MovieandshowComponent } from './sitecomponents/movies/movieandshow/movieandshow.component';
 import { SeatComponent } from './sitecomponents/movies/movieandshow/seat/seat.component';
-import {UserComponent } from './login-register/user/user.component' 
+import { UserComponent } from './login-register/user/user.component';
+import { BookseatComponent } from './sitecomponents/movies/movieandshow/seat/bookseat/bookseat.component';
+import { RemoveseatComponent } from './sitecomponents/basket/removeseat/removeseat.component'; 
 
 
 
@@ -37,13 +39,16 @@ import {UserComponent } from './login-register/user/user.component'
     NavbarComponent,
     MovieandshowComponent,
     SeatComponent,
-    UserComponent
+    UserComponent,
+	BookseatComponent,
+    RemoveseatComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule, BrowserAnimationsModule, HttpClientModule,
-
+    FormsModule, 
+	BrowserAnimationsModule, 
+	HttpClientModule,
   ],
   providers: [AuthService, AuthGuard, DataService, {
     provide: HTTP_INTERCEPTORS,

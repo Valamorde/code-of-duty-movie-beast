@@ -10,7 +10,9 @@ import { LoginComponent } from './login-register/login/login.component';
 import { SignupComponent } from './login-register/signup/signup.component';
 import { MovieandshowComponent } from './sitecomponents/movies/movieandshow/movieandshow.component';
 import { SeatComponent } from './sitecomponents/movies/movieandshow/seat/seat.component';
-import {UserComponent } from './login-register/user/user.component' 
+import { UserComponent } from './login-register/user/user.component';
+import { BookseatComponent } from './sitecomponents/movies/movieandshow/seat/bookseat/bookseat.component';
+import { RemoveseatComponent } from "./sitecomponents/basket/removeseat/removeseat.component"; 
 
 
 
@@ -24,7 +26,9 @@ const Routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'signup', component: SignupComponent },
     { path: 'movieShow/:id', component: MovieandshowComponent, canActivate: [AuthGuard] },
-    { path: 'seat/:idseat', component: SeatComponent, canActivate: [AuthGuard] },
+    { path: 'show/:idshow', component: SeatComponent, canActivate: [AuthGuard] },
+    { path: 'seat/:seatid', component: BookseatComponent, canActivate: [AuthGuard] },
+    { path: "basket/:seatid", component: RemoveseatComponent, canActivate: [AuthGuard] },
     { path: 'user', component: UserComponent, canActivate: [AuthGuard] }
 
 ]

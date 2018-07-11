@@ -11,7 +11,8 @@
           </i>
         </div>
         <div class="card-footer text-muted">
-          <button class="btn btn-primary">Add Basket</button>
+          <button class="btn btn-primary" *ngIf="seat.seatReserved == 0" routerLink="/seat/{{seat.seatId}}">Add to Basket</button>
+          <button class="btn btn-primary" *ngIf="seat.seatReserved == 1" disabled>Reserved</button>
         </div>
       </div>
 
