@@ -1,0 +1,51 @@
+<ul [@listStagger]='user$'>
+    <div class="card text-white bg-dark mb-3" style="max-width: 35rem;">
+        <div class="card-header text-white mb-3">User Profile</div>
+        <div class="card-body">
+            <img alt="User Pic" src="/assets/images/female_coder.jpg" id="profile-image1" class="center">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item  text-white bg-secondary mb-3">
+                    <span>
+                        <strong>User Id:</strong> {{user$.userId}} </span>
+                </li>
+                <li class="list-group-item  text-white bg-secondary mb-3">
+                    <span>
+                        <strong>Full Name:</strong> {{user$.fullName}} </span>
+                </li>
+                <li class="list-group-item  text-white bg-secondary mb-3">
+                    <span>
+                        <strong> E-mail: </strong> {{user$.email}} </span>
+                </li>
+                <li class="list-group-item text-white bg-secondary mb-3">
+                    <span *ngIf="enabled">
+                        <strong> Account Status: </strong>
+                        <span> Good Standing</span>
+                    </span>
+                    <span *ngIf="!enabled">
+                        <strong> Account Status: </strong>
+                        <span> Account Disabled</span>
+                    </span>
+                </li>
+                <li class="list-group-item text-white bg-secondary mb-3">
+                    <span *ngIf="user$.role=='ROLE_USER'">
+                        <strong> Role: </strong>
+                        <span> User </span>
+                    </span>
+                    <span *ngIf="user$.role=='ROLE_ADMIN'">
+                        <strong> Role: </strong>
+                        <span> Admin </span>
+                    </span>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    <div class="circle1"></div>
+    <div class="circle2"></div>
+    <div class="circle3"></div>
+    <div class="circle4"></div>
+    <div class="circle5"></div>
+    <div class="circle6"></div>
+    <div class="circle7"></div>
+    <div class="circle8"> </div>
+</ul>

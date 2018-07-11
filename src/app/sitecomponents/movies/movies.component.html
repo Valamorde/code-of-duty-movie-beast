@@ -5,13 +5,16 @@
     <span class="letter" data-letter="I">I</span>
     <span class="letter" data-letter="E">E</span>
     <span class="letter" data-letter="S">S</span>
+    <div class="box5 shadow5">
+        <p class="intro ">Comedy? Horror? Adventure? We got you covered! Check out some of the latest hot movies below and secure your spot.</p>
+
+    </div>
 </div>
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
     crossorigin="anonymous">
 
 <ul [@listStagger]="movies$">
-    <!-- <tr *ngFor="let movie of movies$;" [id]="movie.movieId"> -->
     <div class="col-md-12">
         <div class="row card-group">
             <div class="col-md-4" *ngFor="let movie of movies$;">

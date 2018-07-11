@@ -3,10 +3,11 @@ import { DataService } from '../../connection/data.service'
 import { trigger, style, transition, animate, query, stagger } from '@angular/animations';
 
 
+
 @Component({
-  selector: 'app-theaters',
-  templateUrl: './theaters.component.html',
-  styleUrls: ['./theaters.component.css'],
+  selector: 'app-user',
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.css'],
   animations: [
     trigger('listStagger', [
       transition('* <=> *', [
@@ -32,15 +33,18 @@ import { trigger, style, transition, animate, query, stagger } from '@angular/an
   ]
 
 })
-export class TheatersComponent implements OnInit {
-  theaters$: Object;
+
+
+export class UserComponent implements OnInit {
+
+  user$: Object;
 
   constructor(private data: DataService) { }
   ngOnInit() {
-    this.data.getTheaters().subscribe(
-      data => this.theaters$ = data
-    )
+    this.data.getUserDetails().subscribe(
+      res => this.user$ = res
 
+    )
 
   }
 }

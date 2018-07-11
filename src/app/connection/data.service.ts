@@ -18,4 +18,11 @@ export class DataService {
 
   }
 
+  getUserDetails() {
+    return this.http.get('http://localhost:8080/api/loggedUser')
+  }
+
+  getTheaters() {
+    return this.http.get('http://localhost:8080/api/theatres')
+  }
 }

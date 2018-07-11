@@ -20,7 +20,7 @@ import { AuthGuard } from './Auth/auth.guard.service';
 import { DataService } from './connection/data.service';
 import { MovieandshowComponent } from './sitecomponents/movies/movieandshow/movieandshow.component';
 import { SeatComponent } from './sitecomponents/movies/movieandshow/seat/seat.component';
-
+import {UserComponent } from './login-register/user/user.component' 
 
 
 
@@ -36,7 +36,8 @@ import { SeatComponent } from './sitecomponents/movies/movieandshow/seat/seat.co
     SignupComponent,
     NavbarComponent,
     MovieandshowComponent,
-    SeatComponent
+    SeatComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
