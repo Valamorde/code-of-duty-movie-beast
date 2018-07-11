@@ -2,6 +2,11 @@ package com.ticketmonster.moviebeast.helpers.security;
 
 import com.ticketmonster.moviebeast.models.User;
 
+/**
+ * This cute helper is responsible for creating new users, when a new person registers in the platform.
+ * @author nancyatnic
+ *
+ */
 public final class JwtUserFactory {
 
     private JwtUserFactory() {

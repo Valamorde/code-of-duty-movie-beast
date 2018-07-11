@@ -9,6 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * This handler is responsible for triggering the logout of the user, when logout is chosen.
+ * @author nancyatnic
+ *
+ */
 @Component
 public class CustomLogoutSuccessHandler implements LogoutSuccessHandler {
 

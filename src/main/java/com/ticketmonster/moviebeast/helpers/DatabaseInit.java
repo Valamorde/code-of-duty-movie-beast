@@ -13,6 +13,10 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.*;
 
+/**
+ * This helper class is responsible for the database initialization. Contains fixed data for demo purposes.
+ * @author nancyatnic
+ */
 @Component
 public class DatabaseInit {
 
@@ -108,6 +112,10 @@ public class DatabaseInit {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    /**
+     * For each i from 0 to 5, it creates a city/theatre/show/user object, assigns the respective name/properties from the list and proceeds to
+     * store it in the database.
+     */
     @PostConstruct
     @Transactional
     public void init() {

@@ -7,6 +7,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Date;
 
+/**
+ * This helper returns the full details of a specific user, such as the full name, email, password and date of last password reset.
+ */
 public class JwtUser implements UserDetails {
 
     private final Integer id;

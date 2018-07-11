@@ -15,6 +15,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+/**
+ * This helper is responsible for handling token info.
+ * Checks token for username, date issued, expiration date.
+ * @author nancyatnic
+ *
+ */
 @Component
 public class JwtTokenUtil implements Serializable {
 
@@ -59,6 +65,12 @@ public class JwtTokenUtil implements Serializable {
         return expiration.before(clock.now());
     }
 
+    /**
+     * Checks if token is created before a password reset
+     * @param created
+     * @param lastPasswordReset
+     * @return milliseconds
+     */
     private Boolean isCreatedBeforeLastPasswordReset(Date created, Date lastPasswordReset) {
         return (lastPasswordReset != null && created.before(lastPasswordReset));
     }
@@ -105,6 +117,12 @@ public class JwtTokenUtil implements Serializable {
                 .compact();
     }
 
+    /**
+     * If database credentials match with the ones provided, the token provides the exact user details
+     * @param token
+     * @param userDetails
+     * @return email
+     */
     public Boolean validateToken(String token, UserDetails userDetails) {
         JwtUser user = (JwtUser) userDetails;
         final String username = getUsernameFromToken(token);

@@ -2,6 +2,11 @@ package com.ticketmonster.moviebeast.helpers.security;
 
 import java.io.Serializable;
 
+/**
+ * This token is returned with credentials that the user has provided in the login.
+ * @author nancyatnic
+ *
+ */
 public class JwtAuthenticationRequest implements Serializable {
 
     private static final long serialVersionUID = -8445943548965154778L;

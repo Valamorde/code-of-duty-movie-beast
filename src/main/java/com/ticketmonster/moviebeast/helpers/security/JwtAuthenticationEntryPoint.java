@@ -9,6 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Serializable;
 
+/**
+ * This is web token is invoked when a user tries to access a secured REST resource without supplying any credentials.
+ * Directs to a 401 Unauthorized response page.
+ * @author nancyatnic
+ *
+ */
 @Component
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint, Serializable {
 
