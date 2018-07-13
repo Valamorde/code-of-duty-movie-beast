@@ -7,6 +7,8 @@ import com.ticketmonster.moviebeast.repositories.ISeatReservationRepository;
 import com.ticketmonster.moviebeast.repositories.IShowRepository;
 import com.ticketmonster.moviebeast.repositories.IUserRepository;
 import com.ticketmonster.moviebeast.services._interfaces.IUserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +28,8 @@ import java.util.List;
  */
 @Service
 public class UserServiceImpl implements IUserService {
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private IUserRepository userRepository;
@@ -73,6 +77,7 @@ public class UserServiceImpl implements IUserService {
             }
             userRepository.delete(targetUser);
 
+            logger.info("Cleaned up after and deleted User with ID:[" + targetUser.getUserId() + "].");
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
@@ -89,6 +94,7 @@ public class UserServiceImpl implements IUserService {
             user.setRole(Role.ROLE_USER.name());
             user.setEnabled(true);
             user.setLastPasswordResetDate(new Date());
+            logger.info("Created new User with email:[" + user.getEmail() + "].");
             return new ResponseEntity<>(userRepository.save(user), HttpStatus.CREATED);
         }
     }
@@ -103,6 +109,7 @@ public class UserServiceImpl implements IUserService {
             seatReservation.setSeatReserved(false);
             seatReservationRepository.save(seatReservation);
         }
+        logger.info("Logged out User with ID:[" + user.getUserId() + "].");
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -178,6 +185,7 @@ public class UserServiceImpl implements IUserService {
             targetUser.setBookings(userDetails.getBookings());
             targetUser.setSeatReservations(userDetails.getSeatReservations());
             targetUser.setEnabled(userDetails.isEnabled());
+            logger.info("Updated User with ID:[" + targetUser.getUserId() + "].");
             return new ResponseEntity<>(userRepository.save(targetUser), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
@@ -191,6 +199,7 @@ public class UserServiceImpl implements IUserService {
 
         if (customAccessHandler.userIsAdmin(authUser)) {
             targetUser.setPassword(bCryptPasswordEncoder.encode("1234"));
+            logger.info("User with ID:[" + targetUser.getUserId() + "]'s password reset to '1234'");
             return new ResponseEntity<>(userRepository.save(targetUser), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);

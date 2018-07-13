@@ -9,6 +9,8 @@ import com.ticketmonster.moviebeast.repositories.ISeatReservationRepository;
 import com.ticketmonster.moviebeast.repositories.IUserRepository;
 import com.ticketmonster.moviebeast.services._interfaces.IBookingService;
 import net.sf.jasperreports.engine.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.Resource;
@@ -34,6 +36,8 @@ import java.util.List;
  */
 @Service
 public class BookingServiceImpl implements IBookingService {
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private IBookingRepository bookingRepository;
@@ -82,6 +86,7 @@ public class BookingServiceImpl implements IBookingService {
                 return new ResponseEntity<>(HttpStatus.FORBIDDEN);
             }
         }
+        logger.info("User:[" + user.getUserId() + "] booked [" + bookings.size() + "] tickets.");
         return new ResponseEntity<>(bookings, HttpStatus.OK);
     }
 
@@ -105,6 +110,7 @@ public class BookingServiceImpl implements IBookingService {
             seatReservation.setSeatReserved(false);
             seatReservationRepository.save(seatReservation);
 
+            logger.info("User:[" + user.getUserId() + "] cancelled Booking:[" + booking.getBookingId() + "].");
             return new ResponseEntity<>(bookingList, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
@@ -140,6 +146,7 @@ public class BookingServiceImpl implements IBookingService {
         if (customAccessHandler.userIsAuthorizedToViewSpecifiedContent(booking.getUser(), user)) {
             booking.setUser(newBooking.getUser());
             booking.setBookingDate(newBooking.getBookingDate());
+            logger.info("Updated Booking with ID:[" + booking.getBookingId() + "].");
             return new ResponseEntity<>(bookingRepository.save(booking), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
@@ -152,6 +159,7 @@ public class BookingServiceImpl implements IBookingService {
         User user = userRepository.findByEmail((authentication.getName()));
         if (customAccessHandler.userIsAdmin(user)) {
             bookingRepository.delete(booking);
+            logger.info("Deleted Booking with ID:[" + booking.getBookingId() + "].");
             return new ResponseEntity<>(bookingRepository.findAllByUser(user), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);

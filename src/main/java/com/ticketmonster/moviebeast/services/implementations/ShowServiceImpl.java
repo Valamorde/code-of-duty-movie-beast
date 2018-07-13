@@ -6,6 +6,8 @@ import com.ticketmonster.moviebeast.models.User;
 import com.ticketmonster.moviebeast.repositories.IShowRepository;
 import com.ticketmonster.moviebeast.repositories.IUserRepository;
 import com.ticketmonster.moviebeast.services._interfaces.IShowService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,8 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 public class ShowServiceImpl implements IShowService {
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private IUserRepository userRepository;
@@ -59,6 +63,7 @@ public class ShowServiceImpl implements IShowService {
             show.setShowCost(newShow.getShowCost());
             show.setShowDate(newShow.getShowDate());
             show.setMovie(newShow.getMovie());
+            logger.info("Created new Show for Movie:[" + show.getMovie().getMovieName() + "].");
             return new ResponseEntity<>(showRepository.save(show), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
@@ -76,6 +81,7 @@ public class ShowServiceImpl implements IShowService {
             show.setShowCost(showDetails.getShowCost());
             show.setShowDate(showDetails.getShowDate());
             show.setSeats(showDetails.getSeats());
+            logger.info("Updated Show with ID:[" + show.getShowId() + "].");
             return new ResponseEntity<>(showRepository.save(show), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
@@ -88,6 +94,7 @@ public class ShowServiceImpl implements IShowService {
         User user = userRepository.findByEmail(authentication.getName());
         if (customAccessHandler.userIsAdmin(user)) {
             showRepository.delete(show);
+            logger.info("Deleted Show with ID:[" + show.getShowId() + "].");
             return new ResponseEntity<>(showRepository.findAll(), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);

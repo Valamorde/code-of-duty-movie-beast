@@ -6,6 +6,8 @@ import com.ticketmonster.moviebeast.models.User;
 import com.ticketmonster.moviebeast.repositories.ITheatreRepository;
 import com.ticketmonster.moviebeast.repositories.IUserRepository;
 import com.ticketmonster.moviebeast.services._interfaces.ITheatreService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class TheatreServiceImpl implements ITheatreService {
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private IUserRepository userRepository;
@@ -47,6 +51,7 @@ public class TheatreServiceImpl implements ITheatreService {
             theatre.setCity(newTheatre.getCity());
             theatre.setTheatreAddress(newTheatre.getTheatreAddress());
             theatre.setMovies(newTheatre.getMovies());
+            logger.info("Created new Theatre with Name:[" + theatre.getTheatreName() + "].");
             return new ResponseEntity<>(theatreRepository.save(theatre), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
@@ -60,6 +65,7 @@ public class TheatreServiceImpl implements ITheatreService {
             theatre.setTheatreName(theatreDetails.getTheatreName());
             theatre.setCity(theatreDetails.getCity());
             theatre.setTheatreAddress(theatreDetails.getTheatreAddress());
+            logger.info("Updated Theatre with ID:[" + theatre.getTheatreId() + "].");
             return new ResponseEntity<>(theatreRepository.save(theatre), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
@@ -71,6 +77,7 @@ public class TheatreServiceImpl implements ITheatreService {
         User user = userRepository.findByEmail(authentication.getName());
         if (customAccessHandler.userIsAdmin(user)) {
             theatreRepository.delete(theatre);
+            logger.info("Deleted Theatre with ID:[" + theatre.getTheatreId() + "].");
             return new ResponseEntity<>(theatreRepository.findAll(), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);

@@ -6,6 +6,8 @@ import com.ticketmonster.moviebeast.models.User;
 import com.ticketmonster.moviebeast.repositories.IMovieRepository;
 import com.ticketmonster.moviebeast.repositories.IUserRepository;
 import com.ticketmonster.moviebeast.services._interfaces.IMovieService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,8 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 public class MovieServiceImpl implements IMovieService {
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private IUserRepository userRepository;
@@ -59,6 +63,7 @@ public class MovieServiceImpl implements IMovieService {
             movie.setTheatre(newMovie.getTheatre());
             movie.setMovieDurationInMinutes(newMovie.getMovieDurationInMinutes());
             movie.setTrailerURL(newMovie.getTrailerURL());
+            logger.info("Created New Movie with Name:[" + movie.getMovieName() + "].");
             return new ResponseEntity<>(movieRepository.save(movie), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
@@ -77,6 +82,7 @@ public class MovieServiceImpl implements IMovieService {
             movie.setTheatre(movieDetails.getTheatre());
             movie.setMovieDurationInMinutes(movieDetails.getMovieDurationInMinutes());
             movie.setTrailerURL(movieDetails.getTrailerURL());
+            logger.info("Updated Movie with ID:[" + movie.getMovieId() + "].");
             return new ResponseEntity<>(movieRepository.save(movie), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
@@ -89,6 +95,7 @@ public class MovieServiceImpl implements IMovieService {
         User user = userRepository.findByEmail(authentication.getName());
         if (customAccessHandler.userIsAdmin(user)) {
             movieRepository.delete(movie);
+            logger.info("Deleted Movie with ID:[" + movie.getMovieId() + "].");
             return new ResponseEntity<>(movieRepository.findAll(), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);

@@ -1,11 +1,14 @@
 package com.ticketmonster.moviebeast.services.implementations;
 
+import com.ticketmonster.moviebeast.helpers.DatabaseCleanup;
 import com.ticketmonster.moviebeast.models.SeatReservation;
 import com.ticketmonster.moviebeast.models.User;
 import com.ticketmonster.moviebeast.repositories.ISeatReservationRepository;
 import com.ticketmonster.moviebeast.repositories.IShowRepository;
 import com.ticketmonster.moviebeast.repositories.IUserRepository;
 import com.ticketmonster.moviebeast.services._interfaces.ISeatReservationService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +25,8 @@ import java.util.List;
 @Service
 public class SeatReservationServiceImpl implements ISeatReservationService {
 
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Autowired
     private IShowRepository showRepository;
 
@@ -30,6 +35,9 @@ public class SeatReservationServiceImpl implements ISeatReservationService {
 
     @Autowired
     private IUserRepository userRepository;
+
+    @Autowired
+    private DatabaseCleanup cleanup;
 
     @Override
     public ResponseEntity<?> getAllSeats() {
@@ -61,6 +69,8 @@ public class SeatReservationServiceImpl implements ISeatReservationService {
 
             showRepository.save(seatReservation.getShow());
             seatReservationRepository.save(bookedSeat);
+            cleanup.cleanupTimer(user, bookedSeat);
+            logger.info("Seat ID:[" + bookedSeat.getSeatId() + "] reserved (5 min) for User ID:[" + user.getUserId() + "].");
             return new ResponseEntity<>(bookedSeat, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -80,6 +90,7 @@ public class SeatReservationServiceImpl implements ISeatReservationService {
         seatReservation.setSeatPaid(false);
         seatReservation.setSeatReserved(false);
 
+        logger.info("Seat ID:[" + seatReservation.getSeatId() + "] no longer reserved for User ID:[" + user.getUserId() + "].");
         return new ResponseEntity<>(seatReservationRepository.save(seatReservation), HttpStatus.OK);
     }
 }

@@ -1,16 +1,17 @@
 package com.ticketmonster.moviebeast.helpers;
 
 import com.ticketmonster.moviebeast.models.SeatReservation;
+import com.ticketmonster.moviebeast.models.User;
 import com.ticketmonster.moviebeast.repositories.ISeatReservationRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * DatabaseCleanup helper is responsible for checking for unpaid tickets and deleting them from the database, every 3 minutes.
@@ -23,23 +24,32 @@ public class DatabaseCleanup {
     @Autowired
     private ISeatReservationRepository seatReservationRepository;
 
-    @Scheduled(fixedRate = 300000)
-    @Transactional
-    public void cleanupUnpaidReservations() {
+    public void cleanupTimer(User user, SeatReservation seatReservation) {
         try {
-            List<SeatReservation> seatReservations = seatReservationRepository.findAllBySeatReservedIsTrueAndSeatPaidIsFalse();
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    cleanupUnpaidReservations(user, seatReservation);
+                }
+            }, 300000);
 
-            logger.warn("Initiating Database Cleanup... " + new Date());
-
-            for (int i = 0; i < seatReservations.size(); i++) {
-                seatReservations.get(i).setSeatReserved(false);
-                seatReservations.get(i).setUser(null);
-                seatReservationRepository.save(seatReservations.get(i));
-            }
-
-            logger.warn("Database Cleanup Complete... " + new Date());
         } catch (Exception e) {
             logger.error("Database Cleanup failed... ", e);
         }
+    }
+
+    public void cleanupUnpaidReservations(User user, SeatReservation seatReservation) {
+        List<SeatReservation> seatReservations = seatReservationRepository.findAllBySeatReservedIsTrueAndSeatPaidIsFalseAndUserIs(user);
+        
+        logger.info("Initiating Cleanup for User with ID:[" + user.getUserId() + "] and  Seat Reservation with ID:[" + seatReservation.getSeatId() + "]." + new Date());
+
+        if (!seatReservation.isSeatPaid()) {
+            seatReservation.setSeatReserved(false);
+            seatReservation.setUser(null);
+            seatReservationRepository.save(seatReservation);
+        }
+
+        logger.info("Seat Reservation with ID:[" + seatReservation.getSeatId() + "]. Cleanup Completed for User with ID:[" + user.getUserId() + "]... " + new Date());
     }
 }

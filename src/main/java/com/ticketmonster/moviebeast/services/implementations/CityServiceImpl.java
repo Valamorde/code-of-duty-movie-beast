@@ -6,6 +6,8 @@ import com.ticketmonster.moviebeast.models.User;
 import com.ticketmonster.moviebeast.repositories.ICityRepository;
 import com.ticketmonster.moviebeast.repositories.IUserRepository;
 import com.ticketmonster.moviebeast.services._interfaces.ICityService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,8 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 public class CityServiceImpl implements ICityService {
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private ICityRepository cityRepository;
@@ -48,6 +52,7 @@ public class CityServiceImpl implements ICityService {
             City city = new City();
             city.setCityName(newCity.getCityName());
             city.setTheatres(newCity.getTheatres());
+            logger.info("Created New City with Name:[" + city.getCityName() + "].");
             return new ResponseEntity<>(cityRepository.save(city), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
@@ -61,6 +66,7 @@ public class CityServiceImpl implements ICityService {
         if (customAccessHandler.userIsAdmin(user)) {
             city.setCityName(cityDetails.getCityName());
             city.setTheatres(cityDetails.getTheatres());
+            logger.info("Updated City with ID:[" + city.getCityId() + "].");
             return new ResponseEntity<>(cityRepository.save(city), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
@@ -73,6 +79,7 @@ public class CityServiceImpl implements ICityService {
         User user = userRepository.findByEmail(authentication.getName());
         if (customAccessHandler.userIsAdmin(user)) {
             cityRepository.delete(city);
+            logger.info("Deleted City with ID:[" + city.getCityId() + "].");
             return new ResponseEntity<>(cityRepository.findAll(), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);

@@ -3,6 +3,8 @@ package com.ticketmonster.moviebeast.helpers;
 import com.ticketmonster.moviebeast.models.*;
 import com.ticketmonster.moviebeast.repositories.*;
 import org.apache.commons.lang3.time.DateUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -20,6 +22,8 @@ import java.util.*;
  */
 @Component
 public class DatabaseInit {
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private final List<String> cities = new ArrayList<String>(Arrays.asList(
             "Athina",
@@ -120,6 +124,8 @@ public class DatabaseInit {
     @PostConstruct
     @Transactional
     public void init() {
+
+        logger.warn("Initiating Database Initialization..." + new Date());
 
         for (int i = 0; i < 5; i++) {
             City city = new City();
@@ -235,5 +241,7 @@ public class DatabaseInit {
         user.setEnabled(true);
         user.setLastPasswordResetDate(new Date());
         userRepository.save(user);
+
+        logger.warn("Database Complete..." + new Date());
     }
 }

@@ -15,7 +15,7 @@
 \* ~~Entity Relationships~~    
 \* ~~Admin Reports~~    
 \* ~~Password Reset~~    
-\* Make sure all "communication" with Front-End works as expected (40%)    
+\* Make sure all "communication" with Front-End works as expected (62%)    
 \* ~~Refactor "Integer ids" in Entities with corresponding "Entity Classes" _(may the force be with us regarding this one)_~~    
 \* ~~Replace dummy data with actual data~~    
 
