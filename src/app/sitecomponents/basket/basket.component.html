@@ -1,43 +1,78 @@
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+ <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
 
 <ul [@listStagger]="basket$">
-  <div *ngIf="basket$.length > 0" class="col-md-12 no-padding lib-item" data-category="ui">
-    <button class="btn btn-primary">Proceed to Checkout</button>
-    <div class="lib-panel">
-      <div class="row box-shadow">
-        <div class="col-md-6">
-          <div class="lib-row lib-desc">
-            <h3>Reservation Details</h3>
-            <ul *ngFor='let item of basket$;'>
-              <div class="col-md-6">
-                <img class="lib-img" src='/assets/images/MoviesById/{{item.show.movie.movieId}}.jpg'>
-              </div>
-              <div class="lib-row lib-header">
-                {{item.show.movie.movieName}}
-                <div class="lib-header-seperator"></div>
-              </div>
-              <div class="card bg-light mb-3" style="max-width: 28rem;">
-                <div class="card-body">
-                  <p class="card-text">
-                    <i class=" material-icons ">calendar_today </i>Date : {{item.show.showDate}}
-                  </p>
-                  <p class="card-text">
-                    <i class=" material-icons ">attach_money </i>Price : {{item.show.showCost}}
-                  </p>
-                  <p class="card-text">
-                    <i class="material-icons">
-                      event_seat
-                    </i> Seat ID: {{item.seatId}}
-                  </p>
-                </div>
-                <button class="btn btn-primary" routerLink="/basket/{{item.seatId}}">Remove</button>
-              </div>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <h2 *ngIf="basket$.length == 0">Hmm, seems like your basket is empty.</h2>
-  <h2 *ngIf="basket$.length == 0">Try booking some tickets.</h2>
+<div *ngIf="basket$.length > 0"  data-category="ui">
+
+<div class="container">
+ 
+  <h1>Reservation Details</h1>
+
+<div class="card">
+   
+<table class="table table-hover shopping-cart-wrap">
+<thead class="text-muted">
+<tr>
+  <th>Movie Details</th>
+</tr>
+</thead>
+
+<tbody>
+    <ul class="movielist" *ngFor='let item of basket$;'>
+<tr>
+	<td>
+<figure class="media">
+	<div class="img-wrap"><img src='/assets/images/MoviesById/{{item.show.movie.movieId}}.jpg' class="img-thumbnail img-sm"></div>
+	<figcaption class="media-body">
+		<h6 class="title text-truncate">{{item.show.movie.movieName}} </h6>
+		<dl class="param param-inline small">
+		  <dt>Date : </dt>
+		  <dd> {{item.show.showDate}}</dd>
+		</dl>
+		<dl class="param param-inline small">
+		  <dt>Theater Name : </dt>
+		  <dd>{{item.show.movie.theatre.theatreName}} </dd>
+    </dl>
+    <dl class="param param-inline small">
+        <dt>Theater Address : </dt>
+        <dd>{{item.show.movie.theatre.theatreAddress}}  </dd>
+      </dl>
+    <dl class="param param-inline small">
+		  <dt>Seat : </dt>
+		  <dd> {{item.seatId}}</dd>
+		</dl>
+	</figcaption>
+</figure> 
+	</td>
+	
+	<td> 
+		<div class="price-wrap"> 
+			<var class="price"> <i class=" material-icons ">attach_money </i>Price:   {{item.show.showCost}}</var>  
+		</div> <!-- price-wrap .// -->
+	</td>
+	<td class="text-right"> 
+  <button class="btn btn-primary" routerLink="/basket/{{item.seatId}}" routerLinkActive="active">Remove</button>
+	</td>
+</tr>
+
+
 </ul>
+
+</tbody>
+<button class="btn btn-primary" routerLink="/checkout" routerLinkActive="active">Proceed to Checkout</button>
+</table>
+</div> <!-- card.// -->
+</div>
+</div>
+
+</ul>
+
+<h2 *ngIf="basket$.length == 0">Hmm, seems like your basket is empty.</h2>
+<h2 *ngIf="basket$.length == 0">Try booking some tickets.</h2>
+<!--container end.//-->

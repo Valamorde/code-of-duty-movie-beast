@@ -15,6 +15,7 @@ import { BookseatComponent } from './sitecomponents/movies/movieandshow/seat/boo
 import { RemoveseatComponent } from "./sitecomponents/basket/removeseat/removeseat.component";
 import { AdminComponent } from './login-register/admin/admin.component';
 import { RoleGuardService as RoleGuard } from './Auth/role.guard.service';
+import { CheckoutComponent } from "./sitecomponents/basket/checkout/checkout.component";
 
 
 const Routes: Routes = [
@@ -30,6 +31,7 @@ const Routes: Routes = [
     { path: 'show/:idshow', component: SeatComponent, canActivate: [AuthGuard] },
     { path: 'seat/:seatid', component: BookseatComponent, canActivate: [AuthGuard] },
     { path: "basket/:seatid", component: RemoveseatComponent, canActivate: [AuthGuard] },
+	{ path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard] },
     { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
     {
         path: 'admin', component: AdminComponent, canActivate: [RoleGuard],

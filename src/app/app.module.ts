@@ -26,7 +26,7 @@ import { RemoveseatComponent } from './sitecomponents/basket/removeseat/removese
 import { AdminComponent } from './login-register/admin/admin.component';
 import { RoleGuardService as RoleGuard } from './Auth/role.guard.service';
 import { MessagesModule, GrowlModule } from 'primeng/primeng';
-
+import { CheckoutComponent } from "./sitecomponents/basket/checkout/checkout.component";
 
 
 
@@ -46,7 +46,8 @@ import { MessagesModule, GrowlModule } from 'primeng/primeng';
     UserComponent,
     BookseatComponent,
     RemoveseatComponent,
-    AdminComponent
+    AdminComponent,
+	  CheckoutComponent
 
   ],
   imports: [
