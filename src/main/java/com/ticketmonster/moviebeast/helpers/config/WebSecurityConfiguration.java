@@ -1,6 +1,5 @@
 package com.ticketmonster.moviebeast.helpers.config;
 
-import com.ticketmonster.moviebeast.helpers.handlers.CustomLogoutSuccessHandler;
 import com.ticketmonster.moviebeast.helpers.security.JwtAuthenticationEntryPoint;
 import com.ticketmonster.moviebeast.helpers.security.JwtAuthorizationTokenFilter;
 import com.ticketmonster.moviebeast.helpers.security.JwtTokenUtil;
@@ -20,7 +19,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -29,8 +27,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private CustomLogoutSuccessHandler logoutSuccessHandler;
     @Autowired
     private JwtAuthenticationEntryPoint unauthorizedHandler;
     @Autowired
@@ -49,8 +45,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
                         .allowedOrigins("http://localhost:4200") // http://localhost:4200/
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS") // "GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"
-                        .allowedHeaders("Content-Type", "Date", "Total-Count", "loginInfo", "application/json", "Authorization") // "Content-Type", "Date", "Total-Count", "loginInfo", "application/json", "Authorization"
+                        .allowedMethods("*") // "GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"
+                        .allowedHeaders("*") // "Content-Type", "Date", "Total-Count", "loginInfo", "application/json", "Authorization"
                         .exposedHeaders("Content-Type", "Date", "Total-Count", "loginInfo", "application/json", "Authorization")
                         .maxAge(3600);
             }
@@ -83,12 +79,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/", "/auth", "/auth/**", "/register", "/register/**", "/error/**").permitAll()
                 .antMatchers("/cities/**", "/theatres/**", "/movies/**", "/shows/**",
-                        "/bookings/**", "/seatReservation/**", "/loggedUser/**", "/users/**").authenticated()
+                        "/bookings/**", "/seatReservation/**", "/loggedUser/**", "/users/**", "/logout", "/logoutUser/**").authenticated()
                 .antMatchers("/admin/**").access("hasAuthority('ROLE_ADMIN')")
                 .anyRequest().authenticated();
-
-        http.logout().permitAll().logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST"))
-                .logoutSuccessHandler(logoutSuccessHandler).invalidateHttpSession(true);
 
         JwtAuthorizationTokenFilter authenticationTokenFilter = new JwtAuthorizationTokenFilter(userDetailsService(), jwtTokenUtil, tokenHeader);
         http.addFilterBefore(authenticationTokenFilter, UsernamePasswordAuthenticationFilter.class).headers().cacheControl();

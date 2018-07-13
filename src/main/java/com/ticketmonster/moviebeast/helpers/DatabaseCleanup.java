@@ -23,9 +23,9 @@ public class DatabaseCleanup {
     @Autowired
     private ISeatReservationRepository seatReservationRepository;
 
-    @Scheduled(fixedRate = 180000)
+    @Scheduled(fixedRate = 300000)
     @Transactional
-    public void cleanupUnpaidReservations(){
+    public void cleanupUnpaidReservations() {
         try {
             List<SeatReservation> seatReservations = seatReservationRepository.findAllBySeatReservedIsTrueAndSeatPaidIsFalse();
 
@@ -38,7 +38,7 @@ public class DatabaseCleanup {
             }
 
             logger.warn("Database Cleanup Complete... " + new Date());
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.error("Database Cleanup failed... ", e);
         }
     }

@@ -13,6 +13,8 @@ public interface IUserService {
 
     ResponseEntity<?> createNewUser(User user);
 
+    ResponseEntity<?> logoutUser(Authentication authentication);
+
     ResponseEntity<?> getAllUsers();
 
     ResponseEntity<?> getSingleUser(Authentication authentication, User targetUser);

@@ -54,8 +54,7 @@ public class UserServiceImpl implements IUserService {
         if (customAccessHandler.userIsAuthorizedToViewSpecifiedContent(targetUser, authUser)) {
             List<SeatReservation> seatReservationList = seatReservationRepository.findAllByUser(targetUser);
 
-            for (int i = 0; i < seatReservationList.size(); i++) {
-                SeatReservation seatReservation = seatReservationList.get(i);
+            for (SeatReservation seatReservation : seatReservationList) {
                 seatReservation.setSeatReserved(false);
                 seatReservation.setSeatPaid(false);
                 seatReservation.setUser(null);
@@ -92,6 +91,19 @@ public class UserServiceImpl implements IUserService {
             user.setLastPasswordResetDate(new Date());
             return new ResponseEntity<>(userRepository.save(user), HttpStatus.CREATED);
         }
+    }
+
+    @Override
+    public ResponseEntity<?> logoutUser(Authentication authentication) {
+        User user = userRepository.findByEmail(authentication.getName());
+        List<SeatReservation> seatReservations = seatReservationRepository.findAllBySeatReservedIsTrueAndSeatPaidIsFalseAndUserIs(user);
+
+        for (SeatReservation seatReservation : seatReservations) {
+            seatReservation.setUser(null);
+            seatReservation.setSeatReserved(false);
+            seatReservationRepository.save(seatReservation);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @Override

@@ -87,4 +87,8 @@ public class UserMediator {
         User user = userRepository.findByEmail(authentication.getName());
         bookingService.printTickets(user, res, req);
     }
+
+    public ResponseEntity<?> logoutUser(Authentication authentication) {
+        return userService.logoutUser(authentication);
+    }
 }

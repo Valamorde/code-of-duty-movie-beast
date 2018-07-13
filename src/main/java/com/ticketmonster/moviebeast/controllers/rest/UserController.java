@@ -59,6 +59,21 @@ public class UserController {
     }
 
     /**
+     * Allows the user to logout of current session
+     *
+     * @return HttpStatus.OK OR HttpStatus.BAD_REQUEST
+     */
+    @GetMapping(value = "/logoutUser")
+    public ResponseEntity<?> logoutUser() {
+        try {
+            return userMediator.logoutUser(SecurityContextHolder.getContext().getAuthentication());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    /**
      * @param userId - INTEGER, a user's id
      * @return specified user's details
      */
