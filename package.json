@@ -25,6 +25,7 @@
     "core-js": "^2.5.4",
     "growl": "^1.10.5",
     "material-design-icons": "^3.0.1",
+    "popper.js": "^1.14.3",
     "primeicons": "^1.0.0-beta.9",
     "primeng": "^6.0.1",
     "rxjs": "^6.0.0",

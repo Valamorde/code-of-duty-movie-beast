@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute, Router } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-checkout',
@@ -13,21 +13,13 @@ export class CheckoutComponent implements OnInit {
   user$ = {};
   tickets$ = {}
 
-  constructor( private http: HttpClient,
+  constructor(private http: HttpClient,
     private route: ActivatedRoute,
-    private _router: Router) 
-    { }
+    private _router: Router) { }
 
   ngOnInit() {
-    this.checkoutBasket().subscribe(
-      data => this.reservations$ = data
-    )
-    
     this.getUser().subscribe((userData) => {
       this.user$ = userData;
-      this.printTicklets().subscribe((ticketData) => {
-        this.tickets$ = ticketData;
-      });
     });
   }
 
@@ -35,18 +27,23 @@ export class CheckoutComponent implements OnInit {
     return this.http.get("http://localhost:8080/api/loggedUser");
   }
 
+  checkoutAndPrintTickets() {
+    this.postCheckoutBasket().subscribe((data) => {
+      this.reservations$ = data;
+      this.getPrintedTicklets().subscribe((ticketData) => {
+        this.tickets$ = ticketData;
+        let file = new Blob([this.tickets$], { type: 'application/pdf' });
+        let fileURL = URL.createObjectURL(file);
+        window.open(fileURL);
+      });
+    });
+  }
 
+  postCheckoutBasket() {
+    return this.http.post('http://localhost:8080/api/checkoutBasket', {});
+  }
 
-    checkoutBasket() {
-      return this.http.post('http://localhost:8080/api/checkoutBasket', this.reservations$)
-
-      
-    }
-
-    printTicklets() {
-      return this.http.get('http://localhost:8080/api/users/'+ this.user$["userId"] + '/bookings/pdf')
-    }
-
-
-
+  getPrintedTicklets() {
+    return this.http.get('http://localhost:8080/api/users/' + this.user$["userId"] + '/bookings/pdf', { responseType: 'blob' });
+  }
 }
