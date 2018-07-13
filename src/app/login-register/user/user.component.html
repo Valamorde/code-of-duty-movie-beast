@@ -37,6 +37,13 @@
                     </span>
                 </li>
 
+                <span *ngIf="user$.role=='ROLE_ADMIN'">
+                    <a class="button1" routerLink="/admin" routerLinkActive="active" style="vertical-align:middle">
+                        <span> Admin Panel </span>
+                    </a>
+                </span>
+
+
             </ul>
         </div>
     </div>

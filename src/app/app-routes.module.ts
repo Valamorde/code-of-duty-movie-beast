@@ -12,8 +12,9 @@ import { MovieandshowComponent } from './sitecomponents/movies/movieandshow/movi
 import { SeatComponent } from './sitecomponents/movies/movieandshow/seat/seat.component';
 import { UserComponent } from './login-register/user/user.component';
 import { BookseatComponent } from './sitecomponents/movies/movieandshow/seat/bookseat/bookseat.component';
-import { RemoveseatComponent } from "./sitecomponents/basket/removeseat/removeseat.component"; 
-
+import { RemoveseatComponent } from "./sitecomponents/basket/removeseat/removeseat.component";
+import { AdminComponent } from './login-register/admin/admin.component';
+import { RoleGuardService as RoleGuard } from './Auth/role.guard.service';
 
 
 const Routes: Routes = [
@@ -29,12 +30,14 @@ const Routes: Routes = [
     { path: 'show/:idshow', component: SeatComponent, canActivate: [AuthGuard] },
     { path: 'seat/:seatid', component: BookseatComponent, canActivate: [AuthGuard] },
     { path: "basket/:seatid", component: RemoveseatComponent, canActivate: [AuthGuard] },
-    { path: 'user', component: UserComponent, canActivate: [AuthGuard] }
-
+    { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
+    {
+        path: 'admin', component: AdminComponent, canActivate: [RoleGuard],
+        data: {
+            expectedRole: 'ROLE_ADMIN'
+        },
+    }
 ]
-
-
-
 @NgModule({
     imports: [RouterModule.forRoot(Routes)],
     exports: [RouterModule]

@@ -22,7 +22,11 @@ import { MovieandshowComponent } from './sitecomponents/movies/movieandshow/movi
 import { SeatComponent } from './sitecomponents/movies/movieandshow/seat/seat.component';
 import { UserComponent } from './login-register/user/user.component';
 import { BookseatComponent } from './sitecomponents/movies/movieandshow/seat/bookseat/bookseat.component';
-import { RemoveseatComponent } from './sitecomponents/basket/removeseat/removeseat.component'; 
+import { RemoveseatComponent } from './sitecomponents/basket/removeseat/removeseat.component';
+import { AdminComponent } from './login-register/admin/admin.component';
+import { RoleGuardService as RoleGuard } from './Auth/role.guard.service';
+import { MessagesModule, GrowlModule } from 'primeng/primeng';
+
 
 
 
@@ -40,17 +44,20 @@ import { RemoveseatComponent } from './sitecomponents/basket/removeseat/removese
     MovieandshowComponent,
     SeatComponent,
     UserComponent,
-	BookseatComponent,
-    RemoveseatComponent
+    BookseatComponent,
+    RemoveseatComponent,
+    AdminComponent
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule, 
-	BrowserAnimationsModule, 
-	HttpClientModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    MessagesModule, GrowlModule
   ],
-  providers: [AuthService, AuthGuard, DataService, {
+  providers: [AuthService, AuthGuard, DataService, RoleGuard, {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,
     multi: true

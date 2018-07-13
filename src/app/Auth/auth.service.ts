@@ -29,9 +29,14 @@ export class AuthService {
   }
 
   logoutUser() {
-    localStorage.removeItem('token')
-    this._router.navigate(['/login'])
+    this.postLogout().subscribe((res) => {
+      localStorage.removeItem('token')
+      this._router.navigate(['/login'])
+    });
   }
 
+  postLogout() {
+    return this.http.get<any>("http://localhost:8080/api/logoutUser");
+  }
 
 }

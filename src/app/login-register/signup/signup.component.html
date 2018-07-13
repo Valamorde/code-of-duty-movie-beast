@@ -1,5 +1,5 @@
 <div class="bg"> </div>
-<div class ="SignupSection">
+<div class="SignupSection">
   <div class="info">
     <img src='/assets/images/loginSignupLogo.png' style='height: 100%; width: 100%; object-fit: contain'>
   </div>
@@ -8,23 +8,24 @@
     <ul class="noBullet">
       <li>
         <label for="email"></label>
-        <input type="text" class="inputFields"[(ngModel)]="registerUserData.username" placeholder="Email" id="username" name="username" required>
-        </li>
-        <li>
-            <label for="fullName"></label>
-            <input type="text" class="inputFields"[(ngModel)]="registerUserData.fullName" placeholder="Full Name" id="fullName" name="fullName" required>
-            </li>
+        <input type="text" class="inputFields" [(ngModel)]="registerUserData.email" placeholder="Email" id="email" name="email" required>
+      </li>
+      <li>
+        <label for="fullName"></label>
+        <input type="text" class="inputFields" [(ngModel)]="registerUserData.fullName" placeholder="Full Name" id="fullName" name="fullName"
+          required>
+      </li>
       <li>
         <label for="password"></label>
-        <input type="password" class="inputFields" [(ngModel)]="registerUserData.password" id="password" placeholder="Password" name="password" required>
+        <input type="password" class="inputFields" [(ngModel)]="registerUserData.password" id="password" placeholder="Password" name="password"
+          required>
 
       </li>
-        <li id="center-btn">
+      <li id="center-btn">
         <input type="submit" id="join-btn" (click)="registerUser()" name="LogIn" alt="LogIn" value="Sign Up"> </li>
-        <li id="center-btn">
-          <input type="submit" id="join-btn1" (click)="navigate()" name="Register" alt="Register" value="Log In">
+      <li id="center-btn">
+        <input type="submit" id="join-btn1" (click)="navigate()" name="Register" alt="Register" value="Log In">
       </li>
     </ul>
   </form>
 </div>
- 

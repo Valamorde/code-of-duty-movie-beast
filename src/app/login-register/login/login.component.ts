@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../Auth/auth.service';
 import { Router } from '@angular/router'
 import { HttpErrorResponse } from '@angular/common/http';
-import { MessagesModule } from 'primeng/messages';
-import { MessageModule } from 'primeng/message';
+import { Message } from 'primeng/components/common/api';
+
 
 @Component({
   selector: 'app-login',
@@ -14,7 +14,7 @@ import { MessageModule } from 'primeng/message';
 export class LoginComponent implements OnInit {
 
   loginUserData = {};
-  errorMessages = [];
+  errorMessages: Message[] = [];
 
   constructor(
     private _auth: AuthService,

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { trigger, style, transition, animate, query, stagger } from '@angular/animations';
+import { show } from '../../../models/show';
+import { movie } from '../../../models/movie';
 
 
 @Component({
@@ -36,17 +38,19 @@ import { trigger, style, transition, animate, query, stagger } from '@angular/an
 })
 
 export class MovieandshowComponent implements OnInit {
-  shows$: Object;
-  movie$: Object;
+  shows$: show[];
+  movie$: movie[];
 
   constructor(private http: HttpClient, private route: ActivatedRoute, ) { }
 
   ngOnInit() {
     this.getShows().subscribe(
-      data => this.shows$ = data
+      data => {
+        this.shows$ = data as show[]
+      }
     )
     this.getSingleMovie().subscribe(
-      moviedata => this.movie$ = moviedata
+      moviedata => { this.movie$ = moviedata as movie[] }
     )
   }
 

@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import {DataService} from '../../connection/data.service'
-import { trigger,style,transition,animate,keyframes,query,stagger } from '@angular/animations';
+import { DataService } from '../../connection/data.service'
+import { trigger, style, transition, animate, keyframes, query, stagger } from '@angular/animations';
+import { city } from '../../models/city';
+
+
 
 @Component({
   selector: 'app-cities',
   templateUrl: './cities.component.html',
-  styleUrls: ['./cities.component.css'], 
-  
-  
+  styleUrls: ['./cities.component.css'],
+
+
   animations: [
     trigger('listStagger', [
       transition('* <=> *', [
@@ -35,14 +38,16 @@ import { trigger,style,transition,animate,keyframes,query,stagger } from '@angul
 })
 
 export class CitiesComponent implements OnInit {
-  
-  cities$: Object;
+
+  cities$: city[];
 
   constructor(private data: DataService) { }
 
   ngOnInit() {
     this.data.getCities().subscribe(
-      data => this.cities$ = data
+      data => {
+        this.cities$ = data as city[]
+      }
     )
   }
 

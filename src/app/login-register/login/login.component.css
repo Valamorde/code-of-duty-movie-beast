@@ -1,3 +1,13 @@
+
+.redplz .ui-growl-message .ui-growl-item {
+  background-color: #cc3f3c;
+}
+
+.ui-growl {
+    background-color: #cc3f3c;
+
+}
+
 .bg {
 
 background-image: url(/assets/images/loginsignupbackground3.jpg);
