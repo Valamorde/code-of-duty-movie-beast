@@ -1,6 +1,6 @@
 import {City} from "./city"
 
-export class theatre{
+export class Theatre{
     theatreId: number;
     cityId: City["cityId"];
     theatreAddress: string;
