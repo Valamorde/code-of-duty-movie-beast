@@ -12,10 +12,7 @@
         <div class=" panel-body ">
           <form>
             <div class="form-group ">
-              <input type="cityid " class="form-control " [(ngModel)]="createNewCity.id" id="id" placeholder="City Id" name="id" required>
-            </div>
-            <div class="form-group ">
-              <input type="cityid " class="form-control " [(ngModel)]="createNewCity.name" id="name" placeholder="City Name" name="name"
+              <input type="cityid " class="form-control " [(ngModel)]="createNewCity.cityName" id="cityname" placeholder="City Name" name="cityname"
                 required>
               <button type="submit " class="btn btn-default " (click)="createNewCity()">Submit</button>
             </div>
@@ -33,10 +30,11 @@
         <div class="panel-body ">
           <form>
             <div class="form-group ">
-              <input type="cityid " class="form-control " [(ngModel)]="modifyCity.id" id="id" placeholder="City Id" name="id" required>
+              <input type="id" class="form-control " [(ngModel)]="modifyCity.cityId" id="cityId" placeholder="City Id" name="id" required>
             </div>
             <div class="form-group ">
-              <input type="cityid " class="form-control " [(ngModel)]="modifyCity.name" id="name" placeholder="City Name" name="name" required>
+              <input type="text" class="form-control " [(ngModel)]="modifyCity.cityName" id="cityName" placeholder="City Name" name="name"
+                required>
               <button type="submit " class="btn btn-default " (click)="modifyCity()">Submit</button>
             </div>
           </form>
@@ -52,12 +50,12 @@
         <div class="panel-body ">
           <form>
             <div class="form-group ">
-              <input type="cityid " class="form-control " [(ngModel)]="deleteCity.id" id="id" placeholder="City Id" name="id" required>
+              <input type="id " class="form-control " [(ngModel)]="deleteCity.cityId" id="cityId" placeholder="City Id" name="id" required>
             </div>
 
             <button type="submit " class="btn btn-default " (click)="deleteCity()">Submit</button>
-            <button type="submit " class="btn btn-default1 " routerLink="/admin" routerLinkActive="active">Go Back Instead</button>
           </form>
+          <button type="submit " class="btn btn-default1 " routerLink="/admin" routerLinkActive="active">Go Back Instead</button>
         </div>
       </div>
     </div>

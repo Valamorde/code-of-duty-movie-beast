@@ -12,20 +12,16 @@
         <div class=" panel-body ">
           <form>
             <div class="form-group ">
-              <input type="theaterId " class="form-control " [(ngModel)]="createNewTheater.id" id="id" placeholder="Theater Id" name="id"
-                required>
+              <input type="text" class="form-control " [(ngModel)]="createNewTheater.theatreName" id="theatreName" placeholder="Theater Name"
+                name="theatreName" required>
             </div>
             <div class="form-group ">
-              <input type="theaterName " class="form-control " [(ngModel)]="createNewTheater.name" id="name" placeholder="Theater Name"
-                name="name" required>
+              <input type="text" class="form-control " [(ngModel)]="createNewTheater.theatreAddress" id="theatreAddress" placeholder="Theater Address"
+                name="theatreAddress" required>
             </div>
             <div class="form-group ">
-              <input type="theaterAdress " class="form-control " [(ngModel)]="createNewTheater.address" id="address" placeholder="Theater Address"
-                name="address" required>
-            </div>
-            <div class="form-group ">
-              <input type="theaterCity " class="form-control " [(ngModel)]="createNewTheater.city" id="city" placeholder="Theater City"
-                name="theater" required>
+              <input type="text" class="form-control " [(ngModel)]="createNewTheater.theatreCity" id="theatreCity" placeholder="Theater City"
+                name="theatreCity" required>
             </div>
             <button type="submit " class="btn btn-default " (click)="createNewTheater()">Submit</button>
           </form>
@@ -41,20 +37,20 @@
           <div class="panel-body ">
             <form>
               <div class="form-group ">
-                <input type="theaterId " class="form-control " [(ngModel)]="modifyTheater.id" id="id" placeholder="Theater Id" name="id"
+                <input type="id " class="form-control " [(ngModel)]="modifyTheater.theatreId" id="theatreId" placeholder="Theater Id" name="theatreId"
                   required>
               </div>
               <div class="form-group ">
-                <input type="theaterName " class="form-control " [(ngModel)]="modifyTheater.name" id="name" placeholder="Theater Name" name="name"
-                  required>
+                <input type="text " class="form-control " [(ngModel)]="modifyTheater.theatreName" id="theatreName" placeholder="Theater Name"
+                  name="theatreName" required>
               </div>
               <div class="form-group ">
-                <input type="theaterAdress " class="form-control " [(ngModel)]="modifyTheater.address" id="address" placeholder="Theater Address"
-                  name="address" required>
+                <input type="text" class="form-control " [(ngModel)]="modifyTheater.theatreAddredd" id="theatreAddress" placeholder="Theater Address"
+                  name="theatreAddress" required>
               </div>
               <div class="form-group ">
-                <input type="theaterCity " class="form-control " [(ngModel)]="modifyTheater.city" id="city" placeholder="Theater City" name="theater"
-                  required>
+                <input type="text" class="form-control " [(ngModel)]="modifyTheater.thetreCity" id="theatreCity" placeholder="Theater City"
+                  name="theatreCity" required>
               </div>
               <button type="submit " class="btn btn-default " (click)="modifyTheater()">Submit</button>
 
@@ -71,12 +67,12 @@
           <div class="panel-body ">
             <form>
               <div class="form-group ">
-                <input type="theaterId " class="form-control " [(ngModel)]="deleteTheater.id" id="id" placeholder="Theater Id" name="id"
+                <input type="id" class="form-control " [(ngModel)]="deleteTheater.theatreid" id="theatreId" placeholder="Theater Id" name="theatreId"
                   required>
               </div>
               <button type="submit " class="btn btn-default " (click)="deleteTheater()">Submit</button>
-              <button type="submit " class="btn btn-default1 " routerLink="/admin" routerLinkActive="active">Go Back Instead</button>
             </form>
+            <button type="submit " class="btn btn-default1 " routerLink="/admin" routerLinkActive="active">Go Back Instead</button>
           </div>
         </div>
       </div>
