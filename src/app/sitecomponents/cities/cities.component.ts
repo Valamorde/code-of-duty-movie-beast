@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../connection/data.service'
 import { trigger, style, transition, animate, keyframes, query, stagger } from '@angular/animations';
-import { city } from '../../models/city';
+import { City } from '../../models/city';
 
 
 
@@ -39,14 +39,14 @@ import { city } from '../../models/city';
 
 export class CitiesComponent implements OnInit {
 
-  cities$: city[];
+  cities$: City[];
 
   constructor(private data: DataService) { }
 
   ngOnInit() {
     this.data.getCities().subscribe(
       data => {
-        this.cities$ = data as city[]
+        this.cities$ = data as City[]
       }
     )
   }

@@ -1,4 +1,4 @@
-export class city {
+export class City {
     cityId: number;
     cityName: string;
-  }
+  } 

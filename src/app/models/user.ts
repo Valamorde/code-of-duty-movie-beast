@@ -1,9 +1,9 @@
-export class user{
+export class User{
     userId: number;
     email: string;
     enabled: boolean;
     fullName: string;
-    lastPasswordResetDate: Date; //dunno
+    // lastPasswordResetDate: Date; 
     password: string;
     role: string;
 }

@@ -1,8 +1,8 @@
-import {city} from "./city"
+import {City} from "./city"
 
 export class theatre{
     theatreId: number;
-    cityId: city["cityId"];
+    cityId: City["cityId"];
     theatreAddress: string;
     theatreName: string;
     

@@ -12,7 +12,7 @@
         <div class=" panel-body">
           <form>
             <div class="form-group">
-              <input type="cityid" class="form-control" [(ngModel)]="createNewCity.cityName" id="cityName" placeholder="City Name" name="cityName"
+              <input type="text" class="form-control " [(ngModel)]="newCity.cityName" id="name" placeholder="City Name" name="name"
                 required>
 
             </div>
@@ -31,11 +31,10 @@
         <div class="panel-body">
           <form>
             <div class="form-group">
-              <input type="id" class="form-control" [(ngModel)]="modifyCity.cityId" id="cityId" placeholder="City Id" name="cityId" required>
+              <p-dropdown name="cityId" [options]="citiesList" [(ngModel)]="modifyThisCity.cityId" placeholder="select a city to modify" ></p-dropdown>
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" [(ngModel)]="modifyCity.cityName" id="cityName" placeholder="City Name" name="cityName"
-                required>
+              <input type="text" class="form-control" [(ngModel)]="modifyThisCity.cityName" id="cityName" placeholder="City Name" name="cityName">
             </div>
             <button type="submit" class="btn btn-default" (click)="modifyCity()">Submit</button>
           </form>
@@ -51,8 +50,8 @@
         <div class="panel-body">
           <form>
             <div class="form-group">
-              <input type="id" class="form-control" [(ngModel)]="deleteCity.cityId" id="cityId" placeholder="City Id" name="cityId" required>
-            </div>
+                  <p-dropdown name="cityId" [options]="citiesList" [(ngModel)]="deleteThisCity.cityId" placeholder="select a city to delete"></p-dropdown>
+                </div>
             <button type="submit" class="btn btn-default" (click)="deleteCity()">Submit</button>
           </form>
           <button type="submit" class="btn btn-default1" routerLink="/admin" routerLinkActive="active">Go Back Instead</button>

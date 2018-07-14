@@ -34,6 +34,7 @@ import { ManagebookingsComponent } from './login-register/admin/managebookings/m
 import { ManageusersComponent } from './login-register/admin/manageusers/manageusers.component';
 import { ManagemoviesComponent } from './login-register/admin/managemovies/managemovies.component';
 import { ManageseatsComponent } from './login-register/admin/manageseats/manageseats.component';
+import {DropdownModule} from 'primeng/dropdown';
 
 
 
@@ -70,7 +71,9 @@ import { ManageseatsComponent } from './login-register/admin/manageseats/manages
     FormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    MessagesModule, GrowlModule
+    MessagesModule, 
+    GrowlModule,
+    DropdownModule
   ],
   providers: [AuthService, AuthGuard, DataService, RoleGuard, {
     provide: HTTP_INTERCEPTORS,
