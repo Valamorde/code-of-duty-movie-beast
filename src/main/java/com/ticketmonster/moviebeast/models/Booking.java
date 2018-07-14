@@ -32,7 +32,6 @@ public class Booking implements Serializable {
     @JoinColumn(name = "userId")
     private User user;
 
-    @JsonIgnore
     @OneToOne(mappedBy = "booking", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private SeatReservation seatReservation;
 
