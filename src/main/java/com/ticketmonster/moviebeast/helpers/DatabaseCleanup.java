@@ -48,8 +48,9 @@ public class DatabaseCleanup {
             seatReservation.setSeatReserved(false);
             seatReservation.setUser(null);
             seatReservationRepository.save(seatReservation);
+            logger.info("Seat Reservation with ID:[" + seatReservation.getSeatId() + "]. Cleanup Completed for User with ID:[" + user.getUserId() + "]... " + new Date());
+        } else {
+            logger.info("Seat Reservation with ID:[" + seatReservation.getSeatId() + "] already paid for User with ID:[" + user.getUserId() + "]. No changes... " + new Date());
         }
-
-        logger.info("Seat Reservation with ID:[" + seatReservation.getSeatId() + "]. Cleanup Completed for User with ID:[" + user.getUserId() + "]... " + new Date());
     }
 }

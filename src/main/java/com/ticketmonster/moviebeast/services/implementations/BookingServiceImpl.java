@@ -102,13 +102,13 @@ public class BookingServiceImpl implements IBookingService {
 
         if (customAccessHandler.userIsAuthorizedToViewSpecifiedContent(booking.getUser(), user)) {
             List<Booking> bookingList = bookingRepository.findAllByUser(booking.getUser());
-            bookingRepository.delete(booking);
             bookingList.remove(booking);
             seatReservation.setUser(null);
             seatReservation.setBooking(null);
             seatReservation.setSeatPaid(false);
             seatReservation.setSeatReserved(false);
             seatReservationRepository.save(seatReservation);
+            bookingRepository.delete(booking);
 
             logger.info("User:[" + user.getUserId() + "] cancelled Booking:[" + booking.getBookingId() + "].");
             return new ResponseEntity<>(bookingList, HttpStatus.OK);
