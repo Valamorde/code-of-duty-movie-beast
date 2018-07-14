@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../connection/data.service'
 import { trigger, style, transition, animate, query, stagger } from '@angular/animations';
-import { movie } from '../../models/movie';
+import { Movie } from '../../models/movie';
 
 @Component({
   selector: 'app-movies',
@@ -35,13 +35,13 @@ import { movie } from '../../models/movie';
 })
 
 export class MoviesComponent implements OnInit {
-  movies$: movie[];
+  movies$: Movie[];
 
   constructor(private data: DataService) { }
   ngOnInit() {
     this.data.getMovies().subscribe(
       data => {
-        this.movies$ = data as movie[];
+        this.movies$ = data as Movie[];
       }
     )
 

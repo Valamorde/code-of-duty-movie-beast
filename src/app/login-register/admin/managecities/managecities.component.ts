@@ -10,9 +10,7 @@ import { SelectItem } from 'primeng/api';
   styleUrls: ['./managecities.component.css']
 })
 export class ManagecitiesComponent implements OnInit {
-
-  private cityUrl = "http://localhost:8080/api/cities"
-
+  
   newCity = new City();
   modifyThisCity = new City();
   deleteThisCity = new City();

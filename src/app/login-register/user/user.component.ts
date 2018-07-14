@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../connection/data.service'
 import { trigger, style, transition, animate, query, stagger } from '@angular/animations';
-import { user } from '../../models/user';
+import { User } from '../../models/user';
 
 
 
@@ -39,13 +39,13 @@ import { user } from '../../models/user';
 
 export class UserComponent implements OnInit {
 
-  user$: user[];
+  user$: User[];
 
   constructor(private data: DataService, ) { }
   ngOnInit() {
     this.data.getUserDetails().subscribe(
       res => {
-        this.user$ = res as user[];
+        this.user$ = res as User[];
       }
 
     )

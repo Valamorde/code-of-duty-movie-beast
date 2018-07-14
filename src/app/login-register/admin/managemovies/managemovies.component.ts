@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Movie } from '../../../models/movie';
+import { MovieService } from '../../../connection/movie.service';
 
 @Component({
   selector: 'app-managemovies',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ManagemoviesComponent implements OnInit {
 
-  constructor() { }
+  newMovie = new Movie();
+
+  constructor(private movieService: MovieService) {
+
+  }
 
   ngOnInit() {
+
+  }
+
+
+  createNewMovie() {
+    return this.movieService.createMovie(this.newMovie)
+      .subscribe((res) => {
+        console.log(res);
+      })
   }
 
 }

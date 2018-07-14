@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { trigger, style, transition, animate, query, stagger } from '@angular/animations';
 import { show } from '../../../models/show';
-import { movie } from '../../../models/movie';
+import { Movie } from '../../../models/movie';
 
 
 @Component({
@@ -39,7 +39,7 @@ import { movie } from '../../../models/movie';
 
 export class MovieandshowComponent implements OnInit {
   shows$: show[];
-  movie$: movie[];
+  movie$: Movie[];
 
   constructor(private http: HttpClient, private route: ActivatedRoute, ) { }
 

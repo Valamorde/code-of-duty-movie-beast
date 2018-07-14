@@ -1,10 +1,10 @@
-import {movie} from "./movie"
+import {Movie} from "./movie"
 
 export class show{
     showId: number;
     availableSeats: number;
     initialSeats: number;
-    movieId: movie["movieId"];
+    movieId: Movie["movieId"];
     showCost: number;
     showDate: Date;
 }
