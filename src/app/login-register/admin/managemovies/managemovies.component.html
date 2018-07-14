@@ -6,28 +6,28 @@
     <div class="col-md-12">
       <div class="panel panel-default">
         <div class="panel-heading" style="background-color:rgb(44, 196, 70)">
-          <strong>Add a Movie </strong>
+          <strong>Add a Movie and generate shows and their respective seats</strong>
         </div>
         <div class=" panel-body">
           <form>
             <div class="form-group">
-              <input type="movieName" class="form-control" [(ngModel)]="newMovie.movieName" id="name" placeholder="Movie Name" name="name"
+              <input type="text" class="form-control" [(ngModel)]="newMovie.movieName" id="name" placeholder="Movie Name" name="name"
                 required>
             </div>
             <div class="form-group">
-              <input type="movieDescription" class="form-control" [(ngModel)]="newMovie.movieDescription" id="description" placeholder="Movie description"
+              <input type="text" class="form-control" [(ngModel)]="newMovie.movieDescription" id="description" placeholder="Movie description"
                 name="description" required>
             </div>
             <div class="form-group">
-              <input type="movieduration" class="form-control" [(ngModel)]="newMovie.movieDurationInMinutes" id="duration" placeholder="Movie duration"
+              <input type="number" class="form-control" [(ngModel)]="newMovie.movieDurationInMinutes" id="duration" placeholder="Movie duration"
                 name="duration" required>
             </div>
             <div class="form-group">
-              <input type="theatreId" class="form-control" [(ngModel)]="newMovie.theatreId" id="theatreid" placeholder="Movie Theatre"
-                name="theatreid" required>
-            </div>
+                <input type="datetime-local" class="form-control" [(ngModel)]="newMovie.movieReleaseDate" id="movieReleaseDate" placeholder="Release Date"
+                  name="duration" required>
+              </div>
             <div class="form-group">
-              <input type="movieTrailer" class="form-control" [(ngModel)]="newMovie.trailerURL" id="trailer" placeholder="Movie Trailer"
+              <input type="text" class="form-control" [(ngModel)]="newMovie.trailerURL" id="trailer" placeholder="Movie Trailer"
                 name="trailer" required>
             </div>
             <button type="submit" class="btn btn-default" (click)="createNewMovie()">Submit</button>

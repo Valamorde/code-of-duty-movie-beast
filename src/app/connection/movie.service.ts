@@ -12,7 +12,7 @@ export class MovieService {
 
 
   createMovie(movie: Movie) {
-    return this.http.post('http://localhost:8080/api/admin/generateMovie', movie)
+    return this.http.post('http://localhost:8080/api/admin/movies/generateMovie', movie)
   }
 
 }

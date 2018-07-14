@@ -2,3 +2,7 @@
     background-color: red;
     color: white;
 }
+
+.ui-dropdown-panel .ui-dropdown-list{
+    background-color: white;
+}
