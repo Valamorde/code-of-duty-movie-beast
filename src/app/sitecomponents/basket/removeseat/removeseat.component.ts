@@ -8,7 +8,6 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./removeseat.component.css']
 })
 export class RemoveseatComponent implements OnInit {
-
   seat$ = {};
 
   constructor(
@@ -21,7 +20,7 @@ export class RemoveseatComponent implements OnInit {
     this.getSeat().subscribe(
       (data) => {
         this.seat$ = data;
-        this.removeFromBasket().subscribe((seatData) => {
+        this.deleteBooking().subscribe((seatData) => {
           this.seat$ = seatData;
           this._router.navigate([localStorage.getItem("basketPage")]);
         });
@@ -33,7 +32,7 @@ export class RemoveseatComponent implements OnInit {
     return this.http.get('http://localhost:8080/api/seats/' + seatid);
   }
 
-  removeFromBasket() {
+  deleteBooking() {
     return this.http.post('http://localhost:8080/api/seatReservation/cancel', this.seat$);
   }
 }

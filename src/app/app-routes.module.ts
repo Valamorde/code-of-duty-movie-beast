@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MoviesComponent } from './sitecomponents/movies/movies.component';
-import { CitiesComponent } from './sitecomponents/cities/cities.component';
-import { ShowsComponent } from './sitecomponents/shows/shows.component';
 import { TheatersComponent } from './sitecomponents/theaters/theaters.component';
 import { BasketComponent } from './sitecomponents/basket/basket.component';
 import { AuthGuard } from './Auth/auth.guard.service';
@@ -23,14 +21,15 @@ import { ManagebookingsComponent } from './login-register/admin/managebookings/m
 import { ManageusersComponent } from './login-register/admin/manageusers/manageusers.component';
 import { ManagemoviesComponent } from './login-register/admin/managemovies/managemovies.component';
 import { ManageseatsComponent } from './login-register/admin/manageseats/manageseats.component';
+import { BookingComponent } from './sitecomponents/booking/booking.component';
+import { RemovebookingComponent } from './sitecomponents/booking/removebooking/removebooking.component';
+
 
 
 
 const Routes: Routes = [
     { path: '', redirectTo: '/movies', pathMatch: 'full' },
     { path: 'movies', component: MoviesComponent, canActivate: [AuthGuard] },
-    { path: 'cities', component: CitiesComponent, canActivate: [AuthGuard] },
-    { path: 'shows', component: ShowsComponent, canActivate: [AuthGuard] },
     { path: 'theaters', component: TheatersComponent, canActivate: [AuthGuard] },
     { path: 'basket', component: BasketComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent },
@@ -39,6 +38,8 @@ const Routes: Routes = [
     { path: 'show/:idshow', component: SeatComponent, canActivate: [AuthGuard] },
     { path: 'seat/:seatid', component: BookseatComponent, canActivate: [AuthGuard] },
     { path: "basket/:seatid", component: RemoveseatComponent, canActivate: [AuthGuard] },
+    { path: "bookings", component: BookingComponent, canActivate: [AuthGuard]},
+    { path: "bookings/:bookingid", component: RemovebookingComponent, canActivate: [AuthGuard]},
     { path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard] },
     { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
     {

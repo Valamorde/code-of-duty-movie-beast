@@ -3,11 +3,9 @@ import { NgModule } from '@angular/core';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
-import { CitiesComponent } from './sitecomponents/cities/cities.component';
 import { TheatersComponent } from './sitecomponents/theaters/theaters.component';
 import { MoviesComponent } from './sitecomponents/movies/movies.component';
 import { BasketComponent } from './sitecomponents/basket/basket.component';
-import { ShowsComponent } from './sitecomponents/shows/shows.component';
 import { LoginComponent } from './login-register/login/login.component';
 import { SignupComponent } from './login-register/signup/signup.component';
 import { NavbarComponent } from './sitecomponents/navbar/navbar.component';
@@ -34,18 +32,21 @@ import { ManagebookingsComponent } from './login-register/admin/managebookings/m
 import { ManageusersComponent } from './login-register/admin/manageusers/manageusers.component';
 import { ManagemoviesComponent } from './login-register/admin/managemovies/managemovies.component';
 import { ManageseatsComponent } from './login-register/admin/manageseats/manageseats.component';
+<<<<<<< Updated upstream
 import {DropdownModule} from 'primeng/dropdown';
+=======
+import { BookingComponent } from './sitecomponents/booking/booking.component';
+import { RemovebookingComponent } from './sitecomponents/booking/removebooking/removebooking.component';
+>>>>>>> Stashed changes
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    CitiesComponent,
-    TheatersComponent,
+        TheatersComponent,
     MoviesComponent,
     BasketComponent,
-    ShowsComponent,
     LoginComponent,
     SignupComponent,
     NavbarComponent,
@@ -62,7 +63,9 @@ import {DropdownModule} from 'primeng/dropdown';
     ManagebookingsComponent,
     ManageusersComponent,
     ManagemoviesComponent,
-    ManageseatsComponent
+    ManageseatsComponent,
+    BookingComponent,
+    RemovebookingComponent
 
   ],
   imports: [

@@ -36,6 +36,10 @@
                     </span>
                 </li>
 
+                <a class="button1" routerLink="/bookings" routerLinkActive="active" style="vertical-align:middle">
+                    <span> Manage Bookings </span>
+                </a>
+
                 <span *ngIf="user$ && user$.role=='ROLE_ADMIN'">
                     <a class="button1" routerLink="/admin" routerLinkActive="active" style="vertical-align:middle">
                         <span> Admin Panel </span>
