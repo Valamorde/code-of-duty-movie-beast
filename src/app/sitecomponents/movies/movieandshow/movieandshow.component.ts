@@ -49,16 +49,16 @@ export class MovieandshowComponent implements OnInit {
         this.shows$ = data as show[]
       }
     )
-    this.getSingleMovie().subscribe(
-      moviedata => { this.movie$ = moviedata as movie[] }
-    )
+    // this.getSingleMovie().subscribe(
+    //   moviedata => { this.movie$ = moviedata as movie[] }
+    // )
   }
 
-  getSingleMovie() {
-    const id = +this.route.snapshot.paramMap.get('id');
-    return this.http.get('http://localhost:8080/api/movies/' + id)
+  // getSingleMovie() {
+  //   const id = +this.route.snapshot.paramMap.get('id');
+  //   return this.http.get('http://localhost:8080/api/movies/' + id)
 
-  }
+  // }
 
   getShows() {
     const id = +this.route.snapshot.paramMap.get('id');

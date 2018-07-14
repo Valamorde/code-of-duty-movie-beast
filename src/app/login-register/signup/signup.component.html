@@ -1,3 +1,5 @@
+<p-growl [value]="errorMessages" sticky="sticky"></p-growl>
+
 <div class="bg"> </div>
 <div class="SignupSection">
   <div class="info">
@@ -22,7 +24,7 @@
 
       </li>
       <li id="center-btn">
-        <input type="submit" id="join-btn" (click)="registerUser()" name="LogIn" alt="LogIn" value="Sign Up"> </li>
+        <input pButton type="submit" id="join-btn" (click)="registerUser()" name="LogIn" alt="LogIn" value="Sign Up"> </li>
       <li id="center-btn">
         <input type="submit" id="join-btn1" (click)="navigate()" name="Register" alt="Register" value="Log In">
       </li>

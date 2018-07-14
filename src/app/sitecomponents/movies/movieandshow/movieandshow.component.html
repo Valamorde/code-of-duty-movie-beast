@@ -5,15 +5,15 @@
         <div class="lib-panel">
             <div class="row box-shadow">
                 <div class="col-md-6">
-                    <img class="lib-img" src='/assets/images/MoviesById/{{shows$[0].movie.movieId}}.jpg'>
+                    <img class="lib-img" src='/assets/images/MoviesById/{{shows$ && shows$[0].movie.movieId}}.jpg'>
                 </div>
                 <div class="col-md-6">
                     <div class="lib-row lib-header">
-                        {{shows$[0].movie.movieName}}
+                        {{shows$ && shows$[0].movie.movieName}}
                         <div class="lib-header-seperator"></div>
                     </div>
                     <div class="lib-row lib-desc">
-                        {{shows$[0].movie.movieDescription}}
+                        {{shows$ && shows$[0].movie.movieDescription}}
 
                         <h3>Show Details</h3>
                         <ul *ngFor='let show of shows$;'>
@@ -27,7 +27,7 @@
                                     </p>
                                     <p class="card-text">
                                         <i class="material-icons ">event_seat
-                                        </i> Available Seats : {{show.availableSeats}}</p>
+                                        </i> Available Seats : {{shows$ && show.availableSeats}}</p>
                                     <button class="btn btn-primary" routerLink="/show/{{show.showId}}" routerLinkActive="active">Seats</button>
                                 </div>
                             </div>

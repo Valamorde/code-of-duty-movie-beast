@@ -34,7 +34,10 @@ export class LoginComponent implements OnInit {
         (err) => {
           if (err instanceof HttpErrorResponse) {
             if (err.status === 401) {
-              this.showError();
+              this.showError401();
+            }
+            else if (err.status === 400) {
+              this.showError400();
             }
           }
         }
@@ -45,8 +48,11 @@ export class LoginComponent implements OnInit {
     this._router.navigate(['/signup'])
   }
 
-  showError() {
+  showError401() {
     this.errorMessages.push({ severity: 'error', summary: 'Bad Credentials', detail: 'Woops! Wrong username/password. Check for typos and give it another try!' });
+  }
+  showError400() {
+    this.errorMessages.push({ severity: 'error', summary: 'Bad Request', detail: 'Woops! Something went wrong. Do you speak Gibberish? Our servers only speak JSON. Check your details and try again.' });
   }
 
   clearError() {

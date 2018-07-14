@@ -73,6 +73,11 @@
 
 </ul>
 
-<h2 *ngIf="basket$.length == 0">Hmm, seems like your basket is empty.</h2>
-<h2 *ngIf="basket$.length == 0">Try booking some tickets.</h2>
+<div *ngIf="basket$.length == 0">
+		  <div class="box5 shadow5">
+				<p class="intro">Oh nooo. Your basket is empty - but it doesn’t have to be! </p>
+				<p class="intro1"> Each seat is safely reserved for you for the next five minutes! </p>
+
+			</div>
+	</div>
 <!--container end.//-->

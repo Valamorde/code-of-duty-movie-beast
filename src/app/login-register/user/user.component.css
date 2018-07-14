@@ -65,7 +65,7 @@
   background-color: #213145;
   border: 0;
   opacity: 0.3;
-  position: absolute;
+  position: fixed;
   border-radius: 100%;
   bottom: -254px;
   left: -255px;
@@ -79,7 +79,7 @@
   background-color: #213145;
   border: 0;
   opacity: 0.5;
-  position: absolute;
+  position: fixed;
   border-radius: 100%;
   bottom: 214px;
   left: -69px;
@@ -93,7 +93,7 @@
   background-color: #213145;
   border: 0;
   opacity: 0.6;
-  position: absolute;
+  position: fixed;
   border-radius: 100%;
   top: 183px;
   left: 78px;
@@ -107,7 +107,7 @@
   background-color: transparent;
   border: solid 2px #213145;
   opacity: 0.6;
-  position: absolute;
+  position: fixed;
   border-radius: 100%;
   bottom: -100px;
   left: 100px;
@@ -121,7 +121,7 @@
   background-color: #213145;
   border: 0;
   opacity: 0.5;
-  position: absolute;
+  position: fixed;
   border-radius: 100%;
   bottom: 30px;
   left: 298px;
@@ -134,12 +134,13 @@
   background-color: transparent;
   border: solid 2px #213145;
   opacity: 0.6;
-  position: absolute;
+  position: fixed;
   border-radius: 100%;
   top: -150px;
   right: -80px;
   animation: circle-ani3 10s infinite;
   animation-timing-function: linear;
+  z-index: -1;
 }
 
 .circle7 {
@@ -148,7 +149,7 @@
   background-color: #213145;
   border: 0;
   opacity: 0.45;
-  position: absolute;
+  position: fixed;
   border-radius: 100%;
   top: 71px;
   right: -106px;
@@ -162,7 +163,7 @@
   background-color: #213145;
   border: 0;
   opacity: 0.1;
-  position: absolute;
+  position: fixed;
   border-radius: 100%;
   top: 183px;
   right: 78px;
