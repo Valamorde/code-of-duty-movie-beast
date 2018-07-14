@@ -12,11 +12,10 @@
         <div class=" panel-body">
           <form>
             <div class="form-group">
-              <input type="text" class="form-control " [(ngModel)]="newCity.cityName" id="name" placeholder="City Name" name="name"
-                required>
+              <input type="text" class="form-control " [(ngModel)]="newCity.cityName" id="name" placeholder="City Name" name="name" required>
 
             </div>
-            <button type="submit" class="btn btn-default" (click)="createNewCity()">Submit</button>
+            <button type="submit" class="btn btn-default" (click)="createCity()">Submit</button>
           </form>
         </div>
       </div>
@@ -31,7 +30,7 @@
         <div class="panel-body">
           <form>
             <div class="form-group">
-              <p-dropdown name="cityId" [options]="citiesList" [(ngModel)]="modifyThisCity.cityId" placeholder="select a city to modify" ></p-dropdown>
+              <p-dropdown name="cityId" [options]="citiesList" [(ngModel)]="modifyThisCity.cityId" placeholder="select a city to modify"></p-dropdown>
             </div>
             <div class="form-group">
               <input type="text" class="form-control" [(ngModel)]="modifyThisCity.cityName" id="cityName" placeholder="City Name" name="cityName">
@@ -50,8 +49,8 @@
         <div class="panel-body">
           <form>
             <div class="form-group">
-                  <p-dropdown name="cityId" [options]="citiesList" [(ngModel)]="deleteThisCity.cityId" placeholder="select a city to delete"></p-dropdown>
-                </div>
+              <p-dropdown name="cityId" [options]="citiesList" [(ngModel)]="deleteThisCity.cityId" placeholder="select a city to delete"></p-dropdown>
+            </div>
             <button type="submit" class="btn btn-default" (click)="deleteCity()">Submit</button>
           </form>
           <button type="submit" class="btn btn-default1" routerLink="/admin" routerLinkActive="active">Go Back Instead</button>
