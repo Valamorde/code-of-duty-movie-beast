@@ -95,6 +95,22 @@ public class MovieController {
     }
 
     /**
+     * Allows the admin to generate a new movie
+     *
+     * @param newMovie
+     * @return
+     */
+    @PostMapping(value = "/admin/movies/generateMovie", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> generateNewMovie(@Valid @RequestBody Movie newMovie) {
+        try {
+            return movieMediator.generateNewMovie(newMovie, SecurityContextHolder.getContext().getAuthentication());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    /**
      * Allows the admin to update a movie
      *
      * @param movieId

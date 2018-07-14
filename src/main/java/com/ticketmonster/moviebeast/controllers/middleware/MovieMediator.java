@@ -41,6 +41,10 @@ public class MovieMediator {
         return movieService.createNewMovie(newMovie, authentication);
     }
 
+    public ResponseEntity<?> generateNewMovie(Movie newMovie, Authentication authentication){
+        return movieService.generateNewMovie(newMovie, authentication);
+    }
+
     public ResponseEntity<?> updateSingleMovie(Integer movieId, Movie movieDetails, Authentication authentication) {
         Movie movie = movieRepository.getOne(movieId);
         return movieService.updateSingleMovie(movie, movieDetails, authentication);

@@ -14,6 +14,8 @@ public interface IMovieService {
 
     ResponseEntity<?> createNewMovie(Movie newMovie, Authentication authentication);
 
+    ResponseEntity<?> generateNewMovie(Movie newMovie, Authentication authentication);
+
     ResponseEntity<?> updateSingleMovie(Movie movie, Movie movieDetails, Authentication authentication);
 
     ResponseEntity<?> deleteSingleMovie(Movie movie, Authentication authentication);
