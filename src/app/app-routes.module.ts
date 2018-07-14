@@ -38,8 +38,8 @@ const Routes: Routes = [
     { path: 'show/:idshow', component: SeatComponent, canActivate: [AuthGuard] },
     { path: 'seat/:seatid', component: BookseatComponent, canActivate: [AuthGuard] },
     { path: "basket/:seatid", component: RemoveseatComponent, canActivate: [AuthGuard] },
-    { path: "bookings", component: BookingComponent, canActivate: [AuthGuard]},
-    { path: "bookings/:bookingid", component: RemovebookingComponent, canActivate: [AuthGuard]},
+    { path: "bookings", component: BookingComponent, canActivate: [AuthGuard] },
+    { path: "rbooking/:bookingid", component: RemovebookingComponent, canActivate: [AuthGuard] },
     { path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard] },
     { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
     {

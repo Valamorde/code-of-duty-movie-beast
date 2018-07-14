@@ -32,19 +32,16 @@ import { ManagebookingsComponent } from './login-register/admin/managebookings/m
 import { ManageusersComponent } from './login-register/admin/manageusers/manageusers.component';
 import { ManagemoviesComponent } from './login-register/admin/managemovies/managemovies.component';
 import { ManageseatsComponent } from './login-register/admin/manageseats/manageseats.component';
-<<<<<<< Updated upstream
-import {DropdownModule} from 'primeng/dropdown';
-=======
+import { DropdownModule } from 'primeng/dropdown';
 import { BookingComponent } from './sitecomponents/booking/booking.component';
 import { RemovebookingComponent } from './sitecomponents/booking/removebooking/removebooking.component';
->>>>>>> Stashed changes
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-        TheatersComponent,
+    TheatersComponent,
     MoviesComponent,
     BasketComponent,
     LoginComponent,
@@ -74,7 +71,7 @@ import { RemovebookingComponent } from './sitecomponents/booking/removebooking/r
     FormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    MessagesModule, 
+    MessagesModule,
     GrowlModule,
     DropdownModule
   ],

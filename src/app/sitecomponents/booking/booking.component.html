@@ -29,68 +29,68 @@
 
 <!-- <ul [@listStagger]="bookings$"> -->
 
-  <div class="container">
+<div class="container">
 
-    <h1>Booking Details</h1>
-    <div class="card">
-      <table class="table table-hover shopping-cart-wrap">
-        <thead class="text-muted">
+  <h1>Booking Details</h1>
+  <div class="card">
+    <table class="table table-hover shopping-cart-wrap">
+      <thead class="text-muted">
+        <tr>
+          <th>Booking Details</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <ul class="movielist" *ngFor='let item of bookings$;'>
           <tr>
-            <th>Booking Details</th>
+            <td>
+              <figure class="media">
+
+                <figcaption class="media-body">
+                  <h6 class="title text-truncate">{{item?.seatReservation?.show?.movie?.movieName}} </h6>
+                  <dl class="param param-inline small">
+                    <dt>Date : </dt>
+                    <dd> {{item?.seatReservation?.show?.showDate}}</dd>
+                  </dl>
+                  <dl class="param param-inline small">
+                    <dt>Theater Name : </dt>
+                    <dd> {{item?.seatReservation?.show?.movie?.theatre?.theatreName}} </dd>
+                  </dl>
+                  <dl class="param param-inline small">
+                    <dt>City Name : </dt>
+                    <dd> {{item?.seatReservation?.show?.movie?.theatre?.city?.cityName}} </dd>
+                  </dl>
+                  <dl class="param param-inline small">
+                    <dt>Booking Id : </dt>
+                    <dd> {{item.bookingId}}</dd>
+                  </dl>
+                </figcaption>
+              </figure>
+            </td>
+
+            <td>
+              <div class="price-wrap">
+                <var class="price">
+                  <i class=" material-icons ">attach_money </i>Price: {{item.bookingCost}}</var>
+              </div>
+              <!-- price-wrap .// -->
+            </td>
+            <td class="text-right">
+              <!-- <button class="btn btn-primary" (click)=deleteBooking(item)>Remove</button> -->
+              <button class="btn btn-primary" routerLink="/rbooking/{{item.bookingId}}" routerLinkActive="active">Remove</button>
+            </td>
           </tr>
-        </thead>
-
-        <tbody>
-          <ul class="movielist" *ngFor='let item of bookings$;'>
-            <tr>
-              <td>
-                <figure class="media">
-
-                  <figcaption class="media-body">
-                    <h6 class="title text-truncate">{{item?.seatReservation?.show?.movie?.movieName}} </h6>
-                    <dl class="param param-inline small">
-                      <dt>Date : </dt>
-                      <dd> {{item?.seatReservation?.show?.showDate}}</dd>
-                    </dl>
-                    <dl class="param param-inline small">
-                      <dt>Theater Name : </dt>
-                      <dd> {{item?.seatReservation?.show?.movie?.theatre?.theatreName}} </dd>
-                    </dl>
-                    <dl class="param param-inline small">
-                      <dt>City Name : </dt>
-                      <dd> {{item?.seatReservation?.show?.movie?.theatre?.city?.cityName}} </dd>
-                    </dl>
-                    <dl class="param param-inline small">
-                      <dt>Booking Id : </dt>
-                      <dd> {{item.bookingId}}</dd>
-                    </dl>
-                  </figcaption>
-                </figure>
-              </td>
-
-              <td>
-                <div class="price-wrap">
-                  <var class="price">
-                    <i class=" material-icons ">attach_money </i>Price: {{item.bookingCost}}</var>
-                </div>
-                <!-- price-wrap .// -->
-              </td>
-              <td class="text-right">
-                <!-- <button class="btn btn-primary" (click)=deleteBooking(item)>Remove</button> -->
-                <button class="btn btn-primary" routerLink="/bookings/{{item.bookingId}}" routerLinkActive="active">Remove</button>
-              </td>
-            </tr>
 
 
-          </ul>
+        </ul>
 
-        </tbody>
+      </tbody>
 
-      </table>
-    </div>
-    </div>
-    <!-- </ul> -->
-    <!-- card.// -->
+    </table>
+  </div>
+</div>
+<!-- </ul> -->
+<!-- card.// -->
 
 
 

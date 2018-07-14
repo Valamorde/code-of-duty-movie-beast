@@ -35,11 +35,11 @@ export class RemovebookingComponent implements OnInit {
   }
 
   getBooking() {
-    const bookingId = +this.route.snapshot.paramMap.get('bookingId');
+    const bookingId = +this.route.snapshot.paramMap.get('bookingid');
     return this.http.get('http://localhost:8080/api/users/' + this.user$["userId"] + '/bookings/' + bookingId);
   }
 
   removeBooking() {
-    return this.http.post('http://localhost:8080/api/seatReservation/cancel', this.booking$);
+    return this.http.post('http://localhost:8080/api/cancelBooking', this.booking$);
   }
 }
