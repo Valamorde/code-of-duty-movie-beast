@@ -8,84 +8,84 @@
         <div class="panel-heading" style="background-color:rgb(44, 196, 70)">
           <strong>Add a Movie </strong>
         </div>
-        <div class=" panel-body ">
+        <div class=" panel-body">
           <form>
-            <div class="form-group ">
-              <input type="movieName" class="form-control " [(ngModel)]="createNewMovie.movieName" id="name" placeholder="Movie Name" name="name"
+            <div class="form-group">
+              <input type="movieName" class="form-control" [(ngModel)]="createNewMovie.movieName" id="name" placeholder="Movie Name" name="name"
                 required>
             </div>
-            <div class="form-group ">
-              <input type="movieDescription" class="form-control " [(ngModel)]="createNewMovie.movieDescription" id="description" placeholder="Movie description"
+            <div class="form-group">
+              <input type="movieDescription" class="form-control" [(ngModel)]="createNewMovie.movieDescription" id="description" placeholder="Movie description"
                 name="description" required>
             </div>
             <div class="form-group">
-              <input type="movieduration" class="form-control " [(ngModel)]="createNewMovie.movieDurationInMinutes" id="duration" placeholder="Movie duration"
+              <input type="movieduration" class="form-control" [(ngModel)]="createNewMovie.movieDurationInMinutes" id="duration" placeholder="Movie duration"
                 name="duration" required>
             </div>
             <div class="form-group">
-              <input type="theatreId" class="form-control " [(ngModel)]="createNewMovie.theatreId" id="theatreid" placeholder="Movie Theatre"
+              <input type="theatreId" class="form-control" [(ngModel)]="createNewMovie.theatreId" id="theatreid" placeholder="Movie Theatre"
                 name="theatreid" required>
             </div>
             <div class="form-group">
-              <input type="movieTrailer " class="form-control " [(ngModel)]="createNewMovie.trailerURL" id="trailer" placeholder="Movie Trailer"
+              <input type="movieTrailer" class="form-control" [(ngModel)]="createNewMovie.trailerURL" id="trailer" placeholder="Movie Trailer"
                 name="trailer" required>
             </div>
-            <button type="submit " class="btn btn-default " (click)="createNewMovie()">Submit</button>
+            <button type="submit" class="btn btn-default" (click)="createNewMovie()">Submit</button>
           </form>
         </div>
       </div>
     </div>
     <br>
 
-    <div class="col-md-12 ">
-      <div class="panel panel-default ">
+    <div class="col-md-12">
+      <div class="panel panel-default">
         <div class="panel-heading" style="background-color:skyblue">
           <strong>Modify a Movie </strong>
         </div>
-        <div class="panel-body ">
+        <div class="panel-body">
           <form>
             <div class="form-group">
-              <input type="movieId " class="form-control " [(ngModel)]="modifyMovie.movieId" id="id" placeholder="Movie Id" name="id" required>
+              <input type="movieId" class="form-control" [(ngModel)]="modifyMovie.movieId" id="id" placeholder="Movie Id" name="id" required>
             </div>
-            <div class="form-group ">
-              <input type="movieName " class="form-control " [(ngModel)]="modifyMovie.movieName" id="name" placeholder="Movie Name" name="name"
+            <div class="form-group">
+              <input type="movieName" class="form-control" [(ngModel)]="modifyMovie.movieName" id="name" placeholder="Movie Name" name="name"
                 required>
             </div>
-            <div class="form-group ">
-              <input type="movieDescription " class="form-control " [(ngModel)]="modifyMovie.movieDescription" id="description" placeholder="Movie description"
+            <div class="form-group">
+              <input type="movieDescription" class="form-control" [(ngModel)]="modifyMovie.movieDescription" id="description" placeholder="Movie description"
                 name="description" required>
             </div>
-            <div class="form-group ">
-              <input type="movieduration " class="form-control " [(ngModel)]="modifyMovie.movieDurationInMinutes" id="duration" placeholder="Movie Duration"
+            <div class="form-group">
+              <input type="movieduration" class="form-control" [(ngModel)]="modifyMovie.movieDurationInMinutes" id="duration" placeholder="Movie Duration"
                 name="duration" required>
             </div>
             <div class="form-group">
-              <input type="theatreId" class="form-control " [(ngModel)]="createNewMovie.theatreId" id="theatreid" placeholder="Movie Theatre"
+              <input type="theatreId" class="form-control" [(ngModel)]="createNewMovie.theatreId" id="theatreid" placeholder="Movie Theatre"
                 name="theatreid" required>
             </div>
-            <div class="form-group ">
-              <input type="movieTrailer " class="form-control " [(ngModel)]="modifyMovie.trailerURL" id="trailer" placeholder="Movie Trailer"
+            <div class="form-group">
+              <input type="movieTrailer" class="form-control" [(ngModel)]="modifyMovie.trailerURL" id="trailer" placeholder="Movie Trailer"
                 name="trailer" required>
             </div>
-            <button type="submit " class="btn btn-default " (click)="modifyMovie()">Submit</button>
+            <button type="submit" class="btn btn-default" (click)="modifyMovie()">Submit</button>
           </form>
         </div>
       </div>
     </div>
     <br>
-    <div class="col-md-12 ">
-      <div class="panel panel-default ">
-        <div class="panel-heading" style="background-color: red ">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading" style="background-color: red">
           <strong> Delete a Movie </strong>
         </div>
-        <div class="panel-body ">
+        <div class="panel-body">
           <form>
-            <div class="form-group ">
-              <input type="movieId " class="form-control " [(ngModel)]="deleteMovie.movieId" id="id" placeholder="Movie Id" name="id" required>
+            <div class="form-group">
+              <input type="movieId" class="form-control" [(ngModel)]="deleteMovie.movieId" id="id" placeholder="Movie Id" name="id" required>
             </div>
-            <button type="submit " class="btn btn-default " (click)="deleteMovie()">Submit</button>
+            <button type="submit" class="btn btn-default" (click)="deleteMovie()">Submit</button>
           </form>
-          <button type="submit " class="btn btn-default1 " routerLink="/admin" routerLinkActive="active">Go Back Instead</button>
+          <button type="submit" class="btn btn-default1" routerLink="/admin" routerLinkActive="active">Go Back Instead</button>
         </div>
       </div>
     </div>

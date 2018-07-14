@@ -9,70 +9,70 @@
         <div class="panel-heading" style="background-color:rgb(44, 196, 70)">
           <strong>Add a Theater </strong>
         </div>
-        <div class=" panel-body ">
+        <div class=" panel-body">
           <form>
-            <div class="form-group ">
-              <input type="text" class="form-control " [(ngModel)]="createNewTheater.theatreName" id="theatreName" placeholder="Theater Name"
+            <div class="form-group">
+              <input type="text" class="form-control" [(ngModel)]="createNewTheater.theatreName" id="theatreName" placeholder="Theater Name"
                 name="theatreName" required>
             </div>
-            <div class="form-group ">
-              <input type="text" class="form-control " [(ngModel)]="createNewTheater.theatreAddress" id="theatreAddress" placeholder="Theater Address"
+            <div class="form-group">
+              <input type="text" class="form-control" [(ngModel)]="createNewTheater.theatreAddress" id="theatreAddress" placeholder="Theater Address"
                 name="theatreAddress" required>
             </div>
-            <div class="form-group ">
-              <input type="text" class="form-control " [(ngModel)]="createNewTheater.theatreCity" id="theatreCity" placeholder="Theater City"
+            <div class="form-group">
+              <input type="text" class="form-control" [(ngModel)]="createNewTheater.theatreCity" id="theatreCity" placeholder="Theater City"
                 name="theatreCity" required>
             </div>
-            <button type="submit " class="btn btn-default " (click)="createNewTheater()">Submit</button>
+            <button type="submit" class="btn btn-default" (click)="createNewTheater()">Submit</button>
           </form>
         </div>
       </div>
 
 
-      <div class="col-md-12 ">
-        <div class="panel panel-default ">
+      <div class="col-md-12">
+        <div class="panel panel-default">
           <div class="panel-heading" style="background-color:skyblue">
-            <strong>Modify a Theater </strong>
+            <strong>Modify a Theater</strong>
           </div>
-          <div class="panel-body ">
+          <div class="panel-body">
             <form>
-              <div class="form-group ">
-                <input type="id " class="form-control " [(ngModel)]="modifyTheater.theatreId" id="theatreId" placeholder="Theater Id" name="theatreId"
+              <div class="form-group">
+                <input type="id" class="form-control" [(ngModel)]="modifyTheater.theatreId" id="theatreId" placeholder="Theater Id" name="theatreId"
                   required>
               </div>
-              <div class="form-group ">
-                <input type="text " class="form-control " [(ngModel)]="modifyTheater.theatreName" id="theatreName" placeholder="Theater Name"
+              <div class="form-group">
+                <input type="text" class="form-control" [(ngModel)]="modifyTheater.theatreName" id="theatreName" placeholder="Theater Name"
                   name="theatreName" required>
               </div>
-              <div class="form-group ">
-                <input type="text" class="form-control " [(ngModel)]="modifyTheater.theatreAddredd" id="theatreAddress" placeholder="Theater Address"
+              <div class="form-group">
+                <input type="text" class="form-control" [(ngModel)]="modifyTheater.theatreAddress" id="theatreAddress" placeholder="Theater Address"
                   name="theatreAddress" required>
               </div>
-              <div class="form-group ">
-                <input type="text" class="form-control " [(ngModel)]="modifyTheater.thetreCity" id="theatreCity" placeholder="Theater City"
+              <div class="form-group">
+                <input type="text" class="form-control" [(ngModel)]="modifyTheater.thetreCity" id="theatreCity" placeholder="Theater City"
                   name="theatreCity" required>
               </div>
-              <button type="submit " class="btn btn-default " (click)="modifyTheater()">Submit</button>
+              <button type="submit" class="btn btn-default" (click)="modifyTheater()">Submit</button>
 
             </form>
           </div>
         </div>
       </div>
       <br>
-      <div class="col-md-12 ">
-        <div class="panel panel-default ">
-          <div class="panel-heading" style="background-color: red ">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading" style="background-color: red">
             <strong> Delete a Theater </strong>
           </div>
-          <div class="panel-body ">
+          <div class="panel-body">
             <form>
-              <div class="form-group ">
-                <input type="id" class="form-control " [(ngModel)]="deleteTheater.theatreid" id="theatreId" placeholder="Theater Id" name="theatreId"
+              <div class="form-group">
+                <input type="id" class="form-control" [(ngModel)]="deleteTheater.theatreid" id="theatreId" placeholder="Theater Id" name="theatreId"
                   required>
               </div>
-              <button type="submit " class="btn btn-default " (click)="deleteTheater()">Submit</button>
+              <button type="submit" class="btn btn-default" (click)="deleteTheater()">Submit</button>
             </form>
-            <button type="submit " class="btn btn-default1 " routerLink="/admin" routerLinkActive="active">Go Back Instead</button>
+            <button type="submit" class="btn btn-default1" routerLink="/admin" routerLinkActive="active">Go Back Instead</button>
           </div>
         </div>
       </div>

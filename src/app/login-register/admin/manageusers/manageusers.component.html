@@ -9,95 +9,78 @@
         <div class="panel-heading" style="background-color:rgb(44, 196, 70)">
           <strong>Add a User</strong>
         </div>
-        <div class=" panel-body ">
+        <div class=" panel-body">
           <form>
-            <div class="form-group ">
-              <input type="UserId " class="form-control " [(ngModel)]="createNewUser.id" id="id" placeholder="User Id" name="id" required>
-            </div>
-            <div class="form-group ">
-              <input type="UserEmail " class="form-control " [(ngModel)]="createNewUser.email" id="email" placeholder="User Email" name="email"
+            <div class="form-group">
+              <input type="email" class="form-control" [(ngModel)]="createNewUser.email" id="email" placeholder="User's Email" name="email"
                 required>
             </div>
-            <div class="form-group ">
-              <input type="UserEnabled " class="form-control " [(ngModel)]="createNewUser.enabled" id="enabled" placeholder="User Enabled"
-                name="enabled" required>
-            </div>
-            <div class="form-group ">
-              <input type="User FullName " class="form-control " [(ngModel)]="createNewUser.fullName" id="fullName" placeholder="User Full Name"
+            <div class="form-group">
+              <input type="text" class="form-control" [(ngModel)]="createNewUser.fullName" id="fullName" placeholder="User's Full Name"
                 name="fullName" required>
             </div>
-            <div class="form-group ">
-              <input type="UserLastPasswordResetDate " class="form-control " [(ngModel)]="createNewUser.lastPasswordResetDate" id="lastPasswordResetDate"
-                placeholder="User Last Password Reset Date" name="lastPasswordResetDate" required>
-            </div>
-            <div class="form-group ">
-              <input type="UserPassword " class="form-control " [(ngModel)]="createNewUser.password" id="password" placeholder="User Password"
+            <div class="form-group">
+              <input type="password" class="form-control" [(ngModel)]="createNewUser.password" id="password" placeholder="User's Password"
                 name="password" required>
             </div>
-            <div class="form-group ">
-              <input type="UserRole " class="form-control " [(ngModel)]="createNewUser.role" id="role" placeholder="User Role" name="role"
+            <div class="form-group">
+              <input type="text" class="form-control" [(ngModel)]="createNewUser.role" id="role" placeholder="User's Role" name="role"
                 required>
             </div>
-            <button type="submit " class="btn btn-default " (click)="createNewUser()">Submit</button>
+            <button type="submit" class="btn btn-default" (click)="createNewUser()">Submit</button>
           </form>
         </div>
       </div>
 
 
-      <div class="col-md-12 ">
-        <div class="panel panel-default ">
+      <div class="col-md-12">
+        <div class="panel panel-default">
           <div class="panel-heading" style="background-color:skyblue">
             <strong>Modify a User </strong>
           </div>
-          <div class="panel-body ">
+          <div class="panel-body">
             <form>
-              <div class="form-group ">
-                <input type="UserId " class="form-control " [(ngModel)]="modifyUser.id" id="id" placeholder="User Id" name="id" required>
+              <div class="form-group">
+                <input type="id" class="form-control" [(ngModel)]="modifyUser.userId" id="userId" placeholder="User's Id" name="userId" required>
               </div>
-              <div class="form-group ">
-                <input type="UserEmail " class="form-control " [(ngModel)]="modifyUser.email" id="email" placeholder="User Email" name="email"
+              <div class="form-group">
+                <input type="email" class="form-control" [(ngModel)]="modifyUser.email" id="email" placeholder="User's Email" name="email"
                   required>
               </div>
-              <div class="form-group ">
-                <input type="UserEnabled " class="form-control " [(ngModel)]="modifyUser.enabled" id="enabled" placeholder="User Enabled"
-                  name="enabled" required>
+              <div class="form-group">
+                <input type="checkbox" class="form-control" [(ngModel)]="modifyUser.enabled" id="enabled" placeholder="User Enabled" name="enabled"
+                  required>
               </div>
-              <div class="form-group ">
-                <input type="User FullName " class="form-control " [(ngModel)]="modifyUser.fullName" id="fullName" placeholder="User Full Name"
-                  name="fullName" required>
+              <div class="form-group">
+                <input type="text" class="form-control" [(ngModel)]="modifyUser.fullName" id="fullName" placeholder="User Full Name" name="fullName"
+                  required>
               </div>
-              <div class="form-group ">
-                <input type="UserLastPasswordResetDate " class="form-control " [(ngModel)]="modifyUser.lastPasswordResetDate" id="lastPasswordResetDate"
-                  placeholder="User Last Password Reset Date" name="lastPasswordResetDate" required>
-              </div>
-              <div class="form-group ">
-                <input type="UserPassword " class="form-control " [(ngModel)]="modifyUser.password" id="password" placeholder="User Password"
+              <div class="form-group">
+                <input type="password" class="form-control" [(ngModel)]="modifyUser.password" id="password" placeholder="User's Password"
                   name="password" required>
               </div>
-              <div class="form-group ">
-                <input type="UserRole " class="form-control " [(ngModel)]="modifyUser.role" id="role" placeholder="User Role" name="role"
-                  required>
+              <div class="form-group">
+                <input type="text" class="form-control" [(ngModel)]="modifyUser.role" id="role" placeholder="User's Role" name="role" required>
               </div>
-              <button type="submit " class="btn btn-default " (click)="modifyUser()">Submit</button>
+              <button type="submit" class="btn btn-default" (click)="modifyUser()">Submit</button>
             </form>
           </div>
         </div>
       </div>
       <br>
-      <div class="col-md-12 ">
-        <div class="panel panel-default ">
-          <div class="panel-heading" style="background-color: red ">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading" style="background-color: red">
             <strong> Delete a User </strong>
           </div>
-          <div class="panel-body ">
+          <div class="panel-body">
             <form>
-              <div class="form-group ">
-                <input type="UserId " class="form-control " [(ngModel)]="deleteUser.id" id="id" placeholder="User Id" name="id" required>
+              <div class="form-group">
+                <input type="id" class="form-control" [(ngModel)]="deleteUser.userId" id="userId" placeholder="User's Id" name="userId" required>
               </div>
-
-              <button type="submit " class="btn btn-default " (click)="deleteUser()">Submit</button>
-              <button type="submit " class="btn btn-default1 " routerLink="/admin" routerLinkActive="active">Go Back Instead</button>
+              <button type="submit" class="btn btn-default" (click)="deleteUser()">Submit</button>
             </form>
+            <button type="submit" class="btn btn-default1" routerLink="/admin" routerLinkActive="active">Go Back Instead</button>
           </div>
         </div>
       </div>

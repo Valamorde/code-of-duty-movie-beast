@@ -9,53 +9,53 @@
         <div class="panel-heading" style="background-color:rgb(44, 196, 70)">
           <strong>Add a City </strong>
         </div>
-        <div class=" panel-body ">
+        <div class=" panel-body">
           <form>
-            <div class="form-group ">
-              <input type="cityid " class="form-control " [(ngModel)]="createNewCity.cityName" id="cityname" placeholder="City Name" name="cityname"
+            <div class="form-group">
+              <input type="cityid" class="form-control" [(ngModel)]="createNewCity.cityName" id="cityName" placeholder="City Name" name="cityName"
                 required>
-              <button type="submit " class="btn btn-default " (click)="createNewCity()">Submit</button>
+
             </div>
+            <button type="submit" class="btn btn-default" (click)="createNewCity()">Submit</button>
           </form>
         </div>
       </div>
     </div>
     <br>
 
-    <div class="col-md-12 ">
-      <div class="panel panel-default ">
+    <div class="col-md-12">
+      <div class="panel panel-default">
         <div class="panel-heading" style="background-color:skyblue">
           <strong>Modify a City </strong>
         </div>
-        <div class="panel-body ">
+        <div class="panel-body">
           <form>
-            <div class="form-group ">
-              <input type="id" class="form-control " [(ngModel)]="modifyCity.cityId" id="cityId" placeholder="City Id" name="id" required>
+            <div class="form-group">
+              <input type="id" class="form-control" [(ngModel)]="modifyCity.cityId" id="cityId" placeholder="City Id" name="cityId" required>
             </div>
-            <div class="form-group ">
-              <input type="text" class="form-control " [(ngModel)]="modifyCity.cityName" id="cityName" placeholder="City Name" name="name"
+            <div class="form-group">
+              <input type="text" class="form-control" [(ngModel)]="modifyCity.cityName" id="cityName" placeholder="City Name" name="cityName"
                 required>
-              <button type="submit " class="btn btn-default " (click)="modifyCity()">Submit</button>
             </div>
+            <button type="submit" class="btn btn-default" (click)="modifyCity()">Submit</button>
           </form>
         </div>
       </div>
     </div>
     <br>
-    <div class="col-md-12 ">
-      <div class="panel panel-default ">
-        <div class="panel-heading" style="background-color: red ">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading" style="background-color: red">
           <strong> Delete a City </strong>
         </div>
-        <div class="panel-body ">
+        <div class="panel-body">
           <form>
-            <div class="form-group ">
-              <input type="id " class="form-control " [(ngModel)]="deleteCity.cityId" id="cityId" placeholder="City Id" name="id" required>
+            <div class="form-group">
+              <input type="id" class="form-control" [(ngModel)]="deleteCity.cityId" id="cityId" placeholder="City Id" name="cityId" required>
             </div>
-
-            <button type="submit " class="btn btn-default " (click)="deleteCity()">Submit</button>
+            <button type="submit" class="btn btn-default" (click)="deleteCity()">Submit</button>
           </form>
-          <button type="submit " class="btn btn-default1 " routerLink="/admin" routerLinkActive="active">Go Back Instead</button>
+          <button type="submit" class="btn btn-default1" routerLink="/admin" routerLinkActive="active">Go Back Instead</button>
         </div>
       </div>
     </div>
