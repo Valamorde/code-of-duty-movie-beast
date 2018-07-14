@@ -180,7 +180,7 @@ public class UserServiceImpl implements IUserService {
         if (customAccessHandler.userIsAuthorizedToViewSpecifiedContent(targetUser, authUser)) {
             targetUser.setFullName(userDetails.getFullName());
             targetUser.setEmail(userDetails.getEmail());
-            targetUser.setPassword(bCryptPasswordEncoder.encode(userDetails.getPassword()));
+//            targetUser.setPassword(bCryptPasswordEncoder.encode(userDetails.getPassword()));
             targetUser.setRole(userDetails.getRole());
             targetUser.setBookings(userDetails.getBookings());
             targetUser.setSeatReservations(userDetails.getSeatReservations());
