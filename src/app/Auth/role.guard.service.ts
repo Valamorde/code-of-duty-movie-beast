@@ -17,7 +17,7 @@ export class RoleGuardService implements CanActivate {
         // decode the token to get its payload
         // const tokenPayload = jwt_decode(token);
         const tokenPayLoad = this.jwtHelper.decodeToken(token);
-        console.log(tokenPayLoad);
+        // console.log(tokenPayLoad); 
         if (
             tokenPayLoad.aud !== expectedRole
         ) {

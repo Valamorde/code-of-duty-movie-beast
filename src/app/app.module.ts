@@ -27,6 +27,13 @@ import { AdminComponent } from './login-register/admin/admin.component';
 import { RoleGuardService as RoleGuard } from './Auth/role.guard.service';
 import { MessagesModule, GrowlModule } from 'primeng/primeng';
 import { CheckoutComponent } from "./sitecomponents/basket/checkout/checkout.component";
+import { ManagecitiesComponent } from './login-register/admin/managecities/managecities.component';
+import { ManagetheatersComponent } from './login-register/admin/managetheaters/managetheaters.component';
+import { ManageshowsComponent } from './login-register/admin/manageshows/manageshows.component';
+import { ManagebookingsComponent } from './login-register/admin/managebookings/managebookings.component';
+import { ManageusersComponent } from './login-register/admin/manageusers/manageusers.component';
+import { ManagemoviesComponent } from './login-register/admin/managemovies/managemovies.component';
+import { ManageseatsComponent } from './login-register/admin/manageseats/manageseats.component';
 
 
 
@@ -47,7 +54,14 @@ import { CheckoutComponent } from "./sitecomponents/basket/checkout/checkout.com
     BookseatComponent,
     RemoveseatComponent,
     AdminComponent,
-	  CheckoutComponent
+    CheckoutComponent,
+    ManagecitiesComponent,
+    ManagetheatersComponent,
+    ManageshowsComponent,
+    ManagebookingsComponent,
+    ManageusersComponent,
+    ManagemoviesComponent,
+    ManageseatsComponent
 
   ],
   imports: [

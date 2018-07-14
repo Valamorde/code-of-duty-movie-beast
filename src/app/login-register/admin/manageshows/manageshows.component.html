@@ -1,0 +1,100 @@
+<div class="container">
+  <div class="col-md-12">
+    <h4 class="page-head-line">Manage Shows</h4>
+
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading" style="background-color:rgb(44, 196, 70)">
+          <strong>Add a Show </strong>
+        </div>
+        <div class=" panel-body ">
+          <form>
+            <div class="form-group ">
+              <input type="ShowId " class="form-control " [(ngModel)]="createNewShow.id" id="id" placeholder="Show Id" name="id" required>
+            </div>
+            <div class="form-group ">
+              <input type="ShowMovie " class="form-control " [(ngModel)]="createNewShow.movie" id="movie" placeholder="Show Movie" name="movie"
+                required>
+            </div>
+
+            <div class="form-group ">
+              <input type="ShowInitialSeats " class="form-control " [(ngModel)]="createNewShow.initialseats" id="initialseats" placeholder="Show Initial Seats"
+                name="initialseats" required>
+            </div>
+            <div class="form-group ">
+              <input type="ShowAvailableSeats " class="form-control " [(ngModel)]="createNewShow.availableseats" id="availableseats" placeholder="Show Available Seats"
+                name="availableseats" required>
+            </div>
+            <div class="form-group ">
+              <input type="ShowDate " class="form-control " [(ngModel)]="createNewShow.date" id="date" placeholder="Show Date" name="date"
+                required>
+            </div>
+            <div class="form-group ">
+              <input type="ShowTime " class="form-control " [(ngModel)]="createNewShow.time" id="time" placeholder="Show Time" name="time"
+                required>
+              <button type="submit " class="btn btn-default " (click)="createNewShow()">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <br>
+
+    <div class="col-md-12 ">
+      <div class="panel panel-default ">
+        <div class="panel-heading" style="background-color:skyblue">
+          <strong>Modify a Show </strong>
+        </div>
+        <div class="panel-body ">
+          <form>
+            <div class="form-group ">
+              <input type="ShowId " class="form-control " [(ngModel)]="modifyShow.id" id="id" placeholder="Show Id" name="id" required>
+            </div>
+            <div class="form-group ">
+              <input type="ShowMovie " class="form-control " [(ngModel)]="modifyShow.movie" id="movie" placeholder="Show Movie" name="movie"
+                required>
+            </div>
+
+            <div class="form-group ">
+              <input type="ShowInitialSeats " class="form-control " [(ngModel)]="modifyShow.initialseats" id="initialseats" placeholder="Show Initial Seats"
+                name="initialseats" required>
+            </div>
+            <div class="form-group ">
+              <input type="ShowAvailableSeats " class="form-control " [(ngModel)]="modifyShow.availableseats" id="availableseats" placeholder="Show Available Seats"
+                name="availableseats" required>
+            </div>
+            <div class="form-group ">
+              <input type="ShowDate " class="form-control " [(ngModel)]="modifyShow.date" id="date" placeholder="Show Date" name="date"
+                required>
+            </div>
+            <div class="form-group ">
+              <input type="ShowTime " class="form-control " [(ngModel)]="modifyShow.time" id="time" placeholder="Show Time" name="time"
+                required>
+              <button type="submit " class="btn btn-default " (click)="modifyShow()">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="col-md-12 ">
+      <div class="panel panel-default ">
+        <div class="panel-heading" style="background-color: red ">
+          <strong> Delete a Show </strong>
+        </div>
+        <div class="panel-body ">
+          <form>
+            <div class="form-group ">
+              <input type="ShowId " class="form-control " [(ngModel)]="deleteShow.id" id="id" placeholder="Show Id" name="id" required>
+            </div>
+            <button type="submit " class="btn btn-default " (click)="deleteShow()">Submit
+            </button>
+            <button type="submit " class="btn btn-default1 " routerLink="/admin" routerLinkActive="active">Go Back Instead</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,82 @@
+<div class="container">
+  <div class="col-md-12">
+    <h4 class="page-head-line">Manage Bookings</h4>
+
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading" style="background-color:rgb(44, 196, 70)">
+          <strong>Add a Booking </strong>
+        </div>
+        <div class=" panel-body ">
+          <form>
+            <div class="form-group ">
+              <input type="BookingId " class="form-control " [(ngModel)]="createNewBooking.id" id="id" placeholder="Booking Id" name="id"
+                required>
+            </div>
+            <div class="form-group ">
+              <input type="BookingSeatId " class="form-control " [(ngModel)]="createNewBooking.seatId" id="seatId" placeholder="Booking Seat Id"
+                name="seatId" required>
+            </div>
+            <div class="form-group ">
+              <input type="BookingCost " class="form-control " [(ngModel)]="createNewBooking.cost" id="cost" placeholder="Booking Cost"
+                name="cost" required>
+            </div>
+            <div class="form-group ">
+              <input type="BookingUser " class="form-control " [(ngModel)]="createNewBooking.user" id="user" placeholder="Booking User"
+                name="user" required>
+            </div>
+            <button type="submit " class="btn btn-default " (click)="createNewBooking()">Submit</button>
+          </form>
+        </div>
+      </div>
+
+
+      <div class="col-md-12 ">
+        <div class="panel panel-default ">
+          <div class="panel-heading" style="background-color:skyblue">
+            <strong>Modify a Booking </strong>
+          </div>
+          <div class="panel-body ">
+            <form>
+              <div class="form-group ">
+                <input type="BookingId " class="form-control " [(ngModel)]="modifyBooking.id" id="id" placeholder="Booking Id" name="id"
+                  required>
+              </div>
+              <div class="form-group ">
+                <input type="BookingSeatId " class="form-control " [(ngModel)]="modifyBooking.seatId" id="seatId" placeholder="Booking Seat Id"
+                  name="seatId" required>
+              </div>
+              <div class="form-group ">
+                <input type="BookingCost " class="form-control " [(ngModel)]="modifyBooking.cost" id="cost" placeholder="Booking Cost" name="cost"
+                  required>
+              </div>
+              <div class="form-group ">
+                <input type="BookingUser " class="form-control " [(ngModel)]="modifyBooking.user" id="user" placeholder="Booking User" name="user"
+                  required>
+              </div>
+              <button type="submit " class="btn btn-default " (click)="modifyBooking()">Submit</button>
+
+            </form>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="col-md-12 ">
+        <div class="panel panel-default ">
+          <div class="panel-heading" style="background-color: red ">
+            <strong> Delete a Booking </strong>
+          </div>
+          <div class="panel-body ">
+            <form>
+              <div class="form-group ">
+                <input type="BookingId " class="form-control " [(ngModel)]="deleteBooking.id" id="id" placeholder="Booking Id" name="id"
+                  required>
+              </div>
+              <button type="submit " class="btn btn-default " (click)="deleteBooking()">Submit</button>
+              <button type="submit " class="btn btn-default1 " routerLink="/admin" routerLinkActive="active">Go Back Instead</button>
+            </form>
+          </div>
+        </div>
+      </div>

@@ -16,6 +16,14 @@ import { RemoveseatComponent } from "./sitecomponents/basket/removeseat/removese
 import { AdminComponent } from './login-register/admin/admin.component';
 import { RoleGuardService as RoleGuard } from './Auth/role.guard.service';
 import { CheckoutComponent } from "./sitecomponents/basket/checkout/checkout.component";
+import { ManagecitiesComponent } from './login-register/admin/managecities/managecities.component';
+import { ManagetheatersComponent } from './login-register/admin/managetheaters/managetheaters.component';
+import { ManageshowsComponent } from './login-register/admin/manageshows/manageshows.component';
+import { ManagebookingsComponent } from './login-register/admin/managebookings/managebookings.component';
+import { ManageusersComponent } from './login-register/admin/manageusers/manageusers.component';
+import { ManagemoviesComponent } from './login-register/admin/managemovies/managemovies.component';
+import { ManageseatsComponent } from './login-register/admin/manageseats/manageseats.component';
+
 
 
 const Routes: Routes = [
@@ -31,14 +39,43 @@ const Routes: Routes = [
     { path: 'show/:idshow', component: SeatComponent, canActivate: [AuthGuard] },
     { path: 'seat/:seatid', component: BookseatComponent, canActivate: [AuthGuard] },
     { path: "basket/:seatid", component: RemoveseatComponent, canActivate: [AuthGuard] },
-	{ path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard] },
+    { path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard] },
     { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
     {
         path: 'admin', component: AdminComponent, canActivate: [RoleGuard],
-        data: {
-            expectedRole: 'ROLE_ADMIN'
-        },
-    }
+        data: { expectedRole: 'ROLE_ADMIN' }
+    },
+    {
+        path: 'citiesmanagment', component: ManagecitiesComponent, canActivate: [RoleGuard],
+        data: { expectedRole: 'ROLE_ADMIN' }
+    },
+    {
+        path: 'showsmanagment', component: ManageshowsComponent, canActivate: [RoleGuard],
+        data: { expectedRole: 'ROLE_ADMIN' }
+    },
+    {
+        path: 'theatermanagment', component: ManagetheatersComponent, canActivate: [RoleGuard],
+        data: { expectedRole: 'ROLE_ADMIN' }
+    },
+    {
+        path: 'bookingmanagment', component: ManagebookingsComponent, canActivate: [RoleGuard],
+        data: { expectedRole: 'ROLE_ADMIN' }
+    },
+    {
+        path: 'usersmanagment', component: ManageusersComponent, canActivate: [RoleGuard],
+        data: { expectedRole: 'ROLE_ADMIN' }
+    },
+    {
+        path: 'moviesmanagment', component: ManagemoviesComponent, canActivate: [RoleGuard],
+        data: { expectedRole: 'ROLE_ADMIN' }
+    },
+    {
+        path: 'seatsmanagment', component: ManageseatsComponent, canActivate: [RoleGuard],
+        data: { expectedRole: 'ROLE_ADMIN' }
+    },
+
+
+
 ]
 @NgModule({
     imports: [RouterModule.forRoot(Routes)],
