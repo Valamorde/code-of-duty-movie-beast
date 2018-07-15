@@ -2,22 +2,13 @@
 
 ### root path : http://localhost:8080/api/
 
-# Achieved Goals (Back-End)    
+# Achieved Goals    
 
 \* Minimum Requirements    
 \* Challenge 1    
 \* Challenge 2    
 \* Challenge 3    
 \* Challenge 4    
-
-# Goals Pending (Back-End) <strikethrough if achieved>    
-
-\* ~~Entity Relationships~~    
-\* ~~Admin Reports~~    
-\* ~~Password Reset~~    
-\* ~~Make sure all "communication" with Front-End works as expected (90%)~~    
-\* ~~Refactor "Integer ids" in Entities with corresponding "Entity Classes" _(may the force be with us regarding this one)_~~    
-\* ~~Replace dummy data with actual data~~    
     
 ### All REST endpoints are _[available here](http://localhost:8080/api/swagger-ui.html)_.    
 
