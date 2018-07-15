@@ -1,0 +1,32 @@
+<p-growl [value]="errorMessages" sticky="sticky"></p-growl>
+
+<div class="bg"> </div>
+<div class="LoginSection">
+  <div class="info">
+    <img src='/assets/images/loginSignupLogo.png' style='height: 100%; width: 100%; object-fit: contain'>
+  </div>
+  <form action="#" method="POST" class="signupForm" name="signupform">
+    <h2>Login</h2>
+    <ul class="noBullet">
+      <li>
+        <label for="email"></label>
+        <input type="text" class="inputFields" [(ngModel)]="loginUserData.username" placeholder="Email" id="username" name="username"
+          required>
+      </li>
+      <li>
+        <label for="password"></label>
+        <input type="password" class="inputFields" [(ngModel)]="loginUserData.password" id="password" placeholder="Password" name="password"
+          required>
+
+      </li>
+
+      <li id="center-btn">
+        <input pButton type="submit" label="Log In" id="join-btn" (click)="loginUser()" name="LogIn" alt="LogIn" value="Log In">
+      </li>
+
+      <li id="center-btn">
+        <input type="submit" id="join-btn1" (click)="navigate()" name="Register" alt="Register" value="Register">
+      </li>
+    </ul>
+  </form>
+</div> 

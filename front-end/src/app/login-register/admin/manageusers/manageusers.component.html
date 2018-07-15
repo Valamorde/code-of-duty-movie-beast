@@ -1,0 +1,81 @@
+<div class="container">
+  <div class="col-md-12">
+    <h4 class="page-head-line">Manage Users</h4>
+
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading" style="background-color:skyblue">
+            <strong>Modify a User </strong>
+          </div>
+          <div class="panel-body">
+            <form>
+               
+                <div class="form-group">
+                    <p-dropdown name="userId" [options]="userListModify" 
+                      [(ngModel)]="modifyThisUser" placeholder="select a user to modify"></p-dropdown>
+                  </div>
+              <div class="form-group">
+                <input type="email" class="form-control" [(ngModel)]="modifyThisUser.email" 
+                  id="modEmail" placeholder="User's Email" name="email"
+                  required>
+              </div>
+              <div class="form-group">
+                <label for="modEnabled">Enabled:</label>
+                <input type="checkbox" class="form-control" [(ngModel)]="modifyThisUser.enabled" 
+                  id="modEnabled" style="display: inline" placeholder="User Enabled" name="enabled"
+                  required>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" [(ngModel)]="modifyThisUser.fullName" 
+                  id="modFullName" placeholder="User Full Name" name="fullName"
+                  required>
+              </div>
+              
+              <div class="form-group">
+                <input type="text" class="form-control" [(ngModel)]="modifyThisUser.role" 
+                  id="modRole" placeholder="User's Role" name="role" required>
+              </div>
+              <button type="submit" class="btn btn-default" (click)="modifyUser()">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading" style="background-color: red">
+            <strong> Delete a User </strong>
+          </div>
+          <div class="panel-body">
+            <form>
+                  <div class="form-group">
+                      <p-dropdown name="userId" [options]="userList" [(ngModel)]="deleteThisUser.userId" placeholder="select a user to delete" ></p-dropdown>
+                    </div>
+              <button type="submit" class="btn btn-default" (click)="deleteUser()">Submit</button>
+            </form>
+                      </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+          <div class="panel panel-default">
+      <div class="panel-heading" style="background-color:blueviolet">
+          <strong> Change User's Password </strong>
+        </div>
+        <div class="panel-body">
+          <form>
+            <div class="form-group">
+                  <p-dropdown name="userId" [options]="userList" [(ngModel)]="passwordThisUser.userId" placeholder="select a user"></p-dropdown>
+                </div>
+            <button type="submit" class="btn btn-default" (click)="resetPassword()">Submit</button>
+          </form>
+    </div>
+    </div>
+    </div>
+    <button type="submit" class="btn btn-default1" routerLink="/admin" routerLinkActive="active">Go Back Instead</button>
+
+  </div>
+  

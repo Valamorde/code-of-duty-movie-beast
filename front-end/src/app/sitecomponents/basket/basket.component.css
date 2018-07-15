@@ -1,0 +1,124 @@
+
+ .param {
+    margin-bottom: 7px;
+    line-height: 1.4;
+}
+.param-inline dt {
+    display: inline-block;
+}
+.param dt {
+    margin: 0;
+    margin-right: 7px;
+    font-weight: 600;
+}
+.param-inline dd {
+    vertical-align: baseline;
+    display: inline-block;
+}
+
+.param dd {
+    margin: 0;
+    vertical-align: baseline;
+} 
+
+.shopping-cart-wrap .price {
+    color: #213145;
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 50px;
+    display: block;
+}
+var {
+    font-style: normal;
+}
+
+.media img {
+    margin-right: 1rem;
+}
+.img-sm {
+    width: 90px;
+    height: 120px;
+    /* object-fit: cover; */
+}
+
+.movielist{
+width: 1010px;
+
+}
+
+.th1{
+ width:3000px;
+}
+
+.btn{
+    margin-top: 15px;
+    margin-left: 450px;
+    background-color: #213145;
+    color: #FFFFFF;
+  
+}
+
+
+h1{
+    margin-left:310px;
+    margin-top:20px;
+    margin-bottom:20px;
+}
+
+h2{
+    margin-left:310px;
+    margin-top:65px;
+   ;
+}
+
+
+.box5{
+    background-color: #213145;
+  }
+  
+  .shadow5{
+    position:relative;
+    box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 0, 0, 0.1) inset;
+    width:87%;
+    height:100px;
+    margin-left:6%;
+    border:2px dashed #F7EEEE;
+    border-radius:5px;
+  }
+  
+  .shadow5:before, .shadow5:after{
+    position:absolute;
+    content:"";
+    box-shadow:0 10px 25px 20px #518C96;
+    top:40px;left:10px;bottom:50px;
+    width:15%;
+    z-index:-1;
+    -webkit-transform: rotate(-8deg);
+    -moz-transform: rotate(-8deg);
+    transform: rotate(-8deg);
+  }
+  .shadow5:after{
+    -webkit-transform: rotate(8deg);
+    -moz-transform: rotate(8deg);
+    transform: rotate(8deg);
+    right: 10px;left: auto;
+  }
+
+
+  .intro{
+    font-family: 'Didact Gothic', sans-serif;
+    font-weight:normal;
+    text-align:center;
+    padding-top:10px;
+    color:#fff;
+    font-size: 25px;
+    
+  }
+  .intro1{    font-family: 'Didact Gothic', sans-serif;
+    font-weight:normal;
+    text-align:center;
+    padding-top:-5px;
+    color:#fff;
+    font-size: 15px;
+
+  }

@@ -1,0 +1,74 @@
+<div class="container">
+  <div class="col-md-12">
+    <h4 class="page-head-line">Manage Theaters</h4>
+
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading" style="background-color:rgb(44, 196, 70)">
+          <strong>Add a Theater </strong>
+        </div>
+        <div class=" panel-body">
+          <form>
+            <div class="form-group">
+              <input type="text" class="form-control" [(ngModel)]="createNewTheater.theatreName" id="theatreName" placeholder="Theater Name"
+                name="theatreName" required>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" [(ngModel)]="createNewTheater.theatreAddress" id="theatreAddress" placeholder="Theater Address"
+                name="theatreAddress" required>
+            </div>
+            <div class="form-group">
+                <p-dropdown name="theatreCity" [options]="citiesList" [(ngModel)]="createNewTheater.city" placeholder="select a city" ></p-dropdown>
+              </div>
+            <button type="submit" class="btn btn-default" (click)="createTheater()">Submit</button>
+          </form>
+        </div>
+      </div>
+
+
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading" style="background-color:skyblue">
+            <strong>Modify a Theater</strong>
+          </div>
+          <div class="panel-body">
+            <form>
+              <div class="form-group">
+                <p-dropdown name="theatreId" [options]="theatreListModify" [(ngModel)]="modifyThisTheatre" placeholder="select a theatre to modify" ></p-dropdown>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" [(ngModel)]="modifyThisTheatre.theatreName" id="theatreName" placeholder="Theater Name"
+                  name="theatreName" required>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" [(ngModel)]="modifyThisTheatre.theatreAddress" id="theatreAddress" placeholder="Theater Address"
+                  name="theatreAddress" required>
+              </div>
+              <div class="form-group">
+                <p-dropdown name="theatreCity" [options]="citiesList" [(ngModel)]="modifyThisTheatre.city" placeholder="select a city" ></p-dropdown>
+              </div>
+              <button type="submit" class="btn btn-default" (click)="modifyTheatre()">Submit</button>
+
+            </form>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading" style="background-color: red">
+            <strong> Delete a Theater </strong>
+          </div>
+          <div class="panel-body">
+            <form>
+              <div class="form-group">
+                <p-dropdown name="theatreId" [options]="theatreList" [(ngModel)]="deleteThisTheatre.theatreId" placeholder="select a theatre to delete" ></p-dropdown>
+              </div>
+              <button type="submit" class="btn btn-default" (click)="deleteTheatre()">Submit</button>
+            </form>
+            <button type="submit" class="btn btn-default1" routerLink="/admin" routerLinkActive="active">Go Back Instead</button>
+          </div>
+        </div>
+      </div>

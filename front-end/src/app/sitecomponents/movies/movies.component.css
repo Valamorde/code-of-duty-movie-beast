@@ -1,0 +1,278 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:900);
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
+@import url("https://fonts.googleapis.com/css?family=Fredericka+the+Great");
+.button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #213145;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 90%;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin-left: 17px;
+  margin-bottom: 20px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+/* ANIMATION CSS */
+*, *:before, *:after{
+  box-sizing:border-box;
+}
+body{
+  font-family: 'Lato', sans-serif;
+    ;
+}
+div.foo{
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+}
+.letter{
+  display: inline-block;
+  font-weight: 900;
+  font-size: 4em;
+  margin: 0.2em;
+  position: relative;
+  color:  #fff;
+  transform-style: preserve-3d;
+  perspective: 400;
+  z-index: 1;
+}
+.letter:before, .letter:after{
+  position:absolute;
+  content: attr(data-letter);
+  transform-origin: top left;
+  top:0;
+  left:0;
+}
+.letter, .letter:before, .letter:after{
+  transition: all 0.3s ease-in-out;
+}
+.letter:before{
+  color:#213145;
+  text-shadow: 
+    -1px 0px 1px rgba(255,255,255,.8),
+    1px 0px 1px rgba(0,0,0,.8);
+  z-index: 3;
+  transform:
+    rotateX(0deg)
+    rotateY(-15deg)
+    rotateZ(0deg);
+}
+.letter:after{
+  color: rgba(0,0,0,.11);
+  z-index:2;
+  transform:
+    scale(1.08,1)
+    rotateX(0deg)
+    rotateY(0deg)
+    rotateZ(0deg)
+    skew(0deg,1deg);
+}
+.letter:hover:before{
+  color: #fafafa;
+  transform:
+    rotateX(0deg)
+    rotateY(-40deg)
+    rotateZ(0deg);
+}
+.letter:hover:after{
+  transform:
+    scale(1.08,1)
+    rotateX(0deg)
+    rotateY(40deg)
+    rotateZ(0deg)
+    skew(0deg,22deg);
+}
+
+
+
+body {
+  background-color: #F8FAFB;
+  font-family: 'Open Sans', sans-serif;
+  padding-top: 10%;
+}
+
+/* .col-md-12 {
+
+margin-left: -40%;
+} */
+
+.col-md-5 {
+    margin-right: -5%;
+}
+.col-md-5, .description {
+  padding: 0;
+
+}
+
+.description {
+  font-family: 'Fredericka the Great', cursive;
+  text-align: center;
+}
+
+.card-header, .metadata {
+  background: none;
+  padding: 0;
+  position: relative;
+  border-style: none;
+}
+
+.metadata {
+  font-size: 16px;
+}
+.metadata i, .metadata p {
+  float: left;
+}
+.metadata p {
+  margin-top: 0;
+  margin-left: 10px;
+}
+.metadata i {
+  color: #ff9d00;
+  margin-top: 5px;
+  margin-left: 1px;
+}
+
+.card-img {
+  -webkit-clip-path: inset(10% 0 20% 0);
+  clip-path: inset(10% 0 20% 0);
+  margin-top: -15%;
+  height: 450px;
+}
+
+.card-body {
+  position: relative;
+  margin-top: -30%;
+  color: #9FA7A9;
+}
+.card-body .card-title {
+  font-weight: 600;
+  color: #414345;
+  height: 50px;
+}
+.card-body .card-text {
+  font-weight: 600;
+  line-height: 30px;
+  height: 200px;
+}
+
+.card, .trailer-preview {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.card:hover, .trailer-preview:hover {
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1), 0 8px 8px rgba(0, 0, 0, 0.18);
+}
+
+.card {
+  border-radius: 8pt;
+  border-style: none;
+  overflow: hidden;
+  transform: scale(0.8);
+  margin-top: -60px;
+  height: 800px;
+}
+
+.trailer-preview {
+  background-color: #ff3d49;
+  position: absolute;
+  top: -46px;
+  right: 24px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  color: white;
+  font-size: 36px;
+  text-align: center;
+  padding-top: 13px;
+}
+.trailer-preview:hover, .trailer-preview:disabled, .trailer-preview:active, .trailer-preview:focus {
+  background-color: #ff3d49;
+  color: white;
+}
+.trailer-preview i {
+  margin-left: 5px;
+}
+
+.container {
+    margin: 50px;
+    margin-bottom: -10px;
+  }
+
+  .scroll-box {
+    overflow-y: scroll;
+    height: 200px;
+    padding: 1rem
+   }
+ 
+
+
+.foo .intro{
+  font-family: 'Didact Gothic', sans-serif;
+  font-weight:normal;
+  text-align:center;
+  padding-top:10px;
+  color:#fff;
+  font-size: 20px;
+  
+}
+
+.box5{
+  background-color: #213145;
+}
+
+.shadow5{
+  position:relative;
+  box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 0, 0, 0.1) inset;
+  width:87%;
+  height:90px;
+  margin-left:6%;
+  border:2px dashed #F7EEEE;
+  border-radius:5px;
+}
+
+.shadow5:before, .shadow5:after{
+  position:absolute;
+  content:"";
+  box-shadow:0 10px 25px 20px #518C96;
+  top:40px;left:10px;bottom:50px;
+  width:15%;
+  z-index:-1;
+  -webkit-transform: rotate(-8deg);
+  -moz-transform: rotate(-8deg);
+  transform: rotate(-8deg);
+}
+.shadow5:after{
+  -webkit-transform: rotate(8deg);
+  -moz-transform: rotate(8deg);
+  transform: rotate(8deg);
+  right: 10px;left: auto;
+}
+

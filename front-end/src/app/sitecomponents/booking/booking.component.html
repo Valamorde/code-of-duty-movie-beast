@@ -1,0 +1,97 @@
+<!-- <div class="foo">
+  <span class="letter" data-letter="B">B</span>
+  <span class="letter" data-letter="O">O</span>
+  <span class="letter" data-letter="O">O</span>
+  <span class="letter" data-letter="K">K</span>
+  <span class="letter" data-letter="I">I</span>
+  <span class="letter" data-letter="N">N</span>
+  <span class="letter" data-letter="G">G</span>
+  <span class="letter" data-letter="S">S</span>
+
+  <div class="card text-white bg-dark mb-3" style="max-width: 100rem;" *ngFor='let item of bookings$'>
+    <div class="card-header">Manage Bookings</div>
+    <div class="card-body">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item bg-secondary mb-3">ID : {{item.bookingId}}</li>
+        <li class="list-group-item bg-secondary mb-3">COST : {{item.bookingCost}}</li>
+        <li class="list-group-item bg-secondary mb-3">DATE : {{item.bookingDate}}</li>
+        <li class="list-group-item bg-secondary mb-3">USER DATA : {{item.user.fullName}}</li>
+        <li class="list-group-item bg-secondary mb-3">SHOW DATE : {{item.seatReservation.show.showDate}}</li>
+        <li class="list-group-item bg-secondary mb-3">MOVIE NAME : {{item.seatReservation.show.movie.movieName}}</li>
+        <li class="list-group-item bg-secondary mb-3">CITY NAME : {{item.seatReservation.show.movie.theatre.city.cityName}}</li>
+        <li class="list-group-item bg-secondary mb-3">THEATER NAME : {{item.seatReservation.show.movie.theatre.theaterName}}</li>
+      </ul>
+    </div>
+  </div> -->
+
+
+
+
+<!-- <ul [@listStagger]="bookings$"> -->
+
+<div class="container">
+
+  <h1>Booking Details</h1>
+  <div class="card">
+    <table class="table table-hover shopping-cart-wrap">
+      <thead class="text-muted">
+        <tr>
+          <th>Booking Details</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <ul class="movielist" *ngFor='let item of bookings$;'>
+          <tr>
+            <td>
+              <figure class="media">
+
+                <figcaption class="media-body">
+                  <h6 class="title text-truncate">{{item?.seatReservation?.show?.movie?.movieName}} </h6>
+                  <dl class="param param-inline small">
+                    <dt>Date : </dt>
+                    <dd> {{item?.seatReservation?.show?.showDate | date : 'short'}}</dd>
+                  </dl>
+                  <dl class="param param-inline small">
+                    <dt>Theater Name : </dt>
+                    <dd> {{item?.seatReservation?.show?.movie?.theatre?.theatreName}} </dd>
+                  </dl>
+                  <dl class="param param-inline small">
+                    <dt>City Name : </dt>
+                    <dd> {{item?.seatReservation?.show?.movie?.theatre?.city?.cityName}} </dd>
+                  </dl>
+                  <dl class="param param-inline small">
+                    <dt>Booking Id : </dt>
+                    <dd> {{item.bookingId}}</dd>
+                  </dl>
+                </figcaption>
+              </figure>
+            </td>
+
+            <td>
+              <div class="price-wrap">
+                <var class="price">
+                  <i class=" material-icons ">attach_money </i>Price: {{item.bookingCost}}</var>
+              </div>
+              <!-- price-wrap .// -->
+            </td>
+            <td class="text-right">
+              <!-- <button class="btn btn-primary" (click)=deleteBooking(item)>Remove</button> -->
+              <button class="btn btn-primary" routerLink="/rbooking/{{item.bookingId}}" routerLinkActive="active">Remove</button>
+            </td>
+          </tr>
+
+
+        </ul>
+
+      </tbody>
+
+    </table>
+  </div>
+</div>
+<!-- </ul> -->
+<!-- card.// -->
+
+
+
+<!--container end.//-->

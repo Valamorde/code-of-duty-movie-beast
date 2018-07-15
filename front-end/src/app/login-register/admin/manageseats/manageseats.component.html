@@ -1,0 +1,89 @@
+<div class="container">
+  <div class="col-md-12">
+    <h4 class="page-head-line">Manage Seats</h4>
+
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading" style="background-color:rgb(44, 196, 70)">
+          <strong>Add a Seat </strong>
+        </div>
+        <div class=" panel-body">
+          <form>
+            <div class="form-group">
+              <input type="text" class="form-control" [(ngModel)]="createNewSeat.show" id="show" placeholder="Seat's Show" name="show"
+                required>
+            </div>
+            <div class="form-group">
+              <input type="checkbox" class="form-control" [(ngModel)]="createNewSeat.seatPaid" id="seatPaid" placeholder="Seat Paid" name="seatPaid"
+                required>
+            </div>
+            <div class="form-group">
+              <input type="checkbox" class="form-control" [(ngModel)]="createNewSeat.seatReserved" id="seatReserved" placeholder="Seat's Reserved"
+                name="seatReserved" required>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" [(ngModel)]="createNewSeat.booking" id="booking" placeholder="Seat's Booking Id"
+                name="booking" required>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" [(ngModel)]="createNewSeat.user" id="user" placeholder="Seat User" name="user" required>
+            </div>
+            <button type="submit" class="btn btn-default" (click)="createNewSeat()">Submit</button>
+          </form>
+        </div>
+      </div>
+
+
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading" style="background-color:skyblue">
+            <strong>Modify a Seat </strong>
+          </div>
+          <div class="panel-body">
+            <form>
+              <div class="form-group">
+                <input type="id" class="form-control" [(ngModel)]="modifySeat.seatId" id="seatId" placeholder="Seat's Id" name="seatId" required>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" [(ngModel)]="createNewSeat.show" id="show" placeholder="Seat's Show" name="show"
+                  required>
+              </div>
+              <div class="form-group">
+                <input type="checkbox" class="form-control" [(ngModel)]="createNewSeat.seatPaid" id="seatPaid" placeholder="Seat Paid" name="seatPaid"
+                  required>
+              </div>
+              <div class="form-group">
+                <input type="checkbox" class="form-control" [(ngModel)]="createNewSeat.seatReserved" id="seatReserved" placeholder="Seat's Reserved"
+                  name="seatReserved" required>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" [(ngModel)]="createNewSeat.booking" id="booking" placeholder="Seat's Booking Id"
+                  name="booking" required>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" [(ngModel)]="createNewSeat.user" id="user" placeholder="Seat User" name="user" required>
+              </div>
+              <button type="submit" class="btn btn-default" (click)="modifySeat()">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading" style="background-color: red">
+            <strong> Delete a Seat </strong>
+          </div>
+          <div class="panel-body">
+            <form>
+              <div class="form-group">
+                <input type="id" class="form-control" [(ngModel)]="deleteSeat.seatId" id="seatId" placeholder="Seat's Id" name="seatId" required>
+              </div>
+              <button type="submit" class="btn btn-default" (click)="deleteSeat()">Submit</button>
+            </form>
+            <button type="submit" class="btn btn-default1" routerLink="/admin" routerLinkActive="active">Go Back Instead</button>
+          </div>
+        </div>
+      </div>

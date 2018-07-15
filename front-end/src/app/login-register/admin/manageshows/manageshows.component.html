@@ -1,0 +1,89 @@
+<div class="container">
+  <div class="col-md-12">
+    <h4 class="page-head-line">Manage Shows</h4>
+
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading" style="background-color:rgb(44, 196, 70)">
+          <strong>Add a Show </strong>
+        </div>
+        <div class=" panel-body">
+          <form>
+            <div class="form-group">
+              <input type="text" class="form-control" [(ngModel)]="createNewShow.movie" id="movie" placeholder="Show's Movie" name="movie"
+                required>
+            </div>
+
+            <div class="form-group">
+              <input type="number" class="form-control" [(ngModel)]="createNewShow.initialSeats" id="initialSeats" placeholder="Show's Initial Seats"
+                name="initialSeats" required>
+            </div>
+            <div class="form-group">
+              <input type="number" class="form-control" [(ngModel)]="createNewShow.availableSeats" id="availableSeats" placeholder="Show's Available Seats"
+                name="availableSeats" required>
+            </div>
+            <div class="form-group">
+              <input type="datetime-local" class="form-control" [(ngModel)]="createNewShow.showDate" id="showDate" placeholder="Show's Date"
+                name="showDate" required>
+            </div>
+            <button type="submit" class="btn btn-default" (click)="createNewShow()">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <br>
+
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading" style="background-color:skyblue">
+          <strong>Modify a Show </strong>
+        </div>
+        <div class="panel-body">
+          <form>
+            <div class="form-group">
+              <input type="id" class="form-control" [(ngModel)]="modifyShow.showId" id="showId" placeholder="Show's Id" name="showId" required>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" [(ngModel)]="modifyShow.movie" id="movie" placeholder="Show 's Movie" name="movie"
+                required>
+            </div>
+            <div class="form-group">
+              <input type="number" class="form-control" [(ngModel)]="modifyShow.initialSeats" id="initialSeats" placeholder="Show's Initial Seats"
+                name="initialSeats" required>
+            </div>
+            <div class="form-group">
+              <input type="number" class="form-control" [(ngModel)]="modifyShow.availableSeats" id="availableSeats" placeholder="Show's Available Seats"
+                name="availableSeats" required>
+            </div>
+            <div class="form-group">
+              <input type="datetime-local" class="form-control" [(ngModel)]="modifyShow.showDate" id="showDate" placeholder="Show's Date"
+                name="showDate" required>
+            </div>
+            <button type="submit" class="btn btn-default" (click)="modifyShow()">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading" style="background-color: red">
+          <strong> Delete a Show </strong>
+        </div>
+        <div class="panel-body">
+          <form>
+            <div class="form-group">
+              <input type="id" class="form-control" [(ngModel)]="deleteShow.showId" id="showId" placeholder="Show's Id" name="showId" required>
+            </div>
+            <button type="submit" class="btn btn-default" (click)="deleteShow()">Submit
+            </button>
+          </form>
+          <button type="submit" class="btn btn-default1" routerLink="/admin" routerLinkActive="active">
+            Go Back Instead</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

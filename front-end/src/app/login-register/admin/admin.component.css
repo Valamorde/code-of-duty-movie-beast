@@ -1,0 +1,77 @@
+.content-wrapper {
+    margin-top: 40px;
+    min-height: 600px;
+    padding-bottom: 60px;
+}
+.btn {
+   background-color: #213145
+}
+.page-head-line {
+    font-weight: 900;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #213145;
+    text-transform: uppercase;
+    color: #213145;
+    font-size: 40px;
+    margin-bottom: 100px;
+    text-align: center;
+}
+
+
+.bk-clr-one {
+    background-color: #9aa02b;
+
+}
+
+.bk-clr-two {
+    background-color: #A52A2A;
+}
+
+.bk-clr-three {
+    background-color: #2a324b
+;
+}
+
+.bk-clr-four {
+    background-color: #19568b
+;
+}
+
+.bk-clr-five {
+    background-color:#f96f5d ;
+
+}
+
+
+.bk-clr-six {
+    background-color: #89b6a5
+    ;
+}
+.bk-clr-seven {
+    background-color: #9c9e9c;
+}
+
+.dashboard-div-icon {
+    height: 75px;
+    width: 75px;
+    border: 2px solid #fff;
+    padding: 20px;
+    border-radius: 50%;
+    -webkit-border-radius:50%;
+    -moz-border-radius:50%;
+    font-size: 30px;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.dashboard-div-wrapper {
+    border-radius: 5px;
+    text-align: center;
+    padding: 15px;
+    color: #fff;
+    margin-bottom: 50px;
+}
+
+    .dashboard-div-wrapper .progress {
+        height: 2px;
+    }
