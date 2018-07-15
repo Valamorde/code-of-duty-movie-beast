@@ -5,7 +5,7 @@
 
     <groupId>com.ticketmonster</groupId>
     <artifactId>movie-beast</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.1.7</version>
     <packaging>jar</packaging>
 
     <name>Movie Beast</name>
