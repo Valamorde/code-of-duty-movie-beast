@@ -1,4 +1,4 @@
-# Development branch.    
+# Copyright © 2018 Code Of Duty    
 
 ### root path : http://localhost:8080/api/
 
@@ -6,7 +6,7 @@
 
 \* Minimum Requirements    
 \* Challenge 1    
-\* Challenge 2 (\*)    
+\* Challenge 2    
 \* Challenge 3    
 \* Challenge 4    
 
@@ -15,12 +15,11 @@
 \* ~~Entity Relationships~~    
 \* ~~Admin Reports~~    
 \* ~~Password Reset~~    
-\* Make sure all "communication" with Front-End works as expected (62%)    
+\* ~~Make sure all "communication" with Front-End works as expected (90%)~~    
 \* ~~Refactor "Integer ids" in Entities with corresponding "Entity Classes" _(may the force be with us regarding this one)_~~    
 \* ~~Replace dummy data with actual data~~    
-
-# Note to Front-End    
-### All REST endpoints are _[available here](http://localhost:8080/api/swagger-ui.html)_ **while server is running**.    
+    
+### All REST endpoints are _[available here](http://localhost:8080/api/swagger-ui.html)_.    
 
 
 ## Important Guidelines
