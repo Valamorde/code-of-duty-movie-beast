@@ -50,7 +50,7 @@
                   <h6 class="title text-truncate">{{item?.seatReservation?.show?.movie?.movieName}} </h6>
                   <dl class="param param-inline small">
                     <dt>Date : </dt>
-                    <dd> {{item?.seatReservation?.show?.showDate}}</dd>
+                    <dd> {{item?.seatReservation?.show?.showDate | date : 'short'}}</dd>
                   </dl>
                   <dl class="param param-inline small">
                     <dt>Theater Name : </dt>

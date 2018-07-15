@@ -20,7 +20,7 @@
                             <div class="card bg-light mb-3" style="max-width: 28rem;">
                                 <div class="card-body">
                                     <p class="card-text">
-                                        <i class=" material-icons ">calendar_today </i>Date : {{show.showDate}}
+                                        <i class=" material-icons ">calendar_today </i>Date : {{show.showDate | date : 'short'}}
                                     </p>
                                     <p class="card-text">
                                         <i class=" material-icons ">attach_money </i>Price : {{show.showCost}}
