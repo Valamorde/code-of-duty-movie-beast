@@ -1,20 +1,20 @@
-.row{
-    margin-top: 10%
+.row {
+  margin-top: 10%
 }
 
 h4 {
-    text-align: center;
+  text-align: center;
 }
 
 .material-icons {
-    font-size: 200px;
-    display:inline-block;
-    vertical-align:middle;
-    margin-left: 10%;
+  font-size: 200px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10%;
 }
 
-.btn {   
-    background-color: #213145;
+.btn {
+  background-color: #213145;
   color: #FFFFFF;
-   margin-left:30%;
+  margin-left: 30%;
 }

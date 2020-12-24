@@ -1,30 +1,30 @@
-import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../connection/data.service'
-import { trigger, style, transition, animate, query, stagger } from '@angular/animations';
+import {Component, OnInit} from "@angular/core";
+import {DataService} from "../../connection/data.service";
+import {animate, query, stagger, style, transition, trigger} from "@angular/animations";
 
 
 @Component({
-  selector: 'app-theaters',
-  templateUrl: './theaters.component.html',
-  styleUrls: ['./theaters.component.css'],
+  selector: "app-theaters",
+  templateUrl: "./theaters.component.html",
+  styleUrls: ["./theaters.component.css"],
   animations: [
-    trigger('listStagger', [
-      transition('* <=> *', [
+    trigger("listStagger", [
+      transition("* <=> *", [
         query(
-          ':enter',
+          ":enter",
           [
-            style({ opacity: 0, transform: 'translateY(-15px)' }),
+            style({opacity: 0, transform: "translateY(-15px)"}),
             stagger(
-              '50ms',
+              "50ms",
               animate(
-                '550ms ease-out',
-                style({ opacity: 1, transform: 'translateY(0px)' })
+                "550ms ease-out",
+                style({opacity: 1, transform: "translateY(0px)"})
               )
             )
           ],
-          { optional: true }
+          {optional: true}
         ),
-        query(':leave', animate('50ms', style({ opacity: 0 })), {
+        query(":leave", animate("50ms", style({opacity: 0})), {
           optional: true
         })
       ])
@@ -35,11 +35,13 @@ import { trigger, style, transition, animate, query, stagger } from '@angular/an
 export class TheatersComponent implements OnInit {
   theaters$: Object;
 
-  constructor(private data: DataService) { }
+  constructor(private data: DataService) {
+  }
+
   ngOnInit() {
     this.data.getTheaters().subscribe(
       data => this.theaters$ = data
-    )
+    );
 
 
   }

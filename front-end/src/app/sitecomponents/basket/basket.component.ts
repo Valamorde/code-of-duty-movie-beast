@@ -1,32 +1,31 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Location } from "@angular/common";
-import { trigger, style, transition, animate, query, stagger } from '@angular/animations';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit} from "@angular/core";
+import {HttpClient} from "@angular/common/http";
+import {Location} from "@angular/common";
+import {animate, query, stagger, style, transition, trigger} from "@angular/animations";
 
 @Component({
-  selector: 'app-basket',
-  templateUrl: './basket.component.html',
-  styleUrls: ['./basket.component.css'],
+  selector: "app-basket",
+  templateUrl: "./basket.component.html",
+  styleUrls: ["./basket.component.css"],
 
   animations: [
-    trigger('listStagger', [
-      transition('* <=> *', [
+    trigger("listStagger", [
+      transition("* <=> *", [
         query(
-          ':enter',
+          ":enter",
           [
-            style({ opacity: 0, transform: 'translateY(-15px)' }),
+            style({opacity: 0, transform: "translateY(-15px)"}),
             stagger(
-              '50ms',
+              "50ms",
               animate(
-                '550ms ease-out',
-                style({ opacity: 1, transform: 'translateY(0px)' })
+                "550ms ease-out",
+                style({opacity: 1, transform: "translateY(0px)"})
               )
             )
           ],
-          { optional: true }
+          {optional: true}
         ),
-        query(':leave', animate('50ms', style({ opacity: 0 })), {
+        query(":leave", animate("50ms", style({opacity: 0})), {
           optional: true
         })
       ])
@@ -35,14 +34,15 @@ import { ActivatedRoute } from '@angular/router';
 
 })
 export class BasketComponent implements OnInit {
- 
+
   basket$ = {};
   user$ = {};
 
   constructor(
     private http: HttpClient,
     private location: Location
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.getUser().subscribe((data) => {
@@ -64,6 +64,6 @@ export class BasketComponent implements OnInit {
   }
 
   rememberPage() {
-    localStorage.setItem('basketPage', this.location.path());
+    localStorage.setItem("basketPage", this.location.path());
   }
 }

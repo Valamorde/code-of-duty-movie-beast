@@ -1,6 +1,6 @@
 <ul [@listStagger]="seats$">
   <div class="row card-group">
-    <div class="col-md-4" *ngFor="let seat of seats$;">
+    <div *ngFor="let seat of seats$;" class="col-md-4">
       <div class="card bg-light mb-3" style="max-width: 18rem;">
         <div class="card-header">
           <h4>Seat Number {{seat.seatId}} </h4>
@@ -11,9 +11,12 @@
           </i>
         </div>
         <div class="card-footer text-muted">
-          <button class="btn btn-primary" *ngIf="seat.seatReserved == 0" routerLink="/seat/{{seat.seatId}}">Add to Basket</button>
-          <button class="btn btn-primary" *ngIf="seat.seatReserved == 1 && seat.seatPaid == 0" disabled>Reserved</button>
-          <button class="btn btn-primary" *ngIf="seat.seatPaid == 1" disabled>Booked</button>
+          <button *ngIf="seat.seatReserved == 0" class="btn btn-primary" routerLink="/seat/{{seat.seatId}}">Add to
+            Basket
+          </button>
+          <button *ngIf="seat.seatReserved == 1 && seat.seatPaid == 0" class="btn btn-primary" disabled>Reserved
+          </button>
+          <button *ngIf="seat.seatPaid == 1" class="btn btn-primary" disabled>Booked</button>
         </div>
       </div>
     </div>

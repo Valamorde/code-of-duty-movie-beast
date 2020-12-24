@@ -1,21 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { CityService } from '../../../connection/city.service';
-import { City } from '../../../models/city';
-import { SelectItem } from 'primeng/api'; 
+import {Component, OnInit} from "@angular/core";
+import {CityService} from "../../../connection/city.service";
+import {City} from "../../../models/city";
+import {SelectItem} from "primeng/api";
 
 @Component({
-  selector: 'app-managecities',
-  templateUrl: './managecities.component.html',
-  styleUrls: ['./managecities.component.css']
+  selector: "app-managecities",
+  templateUrl: "./managecities.component.html",
+  styleUrls: ["./managecities.component.css"]
 })
 export class ManagecitiesComponent implements OnInit {
-  
+
   newCity = new City();
   modifyThisCity = new City();
   deleteThisCity = new City();
 
-  citiesList: SelectItem[]
+  citiesList: SelectItem[];
 
   constructor(private cityService: CityService) {
 
@@ -27,15 +26,15 @@ export class ManagecitiesComponent implements OnInit {
     this.cityService.getCities().subscribe(
       data => {
         console.log(data);
-        
+
         this.citiesList = data.map(x => {
-          return { 
-            label: x.cityName, 
-            value: x.cityId 
-          }
+          return {
+            label: x.cityName,
+            value: x.cityId
+          };
         });
       }
-    )
+    );
   }
 
 
@@ -44,7 +43,7 @@ export class ManagecitiesComponent implements OnInit {
       .subscribe((res) => {
         console.log(res);
 
-      })
+      });
   }
 
 
@@ -54,14 +53,15 @@ export class ManagecitiesComponent implements OnInit {
       .subscribe((res) => {
         console.log(res);
 
-      })
+      });
   }
+
   deleteCity() {
     return this.cityService.deleteCity(this.deleteThisCity)
       .subscribe((res) => {
         console.log(res);
 
-      })
+      });
   }
 
 }

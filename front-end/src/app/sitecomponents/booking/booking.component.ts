@@ -1,14 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Location } from "@angular/common";
-import { Observable } from 'rxjs';
-
+import {Component, OnInit} from "@angular/core";
+import {HttpClient} from "@angular/common/http";
+import {Location} from "@angular/common";
+import {Observable} from "rxjs";
 
 
 @Component({
-  selector: 'app-booking',
-  templateUrl: './booking.component.html',
-  styleUrls: ['./booking.component.css']
+  selector: "app-booking",
+  templateUrl: "./booking.component.html",
+  styleUrls: ["./booking.component.css"]
 })
 export class BookingComponent implements OnInit {
 
@@ -16,8 +15,9 @@ export class BookingComponent implements OnInit {
   user$ = {};
 
   constructor(private http: HttpClient,
-    private location: Location
-  ) { }
+              private location: Location
+  ) {
+  }
 
   ngOnInit() {
 
@@ -41,7 +41,7 @@ export class BookingComponent implements OnInit {
   }
 
   rememberPage() {
-    localStorage.setItem('bookingsPage', this.location.path());
+    localStorage.setItem("bookingsPage", this.location.path());
   }
 }
 

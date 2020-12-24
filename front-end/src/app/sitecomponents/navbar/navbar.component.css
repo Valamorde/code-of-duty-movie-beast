@@ -1,25 +1,29 @@
 .navbar-expand-lg {
-    background-color : #213145
-    !important;
-  }
+  background-color: #213145 !important;
+}
 
-.nav-item{
-    display: inline;
-    padding-right: 24px;
-} 
-  
-.nav-link h4 { display: inline-block; }
+.nav-item {
+  display: inline;
+  padding-right: 24px;
+}
+
+.nav-link h4 {
+  display: inline-block;
+}
 
 .navbar-fnt {
-    font-family: 'Lucida Sans Unicode';
-    font-size: 16px;
+  font-family: 'Lucida Sans Unicode';
+  font-size: 16px;
 }
 
-.material-icons { font-size: 27px;    
-    position: relative;
-    /* Adjust these values accordingly */
-    top: 5px;
-    left: -5px;
-    ;
+.material-icons {
+  font-size: 27px;
+  position: relative;
+  /* Adjust these values accordingly */
+  top: 5px;
+  left: -5px;;
 }
-.material-icons { color: rgba(255, 255, 255, 1); }
+
+.material-icons {
+  color: rgba(255, 255, 255, 1);
+}

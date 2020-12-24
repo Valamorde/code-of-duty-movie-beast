@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
-import { Router } from '@angular/router'
+import {Injectable} from "@angular/core";
+import {HttpClient} from "@angular/common/http";
+import {Router} from "@angular/router";
 
 @Injectable()
 export class AuthService {
@@ -10,28 +10,29 @@ export class AuthService {
   private _movieUrl = "http://localhost:8080/api/movies";
 
   constructor(private http: HttpClient,
-    private _router: Router) { }
+              private _router: Router) {
+  }
 
   registerUser(user) {
-    return this.http.post<any>(this._registerUrl, user)
+    return this.http.post<any>(this._registerUrl, user);
   }
 
   loginUser(user) {
-    return this.http.post<any>(this._loginUrl, user)
+    return this.http.post<any>(this._loginUrl, user);
   }
 
   getToken() {
-    return localStorage.getItem('token')
+    return localStorage.getItem("token");
   }
 
   loggedIn() {
-    return !!localStorage.getItem('token')
+    return !!localStorage.getItem("token");
   }
 
   logoutUser() {
     this.postLogout().subscribe((res) => {
-      localStorage.removeItem('token')
-      this._router.navigate(['/login'])
+      localStorage.removeItem("token");
+      this._router.navigate(["/login"]);
     });
   }
 

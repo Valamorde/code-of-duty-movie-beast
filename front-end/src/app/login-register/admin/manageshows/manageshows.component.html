@@ -12,23 +12,28 @@
         <div class=" panel-body">
           <form>
             <div class="form-group">
-              <input type="text" class="form-control" [(ngModel)]="createNewShow.movie" id="movie" placeholder="Show's Movie" name="movie"
-                required>
+              <input [(ngModel)]="createNewShow.movie" class="form-control" id="movie" name="movie"
+                     placeholder="Show's Movie" required
+                     type="text">
             </div>
 
             <div class="form-group">
-              <input type="number" class="form-control" [(ngModel)]="createNewShow.initialSeats" id="initialSeats" placeholder="Show's Initial Seats"
-                name="initialSeats" required>
+              <input [(ngModel)]="createNewShow.initialSeats" class="form-control" id="initialSeats" name="initialSeats"
+                     placeholder="Show's Initial Seats"
+                     required type="number">
             </div>
             <div class="form-group">
-              <input type="number" class="form-control" [(ngModel)]="createNewShow.availableSeats" id="availableSeats" placeholder="Show's Available Seats"
-                name="availableSeats" required>
+              <input [(ngModel)]="createNewShow.availableSeats" class="form-control" id="availableSeats"
+                     name="availableSeats"
+                     placeholder="Show's Available Seats"
+                     required type="number">
             </div>
             <div class="form-group">
-              <input type="datetime-local" class="form-control" [(ngModel)]="createNewShow.showDate" id="showDate" placeholder="Show's Date"
-                name="showDate" required>
+              <input [(ngModel)]="createNewShow.showDate" class="form-control" id="showDate" name="showDate"
+                     placeholder="Show's Date"
+                     required type="datetime-local">
             </div>
-            <button type="submit" class="btn btn-default" (click)="createNewShow()">Submit</button>
+            <button (click)="createNewShow()" class="btn btn-default" type="submit">Submit</button>
           </form>
         </div>
       </div>
@@ -43,25 +48,32 @@
         <div class="panel-body">
           <form>
             <div class="form-group">
-              <input type="id" class="form-control" [(ngModel)]="modifyShow.showId" id="showId" placeholder="Show's Id" name="showId" required>
+              <input [(ngModel)]="modifyShow.showId" class="form-control" id="showId" name="showId"
+                     placeholder="Show's Id"
+                     required type="id">
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" [(ngModel)]="modifyShow.movie" id="movie" placeholder="Show 's Movie" name="movie"
-                required>
+              <input [(ngModel)]="modifyShow.movie" class="form-control" id="movie" name="movie"
+                     placeholder="Show 's Movie" required
+                     type="text">
             </div>
             <div class="form-group">
-              <input type="number" class="form-control" [(ngModel)]="modifyShow.initialSeats" id="initialSeats" placeholder="Show's Initial Seats"
-                name="initialSeats" required>
+              <input [(ngModel)]="modifyShow.initialSeats" class="form-control" id="initialSeats" name="initialSeats"
+                     placeholder="Show's Initial Seats"
+                     required type="number">
             </div>
             <div class="form-group">
-              <input type="number" class="form-control" [(ngModel)]="modifyShow.availableSeats" id="availableSeats" placeholder="Show's Available Seats"
-                name="availableSeats" required>
+              <input [(ngModel)]="modifyShow.availableSeats" class="form-control" id="availableSeats"
+                     name="availableSeats"
+                     placeholder="Show's Available Seats"
+                     required type="number">
             </div>
             <div class="form-group">
-              <input type="datetime-local" class="form-control" [(ngModel)]="modifyShow.showDate" id="showDate" placeholder="Show's Date"
-                name="showDate" required>
+              <input [(ngModel)]="modifyShow.showDate" class="form-control" id="showDate" name="showDate"
+                     placeholder="Show's Date"
+                     required type="datetime-local">
             </div>
-            <button type="submit" class="btn btn-default" (click)="modifyShow()">Submit</button>
+            <button (click)="modifyShow()" class="btn btn-default" type="submit">Submit</button>
           </form>
         </div>
       </div>
@@ -75,13 +87,16 @@
         <div class="panel-body">
           <form>
             <div class="form-group">
-              <input type="id" class="form-control" [(ngModel)]="deleteShow.showId" id="showId" placeholder="Show's Id" name="showId" required>
+              <input [(ngModel)]="deleteShow.showId" class="form-control" id="showId" name="showId"
+                     placeholder="Show's Id"
+                     required type="id">
             </div>
-            <button type="submit" class="btn btn-default" (click)="deleteShow()">Submit
+            <button (click)="deleteShow()" class="btn btn-default" type="submit">Submit
             </button>
           </form>
-          <button type="submit" class="btn btn-default1" routerLink="/admin" routerLinkActive="active">
-            Go Back Instead</button>
+          <button class="btn btn-default1" routerLink="/admin" routerLinkActive="active" type="submit">
+            Go Back Instead
+          </button>
         </div>
       </div>
     </div>

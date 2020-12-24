@@ -12,10 +12,11 @@
         <div class=" panel-body">
           <form>
             <div class="form-group">
-              <input type="text" class="form-control " [(ngModel)]="newCity.cityName" id="name" placeholder="City Name" name="name" required>
+              <input [(ngModel)]="newCity.cityName" class="form-control " id="name" name="name" placeholder="City Name"
+                     required type="text">
 
             </div>
-            <button type="submit" class="btn btn-default" (click)="createCity()">Submit</button>
+            <button (click)="createCity()" class="btn btn-default" type="submit">Submit</button>
           </form>
         </div>
       </div>
@@ -30,12 +31,14 @@
         <div class="panel-body">
           <form>
             <div class="form-group">
-              <p-dropdown name="cityId" [options]="citiesList" [(ngModel)]="modifyThisCity.cityId" placeholder="select a city to modify"></p-dropdown>
+              <p-dropdown [(ngModel)]="modifyThisCity.cityId" [options]="citiesList" name="cityId"
+                          placeholder="select a city to modify"></p-dropdown>
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" [(ngModel)]="modifyThisCity.cityName" id="cityName" placeholder="City Name" name="cityName">
+              <input [(ngModel)]="modifyThisCity.cityName" class="form-control" id="cityName" name="cityName"
+                     placeholder="City Name" type="text">
             </div>
-            <button type="submit" class="btn btn-default" (click)="modifyCity()">Submit</button>
+            <button (click)="modifyCity()" class="btn btn-default" type="submit">Submit</button>
           </form>
         </div>
       </div>
@@ -49,11 +52,13 @@
         <div class="panel-body">
           <form>
             <div class="form-group">
-              <p-dropdown name="cityId" [options]="citiesList" [(ngModel)]="deleteThisCity.cityId" placeholder="select a city to delete"></p-dropdown>
+              <p-dropdown [(ngModel)]="deleteThisCity.cityId" [options]="citiesList" name="cityId"
+                          placeholder="select a city to delete"></p-dropdown>
             </div>
-            <button type="submit" class="btn btn-default" (click)="deleteCity()">Submit</button>
+            <button (click)="deleteCity()" class="btn btn-default" type="submit">Submit</button>
           </form>
-          <button type="submit" class="btn btn-default1" routerLink="/admin" routerLinkActive="active">Go Back Instead</button>
+          <button class="btn btn-default1" routerLink="/admin" routerLinkActive="active" type="submit">Go Back Instead
+          </button>
         </div>
       </div>
     </div>

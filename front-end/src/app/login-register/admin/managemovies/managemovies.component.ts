@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { Movie } from '../../../models/movie';
-import { MovieService } from '../../../connection/movie.service';
+import {Component, OnInit} from "@angular/core";
+import {Movie} from "../../../models/movie";
+import {MovieService} from "../../../connection/movie.service";
 
 @Component({
-  selector: 'app-managemovies',
-  templateUrl: './managemovies.component.html',
-  styleUrls: ['./managemovies.component.css']
+  selector: "app-managemovies",
+  templateUrl: "./managemovies.component.html",
+  styleUrls: ["./managemovies.component.css"]
 })
 export class ManagemoviesComponent implements OnInit {
 
@@ -24,7 +24,7 @@ export class ManagemoviesComponent implements OnInit {
     return this.movieService.createMovie(this.newMovie)
       .subscribe((res) => {
         console.log(res);
-      })
+      });
   }
 
 }

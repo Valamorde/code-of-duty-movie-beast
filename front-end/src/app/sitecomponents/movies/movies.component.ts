@@ -1,31 +1,31 @@
-import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../connection/data.service'
-import { trigger, style, transition, animate, query, stagger } from '@angular/animations';
-import { Movie } from '../../models/movie';
+import {Component, OnInit} from "@angular/core";
+import {DataService} from "../../connection/data.service";
+import {animate, query, stagger, style, transition, trigger} from "@angular/animations";
+import {Movie} from "../../models/movie";
 
 @Component({
-  selector: 'app-movies',
-  templateUrl: './movies.component.html',
-  styleUrls: ['./movies.component.css'],
+  selector: "app-movies",
+  templateUrl: "./movies.component.html",
+  styleUrls: ["./movies.component.css"],
 
   animations: [
-    trigger('listStagger', [
-      transition('* <=> *', [
+    trigger("listStagger", [
+      transition("* <=> *", [
         query(
-          ':enter',
+          ":enter",
           [
-            style({ opacity: 0, transform: 'translateY(-15px)' }),
+            style({opacity: 0, transform: "translateY(-15px)"}),
             stagger(
-              '50ms',
+              "50ms",
               animate(
-                '550ms ease-out',
-                style({ opacity: 1, transform: 'translateY(0px)' })
+                "550ms ease-out",
+                style({opacity: 1, transform: "translateY(0px)"})
               )
             )
           ],
-          { optional: true }
+          {optional: true}
         ),
-        query(':leave', animate('50ms', style({ opacity: 0 })), {
+        query(":leave", animate("50ms", style({opacity: 0})), {
           optional: true
         })
       ])
@@ -37,13 +37,15 @@ import { Movie } from '../../models/movie';
 export class MoviesComponent implements OnInit {
   movies$: Movie[];
 
-  constructor(private data: DataService) { }
+  constructor(private data: DataService) {
+  }
+
   ngOnInit() {
     this.data.getMovies().subscribe(
       data => {
         this.movies$ = data as Movie[];
       }
-    )
+    );
 
 
     // getVideos(id) {

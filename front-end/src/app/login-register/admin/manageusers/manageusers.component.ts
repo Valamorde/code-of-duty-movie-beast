@@ -1,26 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { UserService } from '../../../connection/user.service';
-import { User } from '../../../models/user';
-import { SelectItem } from 'primeng/api'; 
+import {Component, OnInit} from "@angular/core";
+import {UserService} from "../../../connection/user.service";
+import {User} from "../../../models/user";
+import {SelectItem} from "primeng/api";
 
 @Component({
-  selector: 'app-manageusers',
-  templateUrl: './manageusers.component.html',
-  styleUrls: ['./manageusers.component.css']
+  selector: "app-manageusers",
+  templateUrl: "./manageusers.component.html",
+  styleUrls: ["./manageusers.component.css"]
 })
 export class ManageusersComponent implements OnInit {
 
   // resetPassword = new User();
   modifyThisUser = new User();
   deleteThisUser = new User();
-  passwordThisUser= new User();
+  passwordThisUser = new User();
 
   userList: SelectItem[];
   userListModify: SelectItem[];
 
   constructor(private userService: UserService) {
-    
+
     this.userList = [];
   }
 
@@ -28,22 +27,22 @@ export class ManageusersComponent implements OnInit {
     this.userService.getUsers().subscribe(
       data => {
         console.log(data);
-        
+
         this.userList = data.map(x => {
-          return { 
-            label: x.email, 
-            value: x.userId 
-          }
+          return {
+            label: x.email,
+            value: x.userId
+          };
         });
 
         this.userListModify = data.map(x => {
-          return { 
-            label: x.email, 
-            value: x 
-          }
+          return {
+            label: x.email,
+            value: x
+          };
         });
       }
-    )
+    );
   }
 
   // createCity() {
@@ -61,16 +60,16 @@ export class ManageusersComponent implements OnInit {
       .subscribe((res) => {
         console.log(res);
 
-      })
+      });
   }
-  
+
   resetPassword() {
     console.log(this.passwordThisUser);
     return this.userService.resetPassword(this.passwordThisUser)
       .subscribe((res) => {
         console.log(res);
 
-      })
+      });
   }
 
   deleteUser() {
@@ -78,7 +77,7 @@ export class ManageusersComponent implements OnInit {
       .subscribe((res) => {
         console.log(res);
 
-      })
+      });
   }
 
 }

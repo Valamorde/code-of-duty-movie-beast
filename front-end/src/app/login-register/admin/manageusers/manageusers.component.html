@@ -13,33 +13,33 @@
           </div>
           <div class="panel-body">
             <form>
-               
-                <div class="form-group">
-                    <p-dropdown name="userId" [options]="userListModify" 
-                      [(ngModel)]="modifyThisUser" placeholder="select a user to modify"></p-dropdown>
-                  </div>
+
               <div class="form-group">
-                <input type="email" class="form-control" [(ngModel)]="modifyThisUser.email" 
-                  id="modEmail" placeholder="User's Email" name="email"
-                  required>
+                <p-dropdown [(ngModel)]="modifyThisUser" [options]="userListModify"
+                            name="userId" placeholder="select a user to modify"></p-dropdown>
+              </div>
+              <div class="form-group">
+                <input [(ngModel)]="modifyThisUser.email" class="form-control" id="modEmail"
+                       name="email" placeholder="User's Email" required
+                       type="email">
               </div>
               <div class="form-group">
                 <label for="modEnabled">Enabled:</label>
-                <input type="checkbox" class="form-control" [(ngModel)]="modifyThisUser.enabled" 
-                  id="modEnabled" style="display: inline" placeholder="User Enabled" name="enabled"
-                  required>
+                <input [(ngModel)]="modifyThisUser.enabled" class="form-control" id="modEnabled"
+                       name="enabled" placeholder="User Enabled" required style="display: inline"
+                       type="checkbox">
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" [(ngModel)]="modifyThisUser.fullName" 
-                  id="modFullName" placeholder="User Full Name" name="fullName"
-                  required>
+                <input [(ngModel)]="modifyThisUser.fullName" class="form-control" id="modFullName"
+                       name="fullName" placeholder="User Full Name" required
+                       type="text">
               </div>
-              
+
               <div class="form-group">
-                <input type="text" class="form-control" [(ngModel)]="modifyThisUser.role" 
-                  id="modRole" placeholder="User's Role" name="role" required>
+                <input [(ngModel)]="modifyThisUser.role" class="form-control" id="modRole"
+                       name="role" placeholder="User's Role" required type="text">
               </div>
-              <button type="submit" class="btn btn-default" (click)="modifyUser()">Submit</button>
+              <button (click)="modifyUser()" class="btn btn-default" type="submit">Submit</button>
             </form>
           </div>
         </div>
@@ -52,30 +52,32 @@
           </div>
           <div class="panel-body">
             <form>
-                  <div class="form-group">
-                      <p-dropdown name="userId" [options]="userList" [(ngModel)]="deleteThisUser.userId" placeholder="select a user to delete" ></p-dropdown>
-                    </div>
-              <button type="submit" class="btn btn-default" (click)="deleteUser()">Submit</button>
+              <div class="form-group">
+                <p-dropdown [(ngModel)]="deleteThisUser.userId" [options]="userList" name="userId"
+                            placeholder="select a user to delete"></p-dropdown>
+              </div>
+              <button (click)="deleteUser()" class="btn btn-default" type="submit">Submit</button>
             </form>
-                      </div>
+          </div>
         </div>
       </div>
       <div class="col-md-12">
-          <div class="panel panel-default">
-      <div class="panel-heading" style="background-color:blueviolet">
-          <strong> Change User's Password </strong>
+        <div class="panel panel-default">
+          <div class="panel-heading" style="background-color:blueviolet">
+            <strong> Change User's Password </strong>
+          </div>
+          <div class="panel-body">
+            <form>
+              <div class="form-group">
+                <p-dropdown [(ngModel)]="passwordThisUser.userId" [options]="userList" name="userId"
+                            placeholder="select a user"></p-dropdown>
+              </div>
+              <button (click)="resetPassword()" class="btn btn-default" type="submit">Submit</button>
+            </form>
+          </div>
         </div>
-        <div class="panel-body">
-          <form>
-            <div class="form-group">
-                  <p-dropdown name="userId" [options]="userList" [(ngModel)]="passwordThisUser.userId" placeholder="select a user"></p-dropdown>
-                </div>
-            <button type="submit" class="btn btn-default" (click)="resetPassword()">Submit</button>
-          </form>
-    </div>
-    </div>
-    </div>
-    <button type="submit" class="btn btn-default1" routerLink="/admin" routerLinkActive="active">Go Back Instead</button>
+      </div>
+      <button class="btn btn-default1" routerLink="/admin" routerLinkActive="active" type="submit">Go Back Instead
+      </button>
 
-  </div>
-  
+    </div>

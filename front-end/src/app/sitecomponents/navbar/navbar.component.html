@@ -1,10 +1,12 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <nav class="navbar navbar-expand-lg navbar-fnt navbar-dark bg-dark">
   <div class="navbar-header">
-    <img src='/assets/images/movie-beast-navbar.png' height='55' width='200' style='object-fit: contain'>
+    <img height='55' src='/assets/images/movie-beast-navbar.png' style='object-fit: contain' width='200'>
   </div>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-    aria-expanded="false" aria-label="Toggle navigation">
+  <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+          class="navbar-toggler"
+          data-target="#navbarSupportedContent"
+          data-toggle="collapse" type="button">
     <span class="navbar-toggler-icon"></span>
   </button>
 
@@ -53,7 +55,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" style="cursor:pointer" *ngIf="_authService.loggedIn()" (click)="_authService.logoutUser()">
+        <a (click)="_authService.logoutUser()" *ngIf="_authService.loggedIn()" class="nav-link" style="cursor:pointer">
           <i class="material-icons">sentiment_dissatisfied</i>
           <h4 class="d-inline">Log Out</h4>
         </a>

@@ -12,18 +12,21 @@
         <div class=" panel-body">
           <form>
             <div class="form-group">
-              <input type="id" class="form-control" [(ngModel)]="createNewBooking.seat" id="seat" placeholder="Booking Seat" name="seatId"
-                required>
+              <input [(ngModel)]="createNewBooking.seat" class="form-control" id="seat" name="seatId"
+                     placeholder="Booking Seat" required
+                     type="id">
             </div>
             <div class="form-group">
-              <input type="number" class="form-control" [(ngModel)]="createNewBooking.bookingCost" id="bookingCost" placeholder="Booking Cost"
-                name="bookingCost" required>
+              <input [(ngModel)]="createNewBooking.bookingCost" class="form-control" id="bookingCost" name="bookingCost"
+                     placeholder="Booking Cost"
+                     required type="number">
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" [(ngModel)]="createNewBooking.user" id="user" placeholder="Booking User" name="user"
-                required>
+              <input [(ngModel)]="createNewBooking.user" class="form-control" id="user" name="user"
+                     placeholder="Booking User" required
+                     type="text">
             </div>
-            <button type="submit" class="btn btn-default" (click)="createNewBooking()">Submit</button>
+            <button (click)="createNewBooking()" class="btn btn-default" type="submit">Submit</button>
           </form>
         </div>
       </div>
@@ -37,21 +40,25 @@
           <div class="panel-body">
             <form>
               <div class="form-group">
-                <input type="id" class="form-control" [(ngModel)]="modifyBooking.bookingId" id="bookingId" placeholder="Booking ID" name="bookingId"
-                  required>
+                <input [(ngModel)]="modifyBooking.bookingId" class="form-control" id="bookingId" name="bookingId"
+                       placeholder="Booking ID" required
+                       type="id">
               </div>
               <div class="form-group">
-                <input type="id" class="form-control" [(ngModel)]="modifyBooking.seat" id="seat" placeholder="Booking Seat" name="seat" required>
+                <input [(ngModel)]="modifyBooking.seat" class="form-control" id="seat" name="seat"
+                       placeholder="Booking Seat" required type="id">
               </div>
               <div class="form-group">
-                <input type="number" class="form-control" [(ngModel)]="modifyBooking.bookingCost" id="bookingCost" placeholder="Booking Cost"
-                  name="bookingCost" required>
+                <input [(ngModel)]="modifyBooking.bookingCost" class="form-control" id="bookingCost" name="bookingCost"
+                       placeholder="Booking Cost"
+                       required type="number">
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" [(ngModel)]="modifyBooking.user" id="user" placeholder="Booking User" name="user"
-                  required>
+                <input [(ngModel)]="modifyBooking.user" class="form-control" id="user" name="user"
+                       placeholder="Booking User" required
+                       type="text">
               </div>
-              <button type="submit" class="btn btn-default" (click)="modifyBooking()">Submit</button>
+              <button (click)="modifyBooking()" class="btn btn-default" type="submit">Submit</button>
 
             </form>
           </div>
@@ -66,12 +73,15 @@
           <div class="panel-body">
             <form>
               <div class="form-group">
-                <input type="id" class="form-control" [(ngModel)]="deleteBooking.bookingId" id="bookingId" placeholder="Booking Id" name="bookingId"
-                  required>
+                <input [(ngModel)]="deleteBooking.bookingId" class="form-control" id="bookingId" name="bookingId"
+                       placeholder="Booking Id" required
+                       type="id">
               </div>
-              <button type="submit" class="btn btn-default" (click)="deleteBooking()">Submit</button>
+              <button (click)="deleteBooking()" class="btn btn-default" type="submit">Submit</button>
             </form>
-            <button type="submit" class="btn btn-default1" routerLink="/admin" routerLinkActive="active">Go Back Instead</button>
+            <button class="btn btn-default1" routerLink="/admin" routerLinkActive="active" type="submit">Go Back
+              Instead
+            </button>
           </div>
         </div>
       </div>

@@ -1,9 +1,9 @@
 export class Video {
-    id: number;
-    videoCode: string;
+  id: number;
+  videoCode: string;
 
-    constructor(id: number, videoCode: string){
-          this.id = id;
-          this.videoCode = videoCode;
-    }
+  constructor(id: number, videoCode: string) {
+    this.id = id;
+    this.videoCode = videoCode;
+  }
 }

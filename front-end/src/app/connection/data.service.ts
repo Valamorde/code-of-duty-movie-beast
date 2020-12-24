@@ -1,28 +1,29 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {Injectable} from "@angular/core";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class DataService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getCities() {
-    return this.http.get('http://localhost:8080/api/cities')
+    return this.http.get("http://localhost:8080/api/cities");
 
   }
 
   getMovies() {
-    return this.http.get('http://localhost:8080/api/movies')
+    return this.http.get("http://localhost:8080/api/movies");
 
   }
 
   getUserDetails() {
-    return this.http.get('http://localhost:8080/api/loggedUser')
+    return this.http.get("http://localhost:8080/api/loggedUser");
   }
 
   getTheaters() {
-    return this.http.get('http://localhost:8080/api/theatres')
+    return this.http.get("http://localhost:8080/api/theatres");
   }
 }

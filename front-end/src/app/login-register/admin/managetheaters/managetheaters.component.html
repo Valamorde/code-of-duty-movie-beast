@@ -12,17 +12,21 @@
         <div class=" panel-body">
           <form>
             <div class="form-group">
-              <input type="text" class="form-control" [(ngModel)]="createNewTheater.theatreName" id="theatreName" placeholder="Theater Name"
-                name="theatreName" required>
+              <input [(ngModel)]="createNewTheater.theatreName" class="form-control" id="theatreName" name="theatreName"
+                     placeholder="Theater Name"
+                     required type="text">
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" [(ngModel)]="createNewTheater.theatreAddress" id="theatreAddress" placeholder="Theater Address"
-                name="theatreAddress" required>
+              <input [(ngModel)]="createNewTheater.theatreAddress" class="form-control" id="theatreAddress"
+                     name="theatreAddress"
+                     placeholder="Theater Address"
+                     required type="text">
             </div>
             <div class="form-group">
-                <p-dropdown name="theatreCity" [options]="citiesList" [(ngModel)]="createNewTheater.city" placeholder="select a city" ></p-dropdown>
-              </div>
-            <button type="submit" class="btn btn-default" (click)="createTheater()">Submit</button>
+              <p-dropdown [(ngModel)]="createNewTheater.city" [options]="citiesList" name="theatreCity"
+                          placeholder="select a city"></p-dropdown>
+            </div>
+            <button (click)="createTheater()" class="btn btn-default" type="submit">Submit</button>
           </form>
         </div>
       </div>
@@ -36,20 +40,25 @@
           <div class="panel-body">
             <form>
               <div class="form-group">
-                <p-dropdown name="theatreId" [options]="theatreListModify" [(ngModel)]="modifyThisTheatre" placeholder="select a theatre to modify" ></p-dropdown>
+                <p-dropdown [(ngModel)]="modifyThisTheatre" [options]="theatreListModify" name="theatreId"
+                            placeholder="select a theatre to modify"></p-dropdown>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" [(ngModel)]="modifyThisTheatre.theatreName" id="theatreName" placeholder="Theater Name"
-                  name="theatreName" required>
+                <input [(ngModel)]="modifyThisTheatre.theatreName" class="form-control" id="theatreName"
+                       name="theatreName"
+                       placeholder="Theater Name"
+                       required type="text">
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" [(ngModel)]="modifyThisTheatre.theatreAddress" id="theatreAddress" placeholder="Theater Address"
-                  name="theatreAddress" required>
+                <input [(ngModel)]="modifyThisTheatre.theatreAddress" class="form-control" id="theatreAddress"
+                       name="theatreAddress" placeholder="Theater Address"
+                       required type="text">
               </div>
               <div class="form-group">
-                <p-dropdown name="theatreCity" [options]="citiesList" [(ngModel)]="modifyThisTheatre.city" placeholder="select a city" ></p-dropdown>
+                <p-dropdown [(ngModel)]="modifyThisTheatre.city" [options]="citiesList" name="theatreCity"
+                            placeholder="select a city"></p-dropdown>
               </div>
-              <button type="submit" class="btn btn-default" (click)="modifyTheatre()">Submit</button>
+              <button (click)="modifyTheatre()" class="btn btn-default" type="submit">Submit</button>
 
             </form>
           </div>
@@ -64,11 +73,14 @@
           <div class="panel-body">
             <form>
               <div class="form-group">
-                <p-dropdown name="theatreId" [options]="theatreList" [(ngModel)]="deleteThisTheatre.theatreId" placeholder="select a theatre to delete" ></p-dropdown>
+                <p-dropdown [(ngModel)]="deleteThisTheatre.theatreId" [options]="theatreList" name="theatreId"
+                            placeholder="select a theatre to delete"></p-dropdown>
               </div>
-              <button type="submit" class="btn btn-default" (click)="deleteTheatre()">Submit</button>
+              <button (click)="deleteTheatre()" class="btn btn-default" type="submit">Submit</button>
             </form>
-            <button type="submit" class="btn btn-default1" routerLink="/admin" routerLinkActive="active">Go Back Instead</button>
+            <button class="btn btn-default1" routerLink="/admin" routerLinkActive="active" type="submit">Go Back
+              Instead
+            </button>
           </div>
         </div>
       </div>

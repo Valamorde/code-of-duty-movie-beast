@@ -1,149 +1,143 @@
-*, *:before, *:after{
-    box-sizing:border-box;
-  }
-  body{
-    font-family: 'Lato', sans-serif;
-      ;
-  }
-  div.foo{
-    width: 90%;
-    margin: 0 auto;
-    text-align: center;
-  }
-  .letter{
-    display: inline-block;
-    font-weight: 900;
-    font-size: 3em;
-    margin: 0.2em;
-    position: relative;
-    color:  #fff;
-    transform-style: preserve-3d;
-    perspective: 400;
-    z-index: 1;
-  }
-  .letter:before, .letter:after{
-    position:absolute;
-    content: attr(data-letter);
-    transform-origin: top left;
-    top:0;
-    left:0;
-  }
-  .letter, .letter:before, .letter:after{
-    transition: all 0.3s ease-in-out;
-  }
-  .letter:before{
-    color:#213145;
-    text-shadow: 
-      -1px 0px 1px rgba(255,255,255,.8),
-      1px 0px 1px rgba(0,0,0,.8);
-    z-index: 3;
-    transform:
-      rotateX(0deg)
-      rotateY(-15deg)
-      rotateZ(0deg);
-  }
-  .letter:after{
-    color: rgba(0,0,0,.11);
-    z-index:2;
-    transform:
-      scale(1.08,1)
-      rotateX(0deg)
-      rotateY(0deg)
-      rotateZ(0deg)
-      skew(0deg,1deg);
-  }
-  .letter:hover:before{
-    color: #fafafa;
-    transform:
-      rotateX(0deg)
-      rotateY(-40deg)
-      rotateZ(0deg);
-  }
-  .letter:hover:after{
-    transform:
-      scale(1.08,1)
-      rotateX(0deg)
-      rotateY(40deg)
-      rotateZ(0deg)
-      skew(0deg,22deg);
-  }
-  
-
-  .button .list-group-item-action active{
-    background-color: #213145
-  }
-
-
-  
- .param {
-    margin-bottom: 7px;
-    line-height: 1.4;
+*, *:before, *:after {
+  box-sizing: border-box;
 }
+
+body {
+  font-family: 'Lato', sans-serif;;
+}
+
+div.foo {
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.letter {
+  display: inline-block;
+  font-weight: 900;
+  font-size: 3em;
+  margin: 0.2em;
+  position: relative;
+  color: #fff;
+  transform-style: preserve-3d;
+  perspective: 400;
+  z-index: 1;
+}
+
+.letter:before, .letter:after {
+  position: absolute;
+  content: attr(data-letter);
+  transform-origin: top left;
+  top: 0;
+  left: 0;
+}
+
+.letter, .letter:before, .letter:after {
+  transition: all 0.3s ease-in-out;
+}
+
+.letter:before {
+  color: #213145;
+  text-shadow: -1px 0px 1px rgba(255, 255, 255, .8),
+  1px 0px 1px rgba(0, 0, 0, .8);
+  z-index: 3;
+  transform: rotateX(0deg) rotateY(-15deg) rotateZ(0deg);
+}
+
+.letter:after {
+  color: rgba(0, 0, 0, .11);
+  z-index: 2;
+  transform: scale(1.08, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 1deg);
+}
+
+.letter:hover:before {
+  color: #fafafa;
+  transform: rotateX(0deg) rotateY(-40deg) rotateZ(0deg);
+}
+
+.letter:hover:after {
+  transform: scale(1.08, 1) rotateX(0deg) rotateY(40deg) rotateZ(0deg) skew(0deg, 22deg);
+}
+
+
+.button .list-group-item-action active {
+  background-color: #213145
+}
+
+
+.param {
+  margin-bottom: 7px;
+  line-height: 1.4;
+}
+
 .param-inline dt {
-    display: inline-block;
+  display: inline-block;
 }
+
 .param dt {
-    margin: 0;
-    margin-right: 7px;
-    font-weight: 600;
+  margin: 0;
+  margin-right: 7px;
+  font-weight: 600;
 }
+
 .param-inline dd {
-    vertical-align: baseline;
-    display: inline-block;
+  vertical-align: baseline;
+  display: inline-block;
 }
 
 .param dd {
-    margin: 0;
-    vertical-align: baseline;
-} 
+  margin: 0;
+  vertical-align: baseline;
+}
 
 .shopping-cart-wrap .price {
-    color: #213145;
-    font-size: 18px;
-    font-weight: bold;
-    margin-right: 50px;
-    display: block;
+  color: #213145;
+  font-size: 18px;
+  font-weight: bold;
+  margin-right: 50px;
+  display: block;
 }
+
 var {
-    font-style: normal;
+  font-style: normal;
 }
 
 .media img {
-    margin-right: 1rem;
+  margin-right: 1rem;
 }
+
 .img-sm {
-    width: 90px;
-    height: 120px;
-    /* object-fit: cover; */
+  width: 90px;
+  height: 120px;
+  /* object-fit: cover; */
 }
 
-.movielist{
-width: 1010px;
+.movielist {
+  width: 1010px;
 
 }
 
-.th1{
- width:3000px;
+.th1 {
+  width: 3000px;
 }
 
-.btn{
-    margin-top: 15px;
-    margin-left: 450px;
-    background-color: #213145;
-    color: #FFFFFF;
-  
+.btn {
+  margin-top: 15px;
+  margin-left: 450px;
+  background-color: #213145;
+  color: #FFFFFF;
+
 }
 
 
-h1{
-    margin-left:310px;
-    margin-top:20px;
-    margin-bottom:20px;
+h1 {
+  margin-left: 310px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
-h2{
-    margin-left:310px;
-    margin-top:65px;
-   ;
+h2 {
+  margin-left: 310px;
+  margin-top: 65px;;
 }
 

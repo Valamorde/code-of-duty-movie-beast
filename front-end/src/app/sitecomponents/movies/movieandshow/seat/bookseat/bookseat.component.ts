@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute, Router } from '@angular/router';
-import { trigger, style, transition, animate, query, stagger } from '@angular/animations';
+import {Component, OnInit} from "@angular/core";
+import {HttpClient} from "@angular/common/http";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
-  selector: 'app-bookseat',
-  templateUrl: './bookseat.component.html',
-  styleUrls: ['./bookseat.component.css']
+  selector: "app-bookseat",
+  templateUrl: "./bookseat.component.html",
+  styleUrls: ["./bookseat.component.css"]
 })
 export class BookseatComponent implements OnInit {
 
@@ -17,8 +16,8 @@ export class BookseatComponent implements OnInit {
     private http: HttpClient,
     private route: ActivatedRoute,
     private _router: Router
-  ) { }
-
+  ) {
+  }
 
 
   ngOnInit() {
@@ -33,11 +32,11 @@ export class BookseatComponent implements OnInit {
   }
 
   getSeat() {
-    const seatid = +this.route.snapshot.paramMap.get('seatid');
-    return this.http.get('http://localhost:8080/api/seats/' + seatid)
+    const seatid = +this.route.snapshot.paramMap.get("seatid");
+    return this.http.get("http://localhost:8080/api/seats/" + seatid);
   }
 
   addToBasket() {
-    return this.http.post('http://localhost:8080/api/seatReservation/reserve', this.seat$)
+    return this.http.post("http://localhost:8080/api/seatReservation/reserve", this.seat$);
   }
 }

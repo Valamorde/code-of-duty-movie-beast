@@ -8,16 +8,16 @@
   <span class="letter" data-letter="R">R</span>
   <span class="letter" data-letter="S">S</span>
   <div class="box5 shadow5">
-    <p class="intro ">Check out the theatres we’re accommodating at the time – be patient, more places adding up really soon!</p>
+    <p class="intro ">Check out the theatres we’re accommodating at the time – be patient, more places adding up really
+      soon!</p>
   </div>
 </div>
-
 
 
 <div [@listStagger]="theaters$">
   <div class="row card-group">
     <div class="col-md-12">
-      <div class="example-1 card" *ngFor='let theater of theaters$'>
+      <div *ngFor='let theater of theaters$' class="example-1 card">
         <div class="wrapper">
           <img src='/assets/images/theatres/{{theater.theatreId}}.jpg' styles='max-height:100%; max-width:100%;'>
           <div class=" date ">

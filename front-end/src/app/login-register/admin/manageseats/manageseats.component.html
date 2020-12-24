@@ -12,25 +12,30 @@
         <div class=" panel-body">
           <form>
             <div class="form-group">
-              <input type="text" class="form-control" [(ngModel)]="createNewSeat.show" id="show" placeholder="Seat's Show" name="show"
-                required>
+              <input [(ngModel)]="createNewSeat.show" class="form-control" id="show" name="show"
+                     placeholder="Seat's Show" required
+                     type="text">
             </div>
             <div class="form-group">
-              <input type="checkbox" class="form-control" [(ngModel)]="createNewSeat.seatPaid" id="seatPaid" placeholder="Seat Paid" name="seatPaid"
-                required>
+              <input [(ngModel)]="createNewSeat.seatPaid" class="form-control" id="seatPaid" name="seatPaid"
+                     placeholder="Seat Paid" required
+                     type="checkbox">
             </div>
             <div class="form-group">
-              <input type="checkbox" class="form-control" [(ngModel)]="createNewSeat.seatReserved" id="seatReserved" placeholder="Seat's Reserved"
-                name="seatReserved" required>
+              <input [(ngModel)]="createNewSeat.seatReserved" class="form-control" id="seatReserved" name="seatReserved"
+                     placeholder="Seat's Reserved"
+                     required type="checkbox">
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" [(ngModel)]="createNewSeat.booking" id="booking" placeholder="Seat's Booking Id"
-                name="booking" required>
+              <input [(ngModel)]="createNewSeat.booking" class="form-control" id="booking" name="booking"
+                     placeholder="Seat's Booking Id"
+                     required type="text">
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" [(ngModel)]="createNewSeat.user" id="user" placeholder="Seat User" name="user" required>
+              <input [(ngModel)]="createNewSeat.user" class="form-control" id="user" name="user" placeholder="Seat User"
+                     required type="text">
             </div>
-            <button type="submit" class="btn btn-default" (click)="createNewSeat()">Submit</button>
+            <button (click)="createNewSeat()" class="btn btn-default" type="submit">Submit</button>
           </form>
         </div>
       </div>
@@ -44,28 +49,35 @@
           <div class="panel-body">
             <form>
               <div class="form-group">
-                <input type="id" class="form-control" [(ngModel)]="modifySeat.seatId" id="seatId" placeholder="Seat's Id" name="seatId" required>
+                <input [(ngModel)]="modifySeat.seatId" class="form-control" id="seatId" name="seatId"
+                       placeholder="Seat's Id" required type="id">
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" [(ngModel)]="createNewSeat.show" id="show" placeholder="Seat's Show" name="show"
-                  required>
+                <input [(ngModel)]="createNewSeat.show" class="form-control" id="show" name="show"
+                       placeholder="Seat's Show" required
+                       type="text">
               </div>
               <div class="form-group">
-                <input type="checkbox" class="form-control" [(ngModel)]="createNewSeat.seatPaid" id="seatPaid" placeholder="Seat Paid" name="seatPaid"
-                  required>
+                <input [(ngModel)]="createNewSeat.seatPaid" class="form-control" id="seatPaid" name="seatPaid"
+                       placeholder="Seat Paid" required
+                       type="checkbox">
               </div>
               <div class="form-group">
-                <input type="checkbox" class="form-control" [(ngModel)]="createNewSeat.seatReserved" id="seatReserved" placeholder="Seat's Reserved"
-                  name="seatReserved" required>
+                <input [(ngModel)]="createNewSeat.seatReserved" class="form-control" id="seatReserved"
+                       name="seatReserved"
+                       placeholder="Seat's Reserved"
+                       required type="checkbox">
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" [(ngModel)]="createNewSeat.booking" id="booking" placeholder="Seat's Booking Id"
-                  name="booking" required>
+                <input [(ngModel)]="createNewSeat.booking" class="form-control" id="booking" name="booking"
+                       placeholder="Seat's Booking Id"
+                       required type="text">
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" [(ngModel)]="createNewSeat.user" id="user" placeholder="Seat User" name="user" required>
+                <input [(ngModel)]="createNewSeat.user" class="form-control" id="user" name="user"
+                       placeholder="Seat User" required type="text">
               </div>
-              <button type="submit" class="btn btn-default" (click)="modifySeat()">Submit</button>
+              <button (click)="modifySeat()" class="btn btn-default" type="submit">Submit</button>
             </form>
           </div>
         </div>
@@ -79,11 +91,14 @@
           <div class="panel-body">
             <form>
               <div class="form-group">
-                <input type="id" class="form-control" [(ngModel)]="deleteSeat.seatId" id="seatId" placeholder="Seat's Id" name="seatId" required>
+                <input [(ngModel)]="deleteSeat.seatId" class="form-control" id="seatId" name="seatId"
+                       placeholder="Seat's Id" required type="id">
               </div>
-              <button type="submit" class="btn btn-default" (click)="deleteSeat()">Submit</button>
+              <button (click)="deleteSeat()" class="btn btn-default" type="submit">Submit</button>
             </form>
-            <button type="submit" class="btn btn-default1" routerLink="/admin" routerLinkActive="active">Go Back Instead</button>
+            <button class="btn btn-default1" routerLink="/admin" routerLinkActive="active" type="submit">Go Back
+              Instead
+            </button>
           </div>
         </div>
       </div>
